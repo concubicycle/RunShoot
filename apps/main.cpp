@@ -2,9 +2,13 @@
 
 #include <GLFW/glfw3.h>
 
+#include "core/startup_config.hpp"
 
 int main(int argc, char** argv)
 {
+    core::startup_config conf;
+    
+
     GLFWwindow* window;
 
     /* Initialize the library */
