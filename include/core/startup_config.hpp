@@ -24,7 +24,9 @@ public:
 
     void load();
 
-    const bool fullscreen() const;
+    bool fullscreen() const;
+    int height() const;
+    int width() const;
 
 private:
     json make_default() const;

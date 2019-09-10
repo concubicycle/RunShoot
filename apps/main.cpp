@@ -1,22 +1,27 @@
 #include <stdio.h>
+#include <iostream>
 
 #include <GLFW/glfw3.h>
 
 #include "core/startup_config.hpp"
+#include "core/frame_timer.hpp"
 
-int main(int argc, char** argv)
+#include <chrono>
+
+int main(int argc, char **argv)
 {
-    core::startup_config conf;
-    
+    core::startup_config conf = core::startup_config();
+    core::frame_timer timer;
+    conf.load();
 
-    GLFWwindow* window;
+    GLFWwindow *window;
 
     /* Initialize the library */
     if (!glfwInit())
         return -1;
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
+    window = glfwCreateWindow(conf.width(), conf.height(), "RunShoot", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -26,9 +31,14 @@ int main(int argc, char** argv)
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
 
+    /* Prevent framerate cap by gpu driver (don't wait for vblank before returning form glfwSwapBuffers) */
+    glfwSwapInterval(0);
+
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
+        timer.start();
+
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
 
@@ -37,9 +47,18 @@ int main(int argc, char** argv)
 
         /* Poll for and process events */
         glfwPollEvents();
+
+        timer.end();
+
+        auto ns = std::chrono::duration_cast<std::chrono::milliseconds>(timer.delta());
+        auto ns_smooth = std::chrono::duration_cast<std::chrono::milliseconds>(timer.smoothed_delta());
+
+        std::cout << "Delta: " << ns.count() << std::endl;
+        std::cout << "Smoothed delta: " << ns_smooth.count() << std::endl
+                  << std::endl;
     }
 
     glfwTerminate();
-    
+
     return 0;
 }
