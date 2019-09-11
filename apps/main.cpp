@@ -5,14 +5,17 @@
 
 #include "core/startup_config.hpp"
 #include "core/frame_timer.hpp"
+#include "core/frame_limiter.hpp"
 
 #include <chrono>
 
 int main(int argc, char **argv)
 {
     core::startup_config conf = core::startup_config();
-    core::frame_timer timer;
     conf.load();
+
+    core::frame_timer timer;
+    core::frame_limiter limiter(timer, 60);
 
     GLFWwindow *window;
 
@@ -48,14 +51,10 @@ int main(int argc, char **argv)
         /* Poll for and process events */
         glfwPollEvents();
 
+        limiter.wait_remainder();
+
         timer.end();
-
-        auto ns = std::chrono::duration_cast<std::chrono::milliseconds>(timer.delta());
-        auto ns_smooth = std::chrono::duration_cast<std::chrono::milliseconds>(timer.smoothed_delta());
-
-        std::cout << "Delta: " << ns.count() << std::endl;
-        std::cout << "Smoothed delta: " << ns_smooth.count() << std::endl
-                  << std::endl;
+        std::cout << timer.frame_info() << std::endl;
     }
 
     glfwTerminate();

@@ -28,7 +28,7 @@ include_directories(RunShoot
     ${OPENGL_INCLUDE_DIRS} 
     ${JSON_INCLUDE})
 
-target_link_libraries(RunShoot ${GLFW_LIB} ${OPENGL_LIBRARIES} core)
+target_link_libraries(RunShoot ${GLFW_LIB} ${OPENGL_LIBRARIES} core platform)
 
 if (UNIX)
     target_link_libraries(RunShoot X11)

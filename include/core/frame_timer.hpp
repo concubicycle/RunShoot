@@ -3,6 +3,7 @@
 
 #include <cstdint>
 #include <chrono>
+#include <string>
 
 #include "util/running_average.hpp"
 
@@ -23,8 +24,12 @@ public:
 
     void start();
     void end();
-    std::chrono::nanoseconds delta();
-    std::chrono::nanoseconds smoothed_delta();
+
+    std::chrono::nanoseconds delta() const;
+    std::chrono::nanoseconds smoothed_delta() const;
+    std::chrono::nanoseconds current_frame_time() const;
+
+    std::string frame_info() const;
 };
 } // namespace core
 
