@@ -9,6 +9,16 @@ ${PROJECT_SOURCE_DIR}/src/startup_config.cpp
 ${PROJECT_SOURCE_DIR}/src/startup.cpp
 )
 
+set(RENDERER_SOURCE_LIST
+${PROJECT_SOURCE_DIR}/src/renderer.cpp
+${PROJECT_SOURCE_DIR}/src/vbo.cpp
+)
+
+set(ASSET_SOURCE_LIST
+${PROJECT_SOURCE_DIR}/src/basic_mesh_reader.cpp
+
+)
+
 set(PLATFORM_SOURCE_LIST
 ${PROJECT_SOURCE_DIR}/src/sleep.cpp
 )
@@ -17,6 +27,10 @@ set(UTIL_SOURCE_LIST
 )
 
 set(HEADER_LIST
+${PROJECT_SOURCE_DIR}/include/asset/basic_mesh_reader.hpp
+${PROJECT_SOURCE_DIR}/include/renderer/mesh.hpp
+${PROJECT_SOURCE_DIR}/include/renderer/renderer.hpp
+${PROJECT_SOURCE_DIR}/include/renderer/vbo.hpp
 ${PROJECT_SOURCE_DIR}/include/platform/sleep.hpp
 ${PROJECT_SOURCE_DIR}/include/core/frame_limiter.hpp
 ${PROJECT_SOURCE_DIR}/include/core/frame_timer.hpp
@@ -27,16 +41,21 @@ ${PROJECT_SOURCE_DIR}/include/util/running_average.hpp
 )
 
 # Make an automatic library - will be static or dynamic based on user setting
-add_library(core STATIC ${CORE_SOURCE_LIST} ${HEADER_LIST})
-add_library(platform STATIC ${PLATFORM_SOURCE_LIST} ${HEADER_LIST})
-
+add_library(${CORELIB_NAME} STATIC ${CORE_SOURCE_LIST} ${HEADER_LIST})
+add_library(${PLATFORMLIB_NAME} STATIC ${PLATFORM_SOURCE_LIST} ${HEADER_LIST})
+add_library(${RENDERER} STATIC ${RENDERER_SOURCE_LIST} ${HEADER_LIST})
+add_library(${ASSETLIB_NAME} STATIC ${ASSET_SOURCE_LIST} ${HEADER_LIST})
 
 # We need this directory, and users of our library will need it too
-target_include_directories(core PUBLIC ../include)
-target_include_directories(platform PUBLIC ../include)
+target_include_directories(${CORELIB_NAME} PUBLIC ../include)
+target_include_directories(${PLATFORMLIB_NAME} PUBLIC ../include)
+target_include_directories(${RENDERER} PUBLIC ../include)
+target_include_directories(${ASSETLIB_NAME} PUBLIC ../include)
 
 
 # All users of this library will need at least C++11
-target_compile_features(core PUBLIC cxx_std_11)
-target_compile_features(platform PUBLIC cxx_std_11)
+target_compile_features(${CORELIB_NAME} PUBLIC cxx_std_11)
+target_compile_features(${PLATFORMLIB_NAME} PUBLIC cxx_std_11)
+target_compile_features(${RENDERER} PUBLIC cxx_std_11)
+target_compile_features(${ASSETLIB_NAME} PUBLIC cxx_std_11)
 
