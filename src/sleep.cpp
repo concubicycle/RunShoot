@@ -20,5 +20,12 @@ void os::sleep(std::chrono::nanoseconds nanos)
 }
 
 #else
-#error Unfamiliar platform
+// nanosleep should be available on mac in the same way?
+#include <time.h>
+
+void os::sleep(std::chrono::nanoseconds nanos)
+{
+    timespec ts = {0, nanos.count()};
+    nanosleep(&ts, NULL);
+}
 #endif

@@ -9,7 +9,9 @@
 
 #include <chrono>
 
-int main(int argc, char **argv)
+GLFWwindow *make_window(std::uint32_t width, std::uint32_t height);
+
+int main()
 {
     core::startup_config conf = core::startup_config();
     conf.load();
@@ -17,25 +19,7 @@ int main(int argc, char **argv)
     core::frame_timer timer;
     core::frame_limiter limiter(timer, 60);
 
-    GLFWwindow *window;
-
-    /* Initialize the library */
-    if (!glfwInit())
-        return -1;
-
-    /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(conf.width(), conf.height(), "RunShoot", NULL, NULL);
-    if (!window)
-    {
-        glfwTerminate();
-        return -1;
-    }
-
-    /* Make the window's context current */
-    glfwMakeContextCurrent(window);
-
-    /* Prevent framerate cap by gpu driver (don't wait for vblank before returning form glfwSwapBuffers) */
-    glfwSwapInterval(0);
+    auto window = make_window(conf.width(), conf.height());
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
@@ -60,4 +44,28 @@ int main(int argc, char **argv)
     glfwTerminate();
 
     return 0;
+}
+
+GLFWwindow *make_window(std::uint32_t width, std::uint32_t height)
+{
+    GLFWwindow *window;
+
+    /* Initialize the library */
+    if (!glfwInit())
+        return NULL;
+
+    /* Create a windowed mode window and its OpenGL context */
+    window = glfwCreateWindow(width, height, "RunShoot", NULL, NULL);
+    if (!window)
+    {
+        glfwTerminate();
+        return NULL;
+    }
+
+    /* Make the window's context current */
+    glfwMakeContextCurrent(window);
+
+    /* Prevent framerate cap by gpu driver (don't wait for vblank before returning form glfwSwapBuffers) */
+    glfwSwapInterval(0);
+    return window;
 }
