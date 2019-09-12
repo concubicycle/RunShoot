@@ -29,12 +29,11 @@ include_directories(${TARGET_NAME}
     ${JSON_INCLUDE})
 	
 add_subdirectory(src)
-
 	
-add_dependencies(${TARGET_NAME} glfw core)
+add_dependencies(${TARGET_NAME} glfw core platform)
 add_dependencies(core platform nlohmann_json)
 
-target_link_libraries(${TARGET_NAME} ${GLFW_LIB} ${OPENGL_LIBRARIES} platform core)
+target_link_libraries(${TARGET_NAME} ${GLFW_LIB} ${OPENGL_LIBRARIES}  core platform)
 
 
 if (UNIX)
