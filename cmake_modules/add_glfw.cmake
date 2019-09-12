@@ -11,6 +11,13 @@ ExternalProject_Add(glfw
 
 )
 
-set(GLFW_LIB ${EXTERNAL_INSTALL_LOCATION}/glfw/lib${LIB_SUFFIX}/libglfw3${CMAKE_STATIC_LIBRARY_SUFFIX})
+# not sure how to handle this perfectly. on windows, lib name is different
+if (WIN32)
+    set(GLFW_LIB ${EXTERNAL_INSTALL_LOCATION}/glfw/lib${LIB_SUFFIX}/glfw3${CMAKE_STATIC_LIBRARY_SUFFIX})
+else()
+    set(GLFW_LIB ${EXTERNAL_INSTALL_LOCATION}/glfw/lib${LIB_SUFFIX}/libglfw3${CMAKE_STATIC_LIBRARY_SUFFIX})
+endif ()
+
+
 set(GLFW_INCLUDE ${EXTERNAL_INSTALL_LOCATION}/glfw/include)
 
