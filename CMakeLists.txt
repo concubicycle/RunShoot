@@ -1,5 +1,5 @@
 cmake_minimum_required (VERSION 3.1)
-project(RunShoot C CXX)
+project(RunShoot CXX)
 
 set (CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake_modules")
 set (CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/install/")
@@ -23,14 +23,19 @@ include (add_glfw)
 include (add_nlohmann_json)
 include (add_warnings)
 
-add_dependencies(${TARGET_NAME} glfw nlohmann_json)
-
 include_directories(${TARGET_NAME} 
     ${GLFW_INCLUDE} 
     ${OPENGL_INCLUDE_DIRS} 
     ${JSON_INCLUDE})
+	
+add_subdirectory(src)
 
-target_link_libraries(${TARGET_NAME} ${GLFW_LIB} ${OPENGL_LIBRARIES})
+	
+add_dependencies(${TARGET_NAME} glfw core)
+add_dependencies(core platform nlohmann_json)
+
+target_link_libraries(${TARGET_NAME} ${GLFW_LIB} ${OPENGL_LIBRARIES} platform core)
+
 
 if (UNIX)
     target_link_libraries(${TARGET_NAME} X11)
@@ -41,8 +46,7 @@ if(CMAKE_DL_LIBS)
 endif()
 
 
-add_subdirectory(src)
-target_link_libraries (${TARGET_NAME} core platform)
+
 
 
 

@@ -29,8 +29,8 @@ ${PROJECT_SOURCE_DIR}/include/util/running_average.hpp
 )
 
 # Make an automatic library - will be static or dynamic based on user setting
-add_library(core SHARED ${CORE_SOURCE_LIST} ${HEADER_LIST})
-add_library(platform SHARED ${PLATFORM_SOURCE_LIST} ${HEADER_LIST})
+add_library(core STATIC ${CORE_SOURCE_LIST} ${HEADER_LIST})
+add_library(platform STATIC ${PLATFORM_SOURCE_LIST} ${HEADER_LIST})
 #add_library(util SHARED ${UTIL_SOURCE_LIST} ${HEADER_LIST})
 
 # We need this directory, and users of our library will need it too
@@ -42,4 +42,3 @@ target_include_directories(platform PUBLIC ../include)
 target_compile_features(core PUBLIC cxx_std_11)
 target_compile_features(platform PUBLIC cxx_std_11)
 #target_compile_features(util PUBLIC cxx_std_11)
-

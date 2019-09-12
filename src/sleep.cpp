@@ -4,10 +4,12 @@
 #include <windows.h>
 #include <timeapi.h>
 
-void os::sleep(std::chrono::nanoseconds millis)
+void os::sleep(std::chrono::nanoseconds nanos)
 {
     // TODO: use media timer
-    Sleep(millis.ticks());
+	auto millis = std::chrono::duration_cast<std::chrono::milliseconds>(nanos).count();
+	auto wait_time = millis < 0 ? 0 : millis;
+    Sleep(wait_time);
 }
 
 #elif (__linux__)
