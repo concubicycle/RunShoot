@@ -2,6 +2,7 @@
 #define __FRAMERATE_H_
 
 #include <chrono>
+#include <cstdint>
 
 namespace core
 {
