@@ -12,7 +12,6 @@ Tx3d		vec3			texcoords_3d		texture_coordinates_3d
 
 */
 
-
 #include "vertex_p.h"
 #include "vertex_pc.h"
 #include "vertex_pctx2d.h"
@@ -20,22 +19,18 @@ Tx3d		vec3			texcoords_3d		texture_coordinates_3d
 
 #include "shader_program.h"
 
-
-
-
+namespace ogllib
+{
 template <>
-void ShaderProgram<VertexP>::setAttribPointers()
-{	
+void shader_program<ogllib::vertex_p>::set_attrib_pointers()
+{
 	auto index = _info.getAttribLocation("position");
-	glVertexAttribPointer(index, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
+	glVertexAttribPointer(index, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid *)0);
 	glEnableVertexAttribArray(index);
 }
 
-
-
-
 template <>
-void ShaderProgram<VertexPC>::setAttribPointers()
+void shader_program<VertexPC>::set_attrib_pointers()
 {
 	auto posIndex = _info.getAttribLocation("position");
 	auto colIndex = _info.getAttribLocation("rgba");
@@ -50,27 +45,24 @@ void ShaderProgram<VertexPC>::setAttribPointers()
 	glEnableVertexAttribArray(colIndex);
 }
 
-
 template <>
-void ShaderProgram<VertexPTx2d>::setAttribPointers()
+void shader_program<VertexPTx2d>::set_attrib_pointers()
 {
-	auto posIndex = _info.getAttribLocation("position");	
+	auto posIndex = _info.getAttribLocation("position");
 	auto txIndex = _info.getAttribLocation("texcoords_2d");
 
-	size_t posOffset = offsetof(VertexPTx2d, position);	
+	size_t posOffset = offsetof(VertexPTx2d, position);
 	size_t txOffset = offsetof(VertexPTx2d, textureCoordinates2d);
 
 	glVertexAttribPointer(posIndex, 3, GL_FLOAT, GL_FALSE, sizeof(VertexPTx2d), reinterpret_cast<void *>(posOffset));
-	glEnableVertexAttribArray(posIndex);	
+	glEnableVertexAttribArray(posIndex);
 
 	glVertexAttribPointer(txIndex, 2, GL_FLOAT, GL_FALSE, sizeof(VertexPTx2d), reinterpret_cast<void *>(txOffset));
 	glEnableVertexAttribArray(txIndex);
 }
 
-
-
 template <>
-void ShaderProgram<VertexPCTx2d>::setAttribPointers()
+void shader_program<VertexPCTx2d>::set_attrib_pointers()
 {
 	auto posIndex = _info.getAttribLocation("position");
 	auto colIndex = _info.getAttribLocation("rgba");
@@ -90,3 +82,4 @@ void ShaderProgram<VertexPCTx2d>::setAttribPointers()
 	glEnableVertexAttribArray(txIndex);
 }
 
+} // namespace ogllib

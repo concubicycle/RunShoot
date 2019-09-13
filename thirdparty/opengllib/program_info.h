@@ -6,9 +6,12 @@
 #include <map>
 #include <string>
 
-class ProgramInfo
+namespace ogllib
 {
-private: 
+
+class program_info
+{
+private:
 	int _numUniforms;
 	int _numAttributes;
 
@@ -16,12 +19,14 @@ private:
 	std::map<std::string, int> _uniformLocations;
 
 public:
-	ProgramInfo();
+	program_info();
 	void initialize(int programId);
 
-	int getAttribLocation(const std::string& name) const;
+	int getAttribLocation(const std::string &name) const;
 
-	int getUniformLocation(const std::string& name) const;
+	int getUniformLocation(const std::string &name) const;
 };
+
+} // namespace ogllib
 
 #endif

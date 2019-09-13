@@ -74,7 +74,7 @@ public:
 	void setAspectRatio(float aspect_ration);
 	void setFovY(float fovy);
 	void setZPlanes(float near, float zfar);
-	void setBehavior(camera_behavior a_behavior) { _behavior = a_behavior; }
+	void setBehavior(camera_behavior behavior) { _behavior = behavior; }
 
 	void createViewMat(bool reorthognolaze);
 	void apply();

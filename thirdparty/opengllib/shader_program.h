@@ -8,143 +8,134 @@
 #include <vector>
 #include <memory>
 
-#include "opengl_afx.h"
-#include "program_info.h"
-#include "vertex_buffer.h"
-#include "shader.h"
-#include "vertex_array.h"
-#include "logger.h"
+#include <opengl_afx.h>
+#include <program_info.h>
+#include <vertex_buffer.h>
+#include <shader.h>
+#include <vertex_array.h>
 
-#include "shader_program_uniform_assign.h"
+#include <shader_program_uniform_assign.h>
 
+#include <spdlog/spdlog.h>
 
-
-template <typename TVertexFromat>
-class ShaderProgram  
+namespace ogllib
 {
 
-private:	
-	el::Logger& _logger = *(el::Loggers::getLogger("default"));
+template <typename TVertexFromat>
+class shader_program
+{
+	static constexpr const unsigned int GPU_INFOLOG_BUFFER_SIZE = 512;
 
-	ProgramInfo _info;
-	std::vector<ShaderBase*> _shaders;
+private:
+	ogllib::program_info _info;
+	std::vector<shader_base *> _shaders;
 
-	unsigned int _id; // The shader program identifier
-	bool _compiled; // Whether or not we have initialized the shader
-	
+	unsigned int _id = -1;  // The shader program identifier
+	bool _compiled = false; // Whether or not we have initialized the shader
 
-	void validateProgram()
+	void validate_program()
 	{
-		const unsigned int BUFFER_SIZE = 512;
-		char buffer[BUFFER_SIZE];
-		memset(buffer, 0, BUFFER_SIZE);
+		char buffer[GPU_INFOLOG_BUFFER_SIZE];
 		GLsizei length = 0;
-		GLint success;
+		GLint link_status;
+		GLint validate_status;
 
-		glGetProgramiv(_id, GL_LINK_STATUS, &success);
-		if (!success) {
-			glGetProgramInfoLog(_id, BUFFER_SIZE, &length, buffer); // Ask OpenGL to give us the log associated with the program		
-			_logger.error("Error linking program %i. Link error: %i \n", _id, buffer);
+		memset(buffer, 0, GPU_INFOLOG_BUFFER_SIZE);
+
+		glGetProgramiv(_id, GL_LINK_STATUS, &link_status);
+		if (!link_status)
+		{
+			glGetProgramInfoLog(_id, GPU_INFOLOG_BUFFER_SIZE, &length, buffer);
+			spdlog::info("Error linking program {0:d}. Link error:{1:d} \n", _id, buffer);
 		}
 
-		glValidateProgram(_id); // Get OpenGL to try validating the program
-		GLint status;
-
-		glGetProgramiv(_id, GL_VALIDATE_STATUS, &status); // Find out if the shader program validated correctly
-		if (status == GL_FALSE) // If there was a problem validating
-			_logger.error("Error validating program %i \n.", _id);
+		glValidateProgram(_id);
+		glGetProgramiv(_id, GL_VALIDATE_STATUS, &validate_status);
+		if (validate_status == GL_FALSE)
+		{
+			spdlog::error("Error validating program {0:d} \n.", _id);
+		}
 		else
-			_logger.info("Shader program %i built successfully.", _id);
+		{
+			glGetProgramInfoLog(_id, GPU_INFOLOG_BUFFER_SIZE, &length, buffer);
+			spdlog::info("Shader program {0:d} built successfully. Info log: {1}", _id, buffer);
+		}
 	}
 
-	template<typename TUniform>
-	static Uniforms<ShaderProgram<TVertexFromat>, TUniform>& getUniforms(ProgramInfo& info)
+	template <typename TUniform>
+	static Uniforms<shader_program<TVertexFromat>, TUniform> &getUniforms(program_info &info)
 	{
-		static  Uniforms<ShaderProgram<TVertexFromat>, TUniform> proxy(info); //swag        
+		static Uniforms<shader_program<TVertexFromat>, TUniform> proxy(info); //swag
 		return proxy;
 	}
 
-	// must be implemented for each vertex format TVertexFromat
-	void setAttribPointers()
-	{
-		static_assert(false, "Please define a setAttribPointer() implementation for " + typeid(TVertexFromat).name());
-	}
-
 public:
-		
-
-	ShaderProgram(ShaderBase* vertexShader, ShaderBase* fragmentShader)
+	shader_program(shader_base *vertex_shader, shader_base *fragment_shader)
 	{
-		_id = glCreateProgram(); // Create a GLSL program		
+		_id = glCreateProgram(); // Create a GLSL program
 
-		addShader(vertexShader);
-		addShader(fragmentShader);
+		addShader(vertex_shader);
+		addShader(fragment_shader);
 	}
-	
 
-	~ShaderProgram()
+	~shader_program()
 	{
-		for (auto& shader : _shaders)
-			glDetachShader(_id, shader->getId());
-				
+		for (auto &shader : _shaders)
+			glDetachShader(_id, shader->id());
+
 		glDeleteProgram(_id); // Delete the shader program
 	}
-	
-	template<typename TUniform>
-	Uniforms<ShaderProgram<TVertexFromat>, TUniform> getUniforms()
+
+	template <typename TUniform>
+	Uniforms<shader_program<TVertexFromat>, TUniform> getUniforms()
 	{
 		return getUniforms<TUniform>(_info);
 	}
 
-	template<typename TUniform>
-	void setUniform(const std::string& name, TUniform value)
+	template <typename TUniform>
+	void setUniform(const std::string &name, TUniform value)
 	{
-		///TODO #1: 
-		getUniforms()[name] = value; 
+		getUniforms()[name] = value;
 	}
 
-
-
-
 	//COMPILATION
-	void addShader(ShaderBase* shader)
-	{		
+	void addShader(shader_base *shader)
+	{
 		_shaders.push_back(shader);
 	}
 
 	void compile()
 	{
-		if (_compiled) // If we have already initialized the shader
+		if (_compiled)
 			return;
 
 		// compile shaders
-		for (auto& shader : _shaders)
+		for (auto shader : _shaders)
 			shader->compile();
 
 		// attach shaders
-		for (auto& shader : _shaders)
-			glAttachShader(_id, shader->getId());
+		for (auto shader : _shaders)
+			glAttachShader(_id, shader->id());
 
-		glLinkProgram(_id); // Link the vertex and fragment shaders in the program
-		validateProgram(); // Validate the shader program
+		glLinkProgram(_id);
+		validate_program();
 
 		_info.initialize(_id);
 
-		_compiled = true; // Mark that we have initialized the shader
-	}	
+		_compiled = true;
+	}
 
 	// RENDERING
-	void setupVao(VertexArray<TVertexFromat>& vao)
+	void setupVao(vertex_array<TVertexFromat> &vao)
 	{
 		vao.bind();
 		vao.bindGlObjects();
 		vao.bufferGlObjects();
 
-		setAttribPointers();
+		set_attrib_pointers();
 
 		vao.unbind();
 	}
-	
 
 	// BINDING
 	void bind()
@@ -155,21 +146,22 @@ public:
 		glUseProgram(_id);
 	}
 
-	void unbind() 
+	void unbind()
 	{
 		glUseProgram(0);
 	}
-	
+
+	// must be implemented for each vertex format TVertexFromat
+	void set_attrib_pointers()
+	{
+		static_assert(true, "Please define a setAttribPointer() implementation for all TVertexFormats");
+		//	static_assert(false, "Please define a setAttribPointer() implementation for " + typeid(TVertexFromat).name());
+	}
 
 	// GETTERS/SETTERS
 	unsigned int getId() { return _id; }
-	ProgramInfo& getInfo() { return _info; }
+	program_info &getInfo() { return _info; }
 };
 
-
-
-
-
-#include "shader_program_specializations.h"
-
+} // namespace ogllib
 #endif

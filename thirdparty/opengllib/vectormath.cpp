@@ -1,14 +1,13 @@
 #include "vectormath.h"
 
-glm::quat get_rotation_from(const glm::vec3& source, const glm::vec3& dest)
+glm::quat get_rotation_from(const glm::vec3 &source, const glm::vec3 &dest)
 {
 
 	//early out
 	if (glm::length(source) == 0 || glm::length(dest) == 0)
 		return glm::quat(); //identity glm::quat?
 
-
-					   //begin
+	//begin
 	glm::quat rot;
 	glm::vec3 v1 = glm::normalize(source);
 	glm::vec3 v2 = glm::normalize(dest);
@@ -22,11 +21,11 @@ glm::quat get_rotation_from(const glm::vec3& source, const glm::vec3& dest)
 	}
 
 	//if 180degrees apart, rotate 180 degrees about axis
-	if (abs(dp - -1.0f) <  glm::epsilon<float>())
+	if (abs(dp - -1.0f) < glm::epsilon<float>())
 	{
 		glm::vec3 axis = glm::cross(glm::vec3(1.0f, 0.0f, 0.0f), source);
 
-		if (abs(axis.length()) < glm::epsilon<glm::length_t>())
+		if (abs(axis.length()) < glm::epsilon<float>())
 			axis = glm::cross(glm::vec3(0.0f, 1.0f, 0.0f), source);
 
 		axis = glm::normalize(axis);
@@ -34,7 +33,7 @@ glm::quat get_rotation_from(const glm::vec3& source, const glm::vec3& dest)
 	}
 	else
 	{
-		float sq = glm::sqrt((1 + dp)*2.0);
+		float sq = glm::sqrt((1 + dp) * 2.0);
 		float inv_sqrt = 1 / sq;
 
 		glm::vec3 cp = glm::cross(v1, v2);
@@ -49,21 +48,21 @@ glm::quat get_rotation_from(const glm::vec3& source, const glm::vec3& dest)
 	return rot;
 }
 
-glm::quat get_rotation_from(const glm::vec4& source, const glm::vec4& dest)
+glm::quat get_rotation_from(const glm::vec4 &source, const glm::vec4 &dest)
 {
 	return get_rotation_from(glm::vec3(source.x, source.y, source.z), glm::vec3(dest.x, dest.y, dest.z));
 }
 
-void set_translation(glm::mat4& transform, const glm::vec3& translation)
+void set_translation(glm::mat4 &transform, const glm::vec3 &translation)
 {
-	float* mat = glm::value_ptr(transform);
+	float *mat = glm::value_ptr(transform);
 
 	mat[12] = translation.x;
 	mat[13] = translation.y;
 	mat[14] = translation.z;
 }
 
-void get_translation(const glm::mat4& transform, glm::vec3* translation)
+void get_translation(const glm::mat4 &transform, glm::vec3 *translation)
 {
 	translation->x = transform[3][0];
 	translation->y = transform[3][1];

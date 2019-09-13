@@ -1,11 +1,10 @@
 ﻿#include "program_info.h"
 
-
-ProgramInfo::ProgramInfo()
+ogllib::program_info::program_info()
 {
 }
 
-void ProgramInfo::initialize(int programId)
+void ogllib::program_info::initialize(int programId)
 {
 	glGetProgramInterfaceiv(programId, GL_PROGRAM_INPUT, GL_ACTIVE_RESOURCES, &_numAttributes);
 	glGetProgramInterfaceiv(programId, GL_UNIFORM, GL_ACTIVE_RESOURCES, &_numUniforms);
@@ -21,11 +20,11 @@ void ProgramInfo::initialize(int programId)
 	for (int attrib = 0; attrib < _numAttributes; ++attrib)
 	{
 		glGetProgramResourceiv(programId, GL_PROGRAM_INPUT, attrib, properties.size(),
-			&properties[0], values.size(), NULL, &values[0]);
+							   &properties[0], values.size(), NULL, &values[0]);
 
 		nameData.resize(properties[0]); //The length of the name.
-		glGetProgramResourceName(programId, GL_PROGRAM_INPUT, attrib, nameData.size(), NULL, &nameData[0]);	
-		std::string name((char*)&nameData[0]);
+		glGetProgramResourceName(programId, GL_PROGRAM_INPUT, attrib, nameData.size(), NULL, &nameData[0]);
+		std::string name((char *)&nameData[0]);
 		GLint location = glGetAttribLocation(programId, &(nameData[0]));
 		_attribLocations[name] = location;
 	}
@@ -33,23 +32,23 @@ void ProgramInfo::initialize(int programId)
 	for (int uniform = 0; uniform < _numUniforms; ++uniform)
 	{
 		glGetProgramResourceiv(programId, GL_UNIFORM, uniform, properties.size(),
-			&properties[0], values.size(), NULL, &values[0]);
+							   &properties[0], values.size(), NULL, &values[0]);
 
 		nameData.resize(properties[0]); //The length of the name.
 		glGetProgramResourceName(programId, GL_UNIFORM, uniform, nameData.size(), NULL, &nameData[0]);
-		std::string name((char*)&nameData[0]);
+		std::string name((char *)&nameData[0]);
 		GLint location = glGetUniformLocation(programId, &(nameData[0]));
 		_uniformLocations[name] = location;
 	}
 }
 
-int ProgramInfo::getAttribLocation(const std::string& name) const
-{	
+int ogllib::program_info::getAttribLocation(const std::string &name) const
+{
 
 	return _attribLocations.at(name);
 }
 
-int ProgramInfo::getUniformLocation(const std::string& name) const
+int ogllib::program_info::getUniformLocation(const std::string &name) const
 {
 	return _uniformLocations.at(name);
 }

@@ -2,18 +2,21 @@
 #define __MESH_H_
 
 #include <vector>
+#include <cstdint>
 
 namespace models
 {
+
 template <typename TVertex>
 class mesh
 {
 public:
-    const std::vector<TVertex> &vertices() { return _verties; }
+    mesh() {}
 
-private:
-    std::vector<TVertex> _verties
+    std::vector<TVertex> vertices;
+    std::vector<std::uint32_t> indices;
 };
+
 } // namespace models
 
 #endif

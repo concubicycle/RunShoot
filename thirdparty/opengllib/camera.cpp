@@ -1,27 +1,27 @@
 #include "camera.h"
 
-Camera::Camera()
+ogllib::camera::camera()
 {
 	_pitch = _yaw = _roll = 0;
 	reset_projection();
 }
 
-Camera::~Camera()
+ogllib::camera::~camera()
 {
 }
 
-void Camera::setAspectRatio(float aspect_ration)
+void ogllib::camera::setAspectRatio(float aspect_ration)
 {
 	_aspectRatio = aspect_ration;
 	reset_projection();
 }
-void Camera::setFovY(float fovy)
+void ogllib::camera::setFovY(float fovy)
 {
 	_fovY = fovy;
 	reset_projection();
 }
 
-void Camera::orthogonalize_uvn()
+void ogllib::camera::orthogonalize_uvn()
 {
 	_forward = glm::normalize(_forward);
 
@@ -32,24 +32,24 @@ void Camera::orthogonalize_uvn()
 	_right = glm::normalize(_right);
 }
 
-void Camera::translate(glm::vec3 disp)
+void ogllib::camera::translate(glm::vec3 disp)
 {
 	_eyeLocation += disp;
 }
 
-void Camera::rotate(glm::quat rotation)
+void ogllib::camera::rotate(glm::quat rotation)
 {
 	_view = glm::mat4_cast(rotation) * _view;
 	orthogonalize_uvn();
 }
 
-void Camera::rotate(float theta, glm::vec3 &axis)
+void ogllib::camera::rotate(float theta, glm::vec3 &axis)
 {
 	_view = glm::rotate(_view, theta, axis);
 	orthogonalize_uvn();
 }
 
-void Camera::rotate(float a_yaw_deg, float a_pitch_deg, float a_roll_deg)
+void ogllib::camera::rotate(float a_yaw_deg, float a_pitch_deg, float a_roll_deg)
 {
 	switch (_behavior)
 	{
@@ -63,13 +63,13 @@ void Camera::rotate(float a_yaw_deg, float a_pitch_deg, float a_roll_deg)
 	}
 }
 
-void Camera::set_position(const glm::vec3 &pos)
+void ogllib::camera::set_position(const glm::vec3 &pos)
 {
 	_eyeLocation = pos;
 	createViewMat(false);
 }
 
-void Camera::setOrientation(const glm::quat &orientation)
+void ogllib::camera::setOrientation(const glm::quat &orientation)
 {
 	glm::vec3 prev_pos;
 	get_translation(_view, &prev_pos);
@@ -77,7 +77,7 @@ void Camera::setOrientation(const glm::quat &orientation)
 	set_translation(_view, prev_pos);
 }
 
-void Camera::pitch(float theta)
+void ogllib::camera::pitch(float theta)
 {
 	_pitch += theta;
 
@@ -87,7 +87,7 @@ void Camera::pitch(float theta)
 		_pitch = -PI_2;
 }
 
-void Camera::yaw(float theta)
+void ogllib::camera::yaw(float theta)
 {
 	_yaw += theta;
 
@@ -97,7 +97,7 @@ void Camera::yaw(float theta)
 		_yaw += TWO_PI;
 }
 
-void Camera::roll(float theta)
+void ogllib::camera::roll(float theta)
 {
 	_roll += theta;
 
@@ -107,17 +107,17 @@ void Camera::roll(float theta)
 		_roll += TWO_PI;
 }
 
-void Camera::move_forward(float units)
+void ogllib::camera::move_forward(float units)
 {
 	_eyeLocation += _forward * units;
 }
 
-void Camera::strafeRight(float units)
+void ogllib::camera::strafeRight(float units)
 {
 	_eyeLocation += _right * units;
 }
 
-void Camera::createViewMat(bool reorthognolaze)
+void ogllib::camera::createViewMat(bool reorthognolaze)
 {
 	if (reorthognolaze)
 		orthogonalize_uvn();
@@ -145,7 +145,7 @@ void Camera::createViewMat(bool reorthognolaze)
 	mat[15] = 1.0f;
 }
 
-void Camera::setZPlanes(float znear, float zfar)
+void ogllib::camera::setZPlanes(float znear, float zfar)
 {
 	_zNear = znear;
 	_zFar = zfar;
@@ -153,12 +153,12 @@ void Camera::setZPlanes(float znear, float zfar)
 	reset_projection();
 }
 
-inline const void Camera::reset_projection()
+inline const void ogllib::camera::reset_projection()
 {
 	_projection = glm::perspective(_fovY, _aspectRatio, _zNear, _zFar);
 }
 
-void Camera::rotate_first_person(float a_heading_deg, float a_pitch_deg)
+void ogllib::camera::rotate_first_person(float a_heading_deg, float a_pitch_deg)
 {
 	_pitch += a_pitch_deg;
 
@@ -194,7 +194,7 @@ void Camera::rotate_first_person(float a_heading_deg, float a_pitch_deg)
 	}
 }
 
-void Camera::apply()
+void ogllib::camera::apply()
 {
 	// Calculate the new Front vector
 	_forward.x = cos(_yaw) * cos(_pitch);
@@ -211,7 +211,7 @@ void Camera::apply()
 	_view = glm::lookAt(_eyeLocation, _lookat, _up);
 }
 
-void Camera::rotate_flight(float a_heading_deg, float a_pitch_deg, float a_roll_deg)
+void ogllib::camera::rotate_flight(float a_heading_deg, float a_pitch_deg, float a_roll_deg)
 {
 	glm::mat4 rotMtx;
 

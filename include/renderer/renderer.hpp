@@ -6,6 +6,9 @@
 
 #include "core/startup_config.hpp"
 
+#include <vertex_buffer.h>
+#include <vertex_p.h>
+
 namespace rendering
 {
 class renderer

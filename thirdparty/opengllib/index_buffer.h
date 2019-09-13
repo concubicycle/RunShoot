@@ -3,14 +3,17 @@
 
 #include <vector>
 
-#include <opengllib/opengl_afx.h>
+#include <opengl_afx.h>
 #include "buffer_object.h"
 
+namespace ogllib
+{
+
 // Or "element" onBuffer
-class IndexBuffer : public BufferObject
+class index_buffer : public ogllib::buffer_object
 {
 private:
-	std::vector<GLuint> _data;
+	const std::vector<GLuint> &_data;
 
 protected:
 	void onBind() override
@@ -30,12 +33,12 @@ protected:
 	}
 
 public:
-	IndexBuffer()
+	index_buffer(std::vector<GLuint> const &data) : _data(data)
 	{
 		glGenBuffers(1, &_id);
 	}
 
-	~IndexBuffer()
+	~index_buffer()
 	{
 		glDeleteBuffers(1, &_id);
 	}
@@ -45,12 +48,7 @@ public:
 		glGenBuffers(1, &_id);
 	}
 
-	void initData(int size, std::vector<GLuint> data)
-	{
-		_data = data;
-	}
-
-	std::vector<GLuint> &data()
+	const std::vector<GLuint> &data()
 	{
 		return _data;
 	}
@@ -58,4 +56,5 @@ public:
 	bool empty() const { return _data.empty(); }
 };
 
+} // namespace ogllib
 #endif

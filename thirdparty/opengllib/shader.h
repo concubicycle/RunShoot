@@ -1,127 +1,105 @@
-//==============================================================================
-// perfVis performance visualisation framework
-//
-// Copyright (c) 2014-2016 RWTH Aachen University, Germany,
-// Virtual Reality & Immersive Visualisation Group.
-//==============================================================================
-//                                License
-//
-// This framework is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published
-// by the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-//
-// In the future, we may decide to add a commercial license
-// at our own discretion without further notice.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU Lesser General Public License for more details.
-//
-// You should have received a copy of the GNU Lesser General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
-//==============================================================================
-
-#ifndef PV_SHADER__H_
-#define PV_SHADER__H_
+#ifndef __PV_SHADER__H_
+#define __PV_SHADER__H_
 
 #include <fstream>
 #include <iostream>
 
 #include "opengl_afx.h"
+#include <spdlog/spdlog.h>
 
-class ShaderBase
+namespace ogllib
+{
+class shader_base
 {
 public:
-	virtual GLuint getId() const = 0;
+	virtual GLuint id() const = 0;
 	virtual void compile() = 0;
-	virtual bool isCompiled() const = 0;
+	virtual bool is_compiled() const = 0;
 };
 
-template<typename FileReadPolicy>
-class Shader : private FileReadPolicy, public ShaderBase
+template <typename FileReadPolicy>
+class shader : private FileReadPolicy, public shader_base
 {
+	static constexpr const unsigned int GPU_INFOLOG_BUFFER_SIZE = 512;
+
 	using FileReadPolicy::readFile;
 
 private:
 	GLuint _id;
-	const GLenum _type; 
-	bool _isCompiled = false;
+	const GLenum _type;
+	bool _is_compiled = false;
 
-	std::string _fileName;
+	std::string _filename;
 
-	/**
-	Given a shader and the filename associated with it, validateShader will
-	then get information from OpenGl on whether or not the shader was compiled successfully
-	and if it wasn't, it will output the file with the problem, as well as the problem.
-	*/
-	void validateShader() const
+	void validate_shader()
 	{
-		const unsigned int BUFFER_SIZE = 512;
-		char buffer[BUFFER_SIZE];
-
-		memset(buffer, 0, BUFFER_SIZE);
 		GLsizei length = 0;
+		char buffer[GPU_INFOLOG_BUFFER_SIZE];
 
-		glGetShaderInfoLog(_id, BUFFER_SIZE, &length, buffer); // Ask OpenGL to give us the log associated with the shader
+		memset(buffer, 0, GPU_INFOLOG_BUFFER_SIZE);
+		glGetShaderInfoLog(_id, GPU_INFOLOG_BUFFER_SIZE, &length, buffer);
 
-		if (length > 0) // If we have any information to display
-			std::cerr << "Shader " << _id << " (" << _fileName << ") compile error: " << buffer << std::endl; // Output the information
+		if (length > 0)
+		{
+			spdlog::error(buffer);
+		}
+		else
+		{
+			_is_compiled = true;
+			spdlog::info("Shader {0} ({1:d}) compiled without issue.", _filename, _id);
+		}
 	}
 
-	
-
 public:
-	Shader(GLenum type)
+	shader(GLenum type)
 		: _type(type)
-	{		
+	{
 		_id = glCreateShader(_type);
 	}
 
-	Shader(GLenum type, const char* fname) : Shader(type)
-	{		
-		fromFile(fname);
+	shader(GLenum type, const char *fname) : shader(type)
+	{
+		from_file(fname);
 	}
-		
 
-	~Shader()
+	~shader()
 	{
 		glDeleteShader(_id);
 	}
 
-	void fromFile(const char* fname)
-	{		
-		_fileName = std::string(fname);
+	void from_file(const char *fname)
+	{
+		_filename = std::string(fname);
 		std::string shader_string = readFile(fname);
 
 		if (shader_string.empty())
-			std::cerr << "Failed to compile shader: " << fname << std::endl;
+			spdlog::error("Failed to compile shader {0}.", fname);
 
 		const char *c_str = shader_string.c_str();
-		glShaderSource(_id, 1, &c_str, nullptr);		
+		glShaderSource(_id, 1, &c_str, nullptr);
 	}
 
-	void fromString(const std::string& shader_string)
+	void from_string(const std::string &shader_string)
 	{
-		_filename = "NOT FROM FILE";		
+		_filename = "NOT FROM FILE";
 		const char *c_str = shader_string.c_str();
 		glShaderSource(_id, 1, &c_str, nullptr);
 	}
 
 	void compile() override
 	{
-		if (_isCompiled) return;
+		if (_is_compiled)
+			if (_is_compiled)
+				return;
 
 		glCompileShader(_id);
-		validateShader();
-		_isCompiled = true;
+		validate_shader();
 	}
 
-
-	GLuint getId() const override { return _id; }
-	GLenum getType() const { return _type; }
-	bool isCompiled() const override{ return _isCompiled; }
+	GLuint id() const override { return _id; }
+	GLenum type() const { return _type; }
+	bool is_compiled() const override { return _is_compiled; }
 };
 
+} // namespace ogllib
 #endif

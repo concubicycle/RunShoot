@@ -18,13 +18,17 @@ Tx3d		vec3			texcoords_3d		texture_coordinates_3d
 #include "glm/vec3.hpp"
 #include "opengl_afx.h"
 
-class VertexP
+namespace ogllib
 {
-public:
-	VertexP(float x = 0, float y = 0, float z = 0)		
-		: position(x, y, z)	{}
+
+struct vertex_p
+{
+	vertex_p(float x = 0, float y = 0, float z = 0)
+		: position(x, y, z) {}
 
 	glm::vec3 position;
 };
+
+} // namespace ogllib
 
 #endif

@@ -1,7 +1,7 @@
 #ifndef __BUFFER_OBJECT_H_
 #define __BUFFER_OBJECT_H_
 
-#include <opengllib/opengl_afx.h>
+#include <opengl_afx.h>
 
 namespace ogllib
 {

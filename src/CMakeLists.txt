@@ -11,10 +11,10 @@ ${PROJECT_SOURCE_DIR}/src/startup.cpp
 
 set(RENDERER_SOURCE_LIST
 ${PROJECT_SOURCE_DIR}/src/renderer.cpp
-${PROJECT_SOURCE_DIR}/src/vbo.cpp
 )
 
 set(ASSET_SOURCE_LIST
+${PROJECT_SOURCE_DIR}/src/mesh.cpp
 ${PROJECT_SOURCE_DIR}/src/basic_mesh_reader.cpp
 
 )
@@ -27,10 +27,9 @@ set(UTIL_SOURCE_LIST
 )
 
 set(HEADER_LIST
+${PROJECT_SOURCE_DIR}/include/asset/mesh.hpp
 ${PROJECT_SOURCE_DIR}/include/asset/basic_mesh_reader.hpp
-${PROJECT_SOURCE_DIR}/include/renderer/mesh.hpp
 ${PROJECT_SOURCE_DIR}/include/renderer/renderer.hpp
-${PROJECT_SOURCE_DIR}/include/renderer/vbo.hpp
 ${PROJECT_SOURCE_DIR}/include/platform/sleep.hpp
 ${PROJECT_SOURCE_DIR}/include/core/frame_limiter.hpp
 ${PROJECT_SOURCE_DIR}/include/core/frame_timer.hpp
