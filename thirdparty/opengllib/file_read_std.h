@@ -18,7 +18,7 @@ protected:
 
 		if (!file_stream.is_open())
 		{
-			spdlog::error("Failed to read file {0}");
+			spdlog::error("Failed to read file {0}", fileName);
 		}
 
 		while (file_stream.good())
