@@ -62,12 +62,12 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     renderer.init();
 
     readers::basic_mesh_reader reader;
-    models::mesh<ogllib::vertex_p> mesh = reader.read_mesh_p(std::string("assets/models/square.json"));
+    models::mesh<ogllib::vertex_p> mesh = reader.read_mesh_p(std::string(".\\assets\\models\\square.json"));
 
     ogllib::shader<FileReadStd> vert(GL_VERTEX_SHADER);
     ogllib::shader<FileReadStd> frag(GL_FRAGMENT_SHADER);
-    vert.from_file("assets/shaders/simple.vert");
-    frag.from_file("assets/shaders/simple.frag");
+    vert.from_file(".\\assets\\shaders\\simple.vert");
+    frag.from_file(".\\assets\\shaders\\simple.frag");
     ogllib::shader_program<ogllib::vertex_p> program(&vert, &frag);
     program.compile();
 

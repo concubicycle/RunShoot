@@ -30,7 +30,7 @@ private:
 	ogllib::program_info _info;
 	std::vector<shader_base *> _shaders;
 
-	unsigned int _id = -1;  // The shader program identifier
+	unsigned int _id = 0;  // The shader program identifier
 	bool _compiled = false; // Whether or not we have initialized the shader
 
 	void validate_program()
