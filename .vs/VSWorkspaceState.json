@@ -1,0 +1,10 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\include",
+    "\\include\\memory",
+    "\\src"
+  ],
+  "SelectedNode": "\\src\\pool_allocator.cpp",
+  "PreviewInSolutionExplorer": false
+}

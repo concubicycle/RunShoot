@@ -26,7 +26,12 @@ ${PROJECT_SOURCE_DIR}/src/sleep.cpp
 set(UTIL_SOURCE_LIST
 )
 
+set(MEMORY_SOURCE_LIST
+${PROJECT_SOURCE_DIR}/src/pool_allocator.cpp
+)
+
 set(HEADER_LIST
+${PROJECT_SOURCE_DIR}/include/memory/pool_allocator.hpp
 ${PROJECT_SOURCE_DIR}/include/asset/mesh.hpp
 ${PROJECT_SOURCE_DIR}/include/asset/basic_mesh_reader.hpp
 ${PROJECT_SOURCE_DIR}/include/renderer/renderer.hpp
