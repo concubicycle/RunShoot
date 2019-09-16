@@ -31,10 +31,12 @@ ${PROJECT_SOURCE_DIR}/src/event_dispatcher.cpp
 )
 
 set(MEMORY_SOURCE_LIST
+${PROJECT_SOURCE_DIR}/src/typed_pool_allocator.cpp
 ${PROJECT_SOURCE_DIR}/src/pool_allocator.cpp
 )
 
 set(HEADER_LIST
+${PROJECT_SOURCE_DIR}/include/memory/typed_pool_allocator.hpp
 ${PROJECT_SOURCE_DIR}/include/memory/pool_allocator.hpp
 ${PROJECT_SOURCE_DIR}/include/events/event_dispatcher.hpp
 ${PROJECT_SOURCE_DIR}/include/asset/mesh.hpp
@@ -54,12 +56,16 @@ add_library(${CORELIB_NAME} STATIC ${CORE_SOURCE_LIST} ${HEADER_LIST})
 add_library(${PLATFORMLIB_NAME} STATIC ${PLATFORM_SOURCE_LIST} ${HEADER_LIST})
 add_library(${RENDERER} STATIC ${RENDERER_SOURCE_LIST} ${HEADER_LIST})
 add_library(${ASSETLIB_NAME} STATIC ${ASSET_SOURCE_LIST} ${HEADER_LIST})
+add_library(${MEM_LIB} STATIC ${MEMORY_SOURCE_LIST} ${HEADER_LIST})
+
 
 # We need this directory, and users of our library will need it too
 target_include_directories(${CORELIB_NAME} PUBLIC ../include)
 target_include_directories(${PLATFORMLIB_NAME} PUBLIC ../include)
 target_include_directories(${RENDERER} PUBLIC ../include)
 target_include_directories(${ASSETLIB_NAME} PUBLIC ../include)
+target_include_directories(${MEM_LIB} PUBLIC ../include)
+
 
 
 # All users of this library will need at least C++11
@@ -67,4 +73,5 @@ target_compile_features(${CORELIB_NAME} PUBLIC cxx_std_11)
 target_compile_features(${PLATFORMLIB_NAME} PUBLIC cxx_std_11)
 target_compile_features(${RENDERER} PUBLIC cxx_std_11)
 target_compile_features(${ASSETLIB_NAME} PUBLIC cxx_std_11)
+target_compile_features(${MEM_LIB} PUBLIC cxx_std_11)
 

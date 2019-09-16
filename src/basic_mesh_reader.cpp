@@ -1,5 +1,4 @@
-#include "asset/basic_mesh_reader.hpp"
-
+#include <asset/basic_mesh_reader.hpp>
 #include <fstream>
 
 bool exists(const std::string &name)

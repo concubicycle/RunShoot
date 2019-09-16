@@ -23,6 +23,7 @@ set (OGLLIB_NAME "ogllib")
 set (THIRD_PARTY "thirdparty")
 set (GLM "glm")
 set (SPDLOG "spdlog")
+set (MEM_LIB "memory")
 
 # change for release
 set (CMAKE_BUILD_TYPE Debug)
@@ -33,6 +34,8 @@ set (OpenGL_GL_PREFERENCE "GLVND")
 
 
 add_executable(${TARGET_NAME} apps/main.cpp)
+add_executable(tests tests/main.cpp)
+
 
 include (FindOpenGL)
 include (add_glfw)
@@ -53,7 +56,10 @@ include_directories(${TARGET_NAME}
     ${GLAD_INCLUDE}
     ${SPDLOG_INCLUDE}
     ${EXPECTED_INCLUDE})
-	
+    
+target_include_directories(tests PUBLIC
+    )    
+
 add_subdirectory(src)
 
 add_dependencies(${CORELIB_NAME} 
@@ -97,8 +103,10 @@ target_link_libraries(${TARGET_NAME}
     ${GLAD}
     ${OGLLIB_NAME}
     ${RENDERER}
-    )
+    ${MEM_LIB})
 
+target_link_libraries(tests
+    ${MEM_LIB})
 
 
 if (UNIX)
