@@ -40,7 +40,7 @@ add_executable(tests tests/main.cpp)
 include (FindOpenGL)
 include (add_glfw)
 include (add_nlohmann_json)
-#include (add_warnings)
+#include (add_warnings) # will break windows build due to warnings in thirdparty libs
 include (add_glad)
 include (add_glm)
 include (add_ogllib)
