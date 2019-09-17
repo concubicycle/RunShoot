@@ -1,0 +1,25 @@
+include(ExternalProject)
+
+ExternalProject_Add(assimp
+    PREFIX assimp
+    GIT_REPOSITORY https://github.com/assimp/assimp.git
+    GIT_TAG master
+    CMAKE_ARGS  -DCMAKE_INSTALL_PREFIX=${EXTERNAL_INSTALL_LOCATION}/assimp
+        -DBUILD_SHARED_LIBS=OFF
+        -DASSIMP_BUILD_TESTS=OFF
+        -DOpenGL_GL_PREFERENCE=GLVND
+        -DASSIMP_BUILD_ASSIMP_TOOLS=OFF
+        -DASSIMP_BUILD_ZLIB=ON
+        -DASSIMP_NO_EXPORT=ON
+        -DASSIMP_BUILD_ALL_IMPORTERS_BY_DEFAULT=OFF
+        -DASSIMP_BUILD_glTF_IMPORTER=TRUE
+        -DASSIMP_BUILD_glTF2_IMPORTER=TRUE
+        -DASSIMP_BUILD_Ogre_IMPORTER=TRUE # Contains common Animation namespace
+)
+
+
+set(ASSIMP_INCLUDE ${EXTERNAL_INSTALL_LOCATION}/assimp/include)
+set(ASSIMP_LIB 
+    ${EXTERNAL_INSTALL_LOCATION}/assimp/lib/libassimp${CMAKE_STATIC_LIBRARY_SUFFIX}    
+    ${EXTERNAL_INSTALL_LOCATION}/assimp/lib/libIrrXML${CMAKE_STATIC_LIBRARY_SUFFIX}
+    ${EXTERNAL_INSTALL_LOCATION}/assimp/lib/libzlibstatic${CMAKE_STATIC_LIBRARY_SUFFIX})

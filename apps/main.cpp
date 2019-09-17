@@ -20,6 +20,12 @@
 
 #include <shader_program_specializations.h>
 
+#include <assimp/Importer.hpp>
+#include <assimp/Exporter.hpp>
+#include <assimp/postprocess.h>
+#include <assimp/scene.h>
+#include <array>
+
 using namespace ogllib;
 
 GLFWwindow *set_up_glfw(std::uint32_t width, std::uint32_t height);
@@ -36,12 +42,20 @@ void render_loop(GLFWwindow *window,
 void process_input(GLFWwindow *window);
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 
+void try_assimp()
+{
+    Assimp::Importer importer;
+    const aiScene *scene = importer.ReadFile("./assets/models/Avocado/glTF/Avocado.gltf", aiProcess_ValidateDataStructure);
+}
+
 int main()
 {
     core::startup_config conf = core::startup_config();
     conf.load();
 
     auto window = set_up_glfw(conf.width(), conf.height());
+
+    try_assimp();
 
     if (window == NULL)
         return -1;

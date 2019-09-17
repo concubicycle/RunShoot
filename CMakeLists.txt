@@ -4,7 +4,6 @@ project(RunShoot C CXX)
 set (RunShoot_VERSION_MAJOR 0)
 set (RunShoot_VERSION_MINOR 1)
 
-
 set (CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake_modules")
 set (CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/install/")
 set (CMAKE_BINARY_DIR "${PROJECT_SOURCE_DIR}/build")
@@ -46,6 +45,8 @@ include (add_glm)
 include (add_ogllib)
 include (add_spdlog)
 include (add_expected)
+include (add_assimp)
+
 
 include_directories(${TARGET_NAME} 
     ${GLFW_INCLUDE} 
@@ -55,7 +56,8 @@ include_directories(${TARGET_NAME}
     ${OGLLIB_INCLUDE}
     ${GLAD_INCLUDE}
     ${SPDLOG_INCLUDE}
-    ${EXPECTED_INCLUDE})
+    ${EXPECTED_INCLUDE}
+    ${ASSIMP_INCLUDE})
     
 target_include_directories(tests PUBLIC
     )    
@@ -63,15 +65,18 @@ target_include_directories(tests PUBLIC
 add_subdirectory(src)
 
 add_dependencies(${CORELIB_NAME} 
+    expected
     ${PLATFORMLIB_NAME} 
     nlohmann_json)
 
 add_dependencies(${OGLLIB_NAME} 
+    expected
     ${GLAD} 
     ${GLM} 
     ${SPDLOG})
 
 add_dependencies(${RENDERER} 
+    expected
     glfw 
     ${GLAD} 
     ${CORELIB_NAME} 
@@ -81,14 +86,17 @@ add_dependencies(${RENDERER}
     ${SPDLOG})
 
 add_dependencies(${TARGET_NAME} 
+    expected
     glfw 
     ${ASSETLIB_NAME} 
     ${CORELIB_NAME}     
     ${PLATFORMLIB_NAME} 
     ${RENDERER}
-    expected)
+    assimp
+    )
 
 add_dependencies(${ASSETLIB_NAME} 
+    expected
     ${OGLLIB_NAME} 
     nlohmann_json)
 
@@ -103,7 +111,9 @@ target_link_libraries(${TARGET_NAME}
     ${GLAD}
     ${OGLLIB_NAME}
     ${RENDERER}
-    ${MEM_LIB})
+    ${MEM_LIB}
+    ${ASSIMP_LIB}
+    )
 
 target_link_libraries(tests
     ${MEM_LIB})
