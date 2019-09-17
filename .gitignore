@@ -14,3 +14,5 @@ external/*
 build/*
 
 .vscode
+
+sh.exe.stackdump
