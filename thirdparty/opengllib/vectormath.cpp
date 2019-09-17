@@ -33,8 +33,8 @@ glm::quat get_rotation_from(const glm::vec3 &source, const glm::vec3 &dest)
 	}
 	else
 	{
-		float sq = glm::sqrt((1 + dp) * 2.0);
-		float inv_sqrt = 1 / sq;
+		float sq = glm::sqrt((1.f + dp) * 2.0f);
+		float inv_sqrt = 1.f / sq;
 
 		glm::vec3 cp = glm::cross(v1, v2);
 

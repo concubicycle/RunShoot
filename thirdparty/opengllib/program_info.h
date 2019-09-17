@@ -12,8 +12,8 @@ namespace ogllib
 class program_info
 {
 private:
-	int _numUniforms;
-	int _numAttributes;
+	int _numUniforms = 0;
+	int _numAttributes = 0;
 
 	std::map<std::string, int> _attribLocations;
 	std::map<std::string, int> _uniformLocations;

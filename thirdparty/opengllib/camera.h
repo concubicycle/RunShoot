@@ -27,7 +27,7 @@ enum camera_behavior
 class camera
 {
 private:
-	const float PI_DIV_180 = 0.01745329251;
+	const float PI_DIV_180 = 0.01745329251f;
 
 	float _fovY = 45.0f;
 	float _aspectRatio = 1.0f;

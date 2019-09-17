@@ -38,7 +38,7 @@ void allocators::pool_allocator::init_aligned(std::uint32_t size_bytes, std::uin
 	_alignment = alignment;
 
 	//Determine total amount of memory to allocate
-	std::uint32_t expandedSize_bytes = size_bytes + alignment;
+	std::uint64_t expandedSize_bytes = size_bytes + alignment;
 
 	//Use non-alligned alloc to get memory
 	auto raw = std::uint64_t(malloc(expandedSize_bytes + _chunk_size));
@@ -82,8 +82,8 @@ void allocators::pool_allocator::linked_expand(std::uint32_t size_bytes)
 {
 	std::uint8_t *new_block;
 	std::uint32_t count = (size_bytes / _chunk_size) - 1;
-	std::uint32_t adjustment = 0;
-	std::uint32_t expanded_bytes = size_bytes;
+	std::uint64_t adjustment = 0;
+	std::uint64_t expanded_bytes = size_bytes;
 	auto malloc_size = expanded_bytes + _chunk_size;
 
 	if (_alignment != 0)

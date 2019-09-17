@@ -7,6 +7,8 @@
 #include <memory/pool_allocator.hpp>
 #include <memory/typed_pool_allocator.hpp>
 
+
+
 /*
 NOTE: For this to work now, you have to uncomment 
 #define __PA_DEBUG_OUTPUT_
@@ -62,7 +64,7 @@ void test_typed_allocator()
         auto ptr = alloc.allocate();
         ptr->a = 1000;
         ptr->str = "foo";
-        ptr->c = 23.234;
+        ptr->c = 23.234f;
         ptrs.push_back(ptr);
     }
 
@@ -80,7 +82,7 @@ void test_typed_allocator()
         auto ptr = alloc.allocate();
         ptr->a = 1000;
         ptr->str = "foo";
-        ptr->c = 23.234;
+        ptr->c = 23.234f;
     }
 
     printf("Done allocating.\n");
@@ -98,14 +100,14 @@ void test_raw_allocator()
     auto size = sizeof(test_struct_t);
     auto align = alignof(test_struct_t);
 
-    printf("sizeof(test_struct_t): %d\n", size);
-    printf("alignof(test_struct_t): %d\n", align);
+    printf("sizeof(test_struct_t): %d\n", (int)size);
+    printf("alignof(test_struct_t): %d\n", (int)align);
 
     printf("Construct allocator\n");
     allocators::pool_allocator alloc;
 
     printf("All Memblock Info:");
-    printf("%s", alloc.all_memblock_info());
+    printf("%s", alloc.all_memblock_info().c_str());
 
     printf("Init Allocator:\n");
     alloc.init_aligned(sizeof(test_struct_t) * 100, sizeof(test_struct_t), alignof(test_struct_t));
@@ -114,7 +116,7 @@ void test_raw_allocator()
     printf("Size: %d\n", alloc.size());
 
     printf("All Memblock Info:");
-    printf("%s", alloc.all_memblock_info());
+    printf("%s", alloc.all_memblock_info().c_str());
 
     printf("Capacity: %d\n", alloc.capacity());
     printf("Size: %d\n", alloc.size());

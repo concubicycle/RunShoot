@@ -4,7 +4,8 @@ ExternalProject_Add(assimp
     PREFIX assimp
     GIT_REPOSITORY https://github.com/assimp/assimp.git
     GIT_TAG master
-    CMAKE_ARGS  -DCMAKE_INSTALL_PREFIX=${EXTERNAL_INSTALL_LOCATION}/assimp
+	GIT_SHALLOW TRUE
+    CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${EXTERNAL_INSTALL_LOCATION}/assimp
         -DBUILD_SHARED_LIBS=OFF
         -DASSIMP_BUILD_TESTS=OFF
         -DOpenGL_GL_PREFERENCE=GLVND
@@ -19,7 +20,15 @@ ExternalProject_Add(assimp
 
 
 set(ASSIMP_INCLUDE ${EXTERNAL_INSTALL_LOCATION}/assimp/include)
+
+if(WIN32 AND MSVC)
+set(ASSIMP_LIB 
+    ${EXTERNAL_INSTALL_LOCATION}/assimp/lib/assimp-vc142-mtd${CMAKE_STATIC_LIBRARY_SUFFIX} # not sure how these names are generated....   
+    ${EXTERNAL_INSTALL_LOCATION}/assimp/lib/IrrXMLd${CMAKE_STATIC_LIBRARY_SUFFIX}
+    ${EXTERNAL_INSTALL_LOCATION}/assimp/lib/zlibstaticd${CMAKE_STATIC_LIBRARY_SUFFIX})
+else()
 set(ASSIMP_LIB 
     ${EXTERNAL_INSTALL_LOCATION}/assimp/lib/libassimp${CMAKE_STATIC_LIBRARY_SUFFIX}    
     ${EXTERNAL_INSTALL_LOCATION}/assimp/lib/libIrrXML${CMAKE_STATIC_LIBRARY_SUFFIX}
     ${EXTERNAL_INSTALL_LOCATION}/assimp/lib/libzlibstatic${CMAKE_STATIC_LIBRARY_SUFFIX})
+endif()

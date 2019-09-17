@@ -19,11 +19,11 @@ void ogllib::program_info::initialize(int programId)
 	std::vector<GLint> values(properties.size());
 	for (int attrib = 0; attrib < _numAttributes; ++attrib)
 	{
-		glGetProgramResourceiv(programId, GL_PROGRAM_INPUT, attrib, properties.size(),
-							   &properties[0], values.size(), NULL, &values[0]);
+		glGetProgramResourceiv(programId, GL_PROGRAM_INPUT, attrib, (GLsizei)properties.size(),
+							   &properties[0], (GLsizei)values.size(), NULL, &values[0]);
 
 		nameData.resize(properties[0]); //The length of the name.
-		glGetProgramResourceName(programId, GL_PROGRAM_INPUT, attrib, nameData.size(), NULL, &nameData[0]);
+		glGetProgramResourceName(programId, GL_PROGRAM_INPUT, attrib, (GLsizei)nameData.size(), NULL, &nameData[0]);
 		std::string name((char *)&nameData[0]);
 		GLint location = glGetAttribLocation(programId, &(nameData[0]));
 		_attribLocations[name] = location;
@@ -31,11 +31,11 @@ void ogllib::program_info::initialize(int programId)
 
 	for (int uniform = 0; uniform < _numUniforms; ++uniform)
 	{
-		glGetProgramResourceiv(programId, GL_UNIFORM, uniform, properties.size(),
-							   &properties[0], values.size(), NULL, &values[0]);
+		glGetProgramResourceiv(programId, GL_UNIFORM, uniform, (GLsizei)properties.size(),
+							   &properties[0], (GLsizei)values.size(), NULL, &values[0]);
 
 		nameData.resize(properties[0]); //The length of the name.
-		glGetProgramResourceName(programId, GL_UNIFORM, uniform, nameData.size(), NULL, &nameData[0]);
+		glGetProgramResourceName(programId, GL_UNIFORM, uniform, (GLsizei)nameData.size(), NULL, &nameData[0]);
 		std::string name((char *)&nameData[0]);
 		GLint location = glGetUniformLocation(programId, &(nameData[0]));
 		_uniformLocations[name] = location;

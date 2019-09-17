@@ -58,9 +58,7 @@ include_directories(${TARGET_NAME}
     ${SPDLOG_INCLUDE}
     ${EXPECTED_INCLUDE}
     ${ASSIMP_INCLUDE})
-    
-target_include_directories(tests PUBLIC
-    )    
+   
 
 add_subdirectory(src)
 
@@ -69,7 +67,7 @@ add_dependencies(${CORELIB_NAME}
     ${PLATFORMLIB_NAME} 
     nlohmann_json)
 
-add_dependencies(${OGLLIB_NAME} 
+add_dependencies(${OGLLIB_NAME} 	
     expected
     ${GLAD} 
     ${GLM} 
@@ -86,13 +84,13 @@ add_dependencies(${RENDERER}
     ${SPDLOG})
 
 add_dependencies(${TARGET_NAME} 
+	assimp
     expected
     glfw 
     ${ASSETLIB_NAME} 
     ${CORELIB_NAME}     
     ${PLATFORMLIB_NAME} 
-    ${RENDERER}
-    assimp
+    ${RENDERER}    
     )
 
 add_dependencies(${ASSETLIB_NAME} 

@@ -8,7 +8,7 @@ void os::sleep(std::chrono::nanoseconds nanos)
 {
     // TODO: use media timer
 	auto millis = std::chrono::duration_cast<std::chrono::milliseconds>(nanos).count();
-	auto wait_time = millis < 0 ? 0 : millis;
+	auto wait_time = (DWORD)(millis < 0 ? 0 : millis);
     Sleep(wait_time);
 }
 
