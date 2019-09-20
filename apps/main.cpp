@@ -2,15 +2,28 @@
 #include <iostream>
 #include <chrono>
 
+/////////////
+#include <GLFW/glfw3.h>
+
+#include <glbinding-aux/Meta.h>
+#include <glbinding/Version.h>
+#include <glbinding/glbinding.h>
+
+#include <glbinding/gl/gl.h>
+
+#include <glbinding-aux/ValidVersions.h>
+#include <glbinding-aux/types_to_string.h>
+
+using namespace gl;
+using namespace glbinding;
+//////////////
+
 #include <core/startup_config.hpp>
 #include <core/frame_timer.hpp>
 #include <core/frame_limiter.hpp>
 
 #include <renderer/renderer.hpp>
 #include <asset/basic_mesh_reader.hpp>
-
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
 
 #include <shader_program.h>
 #include <shader.h>
@@ -124,14 +137,14 @@ void render_loop(GLFWwindow *window,
 
         process_input(window);
 
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        gl::glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        gl::glClear(GL_COLOR_BUFFER_BIT);
 
         // draw our first triangle
         program.bind();
         vao.bind();
         ebo.bind();
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        gl::glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
         vao.unbind();
 
@@ -171,6 +184,8 @@ GLFWwindow *set_up_glfw(std::uint32_t width, std::uint32_t height)
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
 
+    glbinding::initialize(glfwGetProcAddress, true);
+
     /* Prevent framerate cap by gpu driver (don't wait for vblank before returning form glfwSwapBuffers) */
     glfwSwapInterval(0);
 
@@ -179,8 +194,8 @@ GLFWwindow *set_up_glfw(std::uint32_t width, std::uint32_t height)
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height)
 {
-    (void)(window); // suppress unused param
-    glViewport(0, 0, width, height);
+    (void)(window);                      // suppress unused param
+    gl::glViewport(0, 0, width, height); //glViewport(0, 0, width, height);
 }
 
 void process_input(GLFWwindow *window)

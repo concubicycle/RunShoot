@@ -1,5 +1,7 @@
 ﻿#include "program_info.h"
 
+using namespace gl;
+
 ogllib::program_info::program_info()
 {
 }
@@ -22,7 +24,7 @@ void ogllib::program_info::initialize(int programId)
 		glGetProgramResourceiv(programId, GL_PROGRAM_INPUT, attrib, (GLsizei)properties.size(),
 							   &properties[0], (GLsizei)values.size(), NULL, &values[0]);
 
-		nameData.resize(properties[0]); //The length of the name.
+		nameData.resize(values[0]); //The length of the name.
 		glGetProgramResourceName(programId, GL_PROGRAM_INPUT, attrib, (GLsizei)nameData.size(), NULL, &nameData[0]);
 		std::string name((char *)&nameData[0]);
 		GLint location = glGetAttribLocation(programId, &(nameData[0]));
@@ -34,7 +36,7 @@ void ogllib::program_info::initialize(int programId)
 		glGetProgramResourceiv(programId, GL_UNIFORM, uniform, (GLsizei)properties.size(),
 							   &properties[0], (GLsizei)values.size(), NULL, &values[0]);
 
-		nameData.resize(properties[0]); //The length of the name.
+		nameData.resize(values[0]); //The length of the name.
 		glGetProgramResourceName(programId, GL_UNIFORM, uniform, (GLsizei)nameData.size(), NULL, &nameData[0]);
 		std::string name((char *)&nameData[0]);
 		GLint location = glGetUniformLocation(programId, &(nameData[0]));

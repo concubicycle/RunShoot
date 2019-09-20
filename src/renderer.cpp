@@ -2,19 +2,13 @@
 
 #include <iostream>
 
+#include <glbinding/gl/gl.h>
+
 bool rendering::renderer::init()
 {
+    gl::glViewport(0, 0, _config.width(), _config.height());
 
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-    {
-        std::cout << "Failed to initialize GLAD" << std::endl;
-        return false;
-    }
-
-    glViewport(0, 0, _config.width(), _config.height());
-
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    gl::glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
     return true;
 }

@@ -7,6 +7,8 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <program_info.h>
 
+using namespace gl;
+
 namespace ogllib
 {
 

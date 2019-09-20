@@ -12,6 +12,8 @@
 #include <string>
 #include <memory>
 
+using GLenum = gl::GLenum;
+
 template <typename TTexelComponent, unsigned char NComponents>
 class OpenGlTexture2D : Texture2D<TTexelComponent, NComponents, GLuint>
 {
@@ -38,33 +40,33 @@ public:
 	static GLuint generate()
 	{
 		GLuint idBuff;
-		glGenTextures(1, &idBuff);
+		gl::glGenTextures(1, &idBuff);
 		return idBuff;
 	}
 
 	void bind()
 	{
-		glBindTexture(GL_TEXTURE_2D, getId());
+		gl::glBindTexture(GL_TEXTURE_2D, getId());
 		_isBound = true;
 	}
 
 	void unbind()
 	{
-		glBindTexture(GL_TEXTURE_2D, 0);
+		gl::glBindTexture(GL_TEXTURE_2D, 0);
 		_isBound = false;
 	}
 
 	void buffer()
 	{
-		glTexImage2D(GL_TEXTURE_2D,
-					 0,
-					 GL_RGBA,
-					 getWidth(),
-					 getHeight(),
-					 0,
-					 GL_RGBA,
-					 GL_UNSIGNED_BYTE,
-					 _textureData.get());
+		gl::glTexImage2D(GL_TEXTURE_2D,
+						 0,
+						 GL_RGBA,
+						 getWidth(),
+						 getHeight(),
+						 0,
+						 GL_RGBA,
+						 GL_UNSIGNED_BYTE,
+						 _textureData.get());
 	}
 
 	// OpenGL Stuff
@@ -73,7 +75,7 @@ public:
 		if (!_isBound)
 			el::Loggers::getLogger("default")->warn("Attempting to call generateMipMaps() on unbound texture");
 
-		glGenerateMipmap(GL_TEXTURE_2D);
+		gl::glGenerateMipmap(GL_TEXTURE_2D);
 	}
 
 	void setWrapMode(TextureWrapMode mode)
@@ -82,8 +84,8 @@ public:
 			el::Loggers::getLogger("default")->warn("Attempting to call generateMipMaps() on unbound texture");
 
 		_wrapMode = mode;
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, mode);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, mode);
+		gl::glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, mode);
+		gl::glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, mode);
 	}
 
 	void setFilteringMode(TextureFilteringMode mode)
@@ -92,8 +94,8 @@ public:
 			el::Loggers::getLogger("default")->warn("Attempting to call setFilteringMode() on unbound texture");
 
 		_filteringMode = mode;
-		glTexParameteri(GL_TEXTURE_2D, Magnifying, mode);
-		glTexParameteri(GL_TEXTURE_2D, Minifying, mode);
+		gl::glTexParameteri(GL_TEXTURE_2D, Magnifying, mode);
+		gl::glTexParameteri(GL_TEXTURE_2D, Minifying, mode);
 	}
 
 	void setFilteringMode(TextureMagMin magmin, TextureFilteringMode mode)
@@ -102,7 +104,7 @@ public:
 			el::Loggers::getLogger("default")->warn("Attempting to call setFilteringMode() on unbound texture");
 
 		_filteringMode = mode;
-		glTexParameteri(GL_TEXTURE_2D, magmin, mode);
+		gl::glTexParameteri(GL_TEXTURE_2D, magmin, mode);
 	}
 };
 

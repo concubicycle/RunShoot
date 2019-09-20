@@ -15,7 +15,6 @@ file (COPY ${ASSETS_DIR} DESTINATION ${CMAKE_BINARY_DIR})
 set (TARGET_NAME "RunShoot")
 set (CORELIB_NAME "core")
 set (PLATFORMLIB_NAME "platform")
-set (GLAD "glad")
 set (RENDERER "renderer")
 set (ASSETLIB_NAME "asset")
 set (OGLLIB_NAME "ogllib")
@@ -36,28 +35,41 @@ add_executable(${TARGET_NAME} apps/main.cpp)
 add_executable(tests tests/main.cpp)
 
 
-include (FindOpenGL)
 include (add_glfw)
 include (add_nlohmann_json)
 #include (add_warnings) # will break windows build due to warnings in thirdparty libs
-include (add_glad)
 include (add_glm)
 include (add_ogllib)
 include (add_spdlog)
 include (add_expected)
 include (add_assimp)
+include (add_glbinding)
+
+# Prevent GLFW from including gl.h, as this will break glbinding
+target_compile_definitions(${TARGET_NAME}
+    PRIVATE
+    ${DEFAULT_COMPILE_DEFINITIONS}
+    GLFW_INCLUDE_NONE
+)
 
 
-include_directories(${TARGET_NAME} 
+target_include_directories(${TARGET_NAME} PRIVATE
     ${GLFW_INCLUDE} 
-    ${OPENGL_INCLUDE_DIRS} 
     ${JSON_INCLUDE}
     ${GLM_INCLUDE}
     ${OGLLIB_INCLUDE}
-    ${GLAD_INCLUDE}
     ${SPDLOG_INCLUDE}
     ${EXPECTED_INCLUDE}
-    ${ASSIMP_INCLUDE})
+    ${ASSIMP_INCLUDE}
+    ${GLBINDING_INCLUDE})
+
+include_directories(${TARGET_NAME}
+    ${JSON_INCLUDE}
+    ${GLM_INCLUDE}
+    ${GLBINDING_INCLUDE}
+    ${OGLLIB_INCLUDE}
+    ${EXPECTED_INCLUDE}
+    ${SPDLOG_INCLUDE})
    
 
 add_subdirectory(src)
@@ -69,14 +81,14 @@ add_dependencies(${CORELIB_NAME}
 
 add_dependencies(${OGLLIB_NAME} 	
     expected
-    ${GLAD} 
+    glbinding
     ${GLM} 
     ${SPDLOG})
 
 add_dependencies(${RENDERER} 
+    glbinding
     expected
     glfw 
-    ${GLAD} 
     ${CORELIB_NAME} 
     ${ASSETLIB_NAME} 
     ${OGLLIB_NAME} 
@@ -84,6 +96,7 @@ add_dependencies(${RENDERER}
     ${SPDLOG})
 
 add_dependencies(${TARGET_NAME} 
+    glbinding
 	assimp
     expected
     glfw 
@@ -100,17 +113,17 @@ add_dependencies(${ASSETLIB_NAME}
 
 
 
-target_link_libraries(${TARGET_NAME} 
+target_link_libraries(${TARGET_NAME} PRIVATE
     ${ASSETLIB_NAME} 
     ${GLFW_LIB}
-    ${OPENGL_LIBRARIES}
     ${CORELIB_NAME}    
     ${PLATFORMLIB_NAME}
-    ${GLAD}
     ${OGLLIB_NAME}
     ${RENDERER}
     ${MEM_LIB}
     ${ASSIMP_LIB}
+    ${GLBINDING_LIB}
+    ${GLBINDING_AUX_LIB}
     )
 
 target_link_libraries(tests
@@ -118,11 +131,11 @@ target_link_libraries(tests
 
 
 if (UNIX)
-    target_link_libraries(${TARGET_NAME} X11)
+    target_link_libraries(${TARGET_NAME} PRIVATE X11)
 endif (UNIX)
 
 if(CMAKE_DL_LIBS)
-    target_link_libraries(${TARGET_NAME} ${CMAKE_DL_LIBS})
+    target_link_libraries(${TARGET_NAME} PRIVATE ${CMAKE_DL_LIBS})
 endif()
 
 

@@ -7,6 +7,8 @@
 #include "opengl_afx.h"
 #include <spdlog/spdlog.h>
 
+using namespace gl;
+
 namespace ogllib
 {
 class shader_base
@@ -51,13 +53,13 @@ private:
 	}
 
 public:
-	shader(GLenum type)
+	shader(gl::GLenum type)
 		: _type(type)
 	{
 		_id = glCreateShader(_type);
 	}
 
-	shader(GLenum type, const char *fname) : shader(type)
+	shader(gl::GLenum type, const char *fname) : shader(type)
 	{
 		from_file(fname);
 	}

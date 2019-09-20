@@ -1,8 +1,7 @@
 #ifndef __RENDERER_H_
 #define __RENDERER_H_
 
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include <opengl_afx.h>
 
 #include "core/startup_config.hpp"
 

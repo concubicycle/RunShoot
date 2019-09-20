@@ -3,6 +3,8 @@
 
 #include "opengl_afx.h"
 
+using namespace gl;
+
 enum TextureFilteringMode
 {
 	Nearest = GL_NEAREST,
@@ -12,6 +14,5 @@ enum TextureFilteringMode
 	LinearMipmapNearest = GL_LINEAR_MIPMAP_NEAREST,
 	NearestMipmapLinear = GL_NEAREST_MIPMAP_LINEAR
 };
-
 
 #endif

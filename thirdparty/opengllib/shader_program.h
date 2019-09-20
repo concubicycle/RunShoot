@@ -18,6 +18,8 @@
 
 #include <spdlog/spdlog.h>
 
+using namespace gl;
+
 namespace ogllib
 {
 
@@ -30,7 +32,7 @@ private:
 	ogllib::program_info _info;
 	std::vector<shader_base *> _shaders;
 
-	unsigned int _id = 0;  // The shader program identifier
+	unsigned int _id = 0;   // The shader program identifier
 	bool _compiled = false; // Whether or not we have initialized the shader
 
 	void validate_program()
@@ -51,7 +53,7 @@ private:
 
 		glValidateProgram(_id);
 		glGetProgramiv(_id, GL_VALIDATE_STATUS, &validate_status);
-		if (validate_status == GL_FALSE)
+		if (validate_status == 0)
 		{
 			spdlog::error("Error validating program {0:d} \n.", _id);
 		}

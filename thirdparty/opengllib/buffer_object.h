@@ -2,6 +2,7 @@
 #define __BUFFER_OBJECT_H_
 
 #include <opengl_afx.h>
+using namespace gl;
 
 namespace ogllib
 {

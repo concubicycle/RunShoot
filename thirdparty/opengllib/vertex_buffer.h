@@ -7,6 +7,8 @@
 #include <vector>
 #include <functional>
 
+using namespace gl;
+
 namespace ogllib
 {
 
