@@ -16,6 +16,7 @@
 
 using namespace gl;
 using namespace glbinding;
+using GLenum = gl::GLenum;
 //////////////
 
 #include <core/startup_config.hpp>
@@ -53,7 +54,7 @@ struct scene_data
     ogllib::index_buffer &ebo;
 
     ogllib::shader_program<ogllib::vertex_ptx2d> &tex_program;
-    opengl_texture_2d<glm::byte, 4> &texture;
+    opengl_texture_2d<glm::byte, 3> &texture;
     ogllib::vertex_array<ogllib::vertex_ptx2d> &vao_tex;
     ogllib::index_buffer &ebo_tex;
 };
@@ -109,12 +110,12 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     error = tex_mesh.error();
     std::cout << error;
 
-    ogllib::shader<FileReadStd> vert(gl::GLenum::GL_VERTEX_SHADER);
-    ogllib::shader<FileReadStd> frag(gl::GLenum::GL_FRAGMENT_SHADER);
+    ogllib::shader<FileReadStd> vert(GL_VERTEX_SHADER);
+    ogllib::shader<FileReadStd> frag(GL_FRAGMENT_SHADER);
     vert.from_file("./assets/shaders/simple.vert");
     frag.from_file("./assets/shaders/simple.frag");
-    ogllib::shader<FileReadStd> vert_ptx2d(gl::GLenum::GL_VERTEX_SHADER);
-    ogllib::shader<FileReadStd> frag_ptx2d(gl::GLenum::GL_FRAGMENT_SHADER);
+    ogllib::shader<FileReadStd> vert_ptx2d(GL_VERTEX_SHADER);
+    ogllib::shader<FileReadStd> frag_ptx2d(GL_FRAGMENT_SHADER);
     vert_ptx2d.from_file("./assets/shaders/ptx2d_basic.vert");
     frag_ptx2d.from_file("./assets/shaders/ptx2d_basic.frag");
 
@@ -143,7 +144,7 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     vao.unbind();
     program.unbind();
 
-    auto texture = opengl_texture_2d<glm::byte, 4>(tex_mesh->texture_filename);
+    auto texture = opengl_texture_2d<glm::byte, 3>(tex_mesh->texture_filename);
     ogllib::vertex_buffer<ogllib::vertex_ptx2d> vbo_tex(tex_mesh->mesh_data.vertices);
     ogllib::vertex_array<ogllib::vertex_ptx2d> vao_tex;
     ogllib::index_buffer ebo_tex(tex_mesh->mesh_data.indices);
@@ -155,12 +156,12 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     ebo_tex.buffer();
 
     texture.bind();
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    texture.set_texture_wrap(GL_REPEAT);
+    texture.set_filtering(GL_LINEAR, GL_LINEAR);
     texture.buffer();
-    glGenerateMipmap(GL_TEXTURE_2D);
+    texture.free_texture_data();
+
+    //texture.gen_mip_maps();
 
     tex_program.bind();
     tex_program.set_attrib_pointers();
@@ -191,8 +192,6 @@ void render_loop(scene_data &data)
         data.texture.bind();
         data.vao_tex.bind();
         data.ebo_tex.bind();
-
-        glUniform1i(glGetUniformLocation(data.tex_program.getId(), "model_texture"), 0); // set it manually
 
         gl::glDrawElements(gl::GLenum::GL_TRIANGLES, 6, gl::GLenum::GL_UNSIGNED_INT, 0);
 

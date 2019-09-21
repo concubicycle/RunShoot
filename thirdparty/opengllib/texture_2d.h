@@ -104,6 +104,11 @@ public:
 		return _id;
 	}
 
+	void free_texture_data()
+	{
+		_textureData.reset();
+	}
+
 protected:
 	std::shared_ptr<TTexelComponent> _textureData;
 
