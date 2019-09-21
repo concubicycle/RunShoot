@@ -45,6 +45,13 @@ ${PROJECT_SOURCE_DIR}/src/archetype_store.cpp
 )
 
 set(HEADER_LIST
+${PROJECT_SOURCE_DIR}/include/ecs/game_obj_component_pools.hpp
+${PROJECT_SOURCE_DIR}/include/ecs/behavior_component.hpp
+${PROJECT_SOURCE_DIR}/include/ecs/component_store.hpp
+${PROJECT_SOURCE_DIR}/include/ecs/archetype_store.hpp
+${PROJECT_SOURCE_DIR}/include/ecs/component.hpp
+${PROJECT_SOURCE_DIR}/include/ecs/game_object.hpp
+${PROJECT_SOURCE_DIR}/include/ecs/game_object_factory.hpp
 ${PROJECT_SOURCE_DIR}/include/ecs/ecs_types.hpp
 ${PROJECT_SOURCE_DIR}/include/asset/textured_mesh.hpp
 ${PROJECT_SOURCE_DIR}/include/asset/mesh_read_error.hpp
