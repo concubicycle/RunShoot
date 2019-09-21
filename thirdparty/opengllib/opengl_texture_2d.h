@@ -5,35 +5,36 @@
 #include "texture_2d.h"
 
 #include "glm/gtx/raw_data.hpp"
-#include "texture_wrap_mode.h"
-#include "texture_filtering_mode.h"
-#include "texture_magmin.h"
 
 #include <string>
 #include <memory>
 
-using GLenum = gl::GLenum;
+#include <spdlog/spdlog.h>
+
+using namespace gl;
 
 template <typename TTexelComponent, unsigned char NComponents>
-class OpenGlTexture2D : Texture2D<TTexelComponent, NComponents, GLuint>
+class opengl_texture_2d : public texture_2d<TTexelComponent, NComponents, GLuint>
 {
 private:
-	TextureWrapMode _wrapMode;
-	TextureFilteringMode _filteringMode;
+	gl::GLenum _wrapMode;
+	gl::GLenum _filteringMode;
 	bool _isBound;
 
 public:
 	/*	NOTE FOR OPENGL: Textures MUST have dimensions that are powers of 2	*/
-	OpenGlTexture2D(unsigned int width, unsigned int height) : Texture2D<TTexelComponent, NComponents, GLuint>(generate(), width, height), _isBound(false)
+	opengl_texture_2d(
+		unsigned int width,
+		unsigned int height) : texture_2d<TTexelComponent, NComponents, GLuint>(generate(), width, height), _isBound(false)
 	{
 	}
 
 	/*	NOTE FOR OPENGL: Textures MUST have dimensions that are powers of 2	*/
-	OpenGlTexture2D(unsigned int width, unsigned int height, std::shared_ptr<TTexelComponent> data) : Texture2D<TTexelComponent, NComponents, GLuint>(generate(), width, height, data), _isBound(false)
+	opengl_texture_2d(unsigned int width, unsigned int height, std::shared_ptr<TTexelComponent> data) : texture_2d<TTexelComponent, NComponents, GLuint>(generate(), width, height, data), _isBound(false)
 	{
 	}
 
-	OpenGlTexture2D(const std::string &fileName) : Texture2D<TTexelComponent, NComponents, GLuint>(generate(), fileName), _isBound(false)
+	opengl_texture_2d(const std::string &fileName) : texture_2d<TTexelComponent, NComponents, GLuint>(generate(), fileName), _isBound(false)
 	{
 	}
 
@@ -46,7 +47,7 @@ public:
 
 	void bind()
 	{
-		gl::glBindTexture(GL_TEXTURE_2D, getId());
+		gl::glBindTexture(GL_TEXTURE_2D, this->getId());
 		_isBound = true;
 	}
 
@@ -58,56 +59,41 @@ public:
 
 	void buffer()
 	{
+		auto data = this->_textureData.get();
+		auto width = this->getWidth();
+		auto height = this->getHeight();
+
 		gl::glTexImage2D(GL_TEXTURE_2D,
 						 0,
 						 GL_RGBA,
-						 getWidth(),
-						 getHeight(),
+						 width,
+						 height,
 						 0,
 						 GL_RGBA,
 						 GL_UNSIGNED_BYTE,
-						 _textureData.get());
+						 data);
 	}
 
 	// OpenGL Stuff
 	void generateMipMaps() const
 	{
 		if (!_isBound)
-			el::Loggers::getLogger("default")->warn("Attempting to call generateMipMaps() on unbound texture");
+			spdlog::warn("Attempting to call generateMipMaps() on unbound texture");
 
 		gl::glGenerateMipmap(GL_TEXTURE_2D);
 	}
 
-	void setWrapMode(TextureWrapMode mode)
+	void setWrapMode(gl::GLenum mode)
 	{
 		if (!_isBound)
-			el::Loggers::getLogger("default")->warn("Attempting to call generateMipMaps() on unbound texture");
+			spdlog::warn("Attempting to call generateMipMaps() on unbound texture");
 
 		_wrapMode = mode;
-		gl::glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, mode);
-		gl::glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, mode);
-	}
-
-	void setFilteringMode(TextureFilteringMode mode)
-	{
-		if (!_isBound)
-			el::Loggers::getLogger("default")->warn("Attempting to call setFilteringMode() on unbound texture");
-
-		_filteringMode = mode;
-		gl::glTexParameteri(GL_TEXTURE_2D, Magnifying, mode);
-		gl::glTexParameteri(GL_TEXTURE_2D, Minifying, mode);
-	}
-
-	void setFilteringMode(TextureMagMin magmin, TextureFilteringMode mode)
-	{
-		if (!_isBound)
-			el::Loggers::getLogger("default")->warn("Attempting to call setFilteringMode() on unbound texture");
-
-		_filteringMode = mode;
-		gl::glTexParameteri(GL_TEXTURE_2D, magmin, mode);
+		gl::glTexParameteri(gl::GLenum::GL_TEXTURE_2D, gl::GLenum::GL_TEXTURE_WRAP_S, mode);
+		gl::glTexParameteri(gl::GLenum::GL_TEXTURE_2D, gl::GLenum::GL_TEXTURE_WRAP_T, mode);
 	}
 };
 
-typedef OpenGlTexture2D<glm::byte, 4> tex2;
+typedef opengl_texture_2d<glm::byte, 4> tex2;
 
 #endif

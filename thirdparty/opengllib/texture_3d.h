@@ -12,35 +12,33 @@ class Texture3D
 {
 
 public:
+	/*	NOTE FOR OPENGL: Textures MUST have dimensions that are powers of 2	*/
+	Texture3D(TId id, unsigned int width, unsigned int height, unsigned int layers, std::shared_ptr<TTexelComponent> data) : _width(width),
+																															 _height(height),
+																															 _layers(layers),
+																															 _id(id),
+																															 _textureData(data)
+	{
+	}
 
 	/*	NOTE FOR OPENGL: Textures MUST have dimensions that are powers of 2	*/
-	Texture3D(TId id, unsigned int width, unsigned int height, unsigned int layers, std::shared_ptr<TTexelComponent> data) :
-		_width(width),
-		_height(height),
-		_layers(layers),
-		_id(id),
-		_textureData(data)
-	{ }
-
-	/*	NOTE FOR OPENGL: Textures MUST have dimensions that are powers of 2	*/
-	Texture3D(TId id, unsigned int width, unsigned int height, unsigned int layers) :
-		_width(width),
-		_height(height),
-		_layers(layers),
-		_id(id),
-		_textureData(width * height * layers * sizeof(TTexelComponent))
-	{ }
-
+	Texture3D(TId id, unsigned int width, unsigned int height, unsigned int layers) : _width(width),
+																					  _height(height),
+																					  _layers(layers),
+																					  _id(id),
+																					  _textureData(width * height * layers * sizeof(TTexelComponent))
+	{
+	}
 
 	std::shared_ptr<TTexelComponent> get(int x, int y, int layer)
 	{
-		return &(_textureData[(_width*_height*layer + _width*y + x) * sizeof(TTexelComponent)]);
+		return &(_textureData[(_width * _height * layer + _width * y + x) * sizeof(TTexelComponent)]);
 	}
 
 	std::shared_ptr<TTexelComponent> getLayer(int layer)
 	{
 		return &(_textureData[_width * _height * layer * sizeof(TTexelComponent)]);
-	}	
+	}
 
 	void createSimplexNoise(float frequency, float amplitude)
 	{
@@ -60,7 +58,7 @@ public:
 					if (color > max)
 						max = color;
 
-					for (int i = 0; i < sizeof(TTexelComponent); i++)					
+					for (int i = 0; i < sizeof(TTexelComponent); i++)
 						get(x, y, z)[i] = color;
 				}
 	}
@@ -71,16 +69,15 @@ public:
 	}
 
 	//getters
-	std::shared_ptr<TTexelComponent>	getDataVectorPtr() { return _textureData; }
+	std::shared_ptr<TTexelComponent> getDataVectorPtr() { return _textureData; }
 
 	unsigned int get_width() { return _width; }
 	unsigned int getHeight() { return _height; }
 	unsigned int getNu_layers() { return _layers; }
 
-	unsigned int getId() { return _id; }	
+	TId getId() { return _id; }
 
 private:
-
 	std::shared_ptr<TTexelComponent> _textureData;
 
 	TId _id;
@@ -88,6 +85,5 @@ private:
 	unsigned int _height;
 	unsigned int _layers;
 };
-
 
 #endif

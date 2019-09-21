@@ -6,8 +6,8 @@ Suffix		Type			Name				Semantic
 p			vec3			position			position
 c			vec4			rgba				color_diffuse
 n			vec3			normal			    normal
-tx2d		vec2			texcoords_2d		texture_coordinates_2d
-tx3d		vec3			texcoords_3d		texture_coordinates_3d
+tx2d		vec2			texcoords_2d		texcoords_2d
+tx3d		vec3			texcoords_3d		texcoords_3d
 ...
 
 */

@@ -36,6 +36,8 @@ ${PROJECT_SOURCE_DIR}/src/pool_allocator.cpp
 )
 
 set(HEADER_LIST
+${PROJECT_SOURCE_DIR}/include/asset/textured_mesh.hpp
+${PROJECT_SOURCE_DIR}/include/asset/mesh_read_error.hpp
 ${PROJECT_SOURCE_DIR}/include/memory/typed_pool_allocator.hpp
 ${PROJECT_SOURCE_DIR}/include/memory/pool_allocator.hpp
 ${PROJECT_SOURCE_DIR}/include/events/event_dispatcher.hpp

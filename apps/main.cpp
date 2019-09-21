@@ -30,6 +30,8 @@ using namespace glbinding;
 #include <vertex_buffer.h>
 #include <index_buffer.h>
 #include <file_read_std.h>
+#include <opengl_texture_2d.h>
+#include <asset/textured_mesh.hpp>
 
 #include <shader_program_specializations.h>
 
@@ -41,16 +43,26 @@ using namespace glbinding;
 
 using namespace ogllib;
 
+struct scene_data
+{
+    GLFWwindow *window;
+    core::frame_timer &timer;
+    core::frame_limiter &limiter;
+    ogllib::shader_program<ogllib::vertex_p> &program;
+    ogllib::vertex_array<ogllib::vertex_p> &vao;
+    ogllib::index_buffer &ebo;
+
+    ogllib::shader_program<ogllib::vertex_ptx2d> &tex_program;
+    opengl_texture_2d<glm::byte, 4> &texture;
+    ogllib::vertex_array<ogllib::vertex_ptx2d> &vao_tex;
+    ogllib::index_buffer &ebo_tex;
+};
+
 GLFWwindow *set_up_glfw(std::uint32_t width, std::uint32_t height);
 
 // put all OpenGL allocations here, so that they're destructed before main() tears down everything else.
 void run_game(core::startup_config &conf, GLFWwindow *window);
-void render_loop(GLFWwindow *window,
-                 core::frame_timer &timer,
-                 core::frame_limiter &limiter,
-                 ogllib::shader_program<ogllib::vertex_p> &program,
-                 ogllib::vertex_array<ogllib::vertex_p> vao,
-                 ogllib::index_buffer &ebo);
+void render_loop(scene_data &data);
 
 void process_input(GLFWwindow *window);
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
@@ -90,16 +102,26 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
 
     readers::basic_mesh_reader reader;
     auto mesh = reader.read_mesh_p(std::string("./assets/models/square.json"));
+    auto tex_mesh = reader.read_mesh_ptx2d("./assets/models/triangle_textured.json");
 
     auto error = mesh.error();
     std::cout << error;
+    error = tex_mesh.error();
+    std::cout << error;
 
-    ogllib::shader<FileReadStd> vert(GL_VERTEX_SHADER);
-    ogllib::shader<FileReadStd> frag(GL_FRAGMENT_SHADER);
+    ogllib::shader<FileReadStd> vert(gl::GLenum::GL_VERTEX_SHADER);
+    ogllib::shader<FileReadStd> frag(gl::GLenum::GL_FRAGMENT_SHADER);
     vert.from_file("./assets/shaders/simple.vert");
     frag.from_file("./assets/shaders/simple.frag");
+    ogllib::shader<FileReadStd> vert_ptx2d(gl::GLenum::GL_VERTEX_SHADER);
+    ogllib::shader<FileReadStd> frag_ptx2d(gl::GLenum::GL_FRAGMENT_SHADER);
+    vert_ptx2d.from_file("./assets/shaders/ptx2d_basic.vert");
+    frag_ptx2d.from_file("./assets/shaders/ptx2d_basic.frag");
+
     ogllib::shader_program<ogllib::vertex_p> program(&vert, &frag);
+    ogllib::shader_program<ogllib::vertex_ptx2d> tex_program(&vert_ptx2d, &frag_ptx2d);
     program.compile();
+    tex_program.compile();
 
     ogllib::vertex_buffer<ogllib::vertex_p> vbo(mesh->vertices);
     ogllib::vertex_array<ogllib::vertex_p> vao;
@@ -119,44 +141,72 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     vbo.unbind();
     ebo.unbind();
     vao.unbind();
+    program.unbind();
 
-    render_loop(window, timer, limiter, program, vao, ebo);
+    auto texture = opengl_texture_2d<glm::byte, 4>(tex_mesh->texture_filename);
+    ogllib::vertex_buffer<ogllib::vertex_ptx2d> vbo_tex(tex_mesh->mesh_data.vertices);
+    ogllib::vertex_array<ogllib::vertex_ptx2d> vao_tex;
+    ogllib::index_buffer ebo_tex(tex_mesh->mesh_data.indices);
+
+    vao_tex.bind();
+    vbo_tex.bind();
+    vbo_tex.buffer();
+    ebo_tex.bind();
+    ebo_tex.buffer();
+
+    texture.bind();
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    texture.buffer();
+    glGenerateMipmap(GL_TEXTURE_2D);
+
+    tex_program.bind();
+    tex_program.set_attrib_pointers();
+
+    // vbo_tex.unbind();
+    // ebo_tex.unbind();
+    // vao_tex.unbind();
+    // tex_program.unbind();
+
+    scene_data data = {window, timer, limiter, program, vao, ebo, tex_program, texture, vao_tex, ebo_tex};
+
+    render_loop(data);
 }
 
-void render_loop(GLFWwindow *window,
-                 core::frame_timer &timer,
-                 core::frame_limiter &limiter,
-                 ogllib::shader_program<ogllib::vertex_p> &program,
-                 ogllib::vertex_array<ogllib::vertex_p> vao,
-                 ogllib::index_buffer &ebo)
+void render_loop(scene_data &data)
 {
     /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(window))
+    while (!glfwWindowShouldClose(data.window))
     {
-        timer.start();
+        data.timer.start();
 
-        process_input(window);
+        process_input(data.window);
 
         gl::glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        gl::glClear(GL_COLOR_BUFFER_BIT);
+        gl::glClear(gl::ClearBufferMask::GL_COLOR_BUFFER_BIT);
 
-        // draw our first triangle
-        program.bind();
-        vao.bind();
-        ebo.bind();
-        gl::glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        data.tex_program.bind();
+        data.texture.bind();
+        data.vao_tex.bind();
+        data.ebo_tex.bind();
 
-        vao.unbind();
+        glUniform1i(glGetUniformLocation(data.tex_program.getId(), "model_texture"), 0); // set it manually
+
+        gl::glDrawElements(gl::GLenum::GL_TRIANGLES, 6, gl::GLenum::GL_UNSIGNED_INT, 0);
+
+        // data.vao_tex.unbind();
 
         /* Swap front and back buffers */
-        glfwSwapBuffers(window);
+        glfwSwapBuffers(data.window);
 
         /* Poll for and process events */
         glfwPollEvents();
 
-        limiter.wait_remainder();
+        data.limiter.wait_remainder();
 
-        timer.end();
+        data.timer.end();
         //std::cout << timer.frame_info() << std::endl;
     }
 }
