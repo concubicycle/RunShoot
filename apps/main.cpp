@@ -42,6 +42,8 @@ using GLenum = gl::GLenum;
 #include <assimp/scene.h>
 #include <array>
 
+#include <ecs/game_object_factory.hpp>
+
 using namespace ogllib;
 
 struct scene_data
@@ -76,6 +78,10 @@ void try_assimp()
 
 int main()
 {
+    ecs::archetype_store archetype_store;
+    ecs::component_store component_store;
+    ecs::game_object_factory factory(archetype_store, component_store);
+
     core::startup_config conf = core::startup_config();
     conf.load();
 
@@ -166,10 +172,10 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     tex_program.bind();
     tex_program.set_attrib_pointers();
 
-    // vbo_tex.unbind();
-    // ebo_tex.unbind();
-    // vao_tex.unbind();
-    // tex_program.unbind();
+    vbo_tex.unbind();
+    ebo_tex.unbind();
+    vao_tex.unbind();
+    tex_program.unbind();
 
     scene_data data = {window, timer, limiter, program, vao, ebo, tex_program, texture, vao_tex, ebo_tex};
 
@@ -194,8 +200,6 @@ void render_loop(scene_data &data)
         data.ebo_tex.bind();
 
         gl::glDrawElements(gl::GLenum::GL_TRIANGLES, 6, gl::GLenum::GL_UNSIGNED_INT, 0);
-
-        // data.vao_tex.unbind();
 
         /* Swap front and back buffers */
         glfwSwapBuffers(data.window);
