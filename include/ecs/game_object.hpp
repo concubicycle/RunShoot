@@ -1,6 +1,8 @@
 #ifndef __GAME_OBJECT_H_
 #define __GAME_OBJECT_H_
 
+#include <ecs/component_store.hpp>
+#include <ecs/archetype_store.hpp>
 #include <ecs/ecs_types.hpp>
 #include <atomic>
 
@@ -17,8 +19,6 @@ public:
 
 private:
     game_object_id _id;
-    const component_store &_component_store;
-    const archetype_store &_archetype_store;
 
     static std::atomic<game_object_id> NextId;
 };

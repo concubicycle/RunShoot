@@ -6,20 +6,21 @@
 
 #include <fstream>
 
-#include <ecs/component_store.hpp>
-#include <ecs/archetype_store.hpp>
+#include <ecs/game_object.hpp>
+#include <ecs/game_obj_component_pools.hpp>
 
 namespace ecs
 {
 
 class component
 {
+public:
+    component(const game_obj_component_pools &pools) : _pools(pools)
+    {
+    }
 
 protected:
-    const component_store &_component_store;
-    const archetype_store &_archetype_store;
-
-private:
+    const game_obj_component_pools &_pools;
 };
 
 #endif
