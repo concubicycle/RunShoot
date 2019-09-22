@@ -1,0 +1,66 @@
+class archetype_pool
+{
+    
+};
+
+
+render_component
+{
+    uint32 BitValue = 0x0001;
+    // ...
+}
+
+behavior_component
+{
+    uint32 BitValue = 0x0002;
+    // ...
+}
+
+transform_component
+{
+    uint32 BitValue = 0x0003;
+}
+
+
+template<T>
+arch_id
+{
+    static uint32 id = T::BitValue;
+}
+
+
+template<typename TCurrent, TPrev...>
+arch_id
+{
+    static uint32 id = TCurrent::BitValue && arch_id<TPrev...>::BitValue;
+}
+
+arch_id<transform_component, render_component>::id; // 0x0003 && 0.0001
+
+template <typename... T>
+create_entity()
+{
+    // onus is on programmer to ask for tuples in the order
+    // in which the BitValue ids appear. 
+    assert_template_param_order(); 
+
+    auto id = arch_id<T...>::id;
+    return archmap[id].new();
+}
+
+tempate <typename t>
+add_component(uint32 entity, T component)
+{
+    auto last_arch = entity.archetype;
+    auto next_arch = entity.archetype | component.archetype_bit;
+
+    arch_store.change_arch(entity, last_arch, next_arch, component);
+}
+
+change_arch(entity, last_arch, next_arch, component)
+{
+    auto new_entity_arch = archmap.addorget(next_arch).new();
+    archmap[last_arch].free(entity);  
+    return new_entity_arch;  
+}
+

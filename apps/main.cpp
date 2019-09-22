@@ -42,8 +42,6 @@ using GLenum = gl::GLenum;
 #include <assimp/scene.h>
 #include <array>
 
-#include <ecs/game_object_factory.hpp>
-
 using namespace ogllib;
 
 struct scene_data
@@ -78,10 +76,6 @@ void try_assimp()
 
 int main()
 {
-    ecs::archetype_store archetype_store;
-    ecs::component_store component_store;
-    ecs::game_object_factory factory(archetype_store, component_store);
-
     core::startup_config conf = core::startup_config();
     conf.load();
 
