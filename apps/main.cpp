@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <iostream>
 #include <chrono>
+#include <tuple>
+#include <string>
 
 /////////////
 #include <GLFW/glfw3.h>
@@ -33,14 +35,17 @@ using GLenum = gl::GLenum;
 #include <file_read_std.h>
 #include <opengl_texture_2d.h>
 #include <asset/textured_mesh.hpp>
-
 #include <shader_program_specializations.h>
 
 #include <assimp/Importer.hpp>
 #include <assimp/Exporter.hpp>
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
-#include <array>
+
+#include <ecs/component_tracked_store.hpp>
+#include <ecs/components/basic_components.hpp>
+#include <ecs/entity.hpp>
+#include <ecs/entity_factory.hpp>
 
 using namespace ogllib;
 
@@ -74,6 +79,27 @@ void try_assimp()
     const aiScene *scene = importer.ReadFile("./assets/models/Avocado/glTF/Avocado.gltf", aiProcess_ValidateDataStructure);
 }
 
+void try_ecs()
+{
+    ecs::component_tracked_store store;
+    ecs::entity_factory factory(store);
+
+    auto fac_entity1 = factory.add_entity<ecs::transform_component, ecs::render_component>();
+
+    auto entity1 = factory.add_entity<ecs::transform_component, ecs::render_component>();
+    auto entity2 = factory.add_entity<ecs::transform_component, ecs::render_component>();
+    auto tonly = factory.add_entity<ecs::transform_component>();
+
+    auto new_entity = factory.add_component<ecs::render_component>(tonly);
+
+    auto &transform = std::get<ecs::transform_component>(*(new_entity.components()));
+
+    auto all_tr = store.read_archetype_all<ecs::render_component, ecs::transform_component>();
+    auto all_t = store.read_archetype_all<ecs::transform_component>();
+
+    auto renderables = store.renderables();
+}
+
 int main()
 {
     core::startup_config conf = core::startup_config();
@@ -82,6 +108,7 @@ int main()
     auto window = set_up_glfw(conf.width(), conf.height());
 
     try_assimp();
+    try_ecs();
 
     if (window == NULL)
         return -1;
@@ -112,15 +139,17 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
 
     ogllib::shader<FileReadStd> vert(GL_VERTEX_SHADER);
     ogllib::shader<FileReadStd> frag(GL_FRAGMENT_SHADER);
-    vert.from_file("./assets/shaders/simple.vert");
-    frag.from_file("./assets/shaders/simple.frag");
     ogllib::shader<FileReadStd> vert_ptx2d(GL_VERTEX_SHADER);
     ogllib::shader<FileReadStd> frag_ptx2d(GL_FRAGMENT_SHADER);
+
+    vert.from_file("./assets/shaders/simple.vert");
+    frag.from_file("./assets/shaders/simple.frag");
     vert_ptx2d.from_file("./assets/shaders/ptx2d_basic.vert");
     frag_ptx2d.from_file("./assets/shaders/ptx2d_basic.frag");
 
     ogllib::shader_program<ogllib::vertex_p> program(&vert, &frag);
     ogllib::shader_program<ogllib::vertex_ptx2d> tex_program(&vert_ptx2d, &frag_ptx2d);
+
     program.compile();
     tex_program.compile();
 
@@ -161,7 +190,7 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     texture.buffer();
     texture.free_texture_data();
 
-    //texture.gen_mip_maps();
+    texture.gen_mip_maps();
 
     tex_program.bind();
     tex_program.set_attrib_pointers();

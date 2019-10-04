@@ -1,14 +1,20 @@
-#ifndef __ECS_TYPES_H_
-#define __ECS_TYPES_H_
+//
+// Created by sava on 9/21/19.
+//
+
+#ifndef ECS_DEV_ECS_TYPES_H
+#define ECS_DEV_ECS_TYPES_H
 
 #include <cstdint>
+#include <bitset>
+
+#define ECS_MAX_COMPONENT_TYPES 64
 
 namespace ecs
 {
+typedef std::bitset<ECS_MAX_COMPONENT_TYPES> component_bitset;
 
-typedef std::uint64_t game_object_id;
-typedef std::uint64_t component_id;
-
+typedef std::uint32_t entity_id;
 } // namespace ecs
 
-#endif
+#endif //ECS_DEV_ECS_TYPES_H

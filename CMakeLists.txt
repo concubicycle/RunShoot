@@ -7,7 +7,7 @@ set (RunShoot_VERSION_MINOR 1)
 set (CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake_modules")
 set (CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/install/")
 set (CMAKE_BINARY_DIR "${PROJECT_SOURCE_DIR}/build")
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pthread")
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -pthread")
 
 set (ASSETS_DIR ${PROJECT_SOURCE_DIR}/assets)
 file (COPY ${ASSETS_DIR} DESTINATION ${CMAKE_BINARY_DIR})
@@ -22,6 +22,7 @@ set (THIRD_PARTY "thirdparty")
 set (GLM "glm")
 set (SPDLOG "spdlog")
 set (MEM_LIB "memory")
+set (ECS_LIB "ecs")
 
 # change for release
 set (CMAKE_BUILD_TYPE Debug)
@@ -69,8 +70,7 @@ include_directories(${TARGET_NAME}
     ${GLBINDING_INCLUDE}
     ${OGLLIB_INCLUDE}
     ${EXPECTED_INCLUDE}
-    ${SPDLOG_INCLUDE})
-   
+    ${SPDLOG_INCLUDE})   
 
 add_subdirectory(src)
 
@@ -92,7 +92,7 @@ add_dependencies(${RENDERER}
     ${CORELIB_NAME} 
     ${ASSETLIB_NAME} 
     ${OGLLIB_NAME} 
-    ${GLM}     
+    ${GLM}
     ${SPDLOG})
 
 add_dependencies(${TARGET_NAME} 
@@ -111,6 +111,12 @@ add_dependencies(${ASSETLIB_NAME}
     ${OGLLIB_NAME} 
     nlohmann_json)
 
+add_dependencies(${ECS_LIB}
+    ${MEM_LIB},
+    ${ASSETLIB_NAME},
+    ${GLM}
+)   
+
 
 
 target_link_libraries(${TARGET_NAME} PRIVATE
@@ -124,6 +130,7 @@ target_link_libraries(${TARGET_NAME} PRIVATE
     ${ASSIMP_LIB}
     ${GLBINDING_LIB}
     ${GLBINDING_AUX_LIB}
+    ${ECS_LIB}
     )
 
 target_link_libraries(tests
