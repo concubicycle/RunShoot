@@ -96,27 +96,6 @@ void try_ecs()
     auto renderables = store.renderables();
 }
 
-void try_ecs()
-{
-    ecs::component_tracked_store store;
-    ecs::entity_factory factory(store);
-
-    auto fac_entity1 = factory.add_entity<ecs::transform_component, ecs::render_component>();
-
-    auto entity1 = factory.add_entity<ecs::transform_component, ecs::render_component>();
-    auto entity2 = factory.add_entity<ecs::transform_component, ecs::render_component>();
-    auto tonly = factory.add_entity<ecs::transform_component>();
-
-    auto new_entity = factory.add_component<ecs::render_component>(tonly);
-
-    auto &transform = std::get<ecs::transform_component>(*(new_entity.components()));
-
-    auto all_tr = store.read_archetype_all<ecs::render_component, ecs::transform_component>();
-    auto all_t = store.read_archetype_all<ecs::transform_component>();
-
-    auto renderables = store.renderables();
-}
-
 int main()
 {
     core::startup_config conf = core::startup_config();
@@ -124,7 +103,12 @@ int main()
 
     auto window = set_up_glfw(conf.width(), conf.height());
 
-    try_ecs();
+    for(int i = 0; i < 10000; i++)
+    {
+        try_ecs();
+    }
+
+
 
     if (window == nullptr)
         return -1;

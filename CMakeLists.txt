@@ -4,19 +4,20 @@ project(RunShoot C CXX)
 set (RunShoot_VERSION_MAJOR 0)
 set (RunShoot_VERSION_MINOR 1)
 
+
+##### change for release #####
+set (CMAKE_BUILD_TYPE Debug)
+##############################
+
+
 set (CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake_modules")
 set (CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/install/")
 set (CMAKE_BINARY_DIR "${PROJECT_SOURCE_DIR}/build")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -pthread")
 
+set (EXTERNAL_INSTALL_LOCATION "${PROJECT_SOURCE_DIR}/external")
+set (OpenGL_GL_PREFERENCE "GLVND")
 set (ASSETS_DIR ${PROJECT_SOURCE_DIR}/assets)
-
-file (COPY ${ASSETS_DIR} DESTINATION ${CMAKE_BINARY_DIR})
-
-
-#add_custom_command(TARGET MyTarget PRE_BUILD
-#        COMMAND ${CMAKE_COMMAND} -E copy_directory
-#        ${CMAKE_SOURCE_DIR}/assets $<TARGET_FILE_DIR:MyTarget>)
 
 set (TARGET_NAME "RunShoot")
 set (CORELIB_NAME "core")
@@ -30,12 +31,11 @@ set (SPDLOG "spdlog")
 set (MEM_LIB "memory")
 set (ECS_LIB "ecs")
 
-# change for release
-set (CMAKE_BUILD_TYPE Debug)
-#
 
-set (EXTERNAL_INSTALL_LOCATION "${PROJECT_SOURCE_DIR}/external")
-set (OpenGL_GL_PREFERENCE "GLVND")
+# This will only copy when you run cmake configuration (run "cmake .." from /build).
+# It doesn't seem to work if CMAKE_BINARY_DIR isn't /build for some reason (with CLion).
+file (COPY ${ASSETS_DIR} DESTINATION ${CMAKE_BINARY_DIR})
+
 
 
 add_executable(${TARGET_NAME} apps/main.cpp)
@@ -51,6 +51,7 @@ include (add_spdlog)
 include (add_expected)
 include (add_assimp)
 include (add_glbinding)
+
 
 # Prevent GLFW from including gl.h, as this will break glbinding
 target_compile_definitions(${TARGET_NAME}
@@ -91,13 +92,19 @@ add_dependencies(${OGLLIB_NAME}
     ${GLM} 
     ${SPDLOG})
 
+add_dependencies(${ECS_LIB}
+    ${MEM_LIB},
+    ${ASSETLIB_NAME},
+    ${GLM})
+
 add_dependencies(${RENDERER} 
     glbinding
     expected
-    glfw 
-    ${CORELIB_NAME} 
-    ${ASSETLIB_NAME} 
-    ${OGLLIB_NAME} 
+    glfw
+    ${ECS_LIB}
+    ${CORELIB_NAME}
+    ${ASSETLIB_NAME}
+    ${OGLLIB_NAME}
     ${GLM}
     ${SPDLOG})
 
@@ -109,21 +116,12 @@ add_dependencies(${TARGET_NAME}
     ${ASSETLIB_NAME} 
     ${CORELIB_NAME}     
     ${PLATFORMLIB_NAME} 
-    ${RENDERER}    
-    )
+    ${RENDERER})
 
 add_dependencies(${ASSETLIB_NAME} 
     expected
     ${OGLLIB_NAME} 
     nlohmann_json)
-
-add_dependencies(${ECS_LIB}
-    ${MEM_LIB},
-    ${ASSETLIB_NAME},
-    ${GLM}
-)   
-
-
 
 target_link_libraries(${TARGET_NAME} PRIVATE
     ${ASSETLIB_NAME} 
@@ -136,8 +134,7 @@ target_link_libraries(${TARGET_NAME} PRIVATE
     ${ASSIMP_LIB}
     ${GLBINDING_LIB}
     ${GLBINDING_AUX_LIB}
-    ${ECS_LIB}
-    )
+    ${ECS_LIB})
 
 target_link_libraries(tests
     ${MEM_LIB})
@@ -151,6 +148,8 @@ if(CMAKE_DL_LIBS)
     target_link_libraries(${TARGET_NAME} PRIVATE ${CMAKE_DL_LIBS})
 endif()
 
+
+message(UNIX)
 
 
 

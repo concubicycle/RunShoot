@@ -2,21 +2,21 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="RunShoot" targetName="glfw" />
-      <config projectName="RunShoot" targetName="glm" />
-      <config projectName="RunShoot" targetName="spdlog" />
-      <config projectName="RunShoot" targetName="RunShoot" />
+      <config projectName="RunShoot" targetName="assimp" />
+      <config projectName="RunShoot" targetName="glbinding" />
       <config projectName="RunShoot" targetName="asset" />
       <config projectName="RunShoot" targetName="ogllib" />
-      <config projectName="RunShoot" targetName="tests" />
-      <config projectName="RunShoot" targetName="glbinding" />
-      <config projectName="RunShoot" targetName="core" />
-      <config projectName="RunShoot" targetName="platform" />
-      <config projectName="RunShoot" targetName="assimp" />
-      <config projectName="RunShoot" targetName="expected" />
-      <config projectName="RunShoot" targetName="memory" />
       <config projectName="RunShoot" targetName="nlohmann_json" />
+      <config projectName="RunShoot" targetName="tests" />
+      <config projectName="RunShoot" targetName="glm" />
+      <config projectName="RunShoot" targetName="RunShoot" />
+      <config projectName="RunShoot" targetName="glfw" />
       <config projectName="RunShoot" targetName="renderer" />
+      <config projectName="RunShoot" targetName="memory" />
+      <config projectName="RunShoot" targetName="core" />
+      <config projectName="RunShoot" targetName="spdlog" />
+      <config projectName="RunShoot" targetName="expected" />
+      <config projectName="RunShoot" targetName="platform" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -25,43 +25,13 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="ECS stuff">
-      <change afterPath="$PROJECT_DIR$/include/ecs/archetype_id.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/ecs/archetype_pool.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/ecs/component_tracked_store.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/ecs/entity.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/ecs/entity_factory.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/asset/basic_mesh_reader.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/asset/mesh.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/core/frame_limiter.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/core/frame_timer.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/core/framerate.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/core/startup.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/core/startup_config.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/memory/pool_allocator.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/memory/typed_pool_allocator.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/platform/sleep.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/renderer/renderer.cpp" afterDir="false" />
+    <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/archetypes ideas.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/ecs_types.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/ecs_types.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/renderer/renderer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/renderer/renderer.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/basic_mesh_reader.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/event_dispatcher.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frame_limiter.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frame_timer.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/framerate.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game_object.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mesh.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pool_allocator.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sleep.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/startup.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/startup_config.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/typed_pool_allocator.cpp" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -84,12 +54,21 @@
       </set>
     </option>
   </component>
+  <component name="OCResolveContextSettings">
+    <option name="configuration" value="0-RunShoot" />
+  </component>
   <component name="ProjectId" id="1RkfA0cXEQvRmvTns35yj62oy90" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/CMakeLists.txt" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/asset" />
+      <recent name="$PROJECT_DIR$/src/core" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -208,8 +187,17 @@
       <option name="presentableId" value="Default" />
       <updated>1570215866574</updated>
       <workItem from="1570215867917" duration="1672000" />
-      <workItem from="1570217587900" duration="1265000" />
+      <workItem from="1570217587900" duration="4893000" />
+      <workItem from="1570228889227" duration="471000" />
     </task>
+    <task id="LOCAL-00001" summary="ECS stuff and cmake config">
+      <created>1570224484089</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1570224484090</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -241,6 +229,7 @@
       <path value="$PROJECT_DIR$/build/spdlog/src/spdlog" />
     </ignored-roots>
     <MESSAGE value="ECS stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="ECS stuff" />
+    <MESSAGE value="ECS stuff and cmake config" />
+    <option name="LAST_COMMIT_MESSAGE" value="ECS stuff and cmake config" />
   </component>
 </project>

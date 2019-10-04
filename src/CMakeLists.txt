@@ -7,7 +7,8 @@ set(CORE_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/core/framerate.cpp
     ${PROJECT_SOURCE_DIR}/src/core/startup_config.cpp
     ${PROJECT_SOURCE_DIR}/src/core/startup.cpp
-)
+    ${PROJECT_SOURCE_DIR}/src/core/scene.cpp
+    ${PROJECT_SOURCE_DIR}/include/core/scene.h)
 
 set(RENDERER_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/renderer/renderer.cpp
@@ -16,8 +17,7 @@ set(RENDERER_SOURCE_LIST
 set(ASSET_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/asset/mesh.cpp
     ${PROJECT_SOURCE_DIR}/src/asset/basic_mesh_reader.cpp
-
-)
+        )
 
 set(PLATFORM_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/platform/sleep.cpp
@@ -45,6 +45,8 @@ set (ECS_HEADERS
 )
 
 set(HEADER_LIST
+    ${PROJECT_SOURCE_DIR}/include/asset/asset_element.h
+    ${PROJECT_SOURCE_DIR}/include/asset/asset_visitor.h
     ${PROJECT_SOURCE_DIR}/include/asset/textured_mesh.hpp
     ${PROJECT_SOURCE_DIR}/include/asset/mesh_read_error.hpp
     ${PROJECT_SOURCE_DIR}/include/memory/typed_pool_allocator.hpp
