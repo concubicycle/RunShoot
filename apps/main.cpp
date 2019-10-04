@@ -1,6 +1,8 @@
-#include <stdio.h>
+#include <cstdio>
 #include <iostream>
 #include <chrono>
+#include <tuple>
+#include <string>
 
 /////////////
 #include <GLFW/glfw3.h>
@@ -33,14 +35,17 @@ using GLenum = gl::GLenum;
 #include <file_read_std.h>
 #include <opengl_texture_2d.h>
 #include <asset/textured_mesh.hpp>
-
 #include <shader_program_specializations.h>
 
 #include <assimp/Importer.hpp>
 #include <assimp/Exporter.hpp>
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
-#include <array>
+
+#include <ecs/component_tracked_store.hpp>
+#include <ecs/components/basic_components.hpp>
+#include <ecs/entity.hpp>
+#include <ecs/entity_factory.hpp>
 
 using namespace ogllib;
 
@@ -68,10 +73,27 @@ void render_loop(scene_data &data);
 void process_input(GLFWwindow *window);
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 
-void try_assimp()
+
+
+void try_ecs()
 {
-    Assimp::Importer importer;
-    const aiScene *scene = importer.ReadFile("./assets/models/Avocado/glTF/Avocado.gltf", aiProcess_ValidateDataStructure);
+    ecs::component_tracked_store store;
+    ecs::entity_factory factory(store);
+
+    auto fac_entity1 = factory.add_entity<ecs::transform_component, ecs::render_component>();
+
+    auto entity1 = factory.add_entity<ecs::transform_component, ecs::render_component>();
+    auto entity2 = factory.add_entity<ecs::transform_component, ecs::render_component>();
+    auto tonly = factory.add_entity<ecs::transform_component>();
+
+    auto new_entity = factory.add_component<ecs::render_component>(tonly);
+
+    auto &transform = std::get<ecs::transform_component>(*(new_entity.components()));
+
+    auto all_tr = store.read_archetype_all<ecs::render_component, ecs::transform_component>();
+    auto all_t = store.read_archetype_all<ecs::transform_component>();
+
+    auto renderables = store.renderables();
 }
 
 int main()
@@ -81,9 +103,9 @@ int main()
 
     auto window = set_up_glfw(conf.width(), conf.height());
 
-    try_assimp();
+    try_ecs();
 
-    if (window == NULL)
+    if (window == nullptr)
         return -1;
 
     run_game(conf, window);
@@ -112,15 +134,17 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
 
     ogllib::shader<FileReadStd> vert(GL_VERTEX_SHADER);
     ogllib::shader<FileReadStd> frag(GL_FRAGMENT_SHADER);
-    vert.from_file("./assets/shaders/simple.vert");
-    frag.from_file("./assets/shaders/simple.frag");
     ogllib::shader<FileReadStd> vert_ptx2d(GL_VERTEX_SHADER);
     ogllib::shader<FileReadStd> frag_ptx2d(GL_FRAGMENT_SHADER);
+
+    vert.from_file("./assets/shaders/simple.vert");
+    frag.from_file("./assets/shaders/simple.frag");
     vert_ptx2d.from_file("./assets/shaders/ptx2d_basic.vert");
     frag_ptx2d.from_file("./assets/shaders/ptx2d_basic.frag");
 
     ogllib::shader_program<ogllib::vertex_p> program(&vert, &frag);
     ogllib::shader_program<ogllib::vertex_ptx2d> tex_program(&vert_ptx2d, &frag_ptx2d);
+
     program.compile();
     tex_program.compile();
 
@@ -161,7 +185,7 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     texture.buffer();
     texture.free_texture_data();
 
-    //texture.gen_mip_maps();
+    texture.gen_mip_maps();
 
     tex_program.bind();
     tex_program.set_attrib_pointers();
@@ -193,7 +217,7 @@ void render_loop(scene_data &data)
         data.vao_tex.bind();
         data.ebo_tex.bind();
 
-        gl::glDrawElements(gl::GLenum::GL_TRIANGLES, 6, gl::GLenum::GL_UNSIGNED_INT, 0);
+        gl::glDrawElements(gl::GLenum::GL_TRIANGLES, 6, gl::GLenum::GL_UNSIGNED_INT, nullptr);
 
         /* Swap front and back buffers */
         glfwSwapBuffers(data.window);
@@ -214,18 +238,18 @@ GLFWwindow *set_up_glfw(std::uint32_t width, std::uint32_t height)
 
     /* Initialize the library */
     if (!glfwInit())
-        return NULL;
+        return nullptr;
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(width, height, "RunShoot", NULL, NULL);
+    window = glfwCreateWindow(width, height, "RunShoot", nullptr, nullptr);
     if (!window)
     {
         glfwTerminate();
-        return NULL;
+        return nullptr;
     }
 
     /* Make the window's context current */

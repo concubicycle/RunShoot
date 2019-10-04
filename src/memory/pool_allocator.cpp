@@ -32,6 +32,9 @@ void allocators::pool_allocator::init_aligned(std::uint32_t size_bytes, std::uin
 	if (size_bytes == 0 || chunkSize == 0)
 		return;
 
+	if (sizeof(void *) > chunkSize)
+		chunkSize = sizeof(void *);
+
 	_chunk_size = chunkSize;
 	_next_expand = size_bytes;
 	_chunk_capacity = (size_bytes / chunkSize) - 1;
