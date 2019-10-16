@@ -38,7 +38,7 @@ file (COPY ${ASSETS_DIR} DESTINATION ${CMAKE_BINARY_DIR})
 
 
 
-add_executable(${TARGET_NAME} apps/main.cpp)
+add_executable(${TARGET_NAME} apps/main.cpp src/asset/texture_manager.cpp include/asset/texture_manager.hpp)
 add_executable(tests tests/main.cpp)
 
 
@@ -84,7 +84,8 @@ add_subdirectory(src)
 add_dependencies(${CORELIB_NAME} 
     expected
     ${PLATFORMLIB_NAME} 
-    nlohmann_json)
+    nlohmann_json
+    glfw)
 
 add_dependencies(${OGLLIB_NAME} 	
     expected
@@ -93,8 +94,7 @@ add_dependencies(${OGLLIB_NAME}
     ${SPDLOG})
 
 add_dependencies(${ECS_LIB}
-    ${MEM_LIB},
-    ${ASSETLIB_NAME},
+    ${MEM_LIB}
     ${GLM})
 
 add_dependencies(${RENDERER} 
@@ -119,12 +119,13 @@ add_dependencies(${TARGET_NAME}
     ${RENDERER})
 
 add_dependencies(${ASSETLIB_NAME} 
+    ${ECS_LIB}    
     expected
     ${OGLLIB_NAME} 
-    nlohmann_json)
+    nlohmann_json    
+)
 
 target_link_libraries(${TARGET_NAME} PRIVATE
-    ${ASSETLIB_NAME} 
     ${GLFW_LIB}
     ${CORELIB_NAME}    
     ${PLATFORMLIB_NAME}
@@ -134,7 +135,9 @@ target_link_libraries(${TARGET_NAME} PRIVATE
     ${ASSIMP_LIB}
     ${GLBINDING_LIB}
     ${GLBINDING_AUX_LIB}
-    ${ECS_LIB})
+    ${ECS_LIB}
+    ${ASSETLIB_NAME}
+)
 
 target_link_libraries(tests
     ${MEM_LIB})

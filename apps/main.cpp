@@ -1,19 +1,10 @@
 #include <iostream>
-#include <chrono>
-#include <tuple>
 #include <string>
 
 /////////////
 #include <GLFW/glfw3.h>
-
-#include <glbinding/Version.h>
 #include <glbinding/glbinding.h>
-
 #include <glbinding/gl/gl.h>
-
-#include <glbinding-aux/ValidVersions.h>
-
-#include <memory/pool_allocator.hpp>
 
 using namespace gl;
 using namespace glbinding;
@@ -32,13 +23,9 @@ using GLenum = gl::GLenum;
 #include <vertex_buffer.h>
 #include <index_buffer.h>
 #include <file_read_std.h>
-#include <opengl_texture_2d.h>
+#include <ogl_2d_tex.hpp>
 #include <shader_program_specializations.h>
-
-
-#include <ecs/component_tracked_store.hpp>
-#include <ecs/components/basic_components.hpp>
-#include <ecs/entity_factory.hpp>
+#include <asset/texture_manager.hpp>
 
 using namespace ogllib;
 
@@ -52,7 +39,7 @@ struct scene_data
     ogllib::index_buffer &ebo;
 
     ogllib::shader_program<ogllib::vertex_ptx2d> &tex_program;
-    opengl_texture_2d<glm::byte, 3> &texture;
+    ogllib::ogl_2d_tex& texture;
     ogllib::vertex_array<ogllib::vertex_ptx2d> &vao_tex;
     ogllib::index_buffer &ebo_tex;
 };
@@ -64,7 +51,7 @@ void run_game(core::startup_config &conf, GLFWwindow *window);
 void render_loop(scene_data &data);
 
 void process_input(GLFWwindow *window);
-void framebuffer_size_callback(GLFWwindow *window, int width, int height);
+
 
 
 
@@ -89,6 +76,8 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
 {
     core::frame_timer timer;
     core::frame_limiter limiter(timer, 60);
+
+    asset::texture_manager textures;
 
     rendering::renderer renderer(conf);
     renderer.init();
@@ -138,7 +127,8 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     vao.unbind();
     program.unbind();
 
-    auto texture = opengl_texture_2d<glm::byte, 3>(tex_mesh->texture_filename);
+    auto& texture = textures.load_texture(tex_mesh->texture_filename); //tex2_rgb(tex_mesh->texture_filename);
+
     ogllib::vertex_buffer<ogllib::vertex_ptx2d> vbo_tex(tex_mesh->mesh_data.vertices);
     ogllib::vertex_array<ogllib::vertex_ptx2d> vao_tex;
     ogllib::index_buffer ebo_tex(tex_mesh->mesh_data.indices);
@@ -153,7 +143,6 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     texture.set_texture_wrap(GL_REPEAT);
     texture.set_filtering(GL_LINEAR, GL_LINEAR);
     texture.buffer();
-    texture.free_texture_data();
 
     texture.gen_mip_maps();
 
@@ -163,7 +152,8 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     vbo_tex.unbind();
     ebo_tex.unbind();
     vao_tex.unbind();
-    tex_program.unbind();
+
+    texture.unload_tex();
 
     scene_data data = {window, timer, limiter, program, vao, ebo, tex_program, texture, vao_tex, ebo_tex};
 
@@ -176,8 +166,6 @@ void render_loop(scene_data &data)
     while (!glfwWindowShouldClose(data.window))
     {
         data.timer.start();
-
-        process_input(data.window);
 
         gl::glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         gl::glClear(gl::ClearBufferMask::GL_COLOR_BUFFER_BIT);
@@ -231,16 +219,4 @@ GLFWwindow *set_up_glfw(std::uint32_t width, std::uint32_t height)
     glfwSwapInterval(0);
 
     return window;
-}
-
-void framebuffer_size_callback(GLFWwindow *window, int width, int height)
-{
-    (void)(window);                      // suppress unused param
-    gl::glViewport(0, 0, width, height); //glViewport(0, 0, width, height);
-}
-
-void process_input(GLFWwindow *window)
-{
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
 }

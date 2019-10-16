@@ -1,68 +1,91 @@
+//
+// Created by sava on 10/8/19.
+//
+
 #ifndef __ENTITY_FACTORY_H_
 #define __ENTITY_FACTORY_H_
 
-#include <ecs/archetype_store.hpp>
-
+#include <unordered_map>
 #include <unordered_set>
 #include <cstdint>
-#include <algorithm>
 
-#include <ecs/ecs_types.hpp>
-#include <ecs/entity.hpp>
+#include "ecs_types.hpp"
+#include "archetype_pool.hpp"
+#include "archetype_id.hpp"
 
-#define MIN_ENTITY_IDS 512
+
 
 namespace ecs
 {
-
-class entity_factory
-{
-public:
-    entity_factory(
-        component_tracked_store &archetype_store,
-        entity_base *existing_entities,
-        std::uint32_t existing_entities_count) : entity_factory(archetype_store)
+    class entity_factory
     {
-        for (std::uint32_t i = 0; i < existing_entities_count; ++i)
+        static const std::uint32_t MinArchetypeChunks;
+
+    public:
+        entity_factory(std::uint32_t next_id) : _next_id(next_id) {}
+        entity_factory(const entity_factory& other) = delete;
+        entity_factory &operator=(const entity_factory &other) = delete;
+
+
+        template<class... TComponents>
+        entity make_entity()
         {
-            auto id = existing_entities[i].id();
-            _ids.insert(id);
-            _max_id = std::max(_max_id, id);
-            _ids.insert(id);
+            auto arch_id = archetype_id<TComponents...>();
+            return make_entity(arch_id, next_id());
         }
-        _max_id++;
-    }
 
-    entity_factory(
-        component_tracked_store &archetype_store) : _archetype_store(archetype_store)
-    {
-        _ids.reserve(MIN_ENTITY_IDS);
-    }
+        entity make_entity(component_bitset id)
+        {
+            return make_entity(id, next_id());
+        }
 
-    template <class... TComponents>
-    entity<TComponents...> add_entity()
-    {
-        auto components = _archetype_store.add_entity<TComponents...>();
-        auto id = _max_id++;
+        entity make_entity(component_bitset archetype_id, entity_id id)
+        {
+            auto it = _archetype_pools.find(archetype_id);
 
-        _ids.insert(id);
+            if (it == _archetype_pools.end())
+            {
+                _archetype_pools.emplace(std::piecewise_construct,
+                    std::forward_as_tuple(archetype_id),
+                    std::forward_as_tuple(archetype_id, MinArchetypeChunks));
+            }
 
-        return entity<TComponents...>(id, components);
-    }
+            if (_ids.find(id) != _ids.end())
+                throw "Entity id already exists"; // TODO: Handle this better.
 
-    template <class TNew, class... TComponents>
-    entity<TNew, TComponents...> add_component(entity<TComponents...> &e)
-    {
-        auto new_components = _archetype_store.add_component<TNew, TComponents...>(e.components());
-        return entity<TNew, TComponents...>(e.id(), new_components);
-    }
+            _ids.insert(id);
 
-private:
-    component_tracked_store &_archetype_store;
+            assert(_archetype_pools.find(archetype_id) != _archetype_pools.end());
+            return _archetype_pools.find(archetype_id)->second.allocate_entity(id);
+        }
 
-    std::unordered_set<entity_id> _ids;
-    entity_id _max_id = 1;
-};
-} // namespace ecs
+        void free_entity(entity& e)
+        {
+            auto id = e.archetype_id();
+            auto it = _archetype_pools.find(id);
 
-#endif
+            if (it == _archetype_pools.end())
+            {
+                return;
+            }
+
+            return _archetype_pools.find(id)->second.free_entity(e);
+        }
+
+
+    private:
+        std::unordered_map<component_bitset, archetype_pool> _archetype_pools;
+        std::unordered_set<entity_id> _ids;
+        entity_id _max_id = 1;
+        entity_id _next_id;
+
+        inline entity_id next_id()
+        {
+            entity_id e_id = ++_next_id;
+            while (_ids.find(e_id) != _ids.end()) e_id++;
+            return e_id;
+        }
+    };
+}
+
+#endif //__ENTITY_FACTORY_H_

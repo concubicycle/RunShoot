@@ -1,40 +1,80 @@
-#ifndef __ECS_TYPES_H_
-#define __ECS_TYPES_H_
+//
+// Created by sava on 10/8/19.
+//
 
-#include <ecs/ecs_types.hpp>
-#include <ecs/archetype_id.hpp>
+#ifndef __ENTITY_H_
+#define __ENTITY_H_
+
+#include "chunk_component_accessor.hpp"
+#include "ecs_types.hpp"
 
 namespace ecs
 {
 
-class entity_base
-{
-public:
-    entity_id id() { return _id; }
-
-protected:
-    const entity_id _id;
-    entity_base(entity_id id) : _id(id) {}
-};
-
-template <class... TComponents>
-class entity : public entity_base
-{
-public:
-    entity(
-        entity_id id,
-        std::shared_ptr<std::tuple<TComponents...>> components)
-        : entity_base(id),
-          _components(components)
+/**
+ * Need better .. semantics? around constructors/destructors. Don't want to call _accessor.destruct() in
+ * entity's destructor, since that will actually destroy the components in memory, when we might just be
+ * moving the entity. We can delete copy constructor, and only pass around references, with a master copy
+ * being kept in a map in archetype_store. hmm...
+ */
+    class entity
     {
-    }
+    public:
+        entity(
+            entity_id id,
+            const std::map<std::uint8_t, archetype_chunk_component> &shift_to_chunk_component,
+            std::uint8_t *chunk_ptr) :
+            _accessor(shift_to_chunk_component, chunk_ptr),
+            _active(true),
+            _archetype_id(0)
+        {
+            _accessor.construct();
 
-    std::shared_ptr<std::tuple<TComponents...>> components() { return _components; }
+            for(auto& pair : shift_to_chunk_component)
+            {
+                _archetype_id |= 1 << pair.first;
+            }
+        }
 
-private:
-    const std::shared_ptr<std::tuple<TComponents...>> _components;
-};
+        entity(
+            entity_id id,
+            component_bitset archetype_id,
+            const std::map<std::uint8_t, archetype_chunk_component> &shift_to_chunk_component,
+            std::uint8_t *chunk_ptr) :
+            _accessor(shift_to_chunk_component, chunk_ptr),
+            _active(true),
+            _archetype_id(archetype_id)
+        {
+            _accessor.construct();
+        }
 
-} // namespace ecs
+        entity(const entity& other) :
+        _accessor(other._accessor),
+        _active(other._active),
+        _archetype_id(other._archetype_id)
+        {
+        }
 
-#endif
+        void *ptr() const { return _accessor.ptr(); }
+        component_bitset archetype_id() const { return _archetype_id; }
+
+        void destroy()
+        {
+            _accessor.destruct();
+            _active = false;
+        }
+
+        template<class T>
+        T &get_component() { return *(_accessor.get_component<T>()); }
+
+    private:
+        component_bitset  _archetype_id;
+        chunk_component_accessor _accessor;
+        bool _active;
+    };
+
+
+}
+
+
+#endif //__ENTITY_H_

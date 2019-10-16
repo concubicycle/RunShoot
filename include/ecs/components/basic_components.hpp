@@ -5,29 +5,49 @@
 #ifndef ECS_DEV_BASIC_COMPONENTS_H
 #define ECS_DEV_BASIC_COMPONENTS_H
 
-#include <ecs/ecs_types.hpp>
-#include <glm/mat4x4.hpp>
+#include <cstring>
+
+
+#include "../ecs_types.hpp"
+#include "../component.hpp"
+
 
 namespace ecs
 {
 
-struct transform_component
-{
-    static const component_bitset component_bit;
+    /** This is a dummy component, made to test in place construction. Do not use it for anything. */
+    class matrix_component : public component<matrix_component>
+    {
+    public:
+        matrix_component()
+        {
+            memset(&m, 0, sizeof(float) * 16);
+            m[0][0] = m[1][1] = m[2][2] = m[3][3] = 1.f;
+        }
 
-    glm::mat4 transform;
-};
+        float m[4][4];
+    };
 
-struct render_component
-{
-    static const component_bitset component_bit;
+    class transform_component : public component<transform_component>
+    {
+    public:
+        float x = 0;
+        float y = 0;
+        float z = 0;
+        float pitch = 0;
+        float yaw = 0;
+        float roll = 0;
+    };
 
-    float a;
-    float b;
-};
 
-const component_bitset transform_component::component_bit(1 << 0);
-const component_bitset render_component::component_bit(1 << 1);
+
+    class render_component : public component<render_component>
+    {
+    public:
+        float a;
+        float b;
+    };
+
 
 } // namespace ecs
 

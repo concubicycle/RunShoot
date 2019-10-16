@@ -6,8 +6,7 @@
 #define ECS_DEV_ARCHETYPE_ID_H
 
 #include <cstdint>
-#include <bitset>
-#include <ecs/ecs_types.hpp>
+#include "ecs_types.hpp"
 
 namespace ecs
 {

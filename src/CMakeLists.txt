@@ -8,20 +8,48 @@ set(CORE_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/core/startup_config.cpp
     ${PROJECT_SOURCE_DIR}/src/core/startup.cpp
     ${PROJECT_SOURCE_DIR}/src/core/scene.cpp
-    ${PROJECT_SOURCE_DIR}/include/core/scene.h)
+    ${PROJECT_SOURCE_DIR}/src/core/input_manager.cpp)
+
+set(CORE_HEADER_LIST
+    ${PROJECT_SOURCE_DIR}/include/core/frame_limiter.hpp
+    ${PROJECT_SOURCE_DIR}/include/core/frame_timer.hpp
+    ${PROJECT_SOURCE_DIR}/include/core/framerate.hpp
+    ${PROJECT_SOURCE_DIR}/include/core/startup_config.hpp
+    ${PROJECT_SOURCE_DIR}/include/core/startup.hpp
+    ${PROJECT_SOURCE_DIR}/include/core/input_manager.hpp)
+
 
 set(RENDERER_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/renderer/renderer.cpp
 )
 
+set(RENDERER_HEADER_LIST
+    ${PROJECT_SOURCE_DIR}/include/renderer/renderer.hpp
+    )
+
 set(ASSET_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/asset/mesh.cpp
     ${PROJECT_SOURCE_DIR}/src/asset/basic_mesh_reader.cpp
-        )
+    ${PROJECT_SOURCE_DIR}/src/asset/scene_loader.cpp
+    asset/texture_manager.cpp )
+
+set(ASSET_HEADER_LIST
+    ${PROJECT_SOURCE_DIR}/include/asset/texture_manager.hpp
+    ${PROJECT_SOURCE_DIR}/include/asset/textured_mesh.hpp
+    ${PROJECT_SOURCE_DIR}/include/asset/mesh.hpp
+    ${PROJECT_SOURCE_DIR}/include/asset/basic_mesh_reader.hpp
+    ${PROJECT_SOURCE_DIR}/include/asset/mesh_read_error.hpp
+    ${PROJECT_SOURCE_DIR}/include/asset/scene.hpp
+    ${PROJECT_SOURCE_DIR}/include/asset/scene_loader.hpp
+)
 
 set(PLATFORM_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/platform/sleep.cpp
 )
+
+set(PLATFORM_HEADER_LIST
+    ${PROJECT_SOURCE_DIR}/include/platform/sleep.hpp
+    )
 
 set(UTIL_SOURCE_LIST
 )
@@ -31,55 +59,61 @@ set(EVENTS_SOURCE_LIST
 )
 
 set(MEMORY_SOURCE_LIST
-        ${PROJECT_SOURCE_DIR}/src/memory/pool_allocator.cpp
-        )
+    ${PROJECT_SOURCE_DIR}/src/memory/pool_allocator.cpp
+    ${PROJECT_SOURCE_DIR}/src/memory/pool_memory_block.cpp
+)
 
-set (ECS_HEADERS
+set(MEMORY_HEADER_LIST
+    ${PROJECT_SOURCE_DIR}/include/memory/pool_allocator.hpp
+    ${PROJECT_SOURCE_DIR}/include/memory/pool_memory_block.hpp
+    ${PROJECT_SOURCE_DIR}/include/memory/typed_pool_allocator.hpp
+)
+
+
+set (ECS_SOURCE_LIST
+    ${PROJECT_SOURCE_DIR}/src/ecs/components/basic_components.cpp
+    ${PROJECT_SOURCE_DIR}/src/ecs/component_meta.cpp
+    ${PROJECT_SOURCE_DIR}/src/ecs/entity_factory.cpp
+    ${PROJECT_SOURCE_DIR}/src/ecs/entity_world.cpp
+)
+
+set (ECS_HEADER_LIST
+    ${PROJECT_SOURCE_DIR}/include/ecs/components/basic_components.hpp
+    ${PROJECT_SOURCE_DIR}/include/ecs/archetype_chunk_component.hpp
     ${PROJECT_SOURCE_DIR}/include/ecs/archetype_id.hpp
     ${PROJECT_SOURCE_DIR}/include/ecs/archetype_pool.hpp
-    ${PROJECT_SOURCE_DIR}/include/ecs/archetype_store.hpp
-    ${PROJECT_SOURCE_DIR}/include/ecs/component_tracked_store.hpp
+    ${PROJECT_SOURCE_DIR}/include/ecs/chunk_component_accessor.hpp
+    ${PROJECT_SOURCE_DIR}/include/ecs/component_meta.hpp
+    ${PROJECT_SOURCE_DIR}/include/ecs/component.hpp
     ${PROJECT_SOURCE_DIR}/include/ecs/ecs_types.hpp
-    ${PROJECT_SOURCE_DIR}/include/ecs/components/basic_components.hpp
+    ${PROJECT_SOURCE_DIR}/include/ecs/entity_factory.hpp
+    ${PROJECT_SOURCE_DIR}/include/ecs/entity_world.hpp
+    ${PROJECT_SOURCE_DIR}/include/ecs/entity.hpp
+
 )
 
 set(HEADER_LIST
-    ${PROJECT_SOURCE_DIR}/include/asset/asset_element.h
-    ${PROJECT_SOURCE_DIR}/include/asset/asset_visitor.h
-    ${PROJECT_SOURCE_DIR}/include/asset/textured_mesh.hpp
-    ${PROJECT_SOURCE_DIR}/include/asset/mesh_read_error.hpp
-    ${PROJECT_SOURCE_DIR}/include/memory/typed_pool_allocator.hpp
-    ${PROJECT_SOURCE_DIR}/include/memory/pool_allocator.hpp
     ${PROJECT_SOURCE_DIR}/include/events/event_dispatcher.hpp
-    ${PROJECT_SOURCE_DIR}/include/asset/mesh.hpp
-    ${PROJECT_SOURCE_DIR}/include/asset/basic_mesh_reader.hpp
-    ${PROJECT_SOURCE_DIR}/include/renderer/renderer.hpp
-    ${PROJECT_SOURCE_DIR}/include/platform/sleep.hpp
-    ${PROJECT_SOURCE_DIR}/include/core/frame_limiter.hpp
-    ${PROJECT_SOURCE_DIR}/include/core/frame_timer.hpp
-    ${PROJECT_SOURCE_DIR}/include/core/framerate.hpp
-    ${PROJECT_SOURCE_DIR}/include/core/startup_config.hpp
-    ${PROJECT_SOURCE_DIR}/include/core/startup.hpp
     ${PROJECT_SOURCE_DIR}/include/util/running_average.hpp
 )
 
 # Make an automatic library - will be static or dynamic based on user setting
-add_library(${CORELIB_NAME} STATIC ${CORE_SOURCE_LIST} ${HEADER_LIST})
-add_library(${PLATFORMLIB_NAME} STATIC ${PLATFORM_SOURCE_LIST} ${HEADER_LIST})
-add_library(${RENDERER} STATIC ${RENDERER_SOURCE_LIST} ${HEADER_LIST})
-add_library(${ASSETLIB_NAME} STATIC ${ASSET_SOURCE_LIST} ${HEADER_LIST})
-add_library(${MEM_LIB} STATIC ${MEMORY_SOURCE_LIST} ${HEADER_LIST})
+add_library(${CORELIB_NAME} STATIC ${CORE_SOURCE_LIST} ${CORE_HEADER_LIST})
+add_library(${PLATFORMLIB_NAME} STATIC ${PLATFORM_SOURCE_LIST} ${PLATFORM_HEADER_LIST})
+add_library(${RENDERER} STATIC ${RENDERER_SOURCE_LIST} ${RENDERER_HEADER_LIST})
+add_library(${ASSETLIB_NAME} STATIC ${ASSET_SOURCE_LIST} ${ASSET_HEADER_LIST})
+add_library(${MEM_LIB} STATIC ${MEMORY_SOURCE_LIST} ${MEMORY_HEADER_LIST})
+add_library(${ECS_LIB} STATIC ${ECS_SOURCE_LIST} ${ECS_HEADER_LIST})
 
-add_library(${ECS_LIB} INTERFACE)
 
 
 # We need this directory, and users of our library will need it too
-target_include_directories(${CORELIB_NAME} PUBLIC ../include)
+target_include_directories(${CORELIB_NAME} PUBLIC ../include ${GLFW_INCLUDE})
 target_include_directories(${PLATFORMLIB_NAME} PUBLIC ../include)
 target_include_directories(${RENDERER} PUBLIC ../include)
 target_include_directories(${ASSETLIB_NAME} PUBLIC ../include)
 target_include_directories(${MEM_LIB} PUBLIC ../include)
-target_include_directories(${ECS_LIB} INTERFACE ${PROJECT_SOURCE_DIR}/include/)
+target_include_directories(${ECS_LIB} PUBLIC ../include)
 
 
 
@@ -90,4 +124,4 @@ target_compile_features(${PLATFORMLIB_NAME} PUBLIC cxx_std_14)
 target_compile_features(${RENDERER} PUBLIC cxx_std_14)
 target_compile_features(${ASSETLIB_NAME} PUBLIC cxx_std_14)
 target_compile_features(${MEM_LIB} PUBLIC cxx_std_14)
-
+target_compile_features(${ECS_LIB} PUBLIC cxx_std_14)

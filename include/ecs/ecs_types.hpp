@@ -10,11 +10,8 @@
 
 #define ECS_MAX_COMPONENT_TYPES 64
 
-namespace ecs
-{
-typedef std::bitset<ECS_MAX_COMPONENT_TYPES> component_bitset;
+typedef unsigned long long component_bitset;
 
 typedef std::uint32_t entity_id;
-} // namespace ecs
 
 #endif //ECS_DEV_ECS_TYPES_H

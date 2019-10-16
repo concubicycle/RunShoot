@@ -1,127 +1,141 @@
 //
-// Created by sava on 9/21/19.
+// Created by sava on 10/7/19.
 //
 
-#ifndef ECS_DEV_ARCHETYPE_POOL_H
-#define ECS_DEV_ARCHETYPE_POOL_H
+#ifndef ECS_ATTEMPT2_ECS_H
+#define ECS_ATTEMPT2_ECS_H
 
+#include <map>
+
+#include "ecs_types.hpp"
 #include <memory/pool_allocator.hpp>
-#include <unordered_map>
-#include <tuple>
-#include <memory>
-#include <algorithm>
-#include <mutex>
-#include <functional>
 
-#include <iostream>
+#include "component_meta.hpp"
+#include "chunk_component_accessor.hpp"
+#include "entity.hpp"
+#include "archetype_chunk_component.hpp"
 
 namespace ecs
 {
-
-class archetype_pool
-{
-public:
-    archetype_pool(
-            std::uint32_t archetype_size,
-            std::uint32_t num_archetypes,
-            uintptr_t archetype_alignment)
-            : _allocator(
-                (std::uint32_t )archetype_size,
-                (std::uint32_t)num_archetypes,
-                (uintptr_t)archetype_alignment)
-    {
-    }
-
-    archetype_pool(const archetype_pool& other) = delete;
-
-    ~archetype_pool()
-    {
-
-        _allocator.free_pool();
-    }
-
-    template <class TTuple>
-    std::shared_ptr<TTuple> allocate()
-    {
-        auto tupleMem = _allocator.allocate();
-        new (tupleMem) TTuple(); // construct in place
-
-        std::shared_ptr<TTuple> ptr(
-            (TTuple *)tupleMem, [this](TTuple *dataPtr) -> void {
-                _allocator.free_element(dataPtr);
-                archetype_all<TTuple>(dataPtr);
-            });
-
-        archetype_all<TTuple>(nullptr).push_back(ptr);
-        return ptr;
-    }
-
     /**
-     * A way to get a const reference to a vector of all archetypes of a type.
-     *
-     * @tparam TTuple TTuple TTuple This is the std::tuple that identifies the archetype (a combination of the component types).
-     * @return a const reference to the archetype vector with all entities of this archetype.
+     * This wraps a raw memory pool, and hands out entities. Entities contain accessor objects,
+     * which know how to get the components from the raw chunk of entity memory.
      */
-    template <typename TTuple>
-    const std::vector<std::shared_ptr<TTuple>> &read_archetype_all()
+    class archetype_pool
     {
-        return archetype_all<TTuple>(nullptr);
-    }
+    public:
+        archetype_pool(component_bitset arch_id, std::uint32_t count) :
+            _arch_id(arch_id),
+            _shift_to_chunk_component_descriptor(calc_shift_to_chunk_component_descriptor(_arch_id)),
+            _chunk_size(calc_chunk_size(_shift_to_chunk_component_descriptor)),
+            _allocator(
+                _chunk_size,
+                count,
+                _shift_to_chunk_component_descriptor.begin()->second.meta.align()) {
+            int i = 0;
+        }
 
-    /**
-     * A way of accessing all entities of an archetype that permits modifications to the vector.
-     * A lambda should be passed, which will be run after locking a guard, which hopefully will
-     * protect the archetype vector.
-     *
-     * @tparam TTuple TTuple This is the std::tuple that identifies the archetype (a combination of the component types).
-     * @param operation A function to run, which will receive a non-const reference to the tuple vector.
-     */
-    template <typename TTuple>
-    void run_with_archetype_all(std::function<void(std::vector<std::shared_ptr<TTuple>> &)> operation)
-    {
-        std::lock_guard<std::mutex>{guard};
-        operation(archetype_all<TTuple>(nullptr));
-    }
+        entity allocate_entity(entity_id id)
+        {
+            std::uint8_t *ptr = (std::uint8_t *) _allocator.allocate();
+            return entity(id, _shift_to_chunk_component_descriptor, ptr);
+        }
 
-private:
-    allocators::pool_allocator _allocator;
-    static std::mutex guard;
+        void free_entity(entity &e)
+        {
+            e.destroy();
+            _allocator.free_element(e.ptr());
+        }
 
-    /**
-     * A way of getting a static vector of some tuple type. For each tuple type, this function will create and return
-     * arch_vec, which is a vector of pointers to all the archetypes TTuple type.
-     *
-     * TODO: Apart from the to_remove param, is this hacky? Is it bad for cache coherence?
-     *
-     * @tparam TTuple This is the std::tuple that identifies the archetype (a combination of the component types).
-     * @tparam to_remove a ptr to remove from the vector
-     * @return A static vector of all the active archetypes of this type.
-     */
-    template <typename TTuple>
-    std::vector<std::shared_ptr<TTuple>> &archetype_all(TTuple *to_remove)
-    {
-        static std::vector<std::shared_ptr<TTuple>> arch_vec;
 
-        if (to_remove)
-            remove_ptr<TTuple>(arch_vec, to_remove);
+    private:
+        component_bitset _arch_id;
+        std::map<std::uint8_t, archetype_chunk_component> _shift_to_chunk_component_descriptor;
+        std::uint32_t _chunk_size;
+        allocators::pool_allocator _allocator;
 
-        return arch_vec;
-    }
 
-    template <typename TTuple>
-    void remove_ptr(std::vector<std::shared_ptr<TTuple>> &arch_vec, TTuple *to_remove)
-    {
-        std::lock_guard<std::mutex>{guard};
+        /**
+         * Creates a lookup of component type metadata for component bitshifts.
+         * @param arch_id archetype id bitset
+         * @return a lookup of component type metadata for component bitshifts.
+         */
+        static std::map<std::uint8_t, archetype_chunk_component> calc_shift_to_chunk_component_descriptor(
+            component_bitset arch_id)
+        {
+            std::map<std::uint8_t, archetype_chunk_component> ret;
+            std::uint32_t ptr_offset = 0;
 
-        auto new_end = std::remove_if(arch_vec.begin(), arch_vec.end(),
-                                      [to_remove](const std::shared_ptr<TTuple> &ptr) { return ptr.get() == to_remove; });
+            for (auto &x : component_meta::bit_metas)
+            {
+                auto shift = x.first;
+                component_bitset component_bit = (component_bitset)(1 << shift);
 
-        arch_vec.erase(new_end, arch_vec.end());
-    }
-};
+                if (!(arch_id & component_bit)) continue;
 
-std::mutex archetype_pool::guard;
+                auto &meta = x.second;
 
-} // namespace ecs
+                auto adjustment = calc_align_adjustment(ptr_offset, meta.align());
+                ptr_offset += adjustment;
 
-#endif //ECS_DEV_ARCHETYPE_POOL_H
+                ret.emplace(std::piecewise_construct,
+                    std::forward_as_tuple(shift),
+                    std::forward_as_tuple(ptr_offset, meta));
+
+                ptr_offset += meta.size();
+
+            }
+
+            return ret;
+        }
+
+        /**
+         * Calculate the chunk size for an archetype chunk.
+         * The whole chunk has to be aligned like the first component.
+         * After the first component, add alignment padding for each subsequent component.
+         *
+         * @param shift_to_chunk_desc a map of the bit set bits that identify this pool's
+         * archetype to the metadata for that component type
+         *
+         * @return _chunk_size of the raw pool
+         */
+        static std::uint32_t calc_chunk_size(
+            const std::map<std::uint8_t, archetype_chunk_component> &chunk_components)
+        {
+            std::uint32_t ptr_offset = 0;
+
+            for (auto const &x : chunk_components)
+            {
+                ptr_offset += x.second.meta.size();
+            }
+
+            auto first_align = chunk_components.begin()->second.meta.align();
+            ptr_offset += calc_align_adjustment(ptr_offset, first_align);
+
+            return ptr_offset;
+        }
+
+        /**
+         * Calculate adjustment by masking off the lower bits of the address,
+         * to determine how 'misaligned' it is.
+         * */
+        static uintptr_t calc_align_adjustment(uintptr_t raw, uintptr_t alignment)
+        {
+            if (alignment == 0) return 0;
+
+            uintptr_t mask = (alignment - 1);
+            uintptr_t misalignment = raw & mask;
+
+            std::uint32_t mask_32 = ((std::uint32_t) alignment) - 1;
+            std::uint32_t raw_32 = (std::uint32_t) raw;
+            std::uint32_t misalignment_32 = mask_32 & raw_32;
+
+            return misalignment > 0
+                   ? alignment - misalignment
+                   : 0;
+        }
+    };
+
+}
+
+#endif //ECS_ATTEMPT2_ECS_H

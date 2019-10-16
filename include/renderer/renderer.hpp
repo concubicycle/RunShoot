@@ -16,6 +16,7 @@ class renderer
 {
 public:
     renderer(const core::startup_config &config) : _config(config) {}
+
     bool init();
 
 

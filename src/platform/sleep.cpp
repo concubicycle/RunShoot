@@ -1,5 +1,27 @@
 #include "platform/sleep.hpp"
 
+#define SPINLOCK_SLEEP
+
+// TODO: Implement high-precision sleep on various platforms, using
+// high-precision sleep code specific to platform. Then turn off SPINLOCK_SLEEP See:
+// https://stackoverflow.com/questions/13397571/precise-thread-sleep-needed-max-1ms-error
+#ifdef SPINLOCK_SLEEP
+
+void os::sleep(std::chrono::nanoseconds nanos)
+{
+    auto start = std::chrono::high_resolution_clock::now();
+
+    while (true)
+    {
+        auto now = std::chrono::high_resolution_clock::now();
+        if (now - start > nanos) return;
+    }
+}
+
+#else
+
+
+
 #if (WIN32)
 #include <windows.h>
 #include <timeapi.h>
@@ -30,4 +52,7 @@ void os::sleep(std::chrono::nanoseconds nanos)
     timespec ts = {0, nanos.count()};
     nanosleep(&ts, NULL);
 }
+#endif
+
+
 #endif

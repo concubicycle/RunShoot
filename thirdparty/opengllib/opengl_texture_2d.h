@@ -18,10 +18,7 @@ class opengl_texture_2d : public texture_2d<TTexelComponent, NComponents, GLuint
 {
 	const gl::GLenum GlColorType = NComponents == 3 ? gl::GLenum::GL_RGB : gl::GLenum::GL_RGBA;
 
-private:
-	gl::GLenum _wrapMode;
-	gl::GLenum _filteringMode;
-	bool _isBound;
+
 
 public:
 	/*	NOTE FOR OPENGL: Textures MUST have dimensions that are powers of 2	*/
@@ -115,8 +112,14 @@ public:
 		gl::glTexParameteri(gl::GLenum::GL_TEXTURE_2D, gl::GLenum::GL_TEXTURE_WRAP_S, mode);
 		gl::glTexParameteri(gl::GLenum::GL_TEXTURE_2D, gl::GLenum::GL_TEXTURE_WRAP_T, mode);
 	}
+
+private:
+    gl::GLenum _wrapMode;
+    gl::GLenum _filteringMode;
+    bool _isBound;
 };
 
-typedef opengl_texture_2d<glm::byte, 4> tex2;
+typedef opengl_texture_2d<glm::byte, 4> tex2_rgba;
+typedef opengl_texture_2d<glm::byte, 3> tex2_rgb;
 
 #endif
