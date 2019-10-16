@@ -31,9 +31,8 @@ set(EVENTS_SOURCE_LIST
 )
 
 set(MEMORY_SOURCE_LIST
-    ${PROJECT_SOURCE_DIR}/src/memory/typed_pool_allocator.cpp
-    ${PROJECT_SOURCE_DIR}/src/memory/pool_allocator.cpp
-)
+        ${PROJECT_SOURCE_DIR}/src/memory/pool_allocator.cpp
+        )
 
 set (ECS_HEADERS
     ${PROJECT_SOURCE_DIR}/include/ecs/archetype_id.hpp

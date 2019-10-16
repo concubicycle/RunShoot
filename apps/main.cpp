@@ -1,4 +1,3 @@
-#include <cstdio>
 #include <iostream>
 #include <chrono>
 #include <tuple>
@@ -7,14 +6,14 @@
 /////////////
 #include <GLFW/glfw3.h>
 
-#include <glbinding-aux/Meta.h>
 #include <glbinding/Version.h>
 #include <glbinding/glbinding.h>
 
 #include <glbinding/gl/gl.h>
 
 #include <glbinding-aux/ValidVersions.h>
-#include <glbinding-aux/types_to_string.h>
+
+#include <memory/pool_allocator.hpp>
 
 using namespace gl;
 using namespace glbinding;
@@ -34,17 +33,11 @@ using GLenum = gl::GLenum;
 #include <index_buffer.h>
 #include <file_read_std.h>
 #include <opengl_texture_2d.h>
-#include <asset/textured_mesh.hpp>
 #include <shader_program_specializations.h>
 
-#include <assimp/Importer.hpp>
-#include <assimp/Exporter.hpp>
-#include <assimp/postprocess.h>
-#include <assimp/scene.h>
 
 #include <ecs/component_tracked_store.hpp>
 #include <ecs/components/basic_components.hpp>
-#include <ecs/entity.hpp>
 #include <ecs/entity_factory.hpp>
 
 using namespace ogllib;
@@ -75,40 +68,12 @@ void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 
 
 
-void try_ecs()
-{
-    ecs::component_tracked_store store;
-    ecs::entity_factory factory(store);
-
-    auto fac_entity1 = factory.add_entity<ecs::transform_component, ecs::render_component>();
-
-    auto entity1 = factory.add_entity<ecs::transform_component, ecs::render_component>();
-    auto entity2 = factory.add_entity<ecs::transform_component, ecs::render_component>();
-    auto tonly = factory.add_entity<ecs::transform_component>();
-
-    auto new_entity = factory.add_component<ecs::render_component>(tonly);
-
-    auto &transform = std::get<ecs::transform_component>(*(new_entity.components()));
-
-    auto all_tr = store.read_archetype_all<ecs::render_component, ecs::transform_component>();
-    auto all_t = store.read_archetype_all<ecs::transform_component>();
-
-    auto renderables = store.renderables();
-}
-
 int main()
 {
     core::startup_config conf = core::startup_config();
     conf.load();
 
     auto window = set_up_glfw(conf.width(), conf.height());
-
-    for(int i = 0; i < 10000; i++)
-    {
-        try_ecs();
-    }
-
-
 
     if (window == nullptr)
         return -1;

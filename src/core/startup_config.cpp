@@ -24,6 +24,8 @@ void core::startup_config::load()
         stream.open(FileName, std::fstream::out);
         stream << config_json;
     }
+
+    stream.close();
 }
 
 bool core::startup_config::fullscreen() const { return config_json["fullscreen"].get<bool>(); }

@@ -21,6 +21,9 @@ struct transform_component
 struct render_component
 {
     static const component_bitset component_bit;
+
+    float a;
+    float b;
 };
 
 const component_bitset transform_component::component_bit(1 << 0);

@@ -21,20 +21,26 @@ namespace ecs
 class archetype_pool
 {
 public:
+    archetype_pool(
+            std::uint32_t archetype_size,
+            std::uint32_t num_archetypes,
+            uintptr_t archetype_alignment)
+            : _allocator(
+                (std::uint32_t )archetype_size,
+                (std::uint32_t)num_archetypes,
+                (uintptr_t)archetype_alignment)
+    {
+    }
+
+    archetype_pool(const archetype_pool& other) = delete;
+
     ~archetype_pool()
     {
+
         _allocator.free_pool();
     }
 
-    template <typename TTuple>
-    void init(size_t num_archetypes)
-    {
-        auto size = sizeof(TTuple);
-        auto align = alignof(TTuple);
-        _allocator.init_aligned(size * num_archetypes, size, align);
-    }
-
-    template <typename TTuple>
+    template <class TTuple>
     std::shared_ptr<TTuple> allocate()
     {
         auto tupleMem = _allocator.allocate();
@@ -43,7 +49,7 @@ public:
         std::shared_ptr<TTuple> ptr(
             (TTuple *)tupleMem, [this](TTuple *dataPtr) -> void {
                 _allocator.free_element(dataPtr);
-                auto vec = archetype_all<TTuple>(dataPtr);
+                archetype_all<TTuple>(dataPtr);
             });
 
         archetype_all<TTuple>(nullptr).push_back(ptr);

@@ -18,7 +18,7 @@ namespace ecs
 class archetype_store
 {
     // the initial capacity for storage of each archetype
-    static const size_t InitialNumArchetypes = 100;
+    static const std::uint32_t InitialNumArchetypes;
 
 public:
     ~archetype_store()
@@ -28,9 +28,11 @@ public:
     template <class... TComponents>
     std::shared_ptr<std::tuple<TComponents...>> add_entity()
     {
-        auto id = archetype_id<TComponents...>();
+        component_bitset id = archetype_id<TComponents...>();
         ensure_archetype_exists<TComponents...>(id);
-        return _arch_map[id].template allocate<std::tuple<TComponents...>>();
+        auto& arch_pool = _arch_map.find(id)->second;
+        return arch_pool.allocate<std::tuple<TComponents...>>();
+
     }
 
     template <class TNew, class... TComponents>
@@ -54,17 +56,23 @@ private:
     std::unordered_map<component_bitset, archetype_pool> _arch_map;
 
     template <class... TComponents>
-    void ensure_archetype_exists(component_bitset &id)
+    void ensure_archetype_exists(component_bitset id)
     {
         std::unordered_map<component_bitset, archetype_pool>::iterator it = _arch_map.find(id);
 
         if (it == _arch_map.end())
         {
-            _arch_map.emplace(id, archetype_pool());
-            _arch_map[id].template init<std::tuple<TComponents...>>(InitialNumArchetypes);
+            auto size = (std::uint32_t) sizeof(std::tuple<TComponents...>);
+            auto align = (uintptr_t )alignof(std::tuple<TComponents...>);
+
+            _arch_map.emplace(std::piecewise_construct,
+                    std::forward_as_tuple(id),
+                    std::forward_as_tuple(size, InitialNumArchetypes, align));
         }
     }
 };
+
+    const std::uint32_t archetype_store::InitialNumArchetypes = 100;
 
 } // namespace ecs
 

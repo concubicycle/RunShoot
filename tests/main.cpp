@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <cstdio>
 #include <string>
 #include <cstring>
 #include <istream>
@@ -47,107 +47,10 @@ int main(int argc, char **argv)
 
 void test_typed_allocator()
 {
-    printf("\n\nTESTING TYPED ALLOCATOR\n");
 
-    printf("Construct allocator\n");
-    allocators::typed_pool_allocator<test_struct> alloc(100);
-
-    std::vector<test_struct *> ptrs;
-
-    printf("Check the in-place construction:\n");
-    auto ptr = alloc.allocate();
-    std::cout << ptr->to_string();
-    alloc.free(ptr);
-
-    for (int i = 0; i < 1000000; i++)
-    {
-        auto ptr = alloc.allocate();
-        ptr->a = 1000;
-        ptr->str = "foo";
-        ptr->c = 23.234f;
-        ptrs.push_back(ptr);
-    }
-
-    for (auto ptr : ptrs)
-    {
-        alloc.free(ptr);
-    }
-
-    printf("All should be freed, no more allocs...\n");
-
-    ptrs.clear();
-
-    for (int i = 0; i < 1000000; i++)
-    {
-        auto ptr = alloc.allocate();
-        ptr->a = 1000;
-        ptr->str = "foo";
-        ptr->c = 23.234f;
-    }
-
-    printf("Done allocating.\n");
-
-    printf("Freeing all...\n");
-    alloc.free_pool();
-
-    printf("end\n");
 }
 
 void test_raw_allocator()
 {
-    printf("\n\nTESTING RAW ALLOCATOR\n");
-
-    auto size = sizeof(test_struct_t);
-    auto align = alignof(test_struct_t);
-
-    printf("sizeof(test_struct_t): %d\n", (int)size);
-    printf("alignof(test_struct_t): %d\n", (int)align);
-
-    printf("Construct allocator\n");
-    allocators::pool_allocator alloc;
-
-    printf("All Memblock Info:");
-    printf("%s", alloc.all_memblock_info().c_str());
-
-    printf("Init Allocator:\n");
-    alloc.init_aligned(sizeof(test_struct_t) * 100, sizeof(test_struct_t), alignof(test_struct_t));
-
-    printf("Capacity: %d\n", alloc.capacity());
-    printf("Size: %d\n", alloc.size());
-
-    printf("All Memblock Info:");
-    printf("%s", alloc.all_memblock_info().c_str());
-
-    printf("Capacity: %d\n", alloc.capacity());
-    printf("Size: %d\n", alloc.size());
-
-    std::vector<void *> ptrs;
-
-    for (int i = 0; i < 1000000; i++)
-    {
-        ptrs.push_back(alloc.allocate());
-        memset(ptrs.back(), 1, size);
-    }
-
-    for (auto ptr : ptrs)
-    {
-        alloc.free_element(ptr);
-    }
-
-    printf("All should be freed, no more allocs...\n");
-
-    ptrs.clear();
-
-    for (int i = 0; i < 1000000; i++)
-    {
-        ptrs.push_back(alloc.allocate());
-        memset(ptrs.back(), 1, size);
-    }
-
-    printf("Done allocating.\n");
-
-    printf("Freeing all...\n");
-    alloc.free_pool();
-
-    printf("end\n");
+    
 }

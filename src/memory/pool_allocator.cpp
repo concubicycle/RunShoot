@@ -1,220 +1,157 @@
+#include <cstring>
 #include "memory/pool_allocator.hpp"
 
-allocators::pool_allocator::pool_allocator()
+allocators::pool_allocator::pool_allocator(
+        std::uint32_t chunk_size,
+        std::uint32_t chunk_count,
+        uintptr_t alignment) :
+        _chunk_size(chunk_size > sizeof(void*) ? chunk_size : sizeof(void*)),
+        _next_expand(chunk_size * chunk_count),
+        _total_allocated(0),
+        _alignment(alignment)
 {
-	_alignment = 1;
+    if (_chunk_size == 0 || chunk_count == 0)
+        return;
+
+    std::uint32_t size_bytes = chunk_size * chunk_count;
+
+    // Determine total amount of memory to allocate
+    // Get an extra chunk to be safe when we link chunks together.
+    std::uint64_t expanded_bytes = size_bytes + _chunk_size + _alignment;
+
+    // Use non-aligned alloc to get memory
+    uintptr_t raw = (uintptr_t) malloc(expanded_bytes + _chunk_size);
+
+    // Calculate adjustment by masking off the lower bits of the address,
+    // to determine how 'misaligned' it is.
+    uintptr_t mask = (alignment - 1);
+    uintptr_t misalignment = raw & mask;
+    uintptr_t adjustment = misalignment > 0
+                               ? _alignment - misalignment
+                               : 0;
+
+    uintptr_t aligned_address = raw + adjustment;
+    track_mem_block((std::uint8_t*)raw, (std::uint8_t*) aligned_address, chunk_count);
+    prepare_memory((std::uint8_t *)aligned_address, chunk_count);
+    _head = (std::uint8_t *)aligned_address;
 }
-allocators::pool_allocator::~pool_allocator(void)
+
+
+void allocators::pool_allocator::linked_expand(std::uint32_t size_bytes)
 {
+    std::uint32_t chunk_count = (size_bytes / _chunk_size);
+    std::uint64_t expanded_bytes = size_bytes + _chunk_size;
+    std::uint8_t* new_block_aligned;
+    std::uint8_t* new_block_raw;
+
+    if (_alignment != 0)
+    {
+        expanded_bytes += _alignment;
+
+        uintptr_t raw = (uintptr_t)malloc(expanded_bytes);
+
+        //Calculate adjustment by masking off the lower bits of the address,
+        //to determine how 'misaligned' it is.
+        uintptr_t mask = (_alignment - 1);
+        uintptr_t misalignment = (raw & mask);
+        uintptr_t adjustment = misalignment > 0
+                     ? _alignment - misalignment
+                     : 0;
+
+
+        new_block_aligned = (std::uint8_t*)(raw + adjustment);
+        new_block_raw = (std::uint8_t*)raw;
+    }
+    else
+    {
+        new_block_raw = new_block_aligned = (std::uint8_t*)malloc(size_bytes + _chunk_size);
+    }
+
+    prepare_memory(new_block_aligned, chunk_count);
+
+    std::uint32_t block_index = track_mem_block(new_block_raw, new_block_aligned, chunk_count);
+    link_last_two_mem_blocks();
 }
 
-void allocators::pool_allocator::init(std::uint32_t size_bytes, std::uint32_t chunk_size)
-{
-	if (size_bytes == 0 || chunk_size == 0)
-		return;
-
-	_chunk_size = chunk_size;
-	_chunk_capacity = (size_bytes / chunk_size) - 1;
-
-	mem_block = (std::uint8_t *)malloc(size_bytes + _chunk_size); // extra chunk
-
-	prepare_memory(mem_block, _chunk_capacity);
-
-	mem_block = head = mem_block;
-
-	_mem_blocks.emplace_back(mem_block, size_bytes, 0);
-
-	_size = 0;
-	return;
-}
-void allocators::pool_allocator::init_aligned(std::uint32_t size_bytes, std::uint32_t chunkSize, std::uint32_t alignment)
-{
-	if (size_bytes == 0 || chunkSize == 0)
-		return;
-
-	if (sizeof(void *) > chunkSize)
-		chunkSize = sizeof(void *);
-
-	_chunk_size = chunkSize;
-	_next_expand = size_bytes;
-	_chunk_capacity = (size_bytes / chunkSize) - 1;
-	_alignment = alignment;
-
-	//Determine total amount of memory to allocate
-	std::uint64_t expandedSize_bytes = size_bytes + alignment;
-
-	//Use non-alligned alloc to get memory
-	auto raw = std::uint64_t(malloc(expandedSize_bytes + _chunk_size));
-
-	//Calculate adjustment by masking off the lower bits of the address,
-	//to determine how 'misa5ligned' it is.
-	std::uint64_t mask = (alignment - 1);
-	std::uint64_t misalignment = (raw & mask);
-	std::uint64_t adjustment = misalignment > 0
-								   ? _alignment - misalignment
-								   : 0;
-
-	//Calculate the adjusted address, and return as a pointer
-	std::uint64_t aligned_address = raw + adjustment;
-
-	//allocate a pointer to the first memory block.
-	_mem_blocks.emplace_back((std::uint8_t *)aligned_address, expandedSize_bytes - adjustment, adjustment);
-
-	prepare_memory(_mem_blocks[0].mem, _chunk_capacity);
-
-	mem_block = head = _mem_blocks[0].mem;
-	_size = 0;
-	return;
-}
 
 /*prepare a recently allocated chunk of memory for use as a pool by setting each chunk
 to point to the next chunk, and the last one to point to NULL.*/
-void allocators::pool_allocator::prepare_memory(std::uint8_t *mem, std::uint32_t num_chunk)
+void allocators::pool_allocator::prepare_memory(std::uint8_t *mem, std::uint32_t chunk_count)
 {
-	for (std::uint32_t chunk_index = 0; chunk_index < num_chunk; ++chunk_index)
+	for (std::uint32_t chunk_index = 0; chunk_index < chunk_count; ++chunk_index)
 	{
 		std::uint8_t *chunk = mem + (chunk_index * _chunk_size);
 		*((std::uint8_t **)chunk) = chunk + _chunk_size;
 	}
 
-	*((std::uint8_t **)&mem[num_chunk * _chunk_size]) = 0; /* terminating NULL */
+	std::uint32_t last_chunk_offset = chunk_count * _chunk_size;
+	std::uint8_t* last_chunk_ptr = mem + last_chunk_offset;
+	*((std::uint8_t **)last_chunk_ptr) = 0; /* terminating NULL */
 }
 
-//TODO: ASSERT AGAINST EVERY POSSIBLE FAILURE OF THIS METHOD PLEASE
-void allocators::pool_allocator::linked_expand(std::uint32_t size_bytes)
-{
-	std::uint8_t *new_block;
-	std::uint32_t count = (size_bytes / _chunk_size) - 1;
-	std::uint64_t adjustment = 0;
-	std::uint64_t expanded_bytes = size_bytes;
-	auto malloc_size = expanded_bytes + _chunk_size;
 
-	if (_alignment != 0)
-	{
-		//Determine total amount of memory to allocate
-		expanded_bytes += _alignment;
-
-		//Use non-alligned alloc to get memory
-		auto raw = std::uint64_t(malloc(malloc_size));
-
-		//Calculate adjustment by masking off the lower bits of the address,
-		//to determine how 'misaligned' it is.
-		std::uint64_t mask = (_alignment - 1);
-		std::uint64_t misalignment = (raw & mask);
-		adjustment = misalignment > 0
-						 ? _alignment - misalignment
-						 : 0;
-
-		//Calculate the adjusted address, and return as a pointer
-		std::uint64_t aligned = raw + adjustment;
-		new_block = (std::uint8_t *)aligned;
-	}
-	else
-	{
-		new_block = (std::uint8_t *)malloc(size_bytes + _chunk_size);
-	}
-
-	prepare_memory(new_block, count);
-
-	//create a new memblock structure
-	_mem_blocks.emplace_back(new_block, expanded_bytes - adjustment, adjustment);
-
-#ifdef __PA_DEBUG_OUTPUT_
-	std::cout << "added new block: " << std::endl
-			  << _mem_blocks.back().to_string() << std::endl
-			  << std::endl;
-#endif
-
-	std::uint8_t *last_memblock = _mem_blocks[_mem_blocks.size() - 2].mem;
-	std::uint32_t last_mem_block_size = _mem_blocks[_mem_blocks.size() - 2].size;
-
-	//link memory blocks
-	*((std::uint8_t **)&last_memblock[last_mem_block_size]) = new_block;
-
-	_chunk_capacity += count;
-
-	if (!head)
-		head = new_block;
-}
 
 void *allocators::pool_allocator::allocate()
 {
-	if (!head)
+	if (!_head)
 	{
 		_next_expand *= 2;
-
-#ifdef __PA_DEBUG_OUTPUT_
-		std::cout << std::endl
-				  << "reallocing (" << _next_expand << ")..."
-				  << std::endl;
-#endif
-
 		linked_expand(_next_expand);
-
-#ifdef __PA_DEBUG_OUTPUT_
-		std::cout << "All Memblock Info:" << std::endl
-				  << "===============" << std::endl
-				  << all_memblock_info() << std::endl
-				  << "===============" << std::endl;
-#endif
 	}
 
-	std::uint8_t *current_block = head;
-	head = (*((std::uint8_t **)(head)));
+	std::uint8_t *current_block = _head;
+    _head = (*((std::uint8_t **)(_head)));
 
-	_size++;
+	_total_allocated++;
 	return current_block;
 }
+
 void allocators::pool_allocator::free_element(void *ptr)
 {
 	if (!ptr)
 		return;
 
-	*((std::uint8_t **)ptr) = head;
-	head = (std::uint8_t *)ptr;
+	*((std::uint8_t **)ptr) = _head;
+    _head = (std::uint8_t *)ptr;
 
-	_size--;
+	_total_allocated--;
 }
 
 void allocators::pool_allocator::free_pool()
 {
 	std::uint64_t malloc_ret_address;
 
-	for (auto block : _mem_blocks)
-	{
-		malloc_ret_address = (std::uint64_t)(block.mem) - (std::uint64_t)block.offset;
-
-#ifdef __PA_DEBUG_OUTPUT_
-		std::cout << "Freeing " << malloc_ret_address << std::endl;
-#endif
-
-		free((std::uint8_t *)(malloc_ret_address));
-	}
-
-	_mem_blocks.clear();
+	for (int i = 0; i < _memory_block_count; ++i)
+    {
+	    free(_memory_blocks[i].original_pointer);
+    }
 }
 
-#ifdef __PA_DEBUG_OUTPUT_
-std::string allocators::pa_memblock::to_string()
+std::uint32_t allocators::pool_allocator::track_mem_block(
+        void* original_ptr,
+        void* aligned_ptr,
+        std::uint32_t chunk_count)
 {
-	auto mem_int = std::uint64_t(mem);
-	std::stringstream stream;
-	stream << "mem: " << mem_int << std::endl
-		   << "size: " << size << std::endl
-		   << "offset: " << offset << std::endl
-		   << "actual mem (returned by malloc):" << (mem_int - offset);
+    if (_memory_block_count == MaxMemoryBlocks)
+    {
+        throw "Pool allocator memory block exceeded. Implement a dynamically allocated auxiliary mem block array.";
+    }
 
-	return stream.str();
+    _memory_blocks[_memory_block_count].set(original_ptr, aligned_ptr, chunk_count);
+    return _memory_block_count++;
 }
 
-std::string allocators::pool_allocator::all_memblock_info()
-{
-	std::stringstream stream;
+void allocators::pool_allocator::link_last_two_mem_blocks() {
+    pa_mem_block_t& last_block = _memory_blocks[_memory_block_count - 2];
+    pa_mem_block_t& this_block = _memory_blocks[_memory_block_count - 1];
 
-	for (auto mb : _mem_blocks)
-		stream << mb.to_string() << std::endl
-			   << "-----------" << std::endl;
+    auto last_chunk_byte_offset = (last_block.chunk_count * _chunk_size);
+    std::uint8_t * last_chunk_ptr = (std::uint8_t *)last_block.aligned_pointer + last_chunk_byte_offset;
 
-	return stream.str();
+    //link memory blocks
+    *((std::uint8_t **)last_chunk_ptr) = (std::uint8_t *)this_block.aligned_pointer;
+
+
+    if (!_head)
+        _head = last_chunk_ptr;
 }
-#endif

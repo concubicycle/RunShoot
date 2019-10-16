@@ -3,71 +3,62 @@
 #ifndef __POOL_ALLOCATOR_H_
 #define __POOL_ALLOCATOR_H_
 
-#define __PA_DEBUG_OUTPUT_
-
 #include <cstdint>
 #include <stdlib.h>
 #include <string>
 #include <vector>
 
-#ifdef __PA_DEBUG_OUTPUT_
-#include <iostream>
-#include <sstream>
-#endif
-
 namespace allocators
 {
-typedef struct pool_allocator_memblock
+typedef struct pa_mem_block
 {
-	std::uint8_t *mem;
-	std::uint32_t size;
-	std::uint32_t offset;
+public:
+    void set(void* original_ptr, void* aligned_ptr, std::uint32_t chunk_count)
+    {
+        this->original_pointer = original_ptr;
+        this->aligned_pointer = aligned_ptr;
+        this->chunk_count = chunk_count;
+    }
 
-	pool_allocator_memblock(
-		std::uint8_t *mem,
-		std::uint32_t size,
-		std::uint32_t offset) : mem(mem), size(size), offset(offset) {}
+    void *original_pointer = nullptr;
+    void *aligned_pointer = nullptr;
+    std::uint32_t chunk_count;
 
-#ifdef __PA_DEBUG_OUTPUT_
-	std::string to_string();
-#endif
-} pa_memblock;
+} pa_mem_block_t;
 
 class pool_allocator
 {
-private:
-	std::uint32_t _chunk_size;
-	std::uint32_t _size;
-	std::uint32_t _chunk_capacity;
-	std::uint64_t _alignment;
-
-	std::uint32_t _next_expand;
-
-	//new:
-	std::vector<pa_memblock> _mem_blocks;
-
-	std::uint8_t *head;
-	std::uint8_t *mem_block;
-
-	void prepare_memory(std::uint8_t *mem, std::uint32_t num_chunks);
+    // a hard limit on the number of memory blocks the allocator can keep track of.
+    const static int MaxMemoryBlocks = 1024;
 
 public:
-	pool_allocator();
-	~pool_allocator(void);
+	pool_allocator(std::uint32_t chunk_size, std::uint32_t chunk_count, uintptr_t alignment);
+	pool_allocator(const pool_allocator& other) = delete;
 
-	std::uint32_t capacity() { return _chunk_capacity; }
-	std::uint32_t size() { return _size; }
+	std::uint32_t size() const { return _total_allocated; }
+
 	void *allocate();
 	void free_element(void *ptr);
-	void init_aligned(std::uint32_t size_bytes, std::uint32_t chunkSize, std::uint32_t alignment);
-	void init(std::uint32_t size_bytes, std::uint32_t chunk_size);
 	void linked_expand(std::uint32_t size_bytes);
-
 	void free_pool();
 
-#ifdef __PA_DEBUG_OUTPUT_
-	std::string all_memblock_info();
-#endif
+
+private:
+    uintptr_t _alignment;
+
+    std::uint32_t _chunk_size;
+    std::uint32_t _total_allocated;
+    std::uint32_t _next_expand;
+
+    std::uint8_t *_head;
+
+    pa_mem_block_t _memory_blocks[MaxMemoryBlocks];
+    std::uint32_t _memory_block_count = 0;
+
+    void prepare_memory(std::uint8_t *mem, std::uint32_t chunk_count);
+
+    std::uint32_t track_mem_block(void* original_ptr, void* aligned_ptr, std::uint32_t chunk_count);
+    void link_last_two_mem_blocks();
 };
 
 } // namespace allocators
