@@ -5,7 +5,7 @@
 #ifndef __OPEN_GL_TEXTURE_HPP_
 #define __OPEN_GL_TEXTURE_HPP_
 
-#include "opengl_afx.h"
+#include "../opengl_afx.h"
 #include "spdlog/spdlog.h"
 
 
@@ -28,6 +28,27 @@ namespace ogllib
             _color_type(_components_per_texel == 3 ? gl::GLenum::GL_RGB : gl::GLenum::GL_RGBA )
         {
             gl::glGenTextures(1, &_id);
+        }
+
+        ogl_2d_tex(const ogl_2d_tex& other) :
+            _id(other._id),
+            _bytes(other._bytes),
+            _width(other._width),
+            _height(other._height),
+            _components_per_texel(other._components_per_texel),
+            _color_type(other._color_type)
+        {
+        }
+
+        ogl_2d_tex& operator=(const ogl_2d_tex& other)
+        {
+            _id = other._id;
+            _bytes = other._bytes;
+            _width = other._width;
+            _height = other._height;
+            _components_per_texel = other._components_per_texel;
+            _color_type = other._color_type;
+            return *this;
         }
 
         GLuint id() { return _id; }
