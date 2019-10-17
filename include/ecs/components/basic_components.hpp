@@ -6,7 +6,9 @@
 #define ECS_DEV_BASIC_COMPONENTS_H
 
 #include <cstring>
-
+#include <ogl_2d_tex.h>
+#include <vertex_array.h>
+#include <cstdint>
 
 #include "../ecs_types.hpp"
 #include "../component.hpp"
@@ -40,12 +42,23 @@ namespace ecs
     };
 
 
+    enum mesh_type : unsigned int
+    {
+        P_TX2D = 1
+    };
 
     class render_component : public component<render_component>
     {
     public:
-        float a;
-        float b;
+        render_component() {
+
+        }
+
+        char mesh_path[256];
+        mesh_type mesh_format;
+        ogllib::vertex_array vao;
+        std::uint32_t gl_texture_id;
+        std::uint32_t element_count;
     };
 
 

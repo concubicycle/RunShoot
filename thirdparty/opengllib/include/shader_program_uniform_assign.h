@@ -28,34 +28,10 @@ private:
 	int _location;
 };
 
-// for each OpenGL type, like GLuint, GLenum, GLfloat...etc,
-// implement this method, and tell the program how to set that type
-// of uniform, given the value "val"
-template <>
-void AssignmentProxy<GLfloat>::operator=(GLfloat &val) //swag
-{
-	glUniform1f(_location, val);
-}
-
-template <>
-void AssignmentProxy<glm::mat4>::operator=(glm::mat4 &val) //swag
-{
-	glUniformMatrix4fv(_location, 1, GL_FALSE, glm::value_ptr(val));
-}
-
-template <>
-void AssignmentProxy<glm::vec3>::operator=(glm::vec3 &val) //swag
-{
-	glUniform3fv(_location, 1, glm::value_ptr(val));
-}
-// ...
-
 // A proxy class that implements [], and returns corresponding assignment proxy.
 // Allows user to do:
-/*
-Uniforms<GLuint> uniforms = shaderProgram.getUniforms<GLuint>();
-uniforms["uniformName"] = value;
-*/
+//     Uniforms<GLuint> uniforms = shaderProgram.getUniforms<GLuint>();
+//     uniforms["uniformName"] = value;
 template <class TProgram, typename TUniform>
 class Uniforms
 {

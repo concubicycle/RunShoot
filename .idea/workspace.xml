@@ -2,11 +2,11 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="RunShoot" targetName="glm" />
       <config projectName="RunShoot" targetName="glfw" />
+      <config projectName="RunShoot" targetName="glm" />
       <config projectName="RunShoot" targetName="spdlog" />
-      <config projectName="RunShoot" targetName="asset" />
       <config projectName="RunShoot" targetName="RunShoot" />
+      <config projectName="RunShoot" targetName="asset" />
       <config projectName="RunShoot" targetName="ogllib" />
       <config projectName="RunShoot" targetName="tests" />
       <config projectName="RunShoot" targetName="glbinding" />
@@ -27,37 +27,56 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/sava.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/asset/texture_manager.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/core/input_manager.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/util/resource_path_hash.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/asset/texture_manager.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/core/input_manager.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/thirdparty/opengllib/ogl_2d_tex.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/scenes/scene.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/shaders/ptx2d_pvm.frag" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/shaders/ptx2d_pvm.vert" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/renderer/render_data.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/thirdparty/opengllib/CMakeLists.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/thirdparty/opengllib/shader_program.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/thirdparty/opengllib/shader_program_uniform_assign.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/asset/asset_element.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/asset/asset_visitor.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/asset/gltf_reader.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/archetype_id.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/archetype_id.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/square.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/square.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/triangle.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/triangle.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/triangle_textured.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/triangle_textured.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake_modules/add_ogllib.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake_modules/add_ogllib.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/asset/scene.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/asset/scene.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/asset/scene_loader.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/asset/scene_loader.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/asset/texture_manager.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/asset/texture_manager.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/core/input_manager.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/core/input_manager.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ecs/archetype_pool.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/archetype_pool.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/archetype_store.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/component_tracked_store.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ecs/chunk_component_accessor.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/chunk_component_accessor.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/ecs_types.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/ecs_types.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ecs/entity.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/entity.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/entity_factory.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/entity_factory.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/memory/pool_allocator.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/memory/pool_allocator.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/memory/typed_pool_allocator.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/memory/typed_pool_allocator.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/renderer/renderer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/renderer/renderer.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/memory/pool_allocator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/memory/pool_allocator.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/platform/sleep.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/platform/sleep.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/asset/scene_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/scene_loader.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/asset/texture_manager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/texture_manager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/input_manager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/input_manager.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/renderer/renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/renderer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/opengl_texture_2d.h" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/opengl_texture_2d.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/texture_2d.h" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/texture_2d.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/buffer_object.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/camera.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/file_read_std.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/index_buffer.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/ogl_2d_tex.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/include/ogl_2d_tex.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/opengl_afx.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/opengl_texture_2d.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/program_info.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/shader.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/shader_program.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/shader_program_specializations.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/shader_program_uniform_assign.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/stb_image.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/texture_2d.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/texture_3d.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/vectormath.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/vertex_array.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/vertex_buffer.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/vertex_p.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/vertex_pc.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/vertex_pctx2d.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/vertex_ptx2d.h" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -69,6 +88,13 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CMakeLists.txt" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
@@ -89,15 +115,19 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/assets/shaders" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/thirdparty/opengllib/include" />
       <recent name="$PROJECT_DIR$/src/asset" />
       <recent name="$PROJECT_DIR$/src/core" />
       <recent name="$PROJECT_DIR$/src/memory" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/shaders" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -200,7 +230,6 @@
       <item itemvalue="CMake Application.glfw" />
       <item itemvalue="CMake Application.glm" />
       <item itemvalue="CMake Application.nlohmann_json" />
-      <item itemvalue="CMake Application.ogllib" />
       <item itemvalue="CMake Application.RunShoot" />
       <item itemvalue="CMake Application.spdlog" />
       <item itemvalue="CMake Application.tests" />
@@ -210,6 +239,7 @@
       <item itemvalue="CMake Application.memory" />
       <item itemvalue="CMake Application.platform" />
       <item itemvalue="CMake Application.renderer" />
+      <item itemvalue="CMake Application.ogllib" />
     </list>
   </component>
   <component name="SvnConfiguration">
@@ -228,6 +258,14 @@
       <workItem from="1570300304427" duration="6993000" />
       <workItem from="1571189299228" duration="5913000" />
       <workItem from="1571197914566" duration="9948000" />
+      <workItem from="1571208702840" duration="10000" />
+      <workItem from="1571248750353" duration="607000" />
+      <workItem from="1571258952370" duration="1304000" />
+      <workItem from="1571266894231" duration="663000" />
+      <workItem from="1571267577981" duration="1526000" />
+      <workItem from="1571271788019" duration="4451000" />
+      <workItem from="1571276613618" duration="12983000" />
+      <workItem from="1571290109303" duration="5510000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>
@@ -278,6 +316,16 @@
           <url>file://$PROJECT_DIR$/src/memory/pool_allocator.cpp</url>
           <line>22</line>
           <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/renderer/renderer.cpp</url>
+          <line>64</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/thirdparty/opengllib/shader_program.cpp</url>
+          <line>34</line>
+          <option name="timeStamp" value="49" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

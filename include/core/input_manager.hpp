@@ -9,6 +9,9 @@
 #include <cstdint>
 #include <cstring>
 
+
+namespace core
+{
 /**
  * GLFW doesn't really have a key state buffer you can get at unfortunately.
  * Creating a key map would be possible with setting a key event callback,
@@ -21,20 +24,24 @@
  *
  * I can implement my own buffers if needed.
  */
-class input_manager
-{
-public:
-    input_manager(GLFWwindow* window) : _window(window)
+    class input_manager
     {
-    }
+    public:
+        input_manager(GLFWwindow *window) : _window(window)
+        {
+        }
 
-    bool is_key_down(std::uint16_t key);
-    bool was_key_pressed(std::uint16_t key);
-    bool was_key_released(std::uint16_t key);
+        bool is_key_down(std::uint16_t key);
 
-private:
-    GLFWwindow *_window;
-};
+        bool was_key_pressed(std::uint16_t key);
 
+        bool was_key_released(std::uint16_t key);
+
+    private:
+        GLFWwindow *_window;
+    };
+
+
+}
 
 #endif //__INPUT_MANAGER_HPP_

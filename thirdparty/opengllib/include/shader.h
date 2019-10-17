@@ -53,15 +53,10 @@ private:
 	}
 
 public:
-	shader(gl::GLenum type)
-		: _type(type)
+	shader(gl::GLenum type, std::string filename) : _type(type), _filename(filename)
 	{
-		_id = glCreateShader(_type);
-	}
-
-	shader(gl::GLenum type, const char *fname) : shader(type)
-	{
-		from_file(fname);
+        _id = glCreateShader(_type);
+        from_file();
 	}
 
 	~shader()
@@ -69,13 +64,12 @@ public:
 		glDeleteShader(_id);
 	}
 
-	void from_file(const char *fname)
+	void from_file()
 	{
-		_filename = std::string(fname);
-		std::string shader_string = readFile(fname);
+		std::string shader_string = readFile(_filename.c_str());
 
 		if (shader_string.empty())
-			spdlog::error("Failed to compile shader {0}.", fname);
+			spdlog::error("Failed to compile shader {0}.", _filename);
 
 		const char *c_str = shader_string.c_str();
 		glShaderSource(_id, 1, &c_str, nullptr);

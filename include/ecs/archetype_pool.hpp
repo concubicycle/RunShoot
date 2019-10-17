@@ -28,12 +28,8 @@ namespace ecs
             _arch_id(arch_id),
             _shift_to_chunk_component_descriptor(calc_shift_to_chunk_component_descriptor(_arch_id)),
             _chunk_size(calc_chunk_size(_shift_to_chunk_component_descriptor)),
-            _allocator(
-                _chunk_size,
-                count,
-                _shift_to_chunk_component_descriptor.begin()->second.meta.align()) {
-            int i = 0;
-        }
+            _allocator(_chunk_size, count, _shift_to_chunk_component_descriptor.begin()->second.meta.align())
+        {}
 
         entity allocate_entity(entity_id id)
         {
@@ -47,19 +43,17 @@ namespace ecs
             _allocator.free_element(e.ptr());
         }
 
-
     private:
         component_bitset _arch_id;
         std::map<std::uint8_t, archetype_chunk_component> _shift_to_chunk_component_descriptor;
         std::uint32_t _chunk_size;
         allocators::pool_allocator _allocator;
 
-
         /**
-         * Creates a lookup of component type metadata for component bitshifts.
-         * @param arch_id archetype id bitset
-         * @return a lookup of component type metadata for component bitshifts.
-         */
+             * Creates a lookup of component type metadata for component bit shifts.
+             * @param arch_id archetype id bitset
+             * @return a lookup of component type metadata for component bit shifts.
+             */
         static std::map<std::uint8_t, archetype_chunk_component> calc_shift_to_chunk_component_descriptor(
             component_bitset arch_id)
         {
@@ -69,9 +63,10 @@ namespace ecs
             for (auto &x : component_meta::bit_metas)
             {
                 auto shift = x.first;
-                component_bitset component_bit = (component_bitset)(1 << shift);
+                component_bitset component_bit = (component_bitset) (1 << shift);
 
-                if (!(arch_id & component_bit)) continue;
+                if (!(arch_id & component_bit))
+                    continue;
 
                 auto &meta = x.second;
 
@@ -83,45 +78,49 @@ namespace ecs
                     std::forward_as_tuple(ptr_offset, meta));
 
                 ptr_offset += meta.size();
-
             }
 
             return ret;
         }
 
         /**
-         * Calculate the chunk size for an archetype chunk.
-         * The whole chunk has to be aligned like the first component.
-         * After the first component, add alignment padding for each subsequent component.
-         *
-         * @param shift_to_chunk_desc a map of the bit set bits that identify this pool's
-         * archetype to the metadata for that component type
-         *
-         * @return _chunk_size of the raw pool
-         */
+             * Calculate the chunk size for an archetype chunk.
+             * The whole chunk has to be aligned like the first component.
+             * After the first component, add alignment padding for each subsequent component.
+             *
+             * @param shift_to_chunk_desc a map of the bit set bits that identify this pool's
+             * archetype to the metadata for that component type
+             *
+             * @return _chunk_size of the raw pool
+             */
         static std::uint32_t calc_chunk_size(
             const std::map<std::uint8_t, archetype_chunk_component> &chunk_components)
         {
+            // take first align, and pretend that's the chunk-start. This would at least
+            // make it possible to optimize chunk size by making the biggest components
+            // be first in the bit set.
+            auto first_align = chunk_components.begin()->second.meta.align();
             std::uint32_t ptr_offset = 0;
 
             for (auto const &x : chunk_components)
             {
                 ptr_offset += x.second.meta.size();
+                ptr_offset += (first_align + ptr_offset, x.second.meta.align());
             }
 
-            auto first_align = chunk_components.begin()->second.meta.align();
             ptr_offset += calc_align_adjustment(ptr_offset, first_align);
 
             return ptr_offset;
         }
 
         /**
-         * Calculate adjustment by masking off the lower bits of the address,
-         * to determine how 'misaligned' it is.
-         * */
+             * Calculate adjustment by masking off the lower bits of the address,
+             * to determine how 'misaligned' it is.
+             * */
         static uintptr_t calc_align_adjustment(uintptr_t raw, uintptr_t alignment)
         {
-            if (alignment == 0) return 0;
+            if (alignment == 0)
+                return 0;
 
             uintptr_t mask = (alignment - 1);
             uintptr_t misalignment = raw & mask;
@@ -136,6 +135,6 @@ namespace ecs
         }
     };
 
-}
+} // namespace ecs
 
 #endif //ECS_ATTEMPT2_ECS_H

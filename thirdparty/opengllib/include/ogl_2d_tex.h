@@ -5,7 +5,7 @@
 #ifndef __OPEN_GL_TEXTURE_HPP_
 #define __OPEN_GL_TEXTURE_HPP_
 
-#include "../opengl_afx.h"
+#include <glbinding/glbinding.h>
 #include "spdlog/spdlog.h"
 
 

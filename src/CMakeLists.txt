@@ -21,7 +21,7 @@ set(CORE_HEADER_LIST
 
 set(RENDERER_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/renderer/renderer.cpp
-)
+    ../include/renderer/render_data.hpp)
 
 set(RENDERER_HEADER_LIST
     ${PROJECT_SOURCE_DIR}/include/renderer/renderer.hpp
@@ -31,7 +31,7 @@ set(ASSET_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/asset/mesh.cpp
     ${PROJECT_SOURCE_DIR}/src/asset/basic_mesh_reader.cpp
     ${PROJECT_SOURCE_DIR}/src/asset/scene_loader.cpp
-    asset/texture_manager.cpp )
+    ${PROJECT_SOURCE_DIR}/src/asset/texture_manager.cpp)
 
 set(ASSET_HEADER_LIST
     ${PROJECT_SOURCE_DIR}/include/asset/texture_manager.hpp
@@ -110,10 +110,10 @@ add_library(${ECS_LIB} STATIC ${ECS_SOURCE_LIST} ${ECS_HEADER_LIST})
 # We need this directory, and users of our library will need it too
 target_include_directories(${CORELIB_NAME} PUBLIC ../include ${GLFW_INCLUDE})
 target_include_directories(${PLATFORMLIB_NAME} PUBLIC ../include)
-target_include_directories(${RENDERER} PUBLIC ../include)
-target_include_directories(${ASSETLIB_NAME} PUBLIC ../include)
+target_include_directories(${RENDERER} PUBLIC ../include ../thirdparty/opengllib/include)
+target_include_directories(${ASSETLIB_NAME} PUBLIC ../include ../thirdparty/opengllib/include)
 target_include_directories(${MEM_LIB} PUBLIC ../include)
-target_include_directories(${ECS_LIB} PUBLIC ../include)
+target_include_directories(${ECS_LIB} PUBLIC ../include ../thirdparty/opengllib/include)
 
 
 

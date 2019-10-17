@@ -30,7 +30,7 @@ namespace ecs
         {
             _accessor.construct();
 
-            for(auto& pair : shift_to_chunk_component)
+            for (auto& pair : shift_to_chunk_component)
             {
                 _archetype_id |= 1 << pair.first;
             }

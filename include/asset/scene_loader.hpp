@@ -10,7 +10,7 @@
 #include <functional>
 #include <nlohmann/json.hpp>
 #include <ecs/entity.hpp>
-#include "scene.hpp"
+#include <asset/scene.hpp>
 
 
 using nlohmann::json;
@@ -23,7 +23,7 @@ namespace asset
     {
     public:
 
-        ecs::scene load_scene(std::string file_path, ecs::entity_world& world);
+        asset::scene load_scene(std::string file_path, ecs::entity_world& world);
 
     private:
         static const bitshift_to_component_loader component_loaders;

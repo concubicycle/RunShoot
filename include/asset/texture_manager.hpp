@@ -9,7 +9,7 @@
 #include <cstdint>
 #include <string>
 #include <unordered_map>
-#include <ogl_2d_tex.hpp>
+#include <ogl_2d_tex.h>
 
 namespace asset
 {
@@ -21,7 +21,6 @@ namespace asset
     private:
         std::unordered_map<std::string, ogllib::ogl_2d_tex> _texture_lookup;
     };
-
 }
 
 
