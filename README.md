@@ -21,6 +21,8 @@ on any platform.
 
 Whatever libraries are not conveniently available as public repos with CMake projects are placed in `/thirdparty`. 
 
+*NOTE*: Currently, there is currently a weird linker error that may occur on first time build, but not afterwards. I am looking into it. 
+If you encounter a zlib-related error, try building again. 
 
 
 ### Linux
@@ -35,7 +37,7 @@ make
 ### Windows
 
 This is being tested on Visual Studio 2017. The paths for projects pulled from github can be finicky depending 
-on platform/tools, so it's best to work with VS2017. 
+on platform/tools, so it's best to work with VS2017. Milestone 1 has been tested and works on VS2019.
 
 I use cmake GUI on windows. In CMake GUI,
 
