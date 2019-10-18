@@ -27,15 +27,18 @@ void core::input_manager::update()
     _last_key_states = _current_key_states;
     _current_key_states = dummy;
 
-    for(int i = 0; glfw_key_codes[i] != GLFW_KEY_LAST; ++i)
+    for(int i = 0; _glfw_key_codes[i] != GLFW_KEY_LAST; ++i)
     {
-        auto state = glfwGetKey(_window, glfw_key_codes[i]);
-        _current_key_states[glfw_key_codes[i]] = state != 0;
+        auto state = glfwGetKey(_window, _glfw_key_codes[i]);
+        _current_key_states[_glfw_key_codes[i]] = state;
     }
 }
 
-
-std::uint16_t core::input_manager::glfw_key_codes[] = {
+core::input_manager::input_manager(GLFWwindow *window) :
+    _window(window),
+    _current_key_states(_key_state_buffer_a),
+    _last_key_states(_key_state_buffer_b),
+    _glfw_key_codes {
     GLFW_KEY_SPACE,
     GLFW_KEY_APOSTROPHE,
     GLFW_KEY_COMMA,
@@ -157,4 +160,8 @@ std::uint16_t core::input_manager::glfw_key_codes[] = {
     GLFW_KEY_RIGHT_SUPER,
     GLFW_KEY_MENU,
     GLFW_KEY_LAST
-};
+}
+{
+    memset(_key_state_buffer_a, 0, sizeof(_key_state_buffer_a));
+    memset(_key_state_buffer_b, 0, sizeof(_key_state_buffer_b));
+}

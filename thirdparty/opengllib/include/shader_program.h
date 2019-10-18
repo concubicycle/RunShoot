@@ -49,13 +49,13 @@ namespace ogllib
 
 
         template<typename TUniform>
-        Uniforms<shader_program<TVertexFormat>, TUniform> getUniforms()
+        Uniforms<shader_program<TVertexFormat>, TUniform>& get_uniforms()
         {
             return get_uniforms<TUniform>(_info);
         }
 
         template<typename TUniform>
-        void setUniform(const std::string &name, TUniform value)
+        void set_uniform(const std::string &name, TUniform value)
         {
             get_uniforms()[name] = value;
         }

@@ -57,10 +57,7 @@ public:
 	AssignmentProxy<TUniform> operator[](const std::string &uniformName) const
 	{
 		auto uniformLocation = _info.getUniformLocation(uniformName);
-
-		// todo: optimize so we only have one instance os AssignmentProxy per type
 		AssignmentProxy<TUniform> assignProxy(uniformLocation);
-
 		return assignProxy;
 	}
 };

@@ -9,10 +9,10 @@
 
  //pass this to the texture shared_ptr, and see where it gets hit if debugging
  //texture de-allocation is needed.
-void wrap_stbi_image_free(void *retval_from_stbi_load)
-{
-	stbi_image_free(retval_from_stbi_load);
-}
+//void wrap_stbi_image_free(void *retval_from_stbi_load)
+//{
+//	stbi_image_free(retval_from_stbi_load);
+//}
 
 ogllib::ogl_2d_tex &asset::texture_manager::load_texture(std::string filename)
 {
@@ -31,9 +31,7 @@ ogllib::ogl_2d_tex &asset::texture_manager::load_texture(std::string filename)
         &bytes_per_texel,
         0);
 
-    unsigned int size = width * height;
-
-    auto ptr =  std::shared_ptr<std::uint8_t>(data, wrap_stbi_image_free);
+    auto ptr =  std::shared_ptr<std::uint8_t>(data, stbi_image_free);
 
     _texture_lookup.emplace(std::piecewise_construct,
         std::forward_as_tuple(filename),

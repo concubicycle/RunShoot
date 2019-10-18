@@ -110,7 +110,8 @@ void rendering::renderer::draw_scene(asset::scene &scene)
         auto projection_view_model = projection * view * model;
 
         _ptx2d_pvm.bind();
-        _ptx2d_pvm.getUniforms<glm::mat4>()["projection_view_model"] = projection_view_model;
+        auto& uniforms = _ptx2d_pvm.get_uniforms<glm::mat4>();
+        uniforms["projection_view_model"] = projection_view_model;
 
         r.vao.bind();
         glDrawElements(GL_TRIANGLES, r.element_count, GL_UNSIGNED_INT, 0);

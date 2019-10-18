@@ -26,6 +26,8 @@ using float_seconds = std::chrono::duration<float>;
 
 #include "runshoot.hpp"
 
+#include "milestone1.hpp"
+
 int main()
 {
     core::startup_config conf = core::startup_config();
@@ -89,8 +91,6 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
 void render_loop(game_systems &data)
 {
     auto& entity = data.scene.entity_world().get_entity(123);
-    auto angular_v = 3.14f / 3.f;
-    auto speed = 5.f;
 
     debounce print_frametime_debounce(float_seconds(1.f), [&data](){
         std::cout << std::endl << "========" << std::endl << data.timer.frame_info() << std::endl;
@@ -101,70 +101,8 @@ void render_loop(game_systems &data)
         data.timer.start();
         auto frame_time = data.timer.smoothed_delta_secs();
 
-        // rotate entity. TODO: Implement behaviors somehow
-        auto& t = entity.get_component<ecs::transform_component>();
-        t.yaw += (angular_v * frame_time);
-
-        if (t.yaw >  6.2831853)
-            t.yaw = 0;
-
-        //
-        if (data.input.is_key_down(GLFW_KEY_A))
-        {
-            t.x -= frame_time * speed;
-        }
-        else if (data.input.is_key_down(GLFW_KEY_D))
-        {
-            t.x += frame_time * speed;
-        }
-        if (data.input.is_key_down(GLFW_KEY_W))
-        {
-            t.y += frame_time * speed;
-        }
-        else if (data.input.is_key_down(GLFW_KEY_S))
-        {
-            t.y -= frame_time * speed;
-        }
-
-        //
-        if (data.input.was_key_pressed(GLFW_KEY_A))
-        {
-            t.scale_x *= 0.5f;
-        }
-        else if (data.input.was_key_pressed(GLFW_KEY_D))
-        {
-            t.scale_y *= 0.5f;
-        }
-        if (data.input.was_key_pressed(GLFW_KEY_W))
-        {
-            t.scale_y *= 0.5f;
-            t.scale_x *= 0.5f;
-        }
-        else if (data.input.was_key_pressed(GLFW_KEY_S))
-        {
-            t.scale_y *= .3333f;
-            t.scale_x *= .3333f;
-        }
-
-        //
-        if (data.input.was_key_released(GLFW_KEY_A))
-        {
-            t.scale_x *= 2.f;
-        }
-        else if (data.input.was_key_released(GLFW_KEY_D))
-        {
-            t.scale_y *= 2.f;
-        }
-        if (data.input.was_key_released(GLFW_KEY_W))
-        {
-            t.scale_y *= 2.f;
-            t.scale_x *= 2.f;
-        }
-        else if (data.input.was_key_released(GLFW_KEY_S))
-        {
-            t.scale_y *= 3.f;
-            t.scale_x *= 3.f;
-        }
+        handle_input(entity, data.input, frame_time);
+        spin_quad(entity, frame_time);
 
         data.renderer.draw_scene(data.scene);
         glfwSwapBuffers(data.window);
