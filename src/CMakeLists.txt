@@ -78,19 +78,19 @@ set (ECS_SOURCE_LIST
 )
 
 set (ECS_HEADER_LIST
-    ${PROJECT_SOURCE_DIR}/include/ecs/components/basic_components.hpp
-    ${PROJECT_SOURCE_DIR}/include/ecs/archetype_chunk_component.hpp
-    ${PROJECT_SOURCE_DIR}/include/ecs/archetype_id.hpp
-    ${PROJECT_SOURCE_DIR}/include/ecs/archetype_pool.hpp
-    ${PROJECT_SOURCE_DIR}/include/ecs/chunk_component_accessor.hpp
-    ${PROJECT_SOURCE_DIR}/include/ecs/component_meta.hpp
-    ${PROJECT_SOURCE_DIR}/include/ecs/component.hpp
-    ${PROJECT_SOURCE_DIR}/include/ecs/ecs_types.hpp
-    ${PROJECT_SOURCE_DIR}/include/ecs/entity_factory.hpp
-    ${PROJECT_SOURCE_DIR}/include/ecs/entity_world.hpp
-    ${PROJECT_SOURCE_DIR}/include/ecs/entity.hpp
+     ${PROJECT_SOURCE_DIR}/include/ecs/components/basic_components.hpp
+     ${PROJECT_SOURCE_DIR}/include/ecs/archetype_chunk_component.hpp
+     ${PROJECT_SOURCE_DIR}/include/ecs/archetype_id.hpp
+     ${PROJECT_SOURCE_DIR}/include/ecs/archetype_pool.hpp
+     ${PROJECT_SOURCE_DIR}/include/ecs/chunk_component_accessor.hpp
+     ${PROJECT_SOURCE_DIR}/include/ecs/component_meta.hpp
+     ${PROJECT_SOURCE_DIR}/include/ecs/component.hpp
+     ${PROJECT_SOURCE_DIR}/include/ecs/ecs_types.hpp
+     ${PROJECT_SOURCE_DIR}/include/ecs/entity_factory.hpp
+     ${PROJECT_SOURCE_DIR}/include/ecs/entity_world.hpp
+     ${PROJECT_SOURCE_DIR}/include/ecs/entity.hpp
 
-)
+     )
 
 set(HEADER_LIST
     ${PROJECT_SOURCE_DIR}/include/events/event_dispatcher.hpp

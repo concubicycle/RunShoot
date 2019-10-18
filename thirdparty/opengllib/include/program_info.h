@@ -12,6 +12,7 @@ namespace ogllib
 class program_info
 {
 private:
+    std::uint32_t _id;
 	int _numUniforms = 0;
 	int _numAttributes = 0;
 
@@ -25,6 +26,8 @@ public:
 	int getAttribLocation(const std::string &name) const;
 
 	int getUniformLocation(const std::string &name) const;
+
+	std::uint32_t id() { return _id; }
 };
 
 } // namespace ogllib

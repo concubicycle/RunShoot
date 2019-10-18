@@ -55,11 +55,15 @@ glm::quat get_rotation_from(const glm::vec4 &source, const glm::vec4 &dest)
 
 void set_translation(glm::mat4 &transform, const glm::vec3 &translation)
 {
-	float *mat = glm::value_ptr(transform);
+    set_translation(transform, translation.x, translation.y, translation.z);
+}
 
-	mat[12] = translation.x;
-	mat[13] = translation.y;
-	mat[14] = translation.z;
+void set_translation(glm::mat4 &transform, float x, float y, float z)
+{
+    float *mat = glm::value_ptr(transform);
+    mat[12] = x;
+    mat[13] = y;
+    mat[14] = z;
 }
 
 void get_translation(const glm::mat4 &transform, glm::vec3 *translation)

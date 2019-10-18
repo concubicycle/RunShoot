@@ -23,6 +23,9 @@ void load_transform(const json &j, ecs::entity &e)
     transform.pitch = j["pitch"].get<float>();
     transform.yaw = j["yaw"].get<float>();
     transform.roll = j["roll"].get<float>();
+    transform.scale_x = j["scale_x"].get<double>();
+    transform.scale_y = j["scale_y"].get<float>();
+    transform.scale_z = j["scale_z"].get<float>();
 }
 
 void load_render(const json &j, ecs::entity &e)

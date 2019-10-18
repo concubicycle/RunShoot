@@ -29,6 +29,8 @@ namespace ecs
 
         entity& add_entity(component_bitset archetype_id, entity_id id);
 
+        entity& get_entity(entity_id id);
+
         /**
          * We'll probably want to iterate all entities often. but we don't want to
          * create and return an array of them, and we don't really wait to return

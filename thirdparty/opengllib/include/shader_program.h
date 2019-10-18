@@ -51,13 +51,13 @@ namespace ogllib
         template<typename TUniform>
         Uniforms<shader_program<TVertexFormat>, TUniform> getUniforms()
         {
-            return getUniforms<TUniform>(_info);
+            return get_uniforms<TUniform>(_info);
         }
 
         template<typename TUniform>
         void setUniform(const std::string &name, TUniform value)
         {
-            getUniforms()[name] = value;
+            get_uniforms()[name] = value;
         }
 
         //COMPILATION
@@ -112,8 +112,6 @@ namespace ogllib
 
     private:
         ogllib::program_info _info;
-
-
         unsigned int _id = 0;   // The shader program identifier
         bool _compiled = false; // Whether or not we have initialized the shader
 
@@ -146,13 +144,18 @@ namespace ogllib
         }
 
         template<typename TUniform>
-        static Uniforms<shader_program<TVertexFormat>, TUniform> &getUniforms(program_info &info)
+        static Uniforms<shader_program<TVertexFormat>, TUniform> &get_uniforms(program_info &info)
         {
-            static Uniforms<shader_program<TVertexFormat>, TUniform> proxy(info); //swag
-            return proxy;
+            static std::unordered_map<std::uint32_t, Uniforms<shader_program<TVertexFormat>, TUniform>> proxies;
+            auto p = proxies.find(info.id());
+            if (p == proxies.end())
+            {
+                proxies.insert({info.id(), Uniforms<shader_program<TVertexFormat>, TUniform>(info)});
+            }
+
+            return proxies.find(info.id())->second;
         }
     };
-
 } // namespace ogllib
 
 #endif

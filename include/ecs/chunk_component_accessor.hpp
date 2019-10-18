@@ -10,23 +10,22 @@
 
 namespace ecs
 {
-
     class chunk_component_accessor
     {
     public:
         chunk_component_accessor(
             const std::map<std::uint8_t, archetype_chunk_component> &shift_to_chunk_component,
-            std::uint8_t *chunk_ptr) : _shift_to_chunk_component(shift_to_chunk_component),
-                                       _chunk_ptr(chunk_ptr),
-                                       _shift_to_component_addr(calc_shift_to_addr(chunk_ptr, shift_to_chunk_component))
+            std::uint8_t *chunk_ptr) :
+            _shift_to_chunk_component(shift_to_chunk_component),
+            _chunk_ptr(chunk_ptr),
+            _shift_to_component_addr(calc_shift_to_addr(chunk_ptr, shift_to_chunk_component))
         {
         }
 
-        chunk_component_accessor(const chunk_component_accessor &other) : _chunk_ptr(other._chunk_ptr),
-                                                                          _shift_to_chunk_component(
-                                                                              other._shift_to_chunk_component),
-                                                                          _shift_to_component_addr(
-                                                                              other._shift_to_component_addr)
+        chunk_component_accessor(const chunk_component_accessor &other) :
+            _chunk_ptr(other._chunk_ptr),
+            _shift_to_chunk_component(other._shift_to_chunk_component),
+            _shift_to_component_addr(other._shift_to_component_addr)
         {
         }
 
@@ -35,13 +34,10 @@ namespace ecs
         template<class T>
         T *get_component()
         {
-            auto it = _shift_to_chunk_component.find(component<T>::component_bitshift);
-            if (it == _shift_to_chunk_component.end())
+            auto it = _shift_to_component_addr.find(component<T>::component_bitshift);
+            if (it == _shift_to_component_addr.end())
                 return nullptr;
-
-            auto offset = it->second.chunk_component_offset;
-            std::uint8_t *addr = _chunk_ptr + offset;
-            return (T *) addr;
+            return (T *) it->second;
         }
 
         /**

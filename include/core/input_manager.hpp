@@ -26,9 +26,16 @@ namespace core
  */
     class input_manager
     {
+        static std::uint16_t glfw_key_codes[];
+
     public:
-        input_manager(GLFWwindow *window) : _window(window)
+        input_manager(GLFWwindow *window) :
+        _window(window),
+        _current_key_states(_key_state_buffer_a),
+        _last_key_states(_key_state_buffer_b)
         {
+            memset(_key_state_buffer_a, 0, sizeof(_key_state_buffer_a));
+            memset(_key_state_buffer_b, 0, sizeof(_key_state_buffer_b));
         }
 
         bool is_key_down(std::uint16_t key);
@@ -37,8 +44,16 @@ namespace core
 
         bool was_key_released(std::uint16_t key);
 
+        void update();
+
     private:
         GLFWwindow *_window;
+
+        std::uint8_t* _current_key_states;
+        std::uint8_t* _last_key_states;
+
+        std::uint8_t _key_state_buffer_a[GLFW_KEY_LAST];
+        std::uint8_t _key_state_buffer_b[GLFW_KEY_LAST];
     };
 
 

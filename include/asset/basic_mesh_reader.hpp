@@ -14,10 +14,10 @@
 
 using json = nlohmann::json;
 
-namespace readers
+namespace asset
 {
 
-using mesh_result_p = tl::expected<models::mesh<ogllib::vertex_p>, mesh_read_error>;
+using mesh_result = tl::expected<models::mesh<ogllib::vertex_p>, mesh_read_error>;
 using mesh_result_ptx2d = tl::expected<models::textured_mesh<ogllib::vertex_ptx2d>, mesh_read_error>;
 
 class basic_mesh_reader
@@ -25,7 +25,7 @@ class basic_mesh_reader
 public:
     basic_mesh_reader() {}
 
-    mesh_result_p read_mesh_p(std::string filename);
+    mesh_result read_mesh_p(std::string filename);
     mesh_result_ptx2d read_mesh_ptx2d(std::string filename);
 };
 

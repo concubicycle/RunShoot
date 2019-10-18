@@ -14,6 +14,9 @@
 #include "../component.hpp"
 
 
+#define MAX_BASIC_COMPONENTS 16
+
+
 namespace ecs
 {
 
@@ -39,6 +42,9 @@ namespace ecs
         float pitch = 0;
         float yaw = 0;
         float roll = 0;
+        float scale_x = 0;
+        float scale_y = 0;
+        float scale_z = 0;
     };
 
 

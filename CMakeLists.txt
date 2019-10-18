@@ -31,13 +31,11 @@ set(SPDLOG "spdlog")
 set(MEM_LIB "memory")
 set(ECS_LIB "ecs")
 
-
-# This will only copy when you run cmake configuration (run "cmake .." from /build).
-# It doesn't seem to work if CMAKE_BINARY_DIR isn't /build for some reason (with CLion).
+# WARNING: Doesn't work when build directory isn't /build for some reason (with CLion)
 file(COPY ${ASSETS_DIR} DESTINATION ${CMAKE_BINARY_DIR})
 
 
-add_executable(${TARGET_NAME} apps/main.cpp)
+add_executable(${TARGET_NAME} apps/main.cpp apps/runshoot.hpp)
 add_executable(tests tests/main.cpp)
 
 
@@ -130,17 +128,14 @@ target_link_libraries(${TARGET_NAME} PRIVATE
                       ${GLFW_LIB}
                       ${CORELIB_NAME}
                       ${PLATFORMLIB_NAME}
-
+                      ${GLBINDING_LIB}
                       ${RENDERER}
                       ${OGLLIB_NAME}
-
                       ${ASSIMP_LIB}
-                      ${GLBINDING_LIB}
                       ${GLBINDING_AUX_LIB}
                       ${ECS_LIB}
                       ${ASSETLIB_NAME}
-                      ${MEM_LIB}
-                      )
+                      ${MEM_LIB})
 
 target_link_libraries(tests
                       ${MEM_LIB})

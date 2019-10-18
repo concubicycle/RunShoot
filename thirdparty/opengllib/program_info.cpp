@@ -8,6 +8,8 @@ ogllib::program_info::program_info()
 
 void ogllib::program_info::initialize(int programId)
 {
+    _id = programId;
+
 	glGetProgramInterfaceiv(programId, GL_PROGRAM_INPUT, GL_ACTIVE_RESOURCES, &_numAttributes);
 	glGetProgramInterfaceiv(programId, GL_UNIFORM, GL_ACTIVE_RESOURCES, &_numUniforms);
 

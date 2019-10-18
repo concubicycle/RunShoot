@@ -5,14 +5,13 @@
 #ifndef __OPEN_GL_TEXTURE_HPP_
 #define __OPEN_GL_TEXTURE_HPP_
 
-#include <glbinding/glbinding.h>
+#include <glbinding/gl/gl.h>
 #include "spdlog/spdlog.h"
 
+using namespace gl;
 
 namespace ogllib
 {
-    using namespace gl;
-
     class ogl_2d_tex
     {
     public:

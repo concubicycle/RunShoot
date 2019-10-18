@@ -7,4 +7,4 @@ add_library(ogllib STATIC
             shader_program_uniform_assign.cpp
             vectormath.cpp)
 
-target_include_directories(ogllib PUBLIC ./include)
+target_include_directories(ogllib PUBLIC ./include ../../external/glbinding/include)

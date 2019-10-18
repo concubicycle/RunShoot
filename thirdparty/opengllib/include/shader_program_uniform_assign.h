@@ -30,7 +30,7 @@ private:
 
 // A proxy class that implements [], and returns corresponding assignment proxy.
 // Allows user to do:
-//     Uniforms<GLuint> uniforms = shaderProgram.getUniforms<GLuint>();
+//     Uniforms<GLuint> uniforms = shaderProgram.get_uniforms<GLuint>();
 //     uniforms["uniformName"] = value;
 template <class TProgram, typename TUniform>
 class Uniforms
@@ -38,9 +38,9 @@ class Uniforms
 	friend TProgram;
 
 private:
-	const program_info &_info;
+	program_info &_info;
 
-	Uniforms(const program_info &info)
+	Uniforms(program_info &info)
 		: _info(info)
 	{
 	}
@@ -56,6 +56,9 @@ public:
 		return assignProxy;
 	}
 };
+
+    template <>
+    void ogllib::AssignmentProxy<glm::mat4>::operator=(glm::mat4 &val);
 
 } // namespace ogllib
 

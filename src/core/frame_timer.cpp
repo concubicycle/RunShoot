@@ -1,6 +1,9 @@
 #include "core/frame_timer.hpp"
 #include <string>
 
+typedef std::chrono::duration<float> float_seconds;
+
+
 void core::frame_timer::start()
 {
     _start = _high_res_timer.now();
@@ -27,9 +30,15 @@ std::chrono::nanoseconds core::frame_timer::current_frame_time() const
 {
     return std::chrono::high_resolution_clock::now() - _start;
 }
+
 std::string core::frame_timer::frame_info() const
 {
     return "delta: " + std::to_string(delta().count()) + "ns\n" +
            "smoothed delta: " + std::to_string(smoothed_delta().count()) + "ns\n" +
            "current frame time: " + std::to_string(current_frame_time().count()) + "ns\n";
+}
+
+float core::frame_timer::smoothed_delta_secs() const
+{
+    auto secs = std::chrono::duration_cast<float_seconds>(_smoothed_delta).count();
 }

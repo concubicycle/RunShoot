@@ -7,6 +7,7 @@
 
 #include "util/running_average.hpp"
 
+
 namespace core
 {
 class frame_timer
@@ -19,6 +20,7 @@ private:
     std::chrono::nanoseconds _delta;
     std::chrono::nanoseconds _smoothed_delta;
 
+
 public:
     frame_timer() : _frame_average(10) {}
 
@@ -27,6 +29,7 @@ public:
 
     std::chrono::nanoseconds delta() const;
     std::chrono::nanoseconds smoothed_delta() const;
+    float smoothed_delta_secs() const;
     std::chrono::nanoseconds current_frame_time() const;
 
     std::string frame_info() const;

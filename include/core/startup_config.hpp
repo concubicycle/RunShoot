@@ -13,7 +13,6 @@ class startup_config
 {
 private:
     static const std::string FileName;
-
     json config_json;
 
 public:
@@ -27,6 +26,7 @@ public:
     bool fullscreen() const;
     int height() const;
     int width() const;
+    float fov() const;
 
 private:
     json make_default() const;

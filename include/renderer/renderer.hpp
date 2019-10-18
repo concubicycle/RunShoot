@@ -29,8 +29,8 @@ public:
         _config(config),
         _textures(textures),
         _simple("./assets/shaders/simple.vert", "./assets/shaders/simple.frag"),
-        _ptx2d_basic("./assets/shaders/ptx2d_basic.vert", "./assets/shaders/ptx2d_basic.frag")
-        //,_ptx2d_pvm("./assets/shaders/ptx2d_pvm.vert", "./assets/shaders/ptx2d_pvm.frag")
+        _ptx2d_basic("./assets/shaders/ptx2d_basic.vert", "./assets/shaders/ptx2d_basic.frag"),
+        _ptx2d_pvm("./assets/shaders/ptx2d_pvm.vert", "./assets/shaders/ptx2d_pvm.frag")
         {}
 
     bool init();
@@ -50,9 +50,8 @@ private:
     // Program taking NDC position and texture coords 2d
     ogllib::shader_program<ogllib::vertex_ptx2d> _ptx2d_basic;
 
-
     // Program taking position and 2d tex cords, and a proj*view*model matrix.
-    //ogllib::shader_program<ogllib::vertex_ptx2d> _ptx2d_pvm;
+    ogllib::shader_program<ogllib::vertex_ptx2d> _ptx2d_pvm;
 };
 } // namespace rendering
 

@@ -1,11 +1,12 @@
 #ifndef __MESH_READ_ERROR_H_
 #define __MESH_READ_ERROR_H_
 
-namespace readers
+namespace asset
 {
 enum mesh_read_error
 {
-    BadFile
+    NoError = 0,
+    BadFile = 1
 };
 }
 

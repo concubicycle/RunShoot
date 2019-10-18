@@ -31,11 +31,15 @@ void core::startup_config::load()
 bool core::startup_config::fullscreen() const { return config_json["fullscreen"].get<bool>(); }
 int core::startup_config::height() const { return config_json["height"].get<int>(); }
 int core::startup_config::width() const { return config_json["width"].get<int>(); }
+float core::startup_config::fov() const { return config_json["fov"]; }
 
 json core::startup_config::make_default() const
 {
     return {
         {"fullscreen", false},
         {"height", 800},
-        {"width", 1400}};
+        {"width", 1400},
+        {"fov", 45}};
 }
+
+

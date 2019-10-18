@@ -11,6 +11,9 @@
 
 ogllib::ogl_2d_tex &asset::texture_manager::load_texture(std::string filename)
 {
+    auto it = _texture_lookup.find(filename);
+    if (it != _texture_lookup.end()) return it->second;
+
     const char *str = filename.c_str();
     int width;
     int height;

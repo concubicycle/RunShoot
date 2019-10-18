@@ -23,3 +23,8 @@ void ecs::entity_world::for_all_entities(std::function<void(entity & )> callback
         callback(pair.second);
     }
 }
+
+ecs::entity &ecs::entity_world::get_entity(entity_id id)
+{
+    return _entity_lookup.find(id)->second;
+}
