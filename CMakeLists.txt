@@ -47,7 +47,7 @@ include(add_nlohmann_json)
 include(add_glm)
 include(add_spdlog)
 include(add_expected)
-include(add_assimp)
+# include(add_assimp) # causes weird build issue on windows - can't close zlib.lib
 include(add_glbinding)
 
 
@@ -65,7 +65,7 @@ target_include_directories(${TARGET_NAME} PRIVATE
                            ${OGLLIB_INCLUDE}
                            ${SPDLOG_INCLUDE}
                            ${EXPECTED_INCLUDE}
-                           ${ASSIMP_INCLUDE}
+                           #${ASSIMP_INCLUDE}
                            ${GLBINDING_INCLUDE})
 
 include_directories(${TARGET_NAME}
@@ -110,7 +110,7 @@ add_dependencies(${RENDERER}
 
 add_dependencies(${TARGET_NAME}
                  glbinding
-                 assimp
+                 #assimp
                  expected
                  glfw
                  ${ASSETLIB_NAME}
@@ -133,7 +133,7 @@ target_link_libraries(${TARGET_NAME} PRIVATE
                       ${GLBINDING_LIB}
                       ${RENDERER}
                       ${OGLLIB_NAME}
-                      ${ASSIMP_LIB}
+                      #${ASSIMP_LIB}
                       ${GLBINDING_AUX_LIB}
                       ${ECS_LIB}
                       ${ASSETLIB_NAME}

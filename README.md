@@ -22,7 +22,10 @@ on any platform.
 Whatever libraries are not conveniently available as public repos with CMake projects are placed in `/thirdparty`. 
 
 *NOTE*: Currently, there is currently a weird linker error that may occur on first time build, but not afterwards. I am looking into it. 
-If you encounter a zlib-related error, try building again. 
+If you encounter a zlib-related error, try building again:
+fatal error LNK1105: cannot close file 'C:/sandbox/dev/RunShoot/build/assimp/src/assimp-build/contrib/zlib/Debug/zlibd.lib'
+
+
 
 
 ### Linux
