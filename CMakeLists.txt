@@ -150,8 +150,6 @@ if (CMAKE_DL_LIBS)
 endif ()
 
 
-message(UNIX)
-
 
 
 

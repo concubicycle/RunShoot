@@ -27,43 +27,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/apps/runshoot.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/models/wall_quad.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/util/debounce.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/sava.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/sava.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/scenes/scene.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scenes/scene.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/asset/basic_mesh_reader.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/asset/basic_mesh_reader.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/asset/mesh_read_error.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/asset/mesh_read_error.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/asset/scene.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/asset/scene.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/core/frame_timer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/core/frame_timer.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/core/input_manager.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/core/input_manager.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/core/startup_config.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/core/startup_config.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/chunk_component_accessor.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/chunk_component_accessor.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/components/basic_components.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/components/basic_components.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/entity_world.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/entity_world.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/renderer/renderer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/renderer/renderer.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/asset/basic_mesh_reader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/basic_mesh_reader.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/asset/scene_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/scene_loader.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/asset/texture_manager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/texture_manager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/frame_timer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/frame_timer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/input_manager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/input_manager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/startup_config.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/startup_config.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ecs/entity_world.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ecs/entity_world.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/renderer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/include/ogl_2d_tex.h" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/include/ogl_2d_tex.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/include/program_info.h" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/include/program_info.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/include/shader_program.h" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/include/shader_program.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/include/shader_program_uniform_assign.h" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/include/shader_program_uniform_assign.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/include/vectormath.h" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/include/vectormath.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/program_info.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/program_info.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/shader_program_uniform_assign.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/shader_program_uniform_assign.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/vectormath.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/vectormath.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -255,7 +220,7 @@
       <workItem from="1571290109303" duration="10962000" />
       <workItem from="1571306280162" duration="535000" />
       <workItem from="1571341770885" duration="8610000" />
-      <workItem from="1571351833169" duration="12131000" />
+      <workItem from="1571351833169" duration="12668000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>
