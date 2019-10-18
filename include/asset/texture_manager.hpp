@@ -17,6 +17,8 @@ namespace asset
     {
     public:
         ogllib::ogl_2d_tex &load_texture(std::string filename);
+		void unload_texture(std::string filename);
+		void unload_all();
 
     private:
         std::unordered_map<std::string, ogllib::ogl_2d_tex> _texture_lookup;

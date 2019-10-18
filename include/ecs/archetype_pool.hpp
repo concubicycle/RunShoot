@@ -63,7 +63,7 @@ namespace ecs
             for (auto &x : component_meta::bit_metas)
             {
                 auto shift = x.first;
-                component_bitset component_bit = (component_bitset) (1 << shift);
+                component_bitset component_bit = component_bitset(1) << shift;
 
                 if (!(arch_id & component_bit))
                     continue;

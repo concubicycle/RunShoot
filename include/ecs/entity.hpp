@@ -32,7 +32,7 @@ namespace ecs
 
             for (auto& pair : shift_to_chunk_component)
             {
-                _archetype_id |= 1 << pair.first;
+                _archetype_id |= component_bitset(1) << pair.first;
             }
         }
 

@@ -20,7 +20,7 @@ namespace ecs
     };
 
     template<class T>
-    const component_bitset component<T>::archetype_bit = 1 << T::component_bitshift;
+    const component_bitset component<T>::archetype_bit = component_bitset(1) << T::component_bitshift;
 
 
 }

@@ -22,6 +22,7 @@ using GLenum = gl::GLenum;
 #include <util/debounce.hpp>
 #include <chrono>
 
+using float_seconds = std::chrono::duration<float>;
 
 #include "runshoot.hpp"
 
@@ -65,24 +66,23 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
 
     entities.for_all_entities([&reader, &renderer] (ecs::entity& e) {
         auto &r = e.get_component<ecs::render_component>();
-/*
+
         auto ptx2d_load = [&r, &renderer](models::textured_mesh<ogllib::vertex_ptx2d> mesh)
         {
             renderer.init_render_component(r, mesh);
-        };*/
+        };
 
         switch (r.mesh_format)
         {
             case ecs::mesh_type::P_TX2D:
-                reader.read_mesh_ptx2d(r.mesh_path).map([&r, &renderer](models::textured_mesh<ogllib::vertex_ptx2d> mesh)
-				{
-					renderer.init_render_component(r, mesh);
-				});
+                reader.read_mesh_ptx2d(r.mesh_path).map(ptx2d_load);
                 break;
         }
     });
 
-    game_systems data = {window, timer, limiter, input, renderer, scene };
+	textures.unload_all();
+
+    game_systems data = { window, timer, limiter, input, renderer, scene };
     render_loop(data);
 }
 
@@ -92,7 +92,7 @@ void render_loop(game_systems &data)
     auto angular_v = 3.14f / 3.f;
     auto speed = 5.f;
 
-    debounce print_frametime_debounce(std::chrono::duration<float>(1.f), [&data](){
+    debounce print_frametime_debounce(float_seconds(1.f), [&data](){
         std::cout << std::endl << "========" << std::endl << data.timer.frame_info() << std::endl;
     });
 
@@ -175,7 +175,7 @@ void render_loop(game_systems &data)
         data.limiter.wait_remainder();
         data.timer.end();
 
-        //print_frametime_debounce();
+        print_frametime_debounce();
     }
 }
 

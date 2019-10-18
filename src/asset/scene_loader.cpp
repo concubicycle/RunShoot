@@ -17,13 +17,13 @@ using bitshift_to_component_loader = std::unordered_map<std::uint8_t, std::funct
 void load_transform(const json &j, ecs::entity &e)
 {
     auto &transform = e.get_component<ecs::transform_component>();
-    transform.x = j["x"].get<double>();
+    transform.x = j["x"].get<float>();
     transform.y = j["y"].get<float>();
     transform.z = j["z"].get<float>();
     transform.pitch = j["pitch"].get<float>();
     transform.yaw = j["yaw"].get<float>();
     transform.roll = j["roll"].get<float>();
-    transform.scale_x = j["scale_x"].get<double>();
+    transform.scale_x = j["scale_x"].get<float>();
     transform.scale_y = j["scale_y"].get<float>();
     transform.scale_z = j["scale_z"].get<float>();
 }
@@ -74,7 +74,7 @@ component_bitset asset::scene_loader::calc_archetype_id(const json &components) 
     for (auto &component_json : components)
     {
         auto shift = component_json["component_bitshift"].get<std::uint8_t>();
-        archetype_id |= (1 << shift);
+        archetype_id |= component_bitset(1) << shift;
     }
 
     return archetype_id;

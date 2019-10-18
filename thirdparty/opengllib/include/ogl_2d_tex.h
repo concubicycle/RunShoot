@@ -102,6 +102,7 @@ namespace ogllib
         void unload_tex()
         {
             _bytes.reset();
+			_bytes = std::shared_ptr<std::uint8_t>(nullptr);
         }
 
     private:

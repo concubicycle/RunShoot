@@ -64,9 +64,7 @@ void rendering::renderer::init_render_component(ecs::render_component &r, models
     texture.set_texture_wrap(GL_REPEAT);
     texture.set_filtering(GL_LINEAR, GL_LINEAR);
     texture.buffer();
-    texture.gen_mip_maps();
-
-    texture.unload_tex();
+    texture.gen_mip_maps();	
 
     r.gl_texture_id = texture.id();
     r.element_count = mesh.mesh_data.indices.size();
