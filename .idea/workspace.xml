@@ -2,22 +2,21 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="RunShoot" targetName="glm" />
-      <config projectName="RunShoot" targetName="glfw" />
-      <config projectName="RunShoot" targetName="spdlog" />
-      <config projectName="RunShoot" targetName="asset" />
-      <config projectName="RunShoot" targetName="RunShoot" />
-      <config projectName="RunShoot" targetName="ogllib" />
-      <config projectName="RunShoot" targetName="tests" />
       <config projectName="RunShoot" targetName="glbinding" />
-      <config projectName="RunShoot" targetName="core" />
-      <config projectName="RunShoot" targetName="platform" />
-      <config projectName="RunShoot" targetName="ecs" />
-      <config projectName="RunShoot" targetName="assimp" />
-      <config projectName="RunShoot" targetName="expected" />
-      <config projectName="RunShoot" targetName="memory" />
+      <config projectName="RunShoot" targetName="asset" />
+      <config projectName="RunShoot" targetName="ogllib" />
       <config projectName="RunShoot" targetName="nlohmann_json" />
+      <config projectName="RunShoot" targetName="tests" />
+      <config projectName="RunShoot" targetName="glm" />
+      <config projectName="RunShoot" targetName="RunShoot" />
+      <config projectName="RunShoot" targetName="glfw" />
+      <config projectName="RunShoot" targetName="memory" />
       <config projectName="RunShoot" targetName="renderer" />
+      <config projectName="RunShoot" targetName="ecs" />
+      <config projectName="RunShoot" targetName="core" />
+      <config projectName="RunShoot" targetName="spdlog" />
+      <config projectName="RunShoot" targetName="expected" />
+      <config projectName="RunShoot" targetName="platform" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -28,7 +27,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/asset/texture_manager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/texture_manager.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -105,11 +104,6 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="assimp" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RunShoot" TARGET_NAME="assimp" CONFIG_NAME="Debug">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="core" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RunShoot" TARGET_NAME="core" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -176,7 +170,6 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="CMake Application.assimp" />
       <item itemvalue="CMake Application.expected" />
       <item itemvalue="CMake Application.glbinding" />
       <item itemvalue="CMake Application.glfw" />
@@ -221,6 +214,7 @@
       <workItem from="1571306280162" duration="535000" />
       <workItem from="1571341770885" duration="8610000" />
       <workItem from="1571351833169" duration="12668000" />
+      <workItem from="1571381717317" duration="376000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>
