@@ -18,6 +18,8 @@
 #include <asset/texture_manager.hpp>
 #include <asset/scene.hpp>
 
+#include <shader_program_uniform_assign.h>
+
 namespace rendering
 {
 class renderer

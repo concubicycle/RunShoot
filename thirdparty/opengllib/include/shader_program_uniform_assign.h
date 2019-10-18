@@ -19,14 +19,22 @@ struct AssignmentProxy
 
 	AssignmentProxy(int location) : _location(location) {}
 
-	void operator=(T &rhs)
-	{
-		//static_assert(false, "Undefined uniform asignment");
-	}
+	void operator=(T &rhs);
 
 private:
 	int _location;
 };
+
+template <>
+void ogllib::AssignmentProxy<glm::mat4>::operator=(glm::mat4 &val);
+
+template <>
+void ogllib::AssignmentProxy<GLfloat>::operator=(GLfloat &val);
+
+template <>
+void ogllib::AssignmentProxy<glm::vec3>::operator=(glm::vec3 &val);
+
+
 
 // A proxy class that implements [], and returns corresponding assignment proxy.
 // Allows user to do:
@@ -56,10 +64,7 @@ public:
 		return assignProxy;
 	}
 };
-
-    template <>
-    void ogllib::AssignmentProxy<glm::mat4>::operator=(glm::mat4 &val);
-
+   
 } // namespace ogllib
 
 #endif

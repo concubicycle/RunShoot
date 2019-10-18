@@ -65,16 +65,19 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
 
     entities.for_all_entities([&reader, &renderer] (ecs::entity& e) {
         auto &r = e.get_component<ecs::render_component>();
-
+/*
         auto ptx2d_load = [&r, &renderer](models::textured_mesh<ogllib::vertex_ptx2d> mesh)
         {
             renderer.init_render_component(r, mesh);
-        };
+        };*/
 
         switch (r.mesh_format)
         {
             case ecs::mesh_type::P_TX2D:
-                reader.read_mesh_ptx2d(r.mesh_path).map(ptx2d_load);
+                reader.read_mesh_ptx2d(r.mesh_path).map([&r, &renderer](models::textured_mesh<ogllib::vertex_ptx2d> mesh)
+				{
+					renderer.init_render_component(r, mesh);
+				});
                 break;
         }
     });
@@ -103,7 +106,7 @@ void render_loop(game_systems &data)
         t.yaw += (angular_v * frame_time);
 
         if (t.yaw >  6.2831853)
-            t.yaw -=  6.2831853f;
+            t.yaw = 0;
 
         //
         if (data.input.is_key_down(GLFW_KEY_A))
@@ -172,7 +175,7 @@ void render_loop(game_systems &data)
         data.limiter.wait_remainder();
         data.timer.end();
 
-        print_frametime_debounce();
+        //print_frametime_debounce();
     }
 }
 

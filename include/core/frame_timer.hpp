@@ -7,6 +7,7 @@
 
 #include "util/running_average.hpp"
 
+using precision = std::chrono::nanoseconds;
 
 namespace core
 {
@@ -22,7 +23,11 @@ private:
 
 
 public:
-    frame_timer() : _frame_average(10) {}
+    frame_timer() : 
+		_frame_average(10, precision(0)),
+		_smoothed_delta(precision(0)),
+		_delta(precision(0))
+	{}
 
     void start();
     void end();

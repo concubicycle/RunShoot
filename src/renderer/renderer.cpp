@@ -3,7 +3,6 @@
 
 
 #include <glbinding/gl/gl.h>
-#include <glm/glm.hpp>
 #include <glm/gtx/euler_angles.hpp>
 
 

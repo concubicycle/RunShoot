@@ -4,7 +4,6 @@ project(RunShoot C CXX)
 set(RunShoot_VERSION_MAJOR 0)
 set(RunShoot_VERSION_MINOR 1)
 
-
 ##### change for release #####
 set(CMAKE_BUILD_TYPE Debug)
 ##############################

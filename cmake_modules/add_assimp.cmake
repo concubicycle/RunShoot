@@ -21,9 +21,11 @@ ExternalProject_Add(assimp
 
 set(ASSIMP_INCLUDE ${EXTERNAL_INSTALL_LOCATION}/assimp/include)
 
+
+
 if(WIN32 AND MSVC)
 set(ASSIMP_LIB 
-    ${EXTERNAL_INSTALL_LOCATION}/assimp/lib/assimp-vc142-mtd${CMAKE_STATIC_LIBRARY_SUFFIX} # not sure how these names are generated....   
+    ${EXTERNAL_INSTALL_LOCATION}/assimp/lib/assimp-vc${MSVC_TOOLSET_VERSION}-mtd${CMAKE_STATIC_LIBRARY_SUFFIX} # not sure how these names are generated....   
     ${EXTERNAL_INSTALL_LOCATION}/assimp/lib/IrrXMLd${CMAKE_STATIC_LIBRARY_SUFFIX}
     ${EXTERNAL_INSTALL_LOCATION}/assimp/lib/zlibstaticd${CMAKE_STATIC_LIBRARY_SUFFIX})
 else()

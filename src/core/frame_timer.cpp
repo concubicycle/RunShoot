@@ -1,7 +1,7 @@
 #include "core/frame_timer.hpp"
 #include <string>
 
-typedef std::chrono::duration<float> float_seconds;
+using float_seconds = std::chrono::duration<float>;
 
 
 void core::frame_timer::start()
@@ -40,5 +40,5 @@ std::string core::frame_timer::frame_info() const
 
 float core::frame_timer::smoothed_delta_secs() const
 {
-    auto secs = std::chrono::duration_cast<float_seconds>(_smoothed_delta).count();
+	return std::chrono::duration_cast<float_seconds>(_smoothed_delta).count();
 }
