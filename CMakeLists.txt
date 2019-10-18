@@ -93,6 +93,7 @@ add_dependencies(ogllib
 
 add_dependencies(${ECS_LIB}
                  ogllib
+				 nlohmann_json
                  ${MEM_LIB}
                  ${GLM})
 

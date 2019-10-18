@@ -50,7 +50,7 @@ mesh_result_ptx2d asset::basic_mesh_reader::read_mesh_ptx2d(std::string filename
     json j;
     try
     {
-        j = json::parse(input_stream);
+		input_stream >> j;
     }
     catch (json::parse_error &e)
     {

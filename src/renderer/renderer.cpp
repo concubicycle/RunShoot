@@ -67,7 +67,7 @@ void rendering::renderer::init_render_component(ecs::render_component &r, models
     texture.gen_mip_maps();	
 
     r.gl_texture_id = texture.id();
-    r.element_count = mesh.mesh_data.indices.size();
+    r.element_count = (std::uint32_t) mesh.mesh_data.indices.size();
 
     _ptx2d_pvm.bind();
     glUniform1i(glGetUniformLocation(_ptx2d_pvm.getId(), "model_texture"), 0);

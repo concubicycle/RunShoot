@@ -58,7 +58,7 @@ namespace ecs
             component_bitset arch_id)
         {
             std::map<std::uint8_t, archetype_chunk_component> ret;
-            std::uint32_t ptr_offset = 0;
+            std::uintptr_t ptr_offset = 0;
 
             for (auto &x : component_meta::bit_metas)
             {
@@ -75,7 +75,7 @@ namespace ecs
 
                 ret.emplace(std::piecewise_construct,
                     std::forward_as_tuple(shift),
-                    std::forward_as_tuple(ptr_offset, meta));
+                    std::forward_as_tuple((std::uint32_t)ptr_offset, meta));
 
                 ptr_offset += meta.size();
             }
@@ -100,7 +100,7 @@ namespace ecs
             // make it possible to optimize chunk size by making the biggest components
             // be first in the bit set.
             auto first_align = chunk_components.begin()->second.meta.align();
-            std::uint32_t ptr_offset = 0;
+			std::uintptr_t ptr_offset = 0;
 
             for (auto const &x : chunk_components)
             {
@@ -110,7 +110,7 @@ namespace ecs
 
             ptr_offset += calc_align_adjustment(ptr_offset, first_align);
 
-            return ptr_offset;
+            return (std::uint32_t)ptr_offset;
         }
 
         /**
