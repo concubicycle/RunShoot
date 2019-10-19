@@ -21,6 +21,28 @@
           "mesh_format": 1
         }
       ]
+    },
+    {
+      "entity_id": 456,
+      "components": [
+        {
+          "component_bitshift": 0,
+          "x": 5,
+          "y": 0,
+          "z": -10.0,
+          "pitch": 0,
+          "yaw": 0,
+          "roll": 0,
+          "scale_x": 1.0,
+          "scale_y": 1.0,
+          "scale_z": 1.0
+        },
+        {
+          "component_bitshift": 1,
+          "mesh_path": "./assets/models/wall_quad.json",
+          "mesh_format": 1
+        }
+      ]
     }
   ]
 }

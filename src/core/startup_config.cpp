@@ -32,6 +32,7 @@ bool core::startup_config::fullscreen() const { return config_json["fullscreen"]
 int core::startup_config::height() const { return config_json["height"].get<int>(); }
 int core::startup_config::width() const { return config_json["width"].get<int>(); }
 float core::startup_config::fov() const { return config_json["fov"]; }
+bool core::startup_config::backface_culling() const { return config_json["backfaceCulling"].get<bool>(); }
 
 json core::startup_config::make_default() const
 {
@@ -39,7 +40,10 @@ json core::startup_config::make_default() const
         {"fullscreen", false},
         {"height", 800},
         {"width", 1400},
-        {"fov", 45}};
+        {"fov", 45},
+        {"backfaceCulling", true}};
 }
+
+
 
 

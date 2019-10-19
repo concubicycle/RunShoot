@@ -6,7 +6,6 @@ set(CORE_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/core/frame_timer.cpp
     ${PROJECT_SOURCE_DIR}/src/core/framerate.cpp
     ${PROJECT_SOURCE_DIR}/src/core/startup_config.cpp
-    ${PROJECT_SOURCE_DIR}/src/core/startup.cpp
     ${PROJECT_SOURCE_DIR}/src/core/scene.cpp
     ${PROJECT_SOURCE_DIR}/src/core/input_manager.cpp)
 

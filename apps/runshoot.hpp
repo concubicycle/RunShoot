@@ -23,7 +23,7 @@ struct game_systems
 };
 
 
-GLFWwindow *set_up_glfw(std::uint32_t width, std::uint32_t height);
+GLFWwindow *set_up_glfw(std::uint32_t width, std::uint32_t height, core::startup_config& config);
 void run_game(core::startup_config &conf, GLFWwindow *window);
 void render_loop(game_systems &data);
 

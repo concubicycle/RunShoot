@@ -37,7 +37,7 @@ set(ECS_LIB "ecs")
 file(COPY ${ASSETS_DIR} DESTINATION ${CMAKE_BINARY_DIR})
 
 
-add_executable(${TARGET_NAME} apps/main.cpp apps/runshoot.hpp apps/milestone1.hpp apps/milestone1.cpp)
+add_executable(${TARGET_NAME} apps/main.cpp apps/runshoot.hpp apps/milestone1.hpp apps/milestone1.cpp apps/runshoot.cpp)
 add_executable(tests tests/main.cpp)
 
 

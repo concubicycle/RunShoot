@@ -8,10 +8,22 @@
 
 #include <vectormath.h>
 
+using namespace gl;
 
 bool rendering::renderer::init()
 {
     gl::glViewport(0, 0, _config.width(), _config.height());
+
+    if (_config.backface_culling())
+    {
+        glEnable(GL_CULL_FACE);
+        glFrontFace(GL_CCW);
+    }
+
+
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
+
     return true;
 }
 
@@ -76,7 +88,7 @@ void rendering::renderer::init_render_component(ecs::render_component &r, models
 void rendering::renderer::draw_scene(asset::scene &scene)
 {
     gl::glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-    gl::glClear(gl::ClearBufferMask::GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     auto entities = scene.entity_world();
 

@@ -33,7 +33,7 @@ int main()
     core::startup_config conf = core::startup_config();
     conf.load();
 
-    auto window = set_up_glfw(conf.width(), conf.height());
+    auto window = set_up_glfw(conf.width(), conf.height(), conf);
 
     if (window == nullptr)
         return -1;
@@ -91,6 +91,7 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
 void render_loop(game_systems &data)
 {
     auto& entity = data.scene.entity_world().get_entity(123);
+    auto& entity2 = data.scene.entity_world().get_entity(456);
 
     debounce print_frametime_debounce(float_seconds(1.f), [&data](){
         std::cout << std::endl << "========" << std::endl << data.timer.frame_info() << std::endl;
@@ -103,6 +104,7 @@ void render_loop(game_systems &data)
 
         handle_input(entity, data.input, frame_time);
         spin_quad(entity, frame_time);
+        spin_quad(entity2, frame_time);
 
         data.renderer.draw_scene(data.scene);
         glfwSwapBuffers(data.window);
@@ -117,30 +119,3 @@ void render_loop(game_systems &data)
     }
 }
 
-GLFWwindow *set_up_glfw(std::uint32_t width, std::uint32_t height)
-{
-    GLFWwindow *window;
-
-    if (!glfwInit())
-        return nullptr;
-
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-    window = glfwCreateWindow(width, height, "RunShoot", nullptr, nullptr);
-    if (!window)
-    {
-        glfwTerminate();
-        return nullptr;
-    }
-
-    glfwMakeContextCurrent(window);
-
-    glbinding::initialize(glfwGetProcAddress, true);
-
-    /* Prevent framerate cap by gpu driver (don't wait for vblank before returning form glfwSwapBuffers) */
-    glfwSwapInterval(0);
-
-    return window;
-}

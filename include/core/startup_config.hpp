@@ -27,6 +27,7 @@ public:
     int height() const;
     int width() const;
     float fov() const;
+    bool backface_culling() const;
 
 private:
     json make_default() const;
