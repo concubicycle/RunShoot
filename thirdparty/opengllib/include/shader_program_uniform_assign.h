@@ -3,8 +3,10 @@
 
 #include <opengl_afx.h>
 
-#include <glm/glm.hpp>
+#include <glm/mat4x4.hpp>
+#include <glm/vec3.hpp>
 #include <glm/gtc/type_ptr.hpp>
+
 #include <program_info.h>
 
 using namespace gl;
@@ -12,7 +14,7 @@ using namespace gl;
 namespace ogllib
 {
 
-// Proxy for asigning OpenGL GLSL uniforms (GPU program global variables)
+// Proxy for assigning OpenGL GLSL uniforms (GPU program global variables)
 template <typename T>
 struct AssignmentProxy
 {

@@ -22,12 +22,11 @@ namespace asset
     class scene_loader
     {
     public:
+        static bitshift_to_component_loader component_loaders;
 
         asset::scene load_scene(std::string file_path, ecs::entity_world& world);
 
     private:
-        static const bitshift_to_component_loader component_loaders;
-
         component_bitset calc_archetype_id(const json &components) const;
         void load_entity_components(ecs::entity &e, const json& component_array) const;
     };

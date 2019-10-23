@@ -14,6 +14,7 @@
       <config projectName="RunShoot" targetName="platform" />
       <config projectName="RunShoot" targetName="ecs" />
       <config projectName="RunShoot" targetName="expected" />
+      <config projectName="RunShoot" targetName="assimp" />
       <config projectName="RunShoot" targetName="memory" />
       <config projectName="RunShoot" targetName="nlohmann_json" />
       <config projectName="RunShoot" targetName="renderer" />
@@ -26,18 +27,54 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/apps/runshoot.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/character_controller.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/components/add_custom_components.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/components/character_controller_component.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/components/character_controller_component.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/models/brick_cube.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/asset/assimp_loader.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/asset/model.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/asset/multi_texture_mesh.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/core/behavior.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/core/behavior_context.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/core/system_info.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/events/event.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/events/event_exchange.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/events/event_type.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/events/listener.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/system_info.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/events/event_dispatcher.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/thirdparty/opengllib/include/vertex_pntx2d.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/sava.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/sava.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/milestone1.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/milestone1.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/runshoot.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/runshoot.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/runshoot.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/runshoot.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/scenes/scene.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scenes/scene.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/core/startup_config.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/core/startup_config.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake_modules/add_glbinding.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake_modules/add_glbinding.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/asset/scene_loader.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/asset/scene_loader.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/core/input_manager.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/core/input_manager.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ecs/chunk_component_accessor.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/chunk_component_accessor.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ecs/components/basic_components.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ecs/entity.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/entity.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ecs/entity_world.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/entity_world.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/events/event_dispatcher.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/events/event_dispatcher.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/renderer/renderer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/renderer/renderer.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/util/running_average.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/util/running_average.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/startup.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/asset/scene_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/scene_loader.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/input_manager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/input_manager.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/startup_config.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/startup_config.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ecs/component_meta.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ecs/component_meta.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ecs/components/basic_components.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ecs/components/basic_components.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ecs/entity_world.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ecs/entity_world.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/renderer/renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/renderer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/startup_config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/include/camera.h" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/include/camera.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/include/shader_program_uniform_assign.h" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/include/shader_program_uniform_assign.h" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -69,26 +106,27 @@
   </component>
   <component name="OCFindUsagesOptions" text="false" ivars="false" properties="true" derivedClasses="false" />
   <component name="OCResolveContextSettings">
-    <option name="configuration" value="0-RunShoot" />
+    <option name="configuration" value="0-core" />
   </component>
   <component name="ProjectId" id="1RkfA0cXEQvRmvTns35yj62oy90" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../cs525/sparsevector_cpp" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C/C++" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/shaders" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/apps" />
       <recent name="$PROJECT_DIR$/thirdparty/opengllib/include" />
       <recent name="$PROJECT_DIR$/src/asset" />
       <recent name="$PROJECT_DIR$/src/core" />
       <recent name="$PROJECT_DIR$/src/memory" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/assets/shaders" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -110,6 +148,11 @@
       </method>
     </configuration>
     <configuration name="asset" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RunShoot" TARGET_NAME="asset" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="assimp" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RunShoot" TARGET_NAME="assimp" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -180,6 +223,7 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="CMake Application.assimp" />
       <item itemvalue="CMake Application.expected" />
       <item itemvalue="CMake Application.glbinding" />
       <item itemvalue="CMake Application.glfw" />
@@ -227,7 +271,14 @@
       <workItem from="1571381717317" duration="3127000" />
       <workItem from="1571396355195" duration="986000" />
       <workItem from="1571434417278" duration="439000" />
-      <workItem from="1571441233000" duration="2988000" />
+      <workItem from="1571441233000" duration="14441000" />
+      <workItem from="1571596063399" duration="23000" />
+      <workItem from="1571596313066" duration="7544000" />
+      <workItem from="1571624970671" duration="19910000" />
+      <workItem from="1571685200468" duration="22531000" />
+      <workItem from="1571812008963" duration="4278000" />
+      <workItem from="1571816907592" duration="206000" />
+      <workItem from="1571817129918" duration="2446000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>
@@ -275,9 +326,14 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/memory/pool_allocator.cpp</url>
-          <line>22</line>
-          <option name="timeStamp" value="12" />
+          <url>file://$PROJECT_DIR$/apps/runshoot.hpp</url>
+          <line>1</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/core/system_info.cpp</url>
+          <line>10</line>
+          <option name="timeStamp" value="46" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

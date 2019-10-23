@@ -1,10 +1,13 @@
 #ifndef __RENDERER_H_
 #define __RENDERER_H_
 
+#include <vector>
+
 #include <opengl_afx.h>
 
 #include <core/startup_config.hpp>
 #include <core/scene.h>
+#include <core/system_info.hpp>
 
 #include <vertex_buffer.h>
 #include <vertex_p.h>
@@ -27,13 +30,11 @@ class renderer
 public:
     renderer(
         const core::startup_config &config,
-        asset::texture_manager& textures) :
-        _config(config),
-        _textures(textures),
-        _simple("./assets/shaders/simple.vert", "./assets/shaders/simple.frag"),
-        _ptx2d_basic("./assets/shaders/ptx2d_basic.vert", "./assets/shaders/ptx2d_basic.frag"),
-        _ptx2d_pvm("./assets/shaders/ptx2d_pvm.vert", "./assets/shaders/ptx2d_pvm.frag")
-        {}
+        const core::system_info& system_info,
+        events::event_exchange& events,
+        asset::texture_manager& textures);
+
+    ~renderer();
 
     bool init();
 
@@ -44,7 +45,12 @@ public:
 
 private:
     const core::startup_config &_config;
+    events::event_exchange _events;
     asset::texture_manager &_textures;
+    const core::system_info& _system_info;
+
+    ecs::entity* _camera_entity;
+    listener_id _cam_listener_id;
 
     // Program taking NDC position
     ogllib::shader_program<ogllib::vertex_ptx2d> _simple;

@@ -7,7 +7,8 @@ set(CORE_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/core/framerate.cpp
     ${PROJECT_SOURCE_DIR}/src/core/startup_config.cpp
     ${PROJECT_SOURCE_DIR}/src/core/scene.cpp
-    ${PROJECT_SOURCE_DIR}/src/core/input_manager.cpp)
+    ${PROJECT_SOURCE_DIR}/src/core/input_manager.cpp
+    ${PROJECT_SOURCE_DIR}/src/core/system_info.cpp)
 
 set(CORE_HEADER_LIST
     ${PROJECT_SOURCE_DIR}/include/core/frame_limiter.hpp
@@ -15,7 +16,8 @@ set(CORE_HEADER_LIST
     ${PROJECT_SOURCE_DIR}/include/core/framerate.hpp
     ${PROJECT_SOURCE_DIR}/include/core/startup_config.hpp
     ${PROJECT_SOURCE_DIR}/include/core/startup.hpp
-    ${PROJECT_SOURCE_DIR}/include/core/input_manager.hpp)
+    ${PROJECT_SOURCE_DIR}/include/core/input_manager.hpp
+    ${PROJECT_SOURCE_DIR}/include/core/system_info.hpp)
 
 
 set(RENDERER_SOURCE_LIST

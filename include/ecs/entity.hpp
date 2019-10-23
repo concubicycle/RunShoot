@@ -24,6 +24,7 @@ namespace ecs
             entity_id id,
             const std::map<std::uint8_t, archetype_chunk_component> &shift_to_chunk_component,
             std::uint8_t *chunk_ptr) :
+            _id(id),
             _accessor(shift_to_chunk_component, chunk_ptr),
             _active(true),
             _archetype_id(0)
@@ -41,6 +42,7 @@ namespace ecs
             component_bitset archetype_id,
             const std::map<std::uint8_t, archetype_chunk_component> &shift_to_chunk_component,
             std::uint8_t *chunk_ptr) :
+            _id(id),
             _accessor(shift_to_chunk_component, chunk_ptr),
             _active(true),
             _archetype_id(archetype_id)
@@ -49,12 +51,14 @@ namespace ecs
         }
 
         entity(const entity& other) :
+        _id(other._id),
         _accessor(other._accessor),
         _active(other._active),
         _archetype_id(other._archetype_id)
         {
         }
 
+        entity_id id() { return _id; }
         void *ptr() const { return _accessor.ptr(); }
         component_bitset archetype_id() const { return _archetype_id; }
 
@@ -68,6 +72,7 @@ namespace ecs
         T &get_component() { return *(_accessor.get_component<T>()); }
 
     private:
+        entity_id _id;
         component_bitset  _archetype_id;
         chunk_component_accessor _accessor;
         bool _active;

@@ -6,14 +6,14 @@
 
 namespace util
 {
-template <typename T>
+template <typename T, typename TDivisor = std::uint32_t>
 class running_average
 {
 public:
     running_average(std::uint32_t num_ints_tracked, T init_avg)
         :
 		_average(init_avg),
-		_last_total(_average * num_ints_tracked),
+		_last_total(_average * (TDivisor)num_ints_tracked),
         _num_ints_tracked(num_ints_tracked)
     {
         while (num_ints_tracked-- > 0)
@@ -27,9 +27,11 @@ public:
         _last_total += value;
         _past_values.pop();
         _past_values.push(value);
-        _average = _last_total / _num_ints_tracked;
+        _average = _last_total / (TDivisor)_num_ints_tracked;
         return _average;
     }
+
+    T average() { return _average; }
 
 private:
 	T _average;

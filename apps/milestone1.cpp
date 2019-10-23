@@ -17,19 +17,19 @@ void handle_input(
     //
     if (input.is_key_down(GLFW_KEY_A))
     {
-        t.x -= frame_time * speed;
+        t.pos.x -= frame_time * speed;
     }
     else if (input.is_key_down(GLFW_KEY_D))
     {
-        t.x += frame_time * speed;
+        t.pos.x += frame_time * speed;
     }
     if (input.is_key_down(GLFW_KEY_W))
     {
-        t.y += frame_time * speed;
+        t.pos.y += frame_time * speed;
     }
     else if (input.is_key_down(GLFW_KEY_S))
     {
-        t.y -= frame_time * speed;
+        t.pos.y -= frame_time * speed;
     }
 
     //
@@ -79,7 +79,6 @@ void spin_quad( ecs::entity& entity,
 {
     auto angular_v = 3.14f / 3.f;
 
-// rotate entity. TODO: Implement behaviors somehow
     auto& t = entity.get_component<ecs::transform_component>();
     t.yaw += (angular_v * frame_time);
 

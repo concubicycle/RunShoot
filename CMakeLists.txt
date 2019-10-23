@@ -37,7 +37,17 @@ set(ECS_LIB "ecs")
 file(COPY ${ASSETS_DIR} DESTINATION ${CMAKE_BINARY_DIR})
 
 
-add_executable(${TARGET_NAME} apps/main.cpp apps/runshoot.hpp apps/milestone1.hpp apps/milestone1.cpp apps/runshoot.cpp)
+add_executable(${TARGET_NAME}
+               apps/main.cpp
+               apps/runshoot.hpp
+               apps/milestone1.hpp
+               apps/milestone1.cpp
+               apps/runshoot.cpp
+               apps/character_controller.hpp
+               apps/components/character_controller_component.cpp
+               apps/components/character_controller_component.hpp
+               )
+
 add_executable(tests tests/main.cpp)
 
 
@@ -47,7 +57,7 @@ include(add_nlohmann_json)
 include(add_glm)
 include(add_spdlog)
 include(add_expected)
-# include(add_assimp) # causes weird build issue on windows - can't close zlib.lib
+include(add_assimp) # causes weird build issue on windows - can't close zlib.lib
 include(add_glbinding)
 
 
@@ -65,7 +75,7 @@ target_include_directories(${TARGET_NAME} PRIVATE
                            ${OGLLIB_INCLUDE}
                            ${SPDLOG_INCLUDE}
                            ${EXPECTED_INCLUDE}
-                           #${ASSIMP_INCLUDE}
+                           ${ASSIMP_INCLUDE}
                            ${GLBINDING_INCLUDE})
 
 include_directories(${TARGET_NAME}
@@ -84,7 +94,8 @@ add_dependencies(${CORELIB_NAME}
                  expected
                  ${PLATFORMLIB_NAME}
                  nlohmann_json
-                 glfw)
+                 glfw
+                 ${GLM})
 
 add_dependencies(ogllib
                  glbinding
@@ -98,7 +109,6 @@ add_dependencies(${ECS_LIB}
                  ${GLM})
 
 add_dependencies(${RENDERER}
-                 ${ECS_LIB}
                  glbinding
                  expected
                  glfw
@@ -111,7 +121,7 @@ add_dependencies(${RENDERER}
 
 add_dependencies(${TARGET_NAME}
                  glbinding
-                 #assimp
+                 assimp
                  expected
                  glfw
                  ${ASSETLIB_NAME}
@@ -131,14 +141,14 @@ target_link_libraries(${TARGET_NAME} PRIVATE
                       ${GLFW_LIB}
                       ${CORELIB_NAME}
                       ${PLATFORMLIB_NAME}
-                      ${GLBINDING_LIB}
                       ${RENDERER}
                       ${OGLLIB_NAME}
-                      #${ASSIMP_LIB}
-                      ${GLBINDING_AUX_LIB}
-                      ${ECS_LIB}
+                      ${ASSIMP_LIB}
                       ${ASSETLIB_NAME}
-                      ${MEM_LIB})
+                      ${ECS_LIB}
+                      ${MEM_LIB}
+                      ${GLBINDING_AUX_LIB}
+                      ${GLBINDING_LIB})
 
 target_link_libraries(tests
                       ${MEM_LIB})

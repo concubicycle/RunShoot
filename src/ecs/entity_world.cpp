@@ -10,7 +10,10 @@ ecs::entity& ecs::entity_world::add_entity(component_bitset archetype_id, entity
     auto it = _entity_lookup.find(id);
 
     if (it == _entity_lookup.end())
+    {
         _entity_lookup.emplace(id, _entity_factory.make_entity(archetype_id, id));
+        _events.invoke<ecs::entity&>(events::event_type::entity_created, _entity_lookup.find(id)->second);
+    }
 
     it = _entity_lookup.find(id);
     return it->second;

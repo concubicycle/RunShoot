@@ -3,17 +3,17 @@
 
 #include <cstdint>
 #include <functional>
-#include <map>
-#include <vector>
+#include <unordered_map>
 
 namespace events
 {
 
-typedef std::uint32_t EventId;
 
-class event_dispatcher
-{
-};
+    class event_dispatcher
+    {
+
+
+    };
 } // namespace events
 
 #endif

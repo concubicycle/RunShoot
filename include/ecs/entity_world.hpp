@@ -11,6 +11,8 @@
 #include <vector>
 #include <functional>
 
+#include <events/event_exchange.hpp>
+
 #include "entity.hpp"
 #include "ecs_types.hpp"
 #include "entity_factory.hpp"
@@ -23,7 +25,9 @@ namespace ecs
     class entity_world
     {
     public:
-        entity_world(entity_factory& world) : _entity_factory(world)
+        entity_world(entity_factory& world, events::event_exchange& events) :
+            _entity_factory(world),
+            _events(events)
         {
         }
 
@@ -49,6 +53,8 @@ namespace ecs
 
     private:
         entity_factory &_entity_factory;
+        events::event_exchange& _events;
+
         std::unordered_map<entity_id, entity> _entity_lookup;
     };
 }

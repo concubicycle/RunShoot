@@ -17,9 +17,9 @@ using bitshift_to_component_loader = std::unordered_map<std::uint8_t, std::funct
 void load_transform(const json &j, ecs::entity &e)
 {
     auto &transform = e.get_component<ecs::transform_component>();
-    transform.x = j["x"].get<float>();
-    transform.y = j["y"].get<float>();
-    transform.z = j["z"].get<float>();
+    transform.pos.x = j["x"].get<float>();
+    transform.pos.y = j["y"].get<float>();
+    transform.pos.z = j["z"].get<float>();
     transform.pitch = j["pitch"].get<float>();
     transform.yaw = j["yaw"].get<float>();
     transform.roll = j["roll"].get<float>();
@@ -40,10 +40,30 @@ void load_render(const json &j, ecs::entity &e)
     r.mesh_format = ecs::mesh_type(j["mesh_format"].get<unsigned int>());
 }
 
-const bitshift_to_component_loader asset::scene_loader::component_loaders
+void load_camera(const json &j, ecs::entity &e)
+{
+    auto &c = e.get_component<ecs::camera_component>();
+    c.position.x = j["position"]["x"].get<float>();
+    c.position.y = j["position"]["y"].get<float>();
+    c.position.z = j["position"]["z"].get<float>();
+
+    c.pitch = j["pitch"].get<float>();
+    c.yaw = j["yaw"].get<float>();
+    c.roll = j["roll"].get<float>();
+
+    c.fov = j["fov"].get<float>();
+    c.near = j["near"].get<float>();
+    c.far = j["far"].get<float>();
+
+    c.mode = (ecs::camera_component::camera_mode) j["mode"].get<int>();
+}
+
+
+bitshift_to_component_loader asset::scene_loader::component_loaders
     {
-        {ecs::transform_component::component_bitshift, load_transform},
-        {ecs::render_component::component_bitshift, load_render}
+        { ecs::transform_component::component_bitshift, load_transform},
+        { ecs::render_component::component_bitshift, load_render },
+        { ecs::camera_component::component_bitshift, load_camera }
     };
 ///////////////////////////////////////////////////////////////////
 

@@ -11,6 +11,7 @@
 #include <renderer/renderer.hpp>
 #include <asset/scene.hpp>
 #include <core/frame_limiter.hpp>
+#include "character_controller.hpp"
 
 struct game_systems
 {
@@ -20,12 +21,18 @@ struct game_systems
     core::input_manager& input;
     rendering::renderer& renderer;
     asset::scene& scene;
+    events::event_exchange& events;
+};
+
+struct behaviors
+{
+    character_controller& character;
 };
 
 
 GLFWwindow *set_up_glfw(std::uint32_t width, std::uint32_t height, core::startup_config& config);
 void run_game(core::startup_config &conf, GLFWwindow *window);
-void render_loop(game_systems &data);
+void render_loop(game_systems &data, behaviors& behaviors);
 
 
 #endif //__RUNSHOOT_HPP_

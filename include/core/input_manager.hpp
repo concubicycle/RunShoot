@@ -9,21 +9,12 @@
 #include <cstdint>
 #include <cstring>
 
+#include <util/running_average.hpp>
+#include <glm/vec2.hpp>
+
 
 namespace core
 {
-/**
- * GLFW doesn't really have a key state buffer you can get at unfortunately.
- * Creating a key map would be possible with setting a key event callback,
- * via glfwSetKeyCallback(window, key_callback);. This would require some
- * slightly ugly code for passing a function that isn't global.
- *
- * The best approach to match the behavior described in class is a simple
- * wrapper around glfwGetKey(), which already differentiates between
- * pressed/held/released.
- *
- * I can implement my own buffers if needed.
- */
     class input_manager
     {
         std::uint16_t _glfw_key_codes[128];
@@ -39,8 +30,12 @@ namespace core
 
         void update();
 
+        const glm::vec2 mouse_delta() { return _mouse_delta.average(); }
+
     private:
         GLFWwindow *_window;
+        double _last_x = 0, _last_y = 0;
+        util::running_average<glm::vec2, float> _mouse_delta;
 
         std::uint8_t* _current_key_states;
         std::uint8_t* _last_key_states;

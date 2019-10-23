@@ -43,7 +43,3 @@ json core::startup_config::make_default() const
         {"fov", 45},
         {"backfaceCulling", true}};
 }
-
-
-
-

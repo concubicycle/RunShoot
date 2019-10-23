@@ -6,9 +6,12 @@
 #define ECS_DEV_BASIC_COMPONENTS_H
 
 #include <cstring>
-#include <ogl_2d_tex.h>
 #include <vertex_array.h>
 #include <cstdint>
+
+#include <glm/vec3.hpp>
+#include <glm/mat4x4.hpp>
+
 
 #include "../ecs_types.hpp"
 #include "../component.hpp"
@@ -36,9 +39,8 @@ namespace ecs
     class transform_component : public component<transform_component>
     {
     public:
-        float x = 0;
-        float y = 0;
-        float z = 0;
+        glm::vec3 pos;
+
         float pitch = 0;
         float yaw = 0;
         float roll = 0;
@@ -67,7 +69,37 @@ namespace ecs
         std::uint32_t element_count;
     };
 
+    class camera_component : public component<camera_component>
+    {
+    public:
+        camera_component() {}
+        enum camera_mode
+        {
+            perspective = 1,
+            orthographic = 2
+        };
 
+        glm::vec3 position =    glm::vec3(0.0f, 0.0f, 0.0f);
+        float pitch = 0;
+        float yaw = 0;
+        float roll = 0;
+
+        camera_mode mode;
+        float fov = 45.f, near = 0.1f, far = 1000.f;
+
+        glm::mat3 fwd_up_right()
+        {
+            float cosp = cos(pitch);
+            float sinp = sin(pitch);
+            float siny = sin(yaw);
+            float cosy = cos(yaw);
+
+            glm::vec3 fwd(siny * cosp, sinp, -cosp * cosy);
+            glm::vec3 up(-siny * sinp, cosp, sinp * cosy);
+
+            return glm::mat3(fwd, up, glm::cross(fwd, up));
+        }
+    };
 } // namespace ecs
 
 #endif //ECS_DEV_BASIC_COMPONENTS_H

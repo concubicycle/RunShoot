@@ -18,7 +18,6 @@ bool core::input_manager::was_key_pressed(std::uint16_t key)
 bool core::input_manager::was_key_released(std::uint16_t key)
 {
     return _last_key_states[key] != GLFW_RELEASE && _current_key_states[key] == GLFW_RELEASE;
-
 }
 
 void core::input_manager::update()
@@ -32,10 +31,18 @@ void core::input_manager::update()
         auto state = glfwGetKey(_window, _glfw_key_codes[i]);
         _current_key_states[_glfw_key_codes[i]] = state;
     }
+
+    double x, y;
+    glfwGetCursorPos(_window, &x, &y);
+
+    _mouse_delta.update(glm::vec2(x - _last_x, y - _last_y));
+    _last_x = x;
+    _last_y = y;
 }
 
 core::input_manager::input_manager(GLFWwindow *window) :
     _window(window),
+    _mouse_delta(3, glm::vec2(0)),
     _current_key_states(_key_state_buffer_a),
     _last_key_states(_key_state_buffer_b),
     _glfw_key_codes {

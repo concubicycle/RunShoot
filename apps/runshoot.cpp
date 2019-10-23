@@ -45,6 +45,8 @@ GLFWwindow *set_up_glfw(std::uint32_t width, std::uint32_t height, core::startup
 
     glfwMakeContextCurrent(window);
 
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
     glbinding::initialize(glfwGetProcAddress, true);
 
     /* Prevent framerate cap by gpu driver (don't wait for vblank before returning form glfwSwapBuffers) */

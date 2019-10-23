@@ -10,6 +10,12 @@
 
 namespace ecs
 {
+    /**
+     * TODO:
+     * Currently, this keeps a map of component bit to the memory address of that component for the
+     * chunk_ptr. Need an implementation that stores this mapping in the chunk its self, so we're not
+     * defeating the whole point of pooling everything in a big block.
+     */
     class chunk_component_accessor
     {
     public:
