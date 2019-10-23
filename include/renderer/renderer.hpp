@@ -22,6 +22,7 @@
 #include <asset/scene.hpp>
 
 #include <shader_program_uniform_assign.h>
+#include <asset/assimp_loader.hpp>
 
 namespace rendering
 {
@@ -40,6 +41,7 @@ public:
 
     void init_render_component(ecs::render_component& r, models::mesh<ogllib::vertex_p>& mesh);
     void init_render_component(ecs::render_component& r, models::textured_mesh<ogllib::vertex_ptx2d>& mesh);
+    void init_render_component(ecs::render_component& r, asset::assimp_model& mesh);
 
     void draw_scene(asset::scene& scene);
 

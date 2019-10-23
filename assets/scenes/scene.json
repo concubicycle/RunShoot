@@ -44,7 +44,6 @@
         }
       ]
     },
-
     {
       "entity_id": 2,
       "components": [
@@ -62,8 +61,8 @@
         },
         {
           "component_bitshift": 1,
-          "mesh_path": "./assets/models/brick_cube.json",
-          "mesh_format": 1
+          "mesh_path": "./assets/models/roof/roof.gltf",
+          "mesh_format": 2
         }
       ]
     },

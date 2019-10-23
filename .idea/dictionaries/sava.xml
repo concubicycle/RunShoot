@@ -1,8 +1,10 @@
 <component name="ProjectDictionaryState">
   <dictionary name="sava">
     <words>
+      <w>assimp</w>
       <w>basi</w>
       <w>glfw</w>
+      <w>gltf</w>
       <w>texel</w>
     </words>
   </dictionary>

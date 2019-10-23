@@ -24,9 +24,7 @@ rendering::renderer::renderer(
     auto grab_camera = [this](ecs::entity &e)
     {
         if (e.archetype_id() & ecs::camera_component::archetype_bit)
-        {
             _camera_entity = &e;
-        }
     };
 
     _cam_listener_id = _events.subscribe(events::entity_created, std::function<void(ecs::entity &)>(grab_camera));
@@ -41,19 +39,15 @@ rendering::renderer::~renderer()
 bool rendering::renderer::init()
 {
     if (!_config.fullscreen())
-    {
-        gl::glViewport(0, 0, _config.width(), _config.height());
-    }
+        glViewport(0, 0, _config.width(), _config.height());
     else
-    {
-        gl::glViewport(0, 0, _system_info.monitor_width(), _system_info.monitor_height());
-    }
+        glViewport(0, 0, _system_info.monitor_width(), _system_info.monitor_height());
 
-    if (_config.backface_culling())
-    {
-        glEnable(GL_CULL_FACE);
-        glFrontFace(GL_CCW);
-    }
+//    if (_config.backface_culling())
+//    {
+//        glEnable(GL_CULL_FACE);
+//        glFrontFace(GL_CCW);
+//    }
 
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
@@ -81,7 +75,6 @@ void rendering::renderer::init_render_component(ecs::render_component &r, models
     r.vao.unbind();
     _simple.unbind();
 }
-
 
 void
 rendering::renderer::init_render_component(ecs::render_component &r, models::textured_mesh<ogllib::vertex_ptx2d> &mesh)
@@ -182,5 +175,10 @@ void rendering::renderer::draw_scene(asset::scene &scene)
         r.vao.bind();
         glDrawElements(GL_TRIANGLES, r.element_count, GL_UNSIGNED_INT, 0);
     });
+}
+
+void rendering::renderer::init_render_component(ecs::render_component &r, asset::assimp_model &mesh)
+{
+
 }
 

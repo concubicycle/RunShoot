@@ -72,19 +72,19 @@ target_include_directories(${TARGET_NAME} PRIVATE
                            ${GLFW_INCLUDE}
                            ${JSON_INCLUDE}
                            ${GLM_INCLUDE}
-                           ${OGLLIB_INCLUDE}
                            ${SPDLOG_INCLUDE}
                            ${EXPECTED_INCLUDE}
-                           ${ASSIMP_INCLUDE}
                            ${GLBINDING_INCLUDE})
 
 include_directories(${TARGET_NAME}
                     ${JSON_INCLUDE}
                     ${GLM_INCLUDE}
                     ${GLBINDING_INCLUDE}
-                    ${OGLLIB_INCLUDE}
                     ${EXPECTED_INCLUDE}
-                    ${SPDLOG_INCLUDE})
+                    ${SPDLOG_INCLUDE}
+                    ${ASSIMP_INCLUDE}
+                    thirdparty/opengllib/include
+                    )
 
 
 add_subdirectory(src)
@@ -135,6 +135,7 @@ add_dependencies(${ASSETLIB_NAME}
                  ${OGLLIB_NAME}
                  nlohmann_json
                  glbinding
+                 assimp
                  )
 
 target_link_libraries(${TARGET_NAME} PRIVATE
@@ -143,10 +144,10 @@ target_link_libraries(${TARGET_NAME} PRIVATE
                       ${PLATFORMLIB_NAME}
                       ${RENDERER}
                       ${OGLLIB_NAME}
-                      ${ASSIMP_LIB}
                       ${ASSETLIB_NAME}
                       ${ECS_LIB}
                       ${MEM_LIB}
+                      ${ASSIMP_LIB}
                       ${GLBINDING_AUX_LIB}
                       ${GLBINDING_LIB})
 
@@ -161,9 +162,4 @@ endif (UNIX)
 if (CMAKE_DL_LIBS)
     target_link_libraries(${TARGET_NAME} PRIVATE ${CMAKE_DL_LIBS})
 endif ()
-
-
-
-
-
 

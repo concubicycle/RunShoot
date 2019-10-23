@@ -45,7 +45,7 @@ GLFWwindow *set_up_glfw(std::uint32_t width, std::uint32_t height, core::startup
 
     glfwMakeContextCurrent(window);
 
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     glbinding::initialize(glfwGetProcAddress, true);
 

@@ -64,6 +64,7 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     character_controller controller(events);
 
     asset::basic_mesh_reader reader;
+    asset::assimp_loader assimp_reader;
     asset::scene_loader loader;
     asset::texture_manager textures;
 
@@ -82,7 +83,8 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
 
     renderer.init();
 
-    entities.for_all_entities([&reader, &renderer] (ecs::entity& e) {
+    entities.for_all_entities([&reader, &assimp_reader, &renderer](ecs::entity &e)
+    {
         auto is_r = e.archetype_id() & ecs::render_component::archetype_bit;
         if (!is_r) return;
 
@@ -93,33 +95,42 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
             renderer.init_render_component(r, mesh);
         };
 
+        auto assimp_load = [&r, &renderer](asset::assimp_model mesh)
+        {
+            renderer.init_render_component(r, mesh);
+        };
+
         switch (r.mesh_format)
         {
             case ecs::mesh_type::P_TX2D:
                 reader.read_mesh_ptx2d(r.mesh_path).map(ptx2d_load);
                 break;
+            case ecs::mesh_type::GLTF2:
+                assimp_reader.load_model(r.mesh_path).map(assimp_load);
+                break;
         }
     });
 
-	textures.unload_all();
+    textures.unload_all();
 
-    game_systems data = { window, timer, limiter, input, renderer, scene, events };
-    behaviors behaviors = { controller };
+    game_systems data = {window, timer, limiter, input, renderer, scene, events};
+    behaviors behaviors = {controller};
     render_loop(data, behaviors);
 }
 
-void render_loop(game_systems &data, behaviors& behaviors)
+void render_loop(game_systems &data, behaviors &behaviors)
 {
-    auto& entity = data.scene.entity_world().get_entity(123);
-    auto& player = data.scene.entity_world().get_entity(111);
-    auto& cube1 = data.scene.entity_world().get_entity(1);
-    auto& cube2 = data.scene.entity_world().get_entity(2);
+    auto &entity = data.scene.entity_world().get_entity(123);
+    auto &player = data.scene.entity_world().get_entity(111);
+    auto &cube1 = data.scene.entity_world().get_entity(1);
+    auto &cube2 = data.scene.entity_world().get_entity(2);
 
-    debounce print_frametime_debounce(float_seconds(1.f), [&data]() {
+    debounce print_frametime_debounce(float_seconds(1.f), [&data]()
+    {
         std::cout << std::endl << "========" << std::endl << data.timer.frame_info() << std::endl;
     });
 
-    core::behavior_context ctx = { data.timer, data.input };
+    core::behavior_context ctx = {data.timer, data.input};
 
     while (!glfwWindowShouldClose(data.window))
     {

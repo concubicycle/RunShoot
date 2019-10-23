@@ -32,7 +32,7 @@ set(ASSET_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/asset/mesh.cpp
     ${PROJECT_SOURCE_DIR}/src/asset/basic_mesh_reader.cpp
     ${PROJECT_SOURCE_DIR}/src/asset/scene_loader.cpp
-    ${PROJECT_SOURCE_DIR}/src/asset/texture_manager.cpp)
+    ${PROJECT_SOURCE_DIR}/src/asset/texture_manager.cpp asset/assimp_loader.cpp)
 
 set(ASSET_HEADER_LIST
     ${PROJECT_SOURCE_DIR}/include/asset/texture_manager.hpp
@@ -42,6 +42,7 @@ set(ASSET_HEADER_LIST
     ${PROJECT_SOURCE_DIR}/include/asset/mesh_read_error.hpp
     ${PROJECT_SOURCE_DIR}/include/asset/scene.hpp
     ${PROJECT_SOURCE_DIR}/include/asset/scene_loader.hpp
+    ${PROJECT_SOURCE_DIR}/include/asset/assimp_loader.hpp
 )
 
 set(PLATFORM_SOURCE_LIST
@@ -72,11 +73,11 @@ set(MEMORY_HEADER_LIST
 
 
 set (ECS_SOURCE_LIST
-    ${PROJECT_SOURCE_DIR}/src/ecs/components/basic_components.cpp
-    ${PROJECT_SOURCE_DIR}/src/ecs/component_meta.cpp
-    ${PROJECT_SOURCE_DIR}/src/ecs/entity_factory.cpp
-    ${PROJECT_SOURCE_DIR}/src/ecs/entity_world.cpp
-)
+     ${PROJECT_SOURCE_DIR}/src/ecs/components/basic_components.cpp
+     ${PROJECT_SOURCE_DIR}/src/ecs/component_meta.cpp
+     ${PROJECT_SOURCE_DIR}/src/ecs/entity_factory.cpp
+     ${PROJECT_SOURCE_DIR}/src/ecs/entity_world.cpp
+     ecs/chunk_component_accessor.cpp)
 
 set (ECS_HEADER_LIST
      ${PROJECT_SOURCE_DIR}/include/ecs/components/basic_components.hpp

@@ -6,24 +6,23 @@
 #define __CHARACTER_CONTROLLER_HPP_
 
 #include <iostream>
-
 #include <core/behavior.hpp>
 #include <events/event_exchange.hpp>
-
-#include "components/character_controller_component.hpp"
 
 #include <glm/gtx/euler_angles.hpp>
 #include <glm/mat3x3.hpp>
 #include <glm/gtx/vector_angle.hpp>
 #include <glm/gtx/string_cast.hpp>
 
+#include "components/character_controller_component.hpp"
+
 
 class character_controller : public core::behavior
 {
 public:
-    character_controller(events::event_exchange& events) : behavior(events) {}
+    explicit character_controller(events::event_exchange& events)  : behavior(events) {}
 
-    virtual component_bitset required_components()
+    component_bitset required_components()  const override
     {
         return
             character_controller_component::archetype_bit |
@@ -33,7 +32,7 @@ public:
 
 protected:
 
-    virtual void update_single(ecs::entity& e, core::behavior_context &ctx)
+    void update_single(ecs::entity& e, core::behavior_context &ctx) override
     {
         auto& t = e.get_component<ecs::transform_component>();
         auto& c = e.get_component<ecs::camera_component>();
@@ -59,10 +58,10 @@ protected:
         c.yaw = t.yaw;
         c.roll = t.roll;
 
-        float cosp = cos(c.pitch);
-        float sinp = sin(c.pitch);
-        float siny = sin(c.yaw);
-        float cosy = cos(c.yaw);
+        float cosp = cosf(c.pitch);
+        float sinp = sinf(c.pitch);
+        float siny = sinf(c.yaw);
+        float cosy = cosf(c.yaw);
 
         glm::vec3 fwd(siny * cosp, sinp, -cosp * cosy);
         glm::vec3 up(-siny * sinp, cosp, sinp * cosy);

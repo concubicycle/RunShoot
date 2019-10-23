@@ -52,7 +52,8 @@ namespace ecs
 
     enum mesh_type : unsigned int
     {
-        P_TX2D = 1
+        P_TX2D = 1,
+        GLTF2 = 2
     };
 
     class render_component : public component<render_component>

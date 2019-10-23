@@ -10,116 +10,90 @@
 
 namespace ecs
 {
-    /**
-     * TODO:
-     * Currently, this keeps a map of component bit to the memory address of that component for the
-     * chunk_ptr. Need an implementation that stores this mapping in the chunk its self, so we're not
-     * defeating the whole point of pooling everything in a big block.
-     */
+    struct component_ptr
+    {
+        std::uint32_t component_offset; // from chunk_ptr
+        std::uint8_t component_bitshift;
+    };
+
+    struct chunk_description
+    {
+        size_t chunk_size;
+        uintptr_t header_offset;
+        uintptr_t components_offset;
+        std::uint16_t component_count;
+    };
+
+
     class chunk_component_accessor
     {
     public:
-        chunk_component_accessor(
-            const std::map<std::uint8_t, archetype_chunk_component> &shift_to_chunk_component,
-            std::uint8_t *chunk_ptr) :
-            _shift_to_chunk_component(shift_to_chunk_component),
-            _chunk_ptr(chunk_ptr),
-            _shift_to_component_addr(calc_shift_to_addr(chunk_ptr, shift_to_chunk_component))
-        {
-        }
+        chunk_component_accessor(void *chunk_ptr, component_bitset archetype_id);
 
-        chunk_component_accessor(const chunk_component_accessor &other) :
-            _chunk_ptr(other._chunk_ptr),
-            _shift_to_chunk_component(other._shift_to_chunk_component),
-            _shift_to_component_addr(other._shift_to_component_addr)
-        {
-        }
+        chunk_component_accessor(const chunk_component_accessor &other);
 
         void *ptr() const { return _chunk_ptr; }
+
+        /**
+        * The component metadata objects stored in archetype_chunk_component.meta contain wrappers for
+        * in-place constructor and destructor of that particular type. We can go through all the
+        * archetype_chunk_component instances, grab pointer offset, and construct/destruct where it says.
+        */
+        void construct();
+
+        void destruct();
 
         template<class T>
         T *get_component()
         {
-            auto it = _shift_to_component_addr.find(component<T>::component_bitshift);
-            if (it == _shift_to_component_addr.end())
-                return nullptr;
-            return (T *) it->second;
+            auto cursor = _header;
+            auto count = _description.component_count;
+
+            while (count-- > 0)
+            {
+                auto chunk_ptr_byte = (uintptr_t) _chunk_ptr;
+
+                if (cursor->component_bitshift == component<T>::component_bitshift)
+                {
+                    return (T *) (chunk_ptr_byte + cursor->component_offset);
+                }
+
+                cursor++;
+            }
+
+            return nullptr;
         }
+
 
         /**
-             * The component metadata objects stored in archetype_chunk_component.meta contain wrappers for
-             * in-place constructor and destructor of that particular type. We can go through all the
-             * archetype_chunk_component instances, grab pointer offset, and construct/destruct where it says.
-             */
-        void construct()
-        {
-            for (auto const &x : _shift_to_component_addr)
-            {
-                void *ptr = x.second;
-                auto meta = _shift_to_chunk_component.find(x.first)->second.meta;
-                meta.construct(ptr);
-            }
-        }
+        * Calculate the chunk size for an archetype chunk.
+        * The whole chunk has to be aligned like the component_ptr, since it will be
+        * prefixed by an array of component_ptrs.
+         *
+        * After the first component, add alignment padding for each subsequent component.
+        *
+        * @param archetype_id: the set of components for which to calculate chunk size
+        *
+        * @return a description of various offsets in the chunk for this archetype
+        */
+        static chunk_description chunk_size_for(component_bitset archetype_id);
 
-        void destruct()
-        {
-            for (auto const &x : _shift_to_component_addr)
-            {
-                void *ptr = x.second;
-                auto meta = _shift_to_chunk_component.find(x.first)->second.meta;
-                meta.destruct(ptr);
-            }
-        }
+        static size_t chunk_align() { return alignof(component_ptr); }
+
 
     private:
-        const std::map<std::uint8_t, archetype_chunk_component> &_shift_to_chunk_component;
-        std::map<std::uint8_t, void *> _shift_to_component_addr;
-        std::uint8_t *_chunk_ptr;
+        void *_chunk_ptr;
+        chunk_description _description;
 
-        static std::map<std::uint8_t, void *> calc_shift_to_addr(
-            void *chunk_ptr,
-            const std::map<std::uint8_t, archetype_chunk_component> &chunk_info)
-        {
-            std::map<std::uint8_t, void *> shift_to_addr;
+        // _chunk_ptr will store first an array of component_ptr structs, and
+        // then the components themselves. this _header pointer points to the
+        // array of component_ptr structs, which contain offsets for getting
+        // the actual component pointers.
+        component_ptr *_header;
 
-            uintptr_t chunk_start = (uintptr_t) chunk_ptr;
-            uintptr_t ptr_offset = 0;
+        static uintptr_t calc_align_adjustment(uintptr_t raw, uintptr_t alignment);
 
-            for (auto &x : chunk_info)
-            {
-                auto &component_desc = x.second;
-                auto &meta = component_desc.meta;
-                auto adjustment = calc_align_adjustment(chunk_start + ptr_offset, meta.align());
-
-                ptr_offset += adjustment;
-                shift_to_addr[x.first] = (void *) (chunk_start + ptr_offset);
-                ptr_offset += meta.size();
-            }
-
-            return shift_to_addr;
-        }
-
-        /**
-            * TODO: Code duplication
-            * Calculate adjustment by masking off the lower bits of the address,
-            * to determine how 'misaligned' it is.
-            * */
-        static uintptr_t calc_align_adjustment(uintptr_t raw, uintptr_t alignment)
-        {
-            if (alignment == 0)
-                return 0;
-
-            uintptr_t mask = (alignment - 1);
-            uintptr_t misalignment = raw & mask;
-
-            std::uint32_t mask_32 = ((std::uint32_t) alignment) - 1;
-            std::uint32_t raw_32 = (std::uint32_t) raw;
-            std::uint32_t misalignment_32 = mask_32 & raw_32;
-
-            return misalignment > 0
-                   ? alignment - misalignment
-                   : 0;
-        }
+        component_ptr *calc_component_offsets();
     };
 
 } // namespace ecs

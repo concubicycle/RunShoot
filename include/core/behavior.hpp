@@ -17,7 +17,7 @@ namespace core
     class behavior
     {
     public:
-        behavior(events::event_exchange &events) : _events(events)
+        explicit behavior(events::event_exchange &events) : _events(events)
         {
             std::function<void(ecs::entity&)> f = std::bind(&behavior::on_entity_created, this, std::placeholders::_1);
             _listener_id = events.subscribe<ecs::entity&>(events::event_type::entity_created, f);
@@ -28,7 +28,7 @@ namespace core
             _events.unsubscribe(events::event_type::entity_created, _listener_id);
         }
 
-        virtual component_bitset required_components() = 0;
+        virtual component_bitset required_components() const = 0;
 
 
         void update(behavior_context &ctx)
@@ -49,9 +49,9 @@ namespace core
         {
             auto req_comps = required_components();
             auto e_comps = e.archetype_id();
-            if (req_comps & e_comps == req_comps)
+            if ((req_comps & e_comps) == req_comps)
             {
-                _entities.push_back(e);
+                _entities.emplace_back(e);
             }
         }
     };
