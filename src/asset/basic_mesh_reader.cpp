@@ -10,7 +10,7 @@ bool exists(const std::string &name)
 using mesh_result_p = tl::expected<models::mesh<ogllib::vertex_p>, asset::mesh_read_error>;
 using mesh_result_ptx2d = tl::expected<models::textured_mesh<ogllib::vertex_ptx2d>, asset::mesh_read_error>;
 
-mesh_result_p asset::basic_mesh_reader::read_mesh_p(std::string filename)
+mesh_result_p asset::basic_mesh_reader::read_mesh_p(std::string filename) const
 {
     models::mesh<ogllib::vertex_p> mesh;
 
@@ -42,7 +42,7 @@ mesh_result_p asset::basic_mesh_reader::read_mesh_p(std::string filename)
     return mesh;
 }
 
-mesh_result_ptx2d asset::basic_mesh_reader::read_mesh_ptx2d(std::string filename)
+mesh_result_ptx2d asset::basic_mesh_reader::read_mesh_ptx2d(std::string filename) const
 {
     models::textured_mesh<ogllib::vertex_ptx2d> mesh;
 

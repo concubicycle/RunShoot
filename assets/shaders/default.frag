@@ -6,7 +6,7 @@ out vec4 FragColor;
 
 
 in VS_OUT {
-    vec3 position;
+    vec4 position;
     vec3 normal;
     vec2 texcoords_2d;
 } fs_in;
@@ -14,7 +14,6 @@ in VS_OUT {
 
 // eye position
 uniform vec3 view_pos;
-
 
 // light uniforms
 uniform vec3 light_pos;
@@ -27,17 +26,14 @@ uniform vec3 specular; // Ks
 uniform float shininess; // alpha exponent
 
 
-uniform bool blinn;
-
-
 void main()
 {
     vec3 Kd = texture(diffuse_texture, fs_in.texcoords_2d).rgb;
     vec3 Ks = specular;
     float alpha = shininess;
 
-    vec3 V = normalize(view_pos - fs_in.position);
-    vec3 L = normalize(light_pos - fs_in.position);
+    vec3 V = normalize(view_pos - fs_in.position.xyz);
+    vec3 L = normalize(light_pos - fs_in.position.xyz);
     vec3 N = normalize(fs_in.normal);
     vec3 H = normalize(L+V);
 
@@ -52,7 +48,6 @@ void main()
     float LdotH = max(DOT_CLAMP, dot(L, H));
 
     float NdotH_alpha = pow(NdotH, alpha);
-
 
    // A diffuse light part of BRDF. 
     vec3 KdOverPi = Kd / PI;
@@ -72,12 +67,13 @@ void main()
     // KdPi + F(L, H) * G(L, V, H) * D(H) / (4 * ldotn * VdotN)
     vec3 brdf = KdOverPi + F * Gcheat * D / 4;
 
-
     // Blinn Phong
     //vec3 I = IaKd + IaKd * NdotL + IiKs * NdotH_alpha;
     
     // BRDF
     vec3 I = IaKd + point_light * NdotL  * brdf;
+
+    //I = I + vec3(1, 0, 0);
 
     FragColor = vec4(I, 1);
 }

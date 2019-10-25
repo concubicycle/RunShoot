@@ -29,8 +29,8 @@ class basic_mesh_reader
 public:
     basic_mesh_reader() {}
 
-    mesh_result read_mesh_p(std::string filename);
-    mesh_result_ptx2d read_mesh_ptx2d(std::string filename);
+    mesh_result read_mesh_p(std::string filename) const;
+    mesh_result_ptx2d read_mesh_ptx2d(std::string filename) const;
 };
 
 } // namespace readers

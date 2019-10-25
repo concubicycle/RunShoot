@@ -27,7 +27,7 @@ public:
 
 	int getUniformLocation(const std::string &name) const;
 
-	std::uint32_t id() { return _id; }
+	std::uint32_t id() const { return _id; }
 };
 
 } // namespace ogllib

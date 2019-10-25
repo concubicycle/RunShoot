@@ -48,7 +48,6 @@ void ogllib::program_info::initialize(int programId)
 
 int ogllib::program_info::getAttribLocation(const std::string &name) const
 {
-
 	return _attribLocations.at(name);
 }
 

@@ -27,46 +27,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/shaders/default.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/shaders/default.vert" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/asset/asset_types.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/asset/mesh_type.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/ecs/components/mesh_opengl.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/util/string_table.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/sava.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/sava.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/platform/symbols.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/renderer/model_render_loader.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/renderer/shader_set.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/renderer/model_render_loader.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/components/character_controller_component.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/character_controller_component.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/components/character_controller_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/character_controller_component.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/runshoot.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/runshoot.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/runshoot.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/runshoot.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blender/roof.blend" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/roof.blend" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blender/roof.blend1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/roof/roof.bin" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/roof/roof.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/roof/roof.gltf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/roof/roof.gltf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/scenes/scene.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scenes/scene.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/shaders/default.frag" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/default.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/shaders/default.vert" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/default.vert" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/asset/assimp_loader.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/asset/assimp_loader.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/asset/basic_mesh_reader.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/asset/basic_mesh_reader.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/asset/multi_texture_mesh.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/asset/multi_texture_mesh.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/asset/scene_loader.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/asset/scene_loader.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/asset/texture_manager.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/asset/texture_manager.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/entity.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/entity.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/renderer/renderer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/renderer/renderer.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/asset/assimp_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/assimp_loader.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/asset/scene_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/scene_loader.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/asset/texture_manager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/texture_manager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ecs/component_meta.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ecs/component_meta.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ecs/components/basic_components.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ecs/components/basic_components.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/memory/pool_allocator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/memory/pool_allocator.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/memory/pool_memory_block.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/memory/pool_memory_block.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/asset/basic_mesh_reader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/basic_mesh_reader.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/renderer/renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/renderer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/include/index_buffer.h" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/include/index_buffer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/include/vertex_buffer.h" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/include/vertex_buffer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/include/vertex_pntx2d.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/include/vertex_pntx2d.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/include/program_info.h" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/include/program_info.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/include/shader_program.h" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/include/shader_program.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/include/shader_program_uniform_assign.h" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/include/shader_program_uniform_assign.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/program_info.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/program_info.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/shader_program.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/shader_program.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -278,7 +260,8 @@
       <workItem from="1571821969657" duration="5331000" />
       <workItem from="1571857889727" duration="9054000" />
       <workItem from="1571887927074" duration="7661000" />
-      <workItem from="1571947567779" duration="14090000" />
+      <workItem from="1571947567779" duration="24995000" />
+      <workItem from="1571978383269" duration="701000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>
@@ -331,9 +314,14 @@
           <option name="timeStamp" value="32" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/thirdparty/opengllib/shader_program.cpp</url>
+          <line>77</line>
+          <option name="timeStamp" value="72" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/src/asset/assimp_loader.cpp</url>
-          <line>28</line>
-          <option name="timeStamp" value="51" />
+          <line>81</line>
+          <option name="timeStamp" value="75" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

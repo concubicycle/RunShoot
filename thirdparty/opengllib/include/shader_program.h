@@ -45,11 +45,11 @@ namespace ogllib
             glDeleteProgram(_id); // Delete the shader program
         }
 
-        void set_attrib_pointers();
+        void set_attrib_pointers() const;
 
 
         template<typename TUniform>
-        Uniforms<shader_program<TVertexFormat>, TUniform>& get_uniforms()
+        const Uniforms<shader_program<TVertexFormat>, TUniform>& get_uniforms() const
         {
             return get_uniforms<TUniform>(_info);
         }
@@ -92,7 +92,7 @@ namespace ogllib
         }
 
         // BINDING
-        void bind()
+        void bind() const
         {
             if (!_compiled)
                 std::cerr << "Attempting to bind non-compiled program.";
@@ -100,13 +100,13 @@ namespace ogllib
             glUseProgram(_id);
         }
 
-        void unbind()
+        void unbind() const
         {
             glUseProgram(0);
         }
 
         // GETTERS/SETTERS
-        unsigned int getId() { return _id; }
+        unsigned int getId() const { return _id; }
 
         program_info &getInfo() { return _info; }
 
@@ -128,23 +128,23 @@ namespace ogllib
             if (!link_status)
             {
                 glGetProgramInfoLog(_id, GPU_INFOLOG_BUFFER_SIZE, &length, buffer);
-                spdlog::info("Error linking program {0:d}. Link error:{1:d} \n", _id, buffer);
+                spdlog::error("Error linking program {0}. Link error:{1} \n", _id, buffer);
             }
 
             glValidateProgram(_id);
             glGetProgramiv(_id, GL_VALIDATE_STATUS, &validate_status);
             if (validate_status == 0)
             {
-                spdlog::error("Error validating program {0:d} \n.", _id);
+                spdlog::error("Error validating program {0} \n.", _id);
             } else
             {
                 glGetProgramInfoLog(_id, GPU_INFOLOG_BUFFER_SIZE, &length, buffer);
-                spdlog::info("Shader program {0:d} built successfully. Info log: {1}", _id, buffer);
+                spdlog::info("Shader program {0} built successfully. Info log: {1}", _id, buffer);
             }
         }
 
         template<typename TUniform>
-        static Uniforms<shader_program<TVertexFormat>, TUniform> &get_uniforms(program_info &info)
+        static const Uniforms<shader_program<TVertexFormat>, TUniform> &get_uniforms(const program_info &info)
         {
             static std::unordered_map<std::uint32_t, Uniforms<shader_program<TVertexFormat>, TUniform>> proxies;
             auto p = proxies.find(info.id());

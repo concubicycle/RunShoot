@@ -13,7 +13,7 @@
 namespace ogllib
 {
     template<>
-    void shader_program<ogllib::vertex_pc>::set_attrib_pointers()
+    void shader_program<ogllib::vertex_pc>::set_attrib_pointers() const
     {
         auto posIndex = _info.getAttribLocation("position");
         auto colIndex = _info.getAttribLocation("rgba");
@@ -31,7 +31,7 @@ namespace ogllib
     }
 
     template<>
-    void shader_program<ogllib::vertex_ptx2d>::set_attrib_pointers()
+    void shader_program<ogllib::vertex_ptx2d>::set_attrib_pointers() const
     {
         auto posIndex = _info.getAttribLocation("position");
         auto txIndex = _info.getAttribLocation("texcoords_2d");
@@ -49,7 +49,7 @@ namespace ogllib
     }
 
     template<>
-    void shader_program<ogllib::vertex_pctx2d>::set_attrib_pointers()
+    void shader_program<ogllib::vertex_pctx2d>::set_attrib_pointers() const
     {
         auto posIndex = _info.getAttribLocation("position");
         auto colIndex = _info.getAttribLocation("rgba");
@@ -73,7 +73,7 @@ namespace ogllib
     }
 
     template<>
-    void shader_program<ogllib::vertex_pntx2d>::set_attrib_pointers()
+    void shader_program<ogllib::vertex_pntx2d>::set_attrib_pointers() const
     {
         auto posIndex = _info.getAttribLocation("position");
         auto normIndex = _info.getAttribLocation("normal");
@@ -87,7 +87,7 @@ namespace ogllib
             reinterpret_cast<void *>(posOffset));
         glEnableVertexAttribArray(posIndex);
 
-        glVertexAttribPointer(normIndex, 4, gl::GLenum::GL_FLOAT, GL_FALSE, sizeof(ogllib::vertex_pntx2d),
+        glVertexAttribPointer(normIndex, 3, gl::GLenum::GL_FLOAT, GL_FALSE, sizeof(ogllib::vertex_pntx2d),
             reinterpret_cast<void *>(normOffset));
         glEnableVertexAttribArray(normIndex);
 

@@ -9,15 +9,12 @@
 #include "mesh.hpp"
 
 
-
-
-
 namespace models
 {
     struct texture
     {
-        std::uint32_t _id;
-        std::string type;
+        std::uint32_t _id = 0;
+        std::string type ;
         std::string path;
     };
 

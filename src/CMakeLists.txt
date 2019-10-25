@@ -22,11 +22,11 @@ set(CORE_HEADER_LIST
 
 set(RENDERER_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/renderer/renderer.cpp
-    ../include/renderer/render_data.hpp)
+    ../include/renderer/render_data.hpp renderer/model_render_loader.cpp)
 
 set(RENDERER_HEADER_LIST
     ${PROJECT_SOURCE_DIR}/include/renderer/renderer.hpp
-    )
+    ../include/renderer/model_render_loader.hpp ../include/renderer/shader_set.hpp)
 
 set(ASSET_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/asset/mesh.cpp
@@ -51,7 +51,7 @@ set(PLATFORM_SOURCE_LIST
 
 set(PLATFORM_HEADER_LIST
     ${PROJECT_SOURCE_DIR}/include/platform/sleep.hpp
-    )
+    ../include/platform/symbols.hpp)
 
 set(UTIL_SOURCE_LIST
 )

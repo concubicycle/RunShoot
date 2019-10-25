@@ -23,14 +23,27 @@ namespace asset
         using mesh_result = tl::expected<assimp_model, mesh_read_error>;
 
     public:
-        mesh_result load_model(std::string path, asset::mesh_type mesh_type);
+        mesh_result load_model(std::string path, asset::mesh_type mesh_type) const;
 
     private:
-        mesh_result load_glf2(std::string path);
+        mesh_result load_glf2(std::string path) const;
 
-        void process_node(aiNode *node, const aiScene *scene, assimp_model& model);
-        assimp_mesh process_mesh(aiMesh *mesh, const aiScene *scene);
-        std::vector<models::texture> load_material_textures(aiMaterial *mat, aiTextureType type, std::string typeName);
+        void process_node(
+            aiNode *node,
+            const aiScene *scene,
+            assimp_model& model,
+            std::string mesh_path) const;
+
+        assimp_mesh process_mesh(
+            aiMesh *mesh,
+            const aiScene *scene,
+            std::string mesh_path) const;
+
+        std::vector<models::texture> load_material_textures(
+            aiMaterial *mat,
+            aiTextureType type,
+            std::string typeName,
+            std::string mesh_path) const;
     };
 }
 #endif //__ASSIMP_LOADER_HPP_

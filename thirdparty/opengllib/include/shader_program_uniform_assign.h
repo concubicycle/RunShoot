@@ -48,9 +48,9 @@ class Uniforms
 	friend TProgram;
 
 private:
-	program_info &_info;
+	const program_info &_info;
 
-	Uniforms(program_info &info)
+	Uniforms(const program_info &info)
 		: _info(info)
 	{
 	}
