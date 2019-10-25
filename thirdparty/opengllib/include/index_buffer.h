@@ -12,6 +12,31 @@ namespace ogllib
 // Or "element" onBuffer
 class index_buffer : public ogllib::buffer_object
 {
+public:
+    index_buffer(std::vector<GLuint> const &data) : _data(data)
+    {
+        gl::glGenBuffers(1, &_id);
+    }
+
+    ~index_buffer()
+    {
+        gl::glDeleteBuffers(1, &_id);
+    }
+
+    GLuint id() const { return _id; }
+
+    void generate()
+    {
+        gl::glGenBuffers(1, &_id);
+    }
+
+    const std::vector<GLuint> &data()
+    {
+        return _data;
+    }
+
+    bool empty() const { return _data.empty(); }
+
 private:
 	const std::vector<GLuint> &_data;
 
@@ -32,28 +57,7 @@ protected:
 		gl::glBindBuffer(gl::GLenum::GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
 
-public:
-	index_buffer(std::vector<GLuint> const &data) : _data(data)
-	{
-		gl::glGenBuffers(1, &_id);
-	}
 
-	~index_buffer()
-	{
-		gl::glDeleteBuffers(1, &_id);
-	}
-
-	void generate()
-	{
-		gl::glGenBuffers(1, &_id);
-	}
-
-	const std::vector<GLuint> &data()
-	{
-		return _data;
-	}
-
-	bool empty() const { return _data.empty(); }
 };
 
 } // namespace ogllib

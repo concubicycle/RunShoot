@@ -41,7 +41,7 @@ int main()
     core::startup_config conf = core::startup_config();
     conf.load();
 
-    auto window = set_up_glfw(conf.width(), conf.height(), conf);
+    auto window = set_up_glfw(conf);
 
     if (window == nullptr)
         return -1;
@@ -57,6 +57,8 @@ int main()
 
 void run_game(core::startup_config &conf, GLFWwindow *window)
 {
+    string_table app_string_table;
+
     add_custom_components();
 
     events::event_exchange events;
@@ -65,12 +67,12 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
 
     asset::basic_mesh_reader reader;
     asset::assimp_loader assimp_reader;
-    asset::scene_loader loader;
-    asset::texture_manager textures;
+    asset::texture_manager textures(app_string_table);
+    asset::scene_loader loader(app_string_table);
 
     core::system_info info;
 
-    rendering::renderer renderer(conf, info, events, textures);
+    rendering::renderer renderer(conf, info, events, textures, app_string_table);
 
     core::frame_timer timer;
     core::frame_limiter limiter(timer, 60);
@@ -83,30 +85,27 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
 
     renderer.init();
 
-    entities.for_all_entities([&reader, &assimp_reader, &renderer](ecs::entity &e)
+    entities.for_all_entities([&reader, &assimp_reader, &renderer, &app_string_table](ecs::entity &e)
     {
-        auto is_r = e.archetype_id() & ecs::render_component::archetype_bit;
-        if (!is_r) return;
+        using basic_mesh = models::textured_mesh<ogllib::vertex_ptx2d>;
 
-        auto &r = e.get_component<ecs::render_component>();
+        if (!e.has<ecs::render_component_ogl>()) return;
+        auto &r = e.get_component<ecs::render_component_ogl>();
 
-        auto ptx2d_load = [&r, &renderer](models::textured_mesh<ogllib::vertex_ptx2d> mesh)
+        auto mesh_type = r.mesh_format;
+        auto mesh_path = app_string_table[r.mesh_path_hash];
+
+        switch (mesh_type)
         {
-            renderer.init_render_component(r, mesh);
-        };
-
-        auto assimp_load = [&r, &renderer](asset::assimp_model mesh)
-        {
-            renderer.init_render_component(r, mesh);
-        };
-
-        switch (r.mesh_format)
-        {
-            case ecs::mesh_type::P_TX2D:
-                reader.read_mesh_ptx2d(r.mesh_path).map(ptx2d_load);
+            case asset::mesh_type::P_TX2D:
+                reader.read_mesh_ptx2d(mesh_path).map([&r, &renderer](basic_mesh& mesh) {
+                    renderer.init_render_component(r, mesh);
+                });
                 break;
-            case ecs::mesh_type::GLTF2:
-                assimp_reader.load_model(r.mesh_path).map(assimp_load);
+            case asset::mesh_type::GLTF2:
+                assimp_reader.load_model(mesh_path, mesh_type).map([&r, &renderer](asset::assimp_model model) {
+                    renderer.init_render_component(r, model);
+                });
                 break;
         }
     });
@@ -120,10 +119,10 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
 
 void render_loop(game_systems &data, behaviors &behaviors)
 {
-    auto &entity = data.scene.entity_world().get_entity(123);
-    auto &player = data.scene.entity_world().get_entity(111);
     auto &cube1 = data.scene.entity_world().get_entity(1);
-    auto &cube2 = data.scene.entity_world().get_entity(2);
+    auto &player = data.scene.entity_world().get_entity(111);
+
+
 
     debounce print_frametime_debounce(float_seconds(1.f), [&data]()
     {
@@ -139,11 +138,9 @@ void render_loop(game_systems &data, behaviors &behaviors)
 
         behaviors.character.update(ctx);
 
-        spin_quad(entity, frame_time);
         spin_quad(cube1, frame_time);
-        spin_quad(cube2, frame_time);
 
-        data.renderer.draw_scene(data.scene);
+        data.renderer.draw_scene_new(data.scene);
         glfwSwapBuffers(data.window);
 
         glfwPollEvents();

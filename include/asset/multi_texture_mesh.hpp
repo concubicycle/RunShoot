@@ -18,6 +18,7 @@ namespace models
     {
         std::uint32_t _id;
         std::string type;
+        std::string path;
     };
 
     template<class TVertex>

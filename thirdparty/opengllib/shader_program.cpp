@@ -2,6 +2,7 @@
 // Created by sava on 10/17/19.
 //
 
+#include <vertex_pntx2d.h>
 #include "shader_program.h"
 #include "vertex_p.h"
 #include "vertex_pc.h"
@@ -71,5 +72,27 @@ namespace ogllib
         glEnableVertexAttribArray(txIndex);
     }
 
+    template<>
+    void shader_program<ogllib::vertex_pntx2d>::set_attrib_pointers()
+    {
+        auto posIndex = _info.getAttribLocation("position");
+        auto normIndex = _info.getAttribLocation("normal");
+        auto txIndex = _info.getAttribLocation("texcoords_2d");
 
+        size_t posOffset = offsetof(ogllib::vertex_pntx2d, position);
+        size_t normOffset = offsetof(ogllib::vertex_pntx2d, normal);
+        size_t txOffset = offsetof(ogllib::vertex_pntx2d, textureCoordinates2d);
+
+        glVertexAttribPointer(posIndex, 3, gl::GLenum::GL_FLOAT, GL_FALSE, sizeof(ogllib::vertex_pntx2d),
+            reinterpret_cast<void *>(posOffset));
+        glEnableVertexAttribArray(posIndex);
+
+        glVertexAttribPointer(normIndex, 4, gl::GLenum::GL_FLOAT, GL_FALSE, sizeof(ogllib::vertex_pntx2d),
+            reinterpret_cast<void *>(normOffset));
+        glEnableVertexAttribArray(normIndex);
+
+        glVertexAttribPointer(txIndex, 2, gl::GLenum::GL_FLOAT, GL_FALSE, sizeof(ogllib::vertex_pntx2d),
+            reinterpret_cast<void *>(txOffset));
+        glEnableVertexAttribArray(txIndex);
+    }
 }

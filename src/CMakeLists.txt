@@ -43,7 +43,7 @@ set(ASSET_HEADER_LIST
     ${PROJECT_SOURCE_DIR}/include/asset/scene.hpp
     ${PROJECT_SOURCE_DIR}/include/asset/scene_loader.hpp
     ${PROJECT_SOURCE_DIR}/include/asset/assimp_loader.hpp
-)
+    ../include/asset/mesh_type.hpp ../include/asset/asset_types.hpp)
 
 set(PLATFORM_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/platform/sleep.cpp
@@ -92,7 +92,7 @@ set (ECS_HEADER_LIST
      ${PROJECT_SOURCE_DIR}/include/ecs/entity_world.hpp
      ${PROJECT_SOURCE_DIR}/include/ecs/entity.hpp
 
-     )
+     ../include/ecs/components/mesh_opengl.hpp)
 
 set(HEADER_LIST
     ${PROJECT_SOURCE_DIR}/include/events/event_dispatcher.hpp

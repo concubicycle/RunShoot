@@ -5,6 +5,7 @@
       <w>basi</w>
       <w>glfw</w>
       <w>gltf</w>
+      <w>opengl</w>
       <w>texel</w>
     </words>
   </dictionary>

@@ -50,13 +50,17 @@ namespace ecs
         template<class T>
         T &get_component() { return *(_accessor.get_component<T>()); }
 
+        template<class T>
+        bool has()
+        {
+            return _archetype_id & component<T>::archetype_bit;
+        }
+
     private:
         component_bitset  _archetype_id;
         chunk_component_accessor _accessor;
         bool _active;
     };
-
-
 }
 
 

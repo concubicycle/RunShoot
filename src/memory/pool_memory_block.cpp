@@ -11,7 +11,8 @@ allocators::pool_memory_block::pool_memory_block(
     std::uint32_t chunk_count,
     uintptr_t alignment) :
     _chunk_size(chunk_size),
-    _chunk_count(chunk_count)
+    _chunk_count(chunk_count),
+    _last_addr_written(nullptr)
 {
     assert (chunk_size > 0 && chunk_count > 0);
 

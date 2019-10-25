@@ -46,6 +46,8 @@ public:
 		glDeleteBuffers(1, &_id);
 	}
 
+	GLuint id() const { return _id; }
+
 	std::vector<TFormat> &data()
 	{
 		return _data;

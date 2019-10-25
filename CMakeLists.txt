@@ -46,7 +46,7 @@ add_executable(${TARGET_NAME}
                apps/character_controller.hpp
                apps/components/character_controller_component.cpp
                apps/components/character_controller_component.hpp
-               )
+               include/ecs/components/mesh_opengl.hpp)
 
 add_executable(tests tests/main.cpp)
 

@@ -8,6 +8,8 @@
 #include <ecs/component.hpp>
 #include <ecs/entity.hpp>
 
+#include <util/string_table.hpp>
+
 class character_controller_component : public ecs::component<character_controller_component>
 {
 public:
@@ -15,7 +17,7 @@ public:
     float walk_speed = 3.f;
 };
 
-void load_character_controller(const json& j, ecs::entity& e);
+void load_character_controller(const json& j, ecs::entity& e, string_table& hashes);
 
 
 #endif //__CHARACTER_CONTROLLER_COMPONENT_HPP_

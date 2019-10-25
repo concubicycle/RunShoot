@@ -1,4 +1,3 @@
-#include <cstring>
 #include <memory/pool_allocator.hpp>
 
 allocators::pool_allocator::pool_allocator(

@@ -28,6 +28,6 @@ add_library(ogllib STATIC
             include/vertex_p.h
             include/vertex_pc.h
             include/vertex_pctx2d.h
-            include/vertex_ptx2d.h include/vertex_pntx2d.hpp)
+            include/vertex_ptx2d.h include/vertex_pntx2d.h)
 
 target_include_directories(ogllib PUBLIC ./include ../../external/glbinding/include)

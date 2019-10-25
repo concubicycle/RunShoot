@@ -4,17 +4,22 @@
 
 #include <cstring>
 #include <asset/scene_loader.hpp>
+#include <asset/mesh_type.hpp>
 #include <ecs/components/basic_components.hpp>
 #include <iostream>
 #include <fstream>
 #include <nlohmann/json.hpp>
 
+
 using nlohmann::json;
-using bitshift_to_component_loader = std::unordered_map<std::uint8_t, std::function<void(const json &, ecs::entity &)>>;
+using bitshift_to_component_loader =
+std::unordered_map<std::uint8_t, std::function<void(const json &, ecs::entity &, string_table&)>>;
 
 
-//////////// LOADER FUNCTIONS FOR ALL COMPONENT TYPES /////////////
-void load_transform(const json &j, ecs::entity &e)
+
+////////////////////////////////////////////////////////////////////////
+//////////// LOADER FUNCTIONS FOR ALL COMPONENT TYPES /////////////////
+void load_transform(const json &j, ecs::entity &e, string_table& hashes)
 {
     auto &transform = e.get_component<ecs::transform_component>();
     transform.pos.x = j["x"].get<float>();
@@ -28,19 +33,30 @@ void load_transform(const json &j, ecs::entity &e)
     transform.scale_z = j["scale_z"].get<float>();
 }
 
-void load_render(const json &j, ecs::entity &e)
+void load_render(const json &j, ecs::entity &e, string_table& hashes)
 {
-    auto &r = e.get_component<ecs::render_component>();
+    auto &r = e.get_component<ecs::render_component_old>();
     std::string path = j["mesh_path"].get<std::string>();
 
     assert (path.length() < 255);
 
     memcpy(r.mesh_path, path.c_str(), path.length());
     r.mesh_path[path.length()] = '\0';
-    r.mesh_format = ecs::mesh_type(j["mesh_format"].get<unsigned int>());
+
+    r.mesh_format = asset::mesh_type(j["mesh_format"].get<unsigned int>());
 }
 
-void load_camera(const json &j, ecs::entity &e)
+void load_render_ogl(const json &j, ecs::entity &e, string_table& hashes)
+{
+    auto &r = e.get_component<ecs::render_component_ogl>();
+    std::string path = j["mesh_path"].get<std::string>();
+
+    r.mesh_path_hash = hashes.hash_and_store(path);
+    r.mesh_format = asset::mesh_type(j["mesh_format"].get<unsigned int>());
+}
+
+
+void load_camera(const json &j, ecs::entity &e, string_table& hashes)
 {
     auto &c = e.get_component<ecs::camera_component>();
     c.position.x = j["position"]["x"].get<float>();
@@ -60,15 +76,23 @@ void load_camera(const json &j, ecs::entity &e)
 
 
 bitshift_to_component_loader asset::scene_loader::component_loaders
-    {
-        { ecs::transform_component::component_bitshift, load_transform},
-        { ecs::render_component::component_bitshift, load_render },
-        { ecs::camera_component::component_bitshift, load_camera }
-    };
-///////////////////////////////////////////////////////////////////
+{
+    { ecs::transform_component::component_bitshift, load_transform},
+    {ecs::render_component_old::component_bitshift, load_render },
+    { ecs::camera_component::component_bitshift, load_camera },
+    {ecs::render_component_ogl::component_bitshift, load_render_ogl }
+};
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
 
 
 
+
+
+
+
+
+asset::scene_loader::scene_loader(string_table &str_table): _string_table(str_table) {}
 
 asset::scene asset::scene_loader::load_scene(std::string file_path, ecs::entity_world &world)
 {
@@ -109,6 +133,8 @@ void asset::scene_loader::load_entity_components(ecs::entity &e, const json &com
         assert(component_loaders.find(bit_shift) != component_loaders.end());
 
         auto it = component_loaders.find(bit_shift);
-        it->second(component, e);
+        it->second(component, e, _string_table);
     }
 }
+
+

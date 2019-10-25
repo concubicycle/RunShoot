@@ -15,8 +15,7 @@ using GLenum = gl::GLenum;
 #include "runshoot.hpp"
 
 
-
-GLFWwindow *set_up_glfw(std::uint32_t width, std::uint32_t height, core::startup_config& config)
+GLFWwindow *set_up_glfw(core::startup_config& config)
 {
     GLFWwindow *window;
 
@@ -34,7 +33,7 @@ GLFWwindow *set_up_glfw(std::uint32_t width, std::uint32_t height, core::startup
         window = glfwCreateWindow(mode->width, mode->height, "RunShoot", glfwGetPrimaryMonitor(), NULL);
     } else
     {
-        window = glfwCreateWindow(width, height, "RunShoot", nullptr, nullptr);
+        window = glfwCreateWindow(config.width(), config.height(), "RunShoot", nullptr, nullptr);
     }
 
     if (!window)
