@@ -27,29 +27,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/include/platform/symbols.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/renderer/model_render_loader.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/renderer/shader_set.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/renderer/model_render_loader.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/runshoot.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/runshoot.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/scenes/scene.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scenes/scene.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/shaders/default.frag" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/default.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/shaders/default.vert" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/default.vert" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/asset/assimp_loader.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/asset/assimp_loader.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/asset/basic_mesh_reader.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/asset/basic_mesh_reader.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/asset/multi_texture_mesh.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/asset/multi_texture_mesh.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/runshoot.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/runshoot.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/renderer/renderer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/renderer/renderer.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/asset/assimp_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/assimp_loader.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/asset/basic_mesh_reader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/basic_mesh_reader.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/renderer/renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/renderer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/include/program_info.h" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/include/program_info.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/include/shader_program.h" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/include/shader_program.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/include/shader_program_uniform_assign.h" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/include/shader_program_uniform_assign.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/program_info.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/program_info.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/shader_program.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/shader_program.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -261,7 +244,7 @@
       <workItem from="1571857889727" duration="9054000" />
       <workItem from="1571887927074" duration="7661000" />
       <workItem from="1571947567779" duration="24995000" />
-      <workItem from="1571978383269" duration="701000" />
+      <workItem from="1571978383269" duration="4578000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>
@@ -312,16 +295,6 @@
           <url>file://$PROJECT_DIR$/apps/runshoot.hpp</url>
           <line>1</line>
           <option name="timeStamp" value="32" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/thirdparty/opengllib/shader_program.cpp</url>
-          <line>77</line>
-          <option name="timeStamp" value="72" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/asset/assimp_loader.cpp</url>
-          <line>81</line>
-          <option name="timeStamp" value="75" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

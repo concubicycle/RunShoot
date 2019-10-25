@@ -190,4 +190,8 @@ void rendering::renderer::draw_scene(asset::scene &scene)
     });
 }
 
+void rendering::renderer::resize(std::uint32_t width, std::uint32_t height)
+{
+    glViewport(0, 0, width, height);
+}
 

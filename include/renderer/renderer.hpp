@@ -1,8 +1,9 @@
 #ifndef __RENDERER_H_
 #define __RENDERER_H_
 
-#include <vector>
 
+#include <vector>
+#include <cstdint>
 #include <opengl_afx.h>
 
 #include <core/startup_config.hpp>
@@ -42,6 +43,11 @@ public:
     bool init();
 
     void draw_scene(asset::scene& scene);
+    void resize(std::uint32_t width, std::uint32_t height);
+
+  //  void (*build_framebuffer_callback(rendering::renderer& r))(GLFWwindow*, int, int);
+
+
 
 private:
     const core::startup_config &_config;
