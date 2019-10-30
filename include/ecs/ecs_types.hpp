@@ -13,5 +13,6 @@
 typedef unsigned long long component_bitset;
 
 typedef std::uint32_t entity_id;
+typedef std::uint8_t component_shift;
 
 #endif //ECS_DEV_ECS_TYPES_H

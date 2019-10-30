@@ -1,0 +1,40 @@
+{
+  "components": [
+    {
+      "component_bitshift": 0,
+      "x": 0,
+      "y": 0,
+      "z": 20,
+      "pitch": 0,
+      "yaw": 0,
+      "roll": 0,
+      "scale_x": 1.0,
+      "scale_y": 1.0,
+      "scale_z": 1.0
+    },
+    {
+      "component_bitshift": 2,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "pitch": 0,
+      "yaw": 0,
+      "roll": 0,
+      "fov": 45,
+      "near": 0.1,
+      "far": 1000.0,
+      "mode": 1
+    },
+    {
+      "component_bitshift": 6,
+      "velocity": [0, 0, 0]
+    },
+    {
+      "component_bitshift": 17,
+      "walk_speed": 7,
+      "run_speed": 12
+    }
+  ]
+}

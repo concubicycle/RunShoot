@@ -13,6 +13,8 @@
 #include <glm/mat4x4.hpp>
 #include <asset/mesh_type.hpp>
 
+#include <physics_models/aabb.hpp>
+
 #include "../ecs_types.hpp"
 #include "../component.hpp"
 #include "mesh_opengl.hpp"
@@ -20,6 +22,7 @@
 
 #define MAX_BASIC_COMPONENTS 16
 #define MAX_RENDER_MESHES 32
+#define MAX_AABB 64
 
 
 namespace ecs
@@ -84,6 +87,29 @@ namespace ecs
             return glm::mat3(glm::cross(fwd, up), up, fwd);
         }
     };
+
+
+    /////////////////////// Punctual Light component ///////////////////////
+    struct punctual_light_component : public component<punctual_light_component>
+    {
+        glm::vec3 color = glm::vec3(1.f);
+        glm::vec3 position = glm::vec3(0.f);
+        float intensity = 1.f;
+    };
+
+    ////////////////////////// AABB list component //////////////////////////
+    struct aabb_component : public component<aabb_component>
+    {
+        physics_models::aabb colliders[MAX_AABB];
+        uint32_t aabb_count = 0;
+    };
+
+    ////////////////////////// AABB list component //////////////////////////
+    struct physical_properties_component : public component<physical_properties_component>
+    {
+        glm::vec3 velocity;
+    };
+
 
 
 

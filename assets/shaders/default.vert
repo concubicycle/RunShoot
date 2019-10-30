@@ -19,6 +19,6 @@ void main()
     vs_out.normal = mat3(model_inverse) * normal;
     vs_out.texcoords_2d = texcoords_2d;
 
-    gl_Position = projection * view * model * vec4(position, 1.0);
+    gl_Position = vs_out.position;
 }
 

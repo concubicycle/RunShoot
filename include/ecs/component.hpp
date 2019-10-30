@@ -15,7 +15,7 @@ namespace ecs
     class component
     {
     public:
-        static const std::uint8_t component_bitshift;
+        static const component_shift component_bitshift;
         static const component_bitset archetype_bit;
     };
 

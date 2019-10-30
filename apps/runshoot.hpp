@@ -11,6 +11,7 @@
 #include <renderer/renderer.hpp>
 #include <asset/scene.hpp>
 #include <core/frame_limiter.hpp>
+#include <physics/physics_world.hpp>
 #include "character_controller.hpp"
 
 struct game_systems
@@ -22,6 +23,7 @@ struct game_systems
     rendering::renderer& renderer;
     asset::scene& scene;
     events::event_exchange& events;
+    physics::physics_world& physics;
 };
 
 struct behaviors

@@ -35,6 +35,17 @@ namespace ecs
 
         entity& get_entity(entity_id id);
 
+        // should make sure that the entity systems have references to don't
+        // get cleaned from under them. copy-assign the new entity into the old
+        // on that's in _entity_lookup.
+        template <class TComponent>
+        void add_component(entity& e)
+        {
+            auto& existing_ref = _entity_lookup.find(e.id())->second;
+            auto new_entity = _entity_factory.add_component<TComponent>(e);
+            existing_ref = new_entity;
+        }
+
         /**
          * We'll probably want to iterate all entities often. but we don't want to
          * create and return an array of them, and we don't really wait to return

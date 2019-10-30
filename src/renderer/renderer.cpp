@@ -43,6 +43,7 @@ rendering::renderer::renderer(
             _camera_entity = &e;
     };
 
+    // todo: if camera is destroyed, set pointer to null
     _cam_listener_id = _events.subscribe(events::entity_created, std::function<void(ecs::entity &)>(grab_camera));
 }
 
@@ -58,12 +59,14 @@ bool rendering::renderer::init()
         glViewport(0, 0, _config.width(), _config.height());
     else
         glViewport(0, 0, _system_info.monitor_width(), _system_info.monitor_height());
-//
-//    if (_config.backface_culling())
-//    {
-//        glEnable(GL_CULL_FACE);
-//        glFrontFace(GL_CCW);
-//    }
+
+    gl::glClearColor(0.2f, 0.1f, 0.3f, 0.f);
+
+    if (_config.backface_culling())
+    {
+        glEnable(GL_CULL_FACE);
+        glFrontFace(GL_CCW);
+    }
 
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
@@ -80,7 +83,7 @@ void rendering::renderer::draw_scene(asset::scene &scene)
     if (_camera_entity == nullptr)
         return;
 
-    gl::glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     auto &entities = scene.entity_world();

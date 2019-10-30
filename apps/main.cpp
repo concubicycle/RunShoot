@@ -13,6 +13,7 @@ using GLenum = gl::GLenum;
 #include <asset/basic_mesh_reader.hpp>
 #include <asset/scene_loader.hpp>
 #include <asset/texture_manager.hpp>
+#include <asset/prototype_loader.hpp>
 #include <core/frame_limiter.hpp>
 #include <core/frame_timer.hpp>
 #include <core/input_manager.hpp>
@@ -27,7 +28,6 @@ using GLenum = gl::GLenum;
 
 #include "character_controller.hpp"
 #include "components/add_custom_components.hpp"
-#include "milestone1.hpp"
 #include "runshoot.hpp"
 
 using float_seconds = std::chrono::duration<float>;
@@ -65,7 +65,9 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     asset::basic_mesh_reader reader;
     asset::assimp_loader assimp_reader;
     asset::texture_manager textures(app_string_table);
-    asset::scene_loader loader(app_string_table);
+    asset::component_loader component_loader(app_string_table);
+    asset::prototype_loader prototypes;
+    asset::scene_loader loader(component_loader, prototypes);
 
     core::system_info info;
     core::frame_timer timer;
@@ -79,6 +81,7 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     ecs::entity_factory factory(1);
     ecs::entity_world entities(factory, events);
 
+    physics::physics_world physics(events);
 
     character_controller controller(events);
 
@@ -86,18 +89,17 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
 
     renderer.init();
     glfwSetFramebufferSizeCallback(window, build_framebuffer_callback(renderer));
+
     render_loader.init_entity_world_render_components(entities);
     textures.unload_all();
 
-    game_systems data = {window, timer, limiter, input, renderer, scene, events};
+    game_systems data = {window, timer, limiter, input, renderer, scene, events, physics};
     behaviors behaviors = {controller};
     render_loop(data, behaviors);
 }
 
 void render_loop(game_systems &data, behaviors &behaviors)
 {
-    auto &cube1 = data.scene.entity_world().get_entity(1);
-    auto &cube2 = data.scene.entity_world().get_entity(2);
     auto &player = data.scene.entity_world().get_entity(111);
 
     core::behavior_context ctx = {data.timer, data.input};
@@ -105,13 +107,11 @@ void render_loop(game_systems &data, behaviors &behaviors)
     while (!glfwWindowShouldClose(data.window))
     {
         data.timer.start();
-        auto frame_time = data.timer.smoothed_delta_secs();
 
+        data.physics.update();
         behaviors.character.update(ctx);
-
-        spin_quad(cube1, frame_time);
-
         data.renderer.draw_scene(data.scene);
+
         glfwSwapBuffers(data.window);
 
         glfwPollEvents();
@@ -121,7 +121,6 @@ void render_loop(game_systems &data, behaviors &behaviors)
         data.timer.end();
     }
 }
-
 
 
 void (*build_framebuffer_callback(rendering::renderer& r))(GLFWwindow*, int, int)

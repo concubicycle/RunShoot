@@ -132,6 +132,11 @@ void rendering::model_render_loader::init_mesh(
 }
 
 
+void model_load_error(asset::mesh_read_error err)
+{
+    spdlog::error("Mesh read error: {0}", err);
+}
+
 void rendering::model_render_loader::init_entity_world_render_components(ecs::entity_world world)
 {
     world.for_all_entities([this](ecs::entity &e)
@@ -158,10 +163,10 @@ void rendering::model_render_loader::init_entity_world_render_components(ecs::en
         switch (r.mesh_format)
         {
             case asset::mesh_type::P_TX2D:
-                _reader.read_mesh_ptx2d(mesh_path).map(ptx2d_load);
+                _reader.read_mesh_ptx2d(mesh_path).map(ptx2d_load).map_error(model_load_error);
                 break;
             case asset::mesh_type::GLTF2:
-                _assimp_loader.load_model(mesh_path, mesh_type).map(assimp_load);
+                _assimp_loader.load_model(mesh_path, mesh_type).map(assimp_load).map_error(model_load_error);
                 break;
         }
     });

@@ -29,6 +29,7 @@ uniform float shininess; // alpha exponent
 void main()
 {
     vec3 Kd = texture(diffuse_texture, fs_in.texcoords_2d).rgb;
+
     vec3 Ks = specular;
     float alpha = shininess;
 

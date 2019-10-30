@@ -32,6 +32,8 @@ set(GLM "glm")
 set(SPDLOG "spdlog")
 set(MEM_LIB "memory")
 set(ECS_LIB "ecs")
+set(PHYSICS_LIB "physics")
+
 
 # WARNING: Doesn't work when build directory isn't /build for some reason (with CLion)
 file(COPY ${ASSETS_DIR} DESTINATION ${CMAKE_BINARY_DIR})
@@ -47,6 +49,8 @@ add_executable(${TARGET_NAME}
                apps/components/character_controller_component.cpp
                apps/components/character_controller_component.hpp
                include/ecs/components/mesh_opengl.hpp)
+
+add_executable(generate_colliders apps/generate_colliders.cpp)
 
 add_executable(tests tests/main.cpp)
 
@@ -138,6 +142,17 @@ add_dependencies(${ASSETLIB_NAME}
                  assimp
                  )
 
+add_dependencies(generate_colliders
+                 expected
+                 ${OGLLIB_NAME}
+                 nlohmann_json
+                 assimp
+                 ${ASSETLIB_NAME}
+                 ogllib)
+
+add_dependencies(${PHYSICS_LIB}
+                 ${ECS_LIB})
+
 target_link_libraries(${TARGET_NAME} PRIVATE
                       ${GLFW_LIB}
                       ${CORELIB_NAME}
@@ -149,7 +164,14 @@ target_link_libraries(${TARGET_NAME} PRIVATE
                       ${MEM_LIB}
                       ${ASSIMP_LIB}
                       ${GLBINDING_AUX_LIB}
-                      ${GLBINDING_LIB})
+                      ${GLBINDING_LIB}
+                      ${PHYSICS_LIB})
+
+
+target_link_libraries(generate_colliders PRIVATE
+                      ${OGLLIB_NAME}
+                      ${ASSETLIB_NAME}
+                      ${ASSIMP_LIB})
 
 target_link_libraries(tests
                       ${MEM_LIB})

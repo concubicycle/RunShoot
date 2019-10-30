@@ -41,14 +41,7 @@ namespace ecs
 
         entity make_entity(component_bitset archetype_id, entity_id id)
         {
-            auto it = _archetype_pools.find(archetype_id);
-
-            if (it == _archetype_pools.end())
-            {
-                _archetype_pools.emplace(std::piecewise_construct,
-                    std::forward_as_tuple(archetype_id),
-                    std::forward_as_tuple(archetype_id, MinArchetypeChunks));
-            }
+            auto& pool = find_pool(archetype_id);
 
             if (_ids.find(id) != _ids.end())
                 throw "Entity id already exists"; // TODO: Handle this better.
@@ -72,6 +65,20 @@ namespace ecs
             return _archetype_pools.find(id)->second.free_entity(e);
         }
 
+        template <class TComponent>
+        entity add_component(entity& e)
+        {
+            auto new_archetype = component<TComponent>::archetype_bit | e.archetype_id();
+            auto& new_pool = find_pool(new_archetype);
+            auto new_entity = new_pool.allocate_entity(e.id());
+            new_entity.copy_components_from(e);
+
+            auto& old_pool = find_pool(e.archetype_id());
+            old_pool.free_entity(e);
+
+            return new_entity;
+        }
+
 
     private:
         std::unordered_map<component_bitset, archetype_pool> _archetype_pools;
@@ -84,6 +91,20 @@ namespace ecs
             entity_id e_id = ++_next_id;
             while (_ids.find(e_id) != _ids.end()) e_id++;
             return e_id;
+        }
+
+        archetype_pool& find_pool(component_bitset archetype_id)
+        {
+            auto it = _archetype_pools.find(archetype_id);
+
+            if (it == _archetype_pools.end())
+            {
+                _archetype_pools.emplace(std::piecewise_construct,
+                    std::forward_as_tuple(archetype_id),
+                    std::forward_as_tuple(archetype_id, MinArchetypeChunks));
+            }
+
+            return _archetype_pools.find(archetype_id)->second;
         }
     };
 }

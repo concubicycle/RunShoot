@@ -30,10 +30,11 @@ asset::assimp_loader::mesh_result asset::assimp_loader::load_glf2(std::string pa
     Assimp::Importer importer;
     const aiScene *scene = importer.ReadFile(
         path,
-        aiProcess_ValidateDataStructure |
-        aiProcess_Triangulate |
-        aiProcess_FlipUVs |
-        aiProcess_ValidateDataStructure);
+        aiProcess_ValidateDataStructure | aiProcess_FixInfacingNormals );
+//    |
+//        aiProcess_Triangulate |
+//        aiProcess_FlipUVs |
+//        aiProcess_ValidateDataStructure);
 
     auto error = importer.GetErrorString();
 

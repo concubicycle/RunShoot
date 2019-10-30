@@ -22,17 +22,22 @@ set(CORE_HEADER_LIST
 
 set(RENDERER_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/renderer/renderer.cpp
-    ../include/renderer/render_data.hpp renderer/model_render_loader.cpp)
+    ../include/renderer/render_data.hpp
+    renderer/model_render_loader.cpp)
 
 set(RENDERER_HEADER_LIST
     ${PROJECT_SOURCE_DIR}/include/renderer/renderer.hpp
-    ../include/renderer/model_render_loader.hpp ../include/renderer/shader_set.hpp)
+    ../include/renderer/model_render_loader.hpp
+    ../include/renderer/shader_set.hpp)
 
 set(ASSET_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/asset/mesh.cpp
     ${PROJECT_SOURCE_DIR}/src/asset/basic_mesh_reader.cpp
     ${PROJECT_SOURCE_DIR}/src/asset/scene_loader.cpp
-    ${PROJECT_SOURCE_DIR}/src/asset/texture_manager.cpp asset/assimp_loader.cpp)
+    ${PROJECT_SOURCE_DIR}/src/asset/texture_manager.cpp
+    asset/assimp_loader.cpp
+    asset/prototype_loader.cpp
+    asset/component_loader.cpp)
 
 set(ASSET_HEADER_LIST
     ${PROJECT_SOURCE_DIR}/include/asset/texture_manager.hpp
@@ -43,7 +48,10 @@ set(ASSET_HEADER_LIST
     ${PROJECT_SOURCE_DIR}/include/asset/scene.hpp
     ${PROJECT_SOURCE_DIR}/include/asset/scene_loader.hpp
     ${PROJECT_SOURCE_DIR}/include/asset/assimp_loader.hpp
-    ../include/asset/mesh_type.hpp ../include/asset/asset_types.hpp)
+    ../include/asset/mesh_type.hpp
+    ../include/asset/asset_types.hpp
+    ../include/asset/prototype_loader.hpp
+    ../include/asset/component_loader.hpp)
 
 set(PLATFORM_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/platform/sleep.cpp
@@ -94,10 +102,26 @@ set (ECS_HEADER_LIST
 
      ../include/ecs/components/mesh_opengl.hpp)
 
+
+set (PHYSICS_SOURCE_LIST
+     physics/physics_world.cpp)
+
+set (PHYSICS_HEADER_LIST
+     ../include/physics/physics_world.hpp)
+
+set (PHYSICS_MODELS_SOURCE_LIST
+     )
+
+set (PHYSICS_MODELS_HEADER_LIST
+     ../include/physics_models/aabb.hpp
+     )
+
+
 set(HEADER_LIST
     ${PROJECT_SOURCE_DIR}/include/events/event_dispatcher.hpp
     ${PROJECT_SOURCE_DIR}/include/util/running_average.hpp
 )
+
 
 # Make an automatic library - will be static or dynamic based on user setting
 add_library(${CORELIB_NAME} STATIC ${CORE_SOURCE_LIST} ${CORE_HEADER_LIST})
@@ -106,6 +130,7 @@ add_library(${RENDERER} STATIC ${RENDERER_SOURCE_LIST} ${RENDERER_HEADER_LIST})
 add_library(${ASSETLIB_NAME} STATIC ${ASSET_SOURCE_LIST} ${ASSET_HEADER_LIST})
 add_library(${MEM_LIB} STATIC ${MEMORY_SOURCE_LIST} ${MEMORY_HEADER_LIST})
 add_library(${ECS_LIB} STATIC ${ECS_SOURCE_LIST} ${ECS_HEADER_LIST})
+add_library(${PHYSICS_LIB} STATIC ${PHYSICS_SOURCE_LIST} ${PHYSICS_HEADER_LIST})
 
 
 
@@ -116,6 +141,7 @@ target_include_directories(${RENDERER} PUBLIC ../include ../thirdparty/opengllib
 target_include_directories(${ASSETLIB_NAME} PUBLIC ../include ../thirdparty/opengllib/include)
 target_include_directories(${MEM_LIB} PUBLIC ../include)
 target_include_directories(${ECS_LIB} PUBLIC ../include ../thirdparty/opengllib/include)
+target_include_directories(${PHYSICS_LIB} PUBLIC ../include)
 
 
 
@@ -127,3 +153,4 @@ target_compile_features(${RENDERER} PUBLIC cxx_std_14)
 target_compile_features(${ASSETLIB_NAME} PUBLIC cxx_std_14)
 target_compile_features(${MEM_LIB} PUBLIC cxx_std_14)
 target_compile_features(${ECS_LIB} PUBLIC cxx_std_14)
+target_compile_features(${PHYSICS_LIB} PUBLIC cxx_std_14)

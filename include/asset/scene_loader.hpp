@@ -15,28 +15,30 @@
 #include <ecs/components/basic_components.hpp>
 
 #include <util/string_table.hpp>
+#include "component_loader.hpp"
+#include "prototype_loader.hpp"
 
 using nlohmann::json;
 
 namespace asset
 {
-    using bitshift_to_component_loader =
-        std::unordered_map<std::uint8_t , std::function<void(const json&, ecs::entity&, string_table&)>>;
-
     class scene_loader
     {
     public:
-        explicit scene_loader(string_table& str_table);
+        explicit scene_loader(
+            component_loader& component_loader,
+            prototype_loader& prototypes);
 
-        static bitshift_to_component_loader component_loaders;
-
-        asset::scene load_scene(std::string file_path, ecs::entity_world& world);
+        asset::scene load_scene(const std::string& file_path, ecs::entity_world& world);
 
     private:
-        string_table& _string_table;
+        component_loader& _component_loader;
+        prototype_loader& _prototypes;
 
         component_bitset calc_archetype_id(const json &components) const;
         void load_entity_components(ecs::entity &e, const json& component_array) const;
+
+        json merge_prototype_and_scene_entity(json& scene_entity);
     };
 }
 

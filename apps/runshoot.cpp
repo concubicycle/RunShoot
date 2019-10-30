@@ -3,9 +3,9 @@
 //
 
 /////////////
-#include <GLFW/glfw3.h>
 #include <glbinding/glbinding.h>
 #include <glbinding/gl/gl.h>
+#include <GLFW/glfw3.h>
 
 using namespace gl;
 using namespace glbinding;
@@ -48,7 +48,7 @@ GLFWwindow *set_up_glfw(core::startup_config& config)
 
     glfwMakeContextCurrent(window);
 
-    //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     glbinding::initialize(glfwGetProcAddress, true);
 

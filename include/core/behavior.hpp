@@ -19,13 +19,20 @@ namespace core
     public:
         explicit behavior(events::event_exchange &events) : _events(events)
         {
-            std::function<void(ecs::entity&)> f = std::bind(&behavior::on_entity_created, this, std::placeholders::_1);
-            _listener_id = events.subscribe<ecs::entity&>(events::event_type::entity_created, f);
+            std::function<void(ecs::entity&)> on_create =
+                std::bind(&behavior::on_entity_created, this, std::placeholders::_1);
+
+            std::function<void(ecs::entity&)> on_destroy =
+                std::bind(&behavior::on_entity_destroyed, this, std::placeholders::_1);
+
+            _listener_id_create = events.subscribe<ecs::entity&>(events::event_type::entity_created, on_create);
+            _listener_id_destroy = events.subscribe<ecs::entity&>(events::event_type::entity_destroyed, on_destroy);
         }
 
         virtual ~behavior()
         {
-            _events.unsubscribe(events::event_type::entity_created, _listener_id);
+            _events.unsubscribe(events::event_type::entity_created, _listener_id_create);
+            _events.unsubscribe(events::event_type::entity_destroyed, _listener_id_destroy);
         }
 
         virtual component_bitset required_components() const = 0;
@@ -43,7 +50,8 @@ namespace core
     private:
         events::event_exchange& _events;
         std::vector<std::reference_wrapper<ecs::entity>> _entities;
-        listener_id _listener_id;
+        listener_id _listener_id_create;
+        listener_id _listener_id_destroy;
 
         void on_entity_created(ecs::entity& e)
         {
@@ -54,8 +62,19 @@ namespace core
                 _entities.emplace_back(e);
             }
         }
-    };
 
+        void on_entity_destroyed(ecs::entity& e)
+        {
+            auto it = std::find_if(
+                _entities.begin(), _entities.end(),
+                [&e](ecs::entity& x) { return x.id() == e.id();});
+
+            if (it != _entities.end())
+            {
+                _entities.erase(it);
+            }
+        }
+    };
 }
 
 #endif //__BEHAVIOR_HPP_

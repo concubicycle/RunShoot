@@ -21,7 +21,7 @@ void add_custom_components()
         character_controller_component::component_bitshift,
         ecs::component_meta::of<character_controller_component>()));
 
-    asset::scene_loader::component_loaders.insert(
+    asset::component_loader::loader_functions.insert(
         std::make_pair(character_controller_component::component_bitshift, load_character_controller));
 }
 

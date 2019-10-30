@@ -46,6 +46,11 @@ namespace ecs
         template<class T>
         T *get_component()
         {
+            return (T *) get_component(component<T>::component_bitshift);
+        }
+
+        void* get_component(std::uint8_t component_bitshift)
+        {
             auto cursor = _header;
             auto count = _description.component_count;
 
@@ -53,9 +58,9 @@ namespace ecs
             {
                 auto chunk_ptr_byte = (uintptr_t) _chunk_ptr;
 
-                if (cursor->component_bitshift == component<T>::component_bitshift)
+                if (cursor->component_bitshift == component_bitshift)
                 {
-                    return (T *) (chunk_ptr_byte + cursor->component_offset);
+                    return (void *) (chunk_ptr_byte + cursor->component_offset);
                 }
 
                 cursor++;

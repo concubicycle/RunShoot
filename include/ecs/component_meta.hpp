@@ -10,6 +10,7 @@
 #include <functional>
 
 #include <nlohmann/json.hpp>
+#include <utility>
 using nlohmann::json;
 
 #include "ecs_types.hpp"
@@ -42,37 +43,43 @@ namespace ecs
                 sizeof(T),
                 alignof(T),
                 component<T>::component_bitshift,
-                [](void *addr)
-                { new(addr) T(); },
-                [](void *addr)
-                { ((T *) addr)->~T(); });
+                [](void *addr) { new(addr) T(); },
+                [](void *addr) { ((T *) addr)->~T(); },
+                [](void *destination, void* source) {
+                    *((T*)destination) = *((T *)source);
+                });
         }
 
-        static std::map<std::uint8_t, component_meta> bit_metas;
+        static std::map<component_shift, component_meta> bit_metas;
 
         size_t size() const { return _size; }
 
         size_t align() const { return _align; }
 
-        std::uint8_t shift() const { return _shift; }
+        component_shift shift() const { return _shift; }
+
 
         void construct(void *addr) { _ctor(addr); }
 
         void destruct(void *addr) { _dtor(addr); }
+
+        void copy(void *destination, void* source) { _copier(destination, source); }
 
 
     private:
         component_meta(
             size_t size,
             size_t align,
-            std::uint8_t shift,
+            component_shift shift,
             std::function<void(void *)> ctor,
-            std::function<void(void *)> dtor) :
+            std::function<void(void *)> dtor,
+            std::function<void(void*, void*)> copier) :
             _size(size),
             _align(align),
             _shift(shift),
-            _ctor(ctor),
-            _dtor(dtor)
+            _ctor(std::move(ctor)),
+            _dtor(std::move(dtor)),
+            _copier(std::move(copier))
         {
         }
 
@@ -82,8 +89,8 @@ namespace ecs
         mutable std::uint8_t _shift;
 
         mutable std::function<void(void *)> _ctor;
-        mutable std::function<void(json &, void *)> _deserialize_ctor;
         mutable std::function<void(void *)> _dtor;
+        mutable std::function<void(void*, void*)> _copier;
     };
 }
 
