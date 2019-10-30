@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="RunShoot" targetName="glfw" />
+      <config projectName="RunShoot" targetName="spdlog" />
+      <config projectName="RunShoot" targetName="glm" />
+      <config projectName="RunShoot" targetName="asset" />
+      <config projectName="RunShoot" targetName="RunShoot" />
+      <config projectName="RunShoot" targetName="generate_colliders" />
+      <config projectName="RunShoot" targetName="ogllib" />
+      <config projectName="RunShoot" targetName="tests" />
+      <config projectName="RunShoot" targetName="glbinding" />
+      <config projectName="RunShoot" targetName="core" />
+      <config projectName="RunShoot" targetName="physics" />
+      <config projectName="RunShoot" targetName="platform" />
+      <config projectName="RunShoot" targetName="ecs" />
+      <config projectName="RunShoot" targetName="tinygltf" />
+      <config projectName="RunShoot" targetName="assimp" />
+      <config projectName="RunShoot" targetName="expected" />
+      <config projectName="RunShoot" targetName="memory" />
+      <config projectName="RunShoot" targetName="nlohmann_json" />
+      <config projectName="RunShoot" targetName="renderer" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" GENERATION_DIR="build" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/apps/run_shoot_character_controller.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/run_shoot_character_controller.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake_modules/add_tinygltf.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CMakeLists.txt" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="$PROJECT_DIR$/.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="OCFindUsagesOptions" text="false" ivars="false" properties="true" derivedClasses="false" />
+  <component name="ProjectId" id="1RkfA0cXEQvRmvTns35yj62oy90" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../cs525/sparsevector_cpp" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C/C++" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/shaders" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/include/physics_models" />
+      <recent name="$PROJECT_DIR$/build/assets/models" />
+      <recent name="$PROJECT_DIR$/apps" />
+      <recent name="$PROJECT_DIR$/thirdparty/opengllib/include" />
+      <recent name="$PROJECT_DIR$/src/asset" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="CMake Application.RunShoot">
+    <configuration name="RunShoot" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RunShoot" TARGET_NAME="RunShoot" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="RunShoot" RUN_TARGET_NAME="RunShoot">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="asset" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RunShoot" TARGET_NAME="asset" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="assimp" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RunShoot" TARGET_NAME="assimp" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="core" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RunShoot" TARGET_NAME="core" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ecs" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RunShoot" TARGET_NAME="ecs" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="expected" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RunShoot" TARGET_NAME="expected" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="generate_colliders" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RunShoot" TARGET_NAME="generate_colliders" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="RunShoot" RUN_TARGET_NAME="generate_colliders">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="glbinding" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RunShoot" TARGET_NAME="glbinding" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="glfw" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RunShoot" TARGET_NAME="glfw" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="glm" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RunShoot" TARGET_NAME="glm" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="memory" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RunShoot" TARGET_NAME="memory" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="nlohmann_json" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RunShoot" TARGET_NAME="nlohmann_json" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ogllib" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RunShoot" TARGET_NAME="ogllib" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="physics" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RunShoot" TARGET_NAME="physics" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="platform" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RunShoot" TARGET_NAME="platform" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="renderer" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RunShoot" TARGET_NAME="renderer" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="spdlog" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RunShoot" TARGET_NAME="spdlog" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="tests" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RunShoot" TARGET_NAME="tests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="RunShoot" RUN_TARGET_NAME="tests">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="tinygltf" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RunShoot" TARGET_NAME="tinygltf" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="CMake Application.assimp" />
+      <item itemvalue="CMake Application.expected" />
+      <item itemvalue="CMake Application.generate_colliders" />
+      <item itemvalue="CMake Application.glbinding" />
+      <item itemvalue="CMake Application.glfw" />
+      <item itemvalue="CMake Application.glm" />
+      <item itemvalue="CMake Application.nlohmann_json" />
+      <item itemvalue="CMake Application.RunShoot" />
+      <item itemvalue="CMake Application.spdlog" />
+      <item itemvalue="CMake Application.tests" />
+      <item itemvalue="CMake Application.tinygltf" />
+      <item itemvalue="CMake Application.asset" />
+      <item itemvalue="CMake Application.core" />
+      <item itemvalue="CMake Application.ecs" />
+      <item itemvalue="CMake Application.memory" />
+      <item itemvalue="CMake Application.physics" />
+      <item itemvalue="CMake Application.platform" />
+      <item itemvalue="CMake Application.renderer" />
+      <item itemvalue="CMake Application.ogllib" />
+    </list>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="" />
+      <created>1570215866574</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1570215866574</updated>
+      <workItem from="1570215867917" duration="1672000" />
+      <workItem from="1570217587900" duration="4893000" />
+      <workItem from="1570228889227" duration="19273000" />
+      <workItem from="1570300304427" duration="6993000" />
+      <workItem from="1571189299228" duration="5913000" />
+      <workItem from="1571197914566" duration="9948000" />
+      <workItem from="1571208702840" duration="10000" />
+      <workItem from="1571248750353" duration="607000" />
+      <workItem from="1571258952370" duration="1304000" />
+      <workItem from="1571266894231" duration="663000" />
+      <workItem from="1571267577981" duration="1526000" />
+      <workItem from="1571271788019" duration="4451000" />
+      <workItem from="1571276613618" duration="12983000" />
+      <workItem from="1571290109303" duration="10962000" />
+      <workItem from="1571306280162" duration="535000" />
+      <workItem from="1571341770885" duration="8610000" />
+      <workItem from="1571351833169" duration="12668000" />
+      <workItem from="1571381717317" duration="3127000" />
+      <workItem from="1571396355195" duration="986000" />
+      <workItem from="1571434417278" duration="439000" />
+      <workItem from="1571441233000" duration="14441000" />
+      <workItem from="1571596063399" duration="23000" />
+      <workItem from="1571596313066" duration="7544000" />
+      <workItem from="1571624970671" duration="19910000" />
+      <workItem from="1571685200468" duration="22531000" />
+      <workItem from="1571812008963" duration="4278000" />
+      <workItem from="1571816907592" duration="206000" />
+      <workItem from="1571817129918" duration="3660000" />
+      <workItem from="1571821589440" duration="154000" />
+      <workItem from="1571821754821" duration="204000" />
+      <workItem from="1571821969657" duration="5331000" />
+      <workItem from="1571857889727" duration="9054000" />
+      <workItem from="1571887927074" duration="7661000" />
+      <workItem from="1571947567779" duration="24995000" />
+      <workItem from="1571978383269" duration="4849000" />
+      <workItem from="1572027372248" duration="13310000" />
+      <workItem from="1572125513753" duration="13776000" />
+      <workItem from="1572283597518" duration="19498000" />
+      <workItem from="1572373663058" duration="30605000" />
+    </task>
+    <task id="LOCAL-00001" summary="ECS stuff and cmake config">
+      <created>1570224484089</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1570224484090</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/build/assimp/src/assimp" />
+      <path value="$PROJECT_DIR$/build/glbinding/src/glbinding" />
+      <path value="$PROJECT_DIR$/build/expected/src/expected" />
+      <path value="$PROJECT_DIR$/build/expected/src/expected-build/_deps/tl_cmake-src" />
+      <path value="$PROJECT_DIR$/build/expected/src/expected/cmake/tl-cmake" />
+      <path value="$PROJECT_DIR$/build/glfw/src/glfw" />
+      <path value="$PROJECT_DIR$/build/glm/src/glm" />
+      <path value="$PROJECT_DIR$/build/nlohmann_json/src/nlohmann_json" />
+      <path value="$PROJECT_DIR$/build/spdlog/src/spdlog" />
+    </ignored-roots>
+    <MESSAGE value="ECS stuff" />
+    <MESSAGE value="ECS stuff and cmake config" />
+    <option name="LAST_COMMIT_MESSAGE" value="ECS stuff and cmake config" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/apps/runshoot.hpp</url>
+          <line>1</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/apps/generate_colliders.cpp</url>
+          <line>40</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/asset/component_loader.cpp</url>
+          <line>116</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
