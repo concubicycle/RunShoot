@@ -29,8 +29,8 @@ void core::startup_config::load()
 }
 
 bool core::startup_config::fullscreen() const { return config_json["fullscreen"].get<bool>(); }
-int core::startup_config::height() const { return config_json["height"].get<int>(); }
-int core::startup_config::width() const { return config_json["width"].get<int>(); }
+std::uint32_t core::startup_config::height() const { return config_json["height"].get<std::uint32_t>(); }
+std::uint32_t core::startup_config::width() const { return config_json["width"].get<std::uint32_t>(); }
 float core::startup_config::fov() const { return config_json["fov"]; }
 bool core::startup_config::backface_culling() const { return config_json["backfaceCulling"].get<bool>(); }
 

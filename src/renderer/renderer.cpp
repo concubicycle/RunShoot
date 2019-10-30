@@ -78,6 +78,7 @@ bool rendering::renderer::init()
     return true;
 }
 
+
 void rendering::renderer::draw_scene(asset::scene &scene)
 {
     if (_camera_entity == nullptr)
@@ -97,7 +98,7 @@ void rendering::renderer::draw_scene(asset::scene &scene)
 
         if (!is_rt) return;
 
-        float width, height;
+        std::uint32_t width, height;
 
         // todo: break out to separate method
         if (_config.fullscreen())
@@ -122,45 +123,39 @@ void rendering::renderer::draw_scene(asset::scene &scene)
 
         auto model_inverse = glm::inverse(model);
 
-        auto aspect = width / height;
+        auto aspect = (float)width / (float)height;
         auto projection = glm::perspective(cam.fov, aspect, cam.near, cam.far);
 
         auto cam_basis = cam.right_up_fwd();
         auto view = glm::lookAt(cam.position, cam.position + cam_basis[2], cam_basis[1]);
 
+		auto light_pos = glm::vec3(0, 100.f, 0);
+		auto light_color = glm::vec3(0.5, 0.5, 0.5);
+		auto specular = glm::vec3(0.1f);
+
         if (r.mesh_format == asset::mesh_type::GLTF2)
         {
             auto& shader = _shaders.default_shader();
             shader.bind();
+            
+			shader.set_uniform("model", model);
+			shader.set_uniform("view", view);
+			shader.set_uniform("projection", projection);
+			shader.set_uniform("model_inverse", model_inverse);
+			shader.set_uniform("view_pos", cam.position);
+			shader.set_uniform("light_pos", light_pos);
+			shader.set_uniform("point_light", light_color);
+			shader.set_uniform("ambient_light", light_color);
+			shader.set_uniform("specular", specular);            
+			shader.set_uniform("shininess", 0.2f);			
 
-            auto mat_uniforms = shader.get_uniforms<glm::mat4>();
-            mat_uniforms["model"] = model;
-            mat_uniforms["view"] = view;
-            mat_uniforms["projection"] = projection;
-            mat_uniforms["model_inverse"] = model_inverse;
-
-            auto vec3_uniforms = shader.get_uniforms<glm::vec3>();
-            auto light_pos = glm::vec3(0, 100.f, 0);
-            auto light_color = glm::vec3(0.5, 0.5, 0.5);
-            auto specular = glm::vec3(0.1f);
-
-            vec3_uniforms["view_pos"] = cam.position;
-            vec3_uniforms["light_pos"] = light_pos;
-            vec3_uniforms["point_light"] = light_color;
-            vec3_uniforms["ambient_light"] = light_color;
-            vec3_uniforms["specular"] = specular;
-
-            auto float_uniforms = shader.get_uniforms<float>();
-            float_uniforms["shininess"] = 0.2f;
-
-            for (int i = 0; i < r.mesh_count; ++i)
+            for (std::uint32_t i = 0; i < r.mesh_count; ++i)
             {
                 glActiveTexture(GL_TEXTURE0);
                 glBindTexture(GL_TEXTURE_2D, r.meshes[i].diffuse_texture_id);
 
                 glBindVertexArray(r.meshes[i].vao);
                 glDrawElements(GL_TRIANGLES, r.meshes[i].element_count, GL_UNSIGNED_INT, 0);
-
             }
 
             glBindVertexArray(0);

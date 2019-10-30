@@ -19,15 +19,15 @@ namespace asset
     public:
         explicit texture_manager(string_table& str_table);
 
-        ogllib::ogl_2d_tex &load_texture(std::string filename, unsigned long hash);
-        ogllib::ogl_2d_tex &load_texture(unsigned long hash);
+        ogllib::ogl_2d_tex &load_texture(std::string filename, size_t hash);
+        ogllib::ogl_2d_tex &load_texture(size_t hash);
         ogllib::ogl_2d_tex &load_texture(std::string filename);
 
 		void unload_texture(std::string filename);
 		void unload_all();
 
     private:
-        std::unordered_map<unsigned long, ogllib::ogl_2d_tex> _texture_lookup;
+        std::unordered_map<size_t, ogllib::ogl_2d_tex> _texture_lookup;
         string_table& _filename_lookup;
     };
 }

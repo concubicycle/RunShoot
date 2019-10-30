@@ -24,7 +24,7 @@ ecs::chunk_component_accessor::chunk_component_accessor(void *chunk_ptr, compone
         component_ptr += calc_align_adjustment((uintptr_t)component_ptr, meta.align());
 
         cursor->component_bitshift = i;
-        cursor->component_offset =  component_ptr - chunk_ptr_byte;
+        cursor->component_offset = (std::uint32_t)(component_ptr - chunk_ptr_byte);
         cursor++;
 
         component_ptr += meta.size();

@@ -24,7 +24,7 @@ asset::texture_manager::texture_manager(string_table &str_table) : _filename_loo
 //	stbi_image_free(retval_from_stbi_load);
 //}
 
-ogllib::ogl_2d_tex &asset::texture_manager::load_texture(std::string filename, unsigned long hash)
+ogllib::ogl_2d_tex &asset::texture_manager::load_texture(std::string filename, size_t hash)
 {
     auto it = _texture_lookup.find(hash);
     if (it != _texture_lookup.end()) return it->second;
@@ -50,7 +50,7 @@ ogllib::ogl_2d_tex &asset::texture_manager::load_texture(std::string filename, u
     return _texture_lookup.find(hash)->second;
 }
 
-ogllib::ogl_2d_tex &asset::texture_manager::load_texture(unsigned long hash)
+ogllib::ogl_2d_tex &asset::texture_manager::load_texture(size_t hash)
 {
     return load_texture(_filename_lookup[hash], hash);
 }

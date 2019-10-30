@@ -54,11 +54,23 @@ namespace ogllib
             return get_uniforms<TUniform>(_info);
         }
 
-        template<typename TUniform>
-        void set_uniform(const std::string &name, TUniform value)
-        {
-            get_uniforms()[name] = value;
-        }
+        
+		
+		void set_uniform(std::string name, GLfloat val) const
+		{
+			glUniform1f(_info.getUniformLocation(name), val);
+		}
+
+		void set_uniform(std::string name, glm::mat4& val) const
+		{
+			glUniformMatrix4fv(_info.getUniformLocation(name), 1, GL_FALSE, glm::value_ptr(val));
+		}
+
+		void set_uniform(std::string name, glm::vec3& val) const
+		{
+			glUniform3fv(_info.getUniformLocation(name), 1, glm::value_ptr(val));
+		}
+		
 
         //COMPILATION
         void build(std::string vertex_shader_path, std::string fragment_shader_path)

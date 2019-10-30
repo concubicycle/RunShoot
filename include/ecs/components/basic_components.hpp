@@ -60,6 +60,8 @@ namespace ecs
         asset::mesh_type mesh_format;
     };
 
+#undef near
+#undef far
 
     ///////////////////////// Camera component /////////////////////////
     struct camera_component : public component<camera_component>

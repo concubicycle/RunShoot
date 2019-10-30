@@ -28,7 +28,7 @@ namespace ecs
             _arch_id(arch_id),
             _chunk_size(calc_chunk_size(arch_id)),
             _allocator(
-                _chunk_size,
+                (std::uint32_t)_chunk_size,
                 count,
                 chunk_component_accessor::chunk_align())
         {
@@ -49,10 +49,10 @@ namespace ecs
 
     private:
         component_bitset _arch_id;
-        std::uint32_t _chunk_size;
+        size_t _chunk_size;
         allocators::pool_allocator _allocator;
 
-        static std::uint32_t calc_chunk_size(component_bitset archetype_id)
+        static size_t calc_chunk_size(component_bitset archetype_id)
         {
             return chunk_component_accessor::chunk_size_for(archetype_id).chunk_size;
         }

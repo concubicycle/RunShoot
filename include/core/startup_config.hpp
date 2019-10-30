@@ -24,8 +24,8 @@ public:
     void load();
 
     bool fullscreen() const;
-    int height() const;
-    int width() const;
+    std::uint32_t height() const;
+	std::uint32_t width() const;
     float fov() const;
     bool backface_culling() const;
 

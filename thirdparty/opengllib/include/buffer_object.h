@@ -16,7 +16,7 @@ private:
 	bool _has_been_buffered = false;
 
 protected:
-	GLuint _id;
+	GLuint _id = 0;
 
 	virtual void onBuffer() = 0;
 	virtual void onBind() = 0;
