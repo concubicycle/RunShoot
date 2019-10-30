@@ -17,8 +17,10 @@ behind the player (it hasn't been rotated to face -z direction yet).
 
 The ECS in this project tries to be similar to one described in [this Unity blog post](https://blogs.unity3d.com/2019/03/08/on-dots-entity-component-system/).
 
+An `archetype` is a a set of components, represented as a std::bitset.
+
 At the lowest level, there is a `memory_pool` that allocates big memory blocks, and splits
-them up into chunks that it distribute. 
+them up into chunks that it distributes. 
 
 On top of that is an `archetype_pool`, which takes
 those chunks and initializes an entity with some set of components in them. 
