@@ -29,44 +29,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/apps/generate_colliders.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/prototypes/player.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/prototypes/seg1.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/asset/component_loader.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/asset/prototype_loader.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/physics/physics_world.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/physics_models/aabb.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/asset/component_loader.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/asset/prototype_loader.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/physics/physics_world.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/sava.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/sava.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/components/drone_controller_component.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/components/drone_controller_component.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/drone_controller.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/prototypes/drone.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/character_controller.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/character_controller.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/components/add_custom_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/add_custom_components.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/runshoot.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/runshoot.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/runshoot.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/runshoot.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blender/roof.blend" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/roof.blend" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/scenes/scene.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scenes/scene.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/shaders/default.frag" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/default.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/shaders/default.vert" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/default.vert" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/asset/scene_loader.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/asset/scene_loader.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/core/behavior.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/core/behavior.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/chunk_component_accessor.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/chunk_component_accessor.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/component.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/component_meta.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/component_meta.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/ecs_types.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/ecs_types.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/entity.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/entity.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/entity_factory.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/entity_factory.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/entity_world.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/entity_world.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/asset/assimp_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/assimp_loader.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/asset/scene_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/scene_loader.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ecs/component_meta.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ecs/component_meta.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ecs/components/basic_components.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ecs/components/basic_components.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/model_render_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/model_render_loader.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/renderer.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -292,7 +266,7 @@
       <workItem from="1572027372248" duration="13310000" />
       <workItem from="1572125513753" duration="13776000" />
       <workItem from="1572283597518" duration="19498000" />
-      <workItem from="1572373663058" duration="19809000" />
+      <workItem from="1572373663058" duration="24491000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>
@@ -348,11 +322,6 @@
           <url>file://$PROJECT_DIR$/apps/generate_colliders.cpp</url>
           <line>40</line>
           <option name="timeStamp" value="33" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/apps/main.cpp</url>
-          <line>58</line>
-          <option name="timeStamp" value="42" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/src/asset/component_loader.cpp</url>

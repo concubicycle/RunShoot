@@ -34,6 +34,10 @@
           "component_bitshift": 0,
           "y": 10
         }]
+    },
+    {
+      "entity_id": 3,
+      "prototype": "./assets/prototypes/drone.json"
     }
   ]
 }

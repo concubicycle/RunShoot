@@ -13,6 +13,7 @@
 #include <core/frame_limiter.hpp>
 #include <physics/physics_world.hpp>
 #include "character_controller.hpp"
+#include "drone_controller.hpp"
 
 struct game_systems
 {
@@ -29,6 +30,7 @@ struct game_systems
 struct behaviors
 {
     character_controller& character;
+    drone_controller& drone;
 };
 
 

@@ -84,6 +84,7 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     physics::physics_world physics(events);
 
     character_controller controller(events);
+    drone_controller drone_controller(events);
 
     auto scene = loader.load_scene("./assets/scenes/scene.json", entities);
 
@@ -94,7 +95,7 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     textures.unload_all();
 
     game_systems data = {window, timer, limiter, input, renderer, scene, events, physics};
-    behaviors behaviors = {controller};
+    behaviors behaviors = {controller, drone_controller};
     render_loop(data, behaviors);
 }
 
@@ -109,7 +110,10 @@ void render_loop(game_systems &data, behaviors &behaviors)
         data.timer.start();
 
         data.physics.update();
+
         behaviors.character.update(ctx);
+        behaviors.drone.update(ctx);
+
         data.renderer.draw_scene(data.scene);
 
         glfwSwapBuffers(data.window);
