@@ -84,7 +84,6 @@ void rendering::renderer::draw_scene(asset::scene &scene)
     if (_camera_entity == nullptr)
         return;
 
-
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     auto &entities = scene.entity_world();
@@ -129,9 +128,10 @@ void rendering::renderer::draw_scene(asset::scene &scene)
         auto cam_basis = cam.right_up_fwd();
         auto view = glm::lookAt(cam.position, cam.position + cam_basis[2], cam_basis[1]);
 
-		auto light_pos = glm::vec3(0, 100.f, 0);
+		auto light_pos = glm::vec3(0, 10.f, 10.f);
 		auto light_color = glm::vec3(0.5, 0.5, 0.5);
-		auto specular = glm::vec3(0.1f);
+		auto ambient_light = glm::vec3(0);
+		auto specular = glm::vec3(0.03f);
 
         if (r.mesh_format == asset::mesh_type::GLTF2)
         {
@@ -145,7 +145,7 @@ void rendering::renderer::draw_scene(asset::scene &scene)
 			shader.set_uniform("view_pos", cam.position);
 			shader.set_uniform("light_pos", light_pos);
 			shader.set_uniform("point_light", light_color);
-			shader.set_uniform("ambient_light", light_color);
+			shader.set_uniform("ambient_light", ambient_light);
 			shader.set_uniform("specular", specular);            
 			shader.set_uniform("shininess", 0.2f);			
 
@@ -173,8 +173,7 @@ void rendering::renderer::draw_scene(asset::scene &scene)
 
             shader.bind();
 
-            auto &uniforms = shader.get_uniforms<glm::mat4>();
-            uniforms["projection_view_model"] = projection_view_model;
+            shader.set_uniform("projection_view_model", projection_view_model);
 
             glBindVertexArray(r.meshes[0].vao);
             glDrawElements(GL_TRIANGLES, r.meshes[0].element_count, GL_UNSIGNED_INT, 0);

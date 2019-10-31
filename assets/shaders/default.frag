@@ -6,17 +6,15 @@ out vec4 FragColor;
 
 
 in VS_OUT {
-    vec4 position;
     vec3 normal;
     vec2 texcoords_2d;
+    vec3 light_vec;
+    vec3 view_vec;
 } fs_in;
 
 
-// eye position
-uniform vec3 view_pos;
 
 // light uniforms
-uniform vec3 light_pos;
 uniform vec3 point_light; // Ii
 uniform vec3 ambient_light; // Ia
 
@@ -26,6 +24,8 @@ uniform vec3 specular; // Ks
 uniform float shininess; // alpha exponent
 
 
+
+
 void main()
 {
     vec3 Kd = texture(diffuse_texture, fs_in.texcoords_2d).rgb;
@@ -33,10 +33,12 @@ void main()
     vec3 Ks = specular;
     float alpha = shininess;
 
-    vec3 V = normalize(view_pos - fs_in.position.xyz);
-    vec3 L = normalize(light_pos - fs_in.position.xyz);
+    vec3 V = normalize(fs_in.view_vec);
+    vec3 L = normalize(fs_in.light_vec);
     vec3 N = normalize(fs_in.normal);
     vec3 H = normalize(L+V);
+
+    float distance_falloff = 1 / length(fs_in.light_vec) * 100;
 
     vec3 IaKd = ambient_light * Kd;    
     vec3 IiKd = point_light * Kd;
@@ -72,7 +74,7 @@ void main()
     //vec3 I = IaKd + IaKd * NdotL + IiKs * NdotH_alpha;
     
     // BRDF
-    vec3 I = IaKd + point_light * NdotL  * brdf;
+    vec3 I = IaKd + point_light * NdotL  * brdf * distance_falloff;
 
     //I = I + vec3(1, 0, 0);
 

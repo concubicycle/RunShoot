@@ -79,7 +79,7 @@ void rendering::model_render_loader::init_mesh(
     r.mesh_count = 1;
 
     _shaders.ptx2d_pvm().bind();
-    glUniform1i(glGetUniformLocation(_shaders.ptx2d_pvm().getId(), "model_texture"), 0);
+    glUniform1i(glGetUniformLocation(_shaders.ptx2d_pvm().id(), "model_texture"), 0);
     _shaders.ptx2d_pvm().unbind();
     texture.unbind();
 }
@@ -126,7 +126,7 @@ void rendering::model_render_loader::init_mesh(
     r.meshes[mesh_index].diffuse_texture_id = texture.id();
 
     _shaders.default_shader().bind();
-    glUniform1i(glGetUniformLocation(_shaders.default_shader().getId(), "diffuse_texture"), 0);
+    glUniform1i(glGetUniformLocation(_shaders.default_shader().id(), "diffuse_texture"), 0);
     _shaders.default_shader().unbind();
     texture.unbind();
 }

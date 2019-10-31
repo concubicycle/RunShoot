@@ -6,19 +6,27 @@ layout (location = 2) in vec2 texcoords_2d;
 
 // declare an interface block; see 'Advanced GLSL' for what these are.
 out VS_OUT {
-    vec4 position;
     vec3 normal;
     vec2 texcoords_2d;
+    vec3 light_vec;
+    vec3 view_vec;
 } vs_out;
 
 uniform mat4 model, model_inverse, projection, view;
 
+uniform vec3 light_pos;
+uniform vec3 view_pos;
+
 void main()
 {
-    vs_out.position = (projection * view * model * vec4(position,1));
+    vec4 world_pos = model * vec4(position, 1);
+
+    vs_out.light_vec = light_pos - world_pos.xyz;
+    vs_out.view_vec = view_pos - world_pos.xyz;
+
     vs_out.normal = mat3(model_inverse) * normal;
     vs_out.texcoords_2d = texcoords_2d;
 
-    gl_Position = vs_out.position;
+    gl_Position = projection * view * world_pos;
 }
 

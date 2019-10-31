@@ -14,12 +14,11 @@
 #include <shader.h>
 #include <vertex_array.h>
 
-#include <shader_program_uniform_assign.h>
-
 #include <spdlog/spdlog.h>
 #include <vertex_pctx2d.h>
 #include <vertex_ptx2d.h>
 #include <vertex_pc.h>
+#include <glm/gtc/type_ptr.hpp>
 #include "file_read_std.h"
 
 
@@ -31,7 +30,7 @@ namespace ogllib
     template<class TVertexFormat>
     class shader_program
     {
-        static constexpr const unsigned int GPU_INFOLOG_BUFFER_SIZE = 512;
+        static constexpr const unsigned int GPU_INFO_BUFFER_SIZE = 512;
 
     public:
         shader_program(std::string vertex_shader_path, std::string fragment_shader_path)
@@ -46,14 +45,6 @@ namespace ogllib
         }
 
         void set_attrib_pointers() const;
-
-
-        template<typename TUniform>
-        const Uniforms<shader_program<TVertexFormat>, TUniform>& get_uniforms() const
-        {
-            return get_uniforms<TUniform>(_info);
-        }
-
         
 		
 		void set_uniform(std::string name, GLfloat val) const
@@ -117,10 +108,10 @@ namespace ogllib
             glUseProgram(0);
         }
 
-        // GETTERS/SETTERS
-        unsigned int getId() const { return _id; }
 
-        program_info &getInfo() { return _info; }
+        unsigned int id() const { return _id; }
+
+        program_info &get_info() { return _info; }
 
     private:
         ogllib::program_info _info;
@@ -129,17 +120,17 @@ namespace ogllib
 
         void validate_program()
         {
-            char buffer[GPU_INFOLOG_BUFFER_SIZE];
+            char buffer[GPU_INFO_BUFFER_SIZE];
             GLsizei length = 0;
             GLint link_status;
             GLint validate_status;
 
-            memset(buffer, 0, GPU_INFOLOG_BUFFER_SIZE);
+            memset(buffer, 0, GPU_INFO_BUFFER_SIZE);
 
             glGetProgramiv(_id, GL_LINK_STATUS, &link_status);
             if (!link_status)
             {
-                glGetProgramInfoLog(_id, GPU_INFOLOG_BUFFER_SIZE, &length, buffer);
+                glGetProgramInfoLog(_id, GPU_INFO_BUFFER_SIZE, &length, buffer);
                 spdlog::error("Error linking program {0}. Link error:{1} \n", _id, buffer);
             }
 
@@ -150,22 +141,9 @@ namespace ogllib
                 spdlog::error("Error validating program {0} \n.", _id);
             } else
             {
-                glGetProgramInfoLog(_id, GPU_INFOLOG_BUFFER_SIZE, &length, buffer);
+                glGetProgramInfoLog(_id, GPU_INFO_BUFFER_SIZE, &length, buffer);
                 spdlog::info("Shader program {0} built successfully. Info log: {1}", _id, buffer);
             }
-        }
-
-        template<typename TUniform>
-        static const Uniforms<shader_program<TVertexFormat>, TUniform> &get_uniforms(const program_info &info)
-        {
-            static std::unordered_map<std::uint32_t, Uniforms<shader_program<TVertexFormat>, TUniform>> proxies;
-            auto p = proxies.find(info.id());
-            if (p == proxies.end())
-            {
-                proxies.insert({info.id(), Uniforms<shader_program<TVertexFormat>, TUniform>(info)});
-            }
-
-            return proxies.find(info.id())->second;
         }
     };
 } // namespace ogllib

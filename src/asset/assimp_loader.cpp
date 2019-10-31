@@ -13,28 +13,26 @@
 #include <platform/symbols.hpp>
 
 tl::expected<asset::assimp_model, asset::mesh_read_error> asset::assimp_loader::load_model(
-    std::string path,
+    const std::string& path,
     asset::mesh_type mesh_type) const
 {
     switch (mesh_type)
     {
         case asset::GLTF2:
             return load_glf2(path);
+        case P_TX2D:
+            break;
     }
 
     return load_glf2(path); //temp
 }
 
-asset::assimp_loader::mesh_result asset::assimp_loader::load_glf2(std::string path) const
+asset::assimp_loader::mesh_result asset::assimp_loader::load_glf2(const std::string& path) const
 {
     Assimp::Importer importer;
     const aiScene *scene = importer.ReadFile(
         path,
-        aiProcess_ValidateDataStructure | aiProcess_FixInfacingNormals );
-//    |
-//        aiProcess_Triangulate |
-//        aiProcess_FlipUVs |
-//        aiProcess_ValidateDataStructure);
+        aiProcess_ValidateDataStructure | aiProcess_FixInfacingNormals);
 
     auto error = importer.GetErrorString();
 
@@ -50,7 +48,10 @@ asset::assimp_loader::mesh_result asset::assimp_loader::load_glf2(std::string pa
     return model;
 }
 
-void asset::assimp_loader::process_node(aiNode *node, const aiScene *scene, assimp_model& model, std::string mesh_path) const
+void asset::assimp_loader::process_node(
+    aiNode *node,
+    const aiScene *scene, assimp_model& model,
+    const std::string& mesh_path) const
 {
     for(unsigned int i = 0; i < node->mNumMeshes; i++)
     {
@@ -64,13 +65,13 @@ void asset::assimp_loader::process_node(aiNode *node, const aiScene *scene, assi
     }
 }
 
-asset::assimp_mesh asset::assimp_loader::process_mesh(aiMesh *mesh, const aiScene *scene, std::string mesh_path) const
+asset::assimp_mesh asset::assimp_loader::process_mesh(aiMesh *mesh, const aiScene *scene, const std::string& mesh_path) const
 {
     assimp_mesh result;
 
     for(unsigned int i = 0; i < mesh->mNumVertices; i++)
     {
-        auto tex = mesh->mTextureCoords[0] == NULL
+        auto tex = mesh->mTextureCoords[0] == nullptr
                    ? glm::vec2(0)
                    : glm::vec2(mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y);
 
@@ -114,8 +115,8 @@ std::vector<models::texture>
 asset::assimp_loader::load_material_textures(
     aiMaterial *mat,
     aiTextureType type,
-    std::string typeName,
-    std::string mesh_path) const
+    const std::string& typeName,
+    const std::string& mesh_path) const
 {
     std::vector<models::texture> textures;
 

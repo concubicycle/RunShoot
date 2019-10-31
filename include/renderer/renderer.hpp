@@ -16,7 +16,7 @@
 #include <vertex_pntx2d.h>
 #include <shader.h>
 #include <shader_program.h>
-#include <shader_program_uniform_assign.h>
+
 
 #include <ecs/components/basic_components.hpp>
 #include <asset/mesh.hpp>

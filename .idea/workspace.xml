@@ -30,11 +30,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/apps/run_shoot_character_controller.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/run_shoot_character_controller.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake_modules/add_tinygltf.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/shaders/default.frag" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/default.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/shaders/default.vert" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/default.vert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/asset/assimp_loader.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/asset/assimp_loader.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/renderer/renderer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/renderer/renderer.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/asset/assimp_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/assimp_loader.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/model_render_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/model_render_loader.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/renderer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/include/shader_program.h" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/include/shader_program.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/include/shader_program_uniform_assign.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/shader_program_uniform_assign.cpp" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -69,12 +76,11 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../cs525/sparsevector_cpp" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/CMakeLists.txt" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C/C++" />
+    <property name="settings.editor.selected.configurable" value="CMakeSettings" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -266,7 +272,10 @@
       <workItem from="1572027372248" duration="13310000" />
       <workItem from="1572125513753" duration="13776000" />
       <workItem from="1572283597518" duration="19498000" />
-      <workItem from="1572373663058" duration="30605000" />
+      <workItem from="1572373663058" duration="30628000" />
+      <workItem from="1572479126548" duration="304000" />
+      <workItem from="1572479948005" duration="2164000" />
+      <workItem from="1572549709994" duration="5779000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>
