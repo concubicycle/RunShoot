@@ -147,7 +147,8 @@ void rendering::renderer::draw_scene(asset::scene &scene)
 			shader.set_uniform("point_light", light_color);
 			shader.set_uniform("ambient_light", ambient_light);
 			shader.set_uniform("specular", specular);            
-			shader.set_uniform("shininess", 0.2f);			
+			shader.set_uniform("shininess", 0.2f);
+            shader.set_uniform("light_intensity", 100.f);
 
             for (std::uint32_t i = 0; i < r.mesh_count; ++i)
             {

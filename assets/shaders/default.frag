@@ -17,6 +17,7 @@ in VS_OUT {
 // light uniforms
 uniform vec3 point_light; // Ii
 uniform vec3 ambient_light; // Ia
+uniform float light_intensity;
 
 // surface uniforms
 uniform sampler2D diffuse_texture;
@@ -38,7 +39,7 @@ void main()
     vec3 N = normalize(fs_in.normal);
     vec3 H = normalize(L+V);
 
-    float distance_falloff = 1 / length(fs_in.light_vec) * 100;
+    float distance_falloff = 1 / length(fs_in.light_vec) * light_intensity;
 
     vec3 IaKd = ambient_light * Kd;    
     vec3 IiKd = point_light * Kd;
