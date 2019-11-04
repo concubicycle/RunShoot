@@ -7,9 +7,11 @@
 physics::physics_world::physics_world(events::event_exchange &events) : _events(events)
 {
     auto grab_entity = [this](ecs::entity &e) {
+
+
         auto has_colliders = e.archetype_id() & ecs::aabb_component::archetype_bit;
         auto is_physical = e.archetype_id() & ecs::aabb_component::archetype_bit &&
-                           e.archetype_id() & ecs::physical_properties_component::archetype_bit;
+                           e.archetype_id() & ecs::rigid_body_component::archetype_bit;
 
         if (has_colliders)
             _collision_entities.push_back(e);
@@ -47,8 +49,29 @@ physics::physics_world::~physics_world()
 }
 
 
-void physics::physics_world::update()
+void physics::physics_world::update(float frame_time)
 {
+    for(auto& e : _physical_entities)
+        integrate(e, frame_time);
 
+    // detect collisions...
+
+    // resolve collisions...
 }
 
+void physics::physics_world::integrate(ecs::entity &e, float frame_time)
+{
+    auto phys_props = e.get_component<ecs::rigid_body_component>();
+
+    phys_props.previous_position = phys_props.position;
+    phys_props.force += phys_props.gravity;
+    phys_props.acceleration += phys_props.mass_inverse() * phys_props.force;
+    phys_props.force = glm::vec3(0);
+    phys_props.position = phys_props.velocity * frame_time + phys_props.position;
+
+    if (e.has<ecs::transform_component>())
+    {
+        auto t = e.get_component<ecs::transform_component>();
+        t.pos = phys_props.position;
+    }
+}

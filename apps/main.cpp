@@ -109,7 +109,7 @@ void render_loop(game_systems &data, behaviors &behaviors)
     {
         data.timer.start();
 
-        data.physics.update();
+        data.physics.update(data.timer.smoothed_delta_secs());
 
         behaviors.character.update(ctx);
         behaviors.drone.update(ctx);

@@ -13,7 +13,7 @@
       "scale_z": 1.0
     },
     {
-      "component_bitshift": 3,
+      "component_bitshift": 2,
       "mesh_path": "./assets/models/drone/drone.gltf",
       "mesh_format": 2
     },

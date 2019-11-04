@@ -162,7 +162,6 @@ void rendering::renderer::draw_scene(asset::scene &scene)
             glBindVertexArray(0);
             glBindTexture(GL_TEXTURE_2D, 0);
             shader.unbind();
-
         } else
         {
             auto& shader = _shaders.ptx2d_pvm();

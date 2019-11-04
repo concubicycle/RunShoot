@@ -16,7 +16,7 @@
           "scale_z": 1.0
         },
         {
-          "component_bitshift": 3,
+          "component_bitshift": 2,
           "mesh_path": "./assets/models/wall_quad.json",
           "mesh_format": 1
         }

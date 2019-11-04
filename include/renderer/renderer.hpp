@@ -24,7 +24,8 @@
 #include <asset/texture_manager.hpp>
 #include <asset/scene.hpp>
 #include <asset/asset_types.hpp>
-#include "shader_set.hpp"
+
+#include <renderer/shader_set.hpp>
 
 
 namespace rendering

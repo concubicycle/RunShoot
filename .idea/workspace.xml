@@ -30,9 +30,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/sava.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/physics/collisions.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/physics/contact.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/physics/intersection_tests.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/physics_models/sphere.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/physics/collisions.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/shaders/default.frag" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/default.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/shaders/default.vert" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/default.vert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/drone.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/drone.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/player.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/player.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/seg1.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/seg1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/scenes/scene.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scenes/scene.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake_modules/add_expected.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake_modules/add_expected.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake_modules/add_glbinding.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake_modules/add_glbinding.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake_modules/add_glfw.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake_modules/add_glfw.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake_modules/add_glm.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake_modules/add_glm.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ecs/entity_factory.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/entity_factory.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/physics/physics_world.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics/physics_world.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/physics_models/aabb.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics_models/aabb.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/renderer/renderer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/renderer/renderer.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/asset/component_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/component_loader.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ecs/component_meta.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ecs/component_meta.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ecs/components/basic_components.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ecs/components/basic_components.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/physics/physics_world.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/physics/physics_world.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/renderer/renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/renderer.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -64,15 +87,19 @@
     </option>
   </component>
   <component name="OCFindUsagesOptions" text="false" ivars="false" properties="true" derivedClasses="false" />
+  <component name="OCResolveContextSettings">
+    <option name="configuration" value="0-physics" />
+  </component>
   <component name="ProjectId" id="1RkfA0cXEQvRmvTns35yj62oy90" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/CMakeLists.txt" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="CMakeSettings" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -268,6 +295,15 @@
       <workItem from="1572479126548" duration="304000" />
       <workItem from="1572479948005" duration="2164000" />
       <workItem from="1572549709994" duration="6036000" />
+      <workItem from="1572558321404" duration="246000" />
+      <workItem from="1572559671194" duration="2471000" />
+      <workItem from="1572564534796" duration="3177000" />
+      <workItem from="1572630041954" duration="8709000" />
+      <workItem from="1572653530678" duration="4105000" />
+      <workItem from="1572841920062" duration="605000" />
+      <workItem from="1572842760976" duration="22000" />
+      <workItem from="1572843161611" duration="1980000" />
+      <workItem from="1572845160035" duration="4181000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>
@@ -323,11 +359,6 @@
           <url>file://$PROJECT_DIR$/apps/generate_colliders.cpp</url>
           <line>40</line>
           <option name="timeStamp" value="33" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/asset/component_loader.cpp</url>
-          <line>116</line>
-          <option name="timeStamp" value="43" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -13,7 +13,7 @@
       "scale_z": 1.0
     },
     {
-      "component_bitshift": 2,
+      "component_bitshift": 1,
       "position": {
         "x": 0,
         "y": 0,
@@ -28,7 +28,7 @@
       "mode": 1
     },
     {
-      "component_bitshift": 6,
+      "component_bitshift": 5,
       "velocity": [0, 0, 0]
     },
     {

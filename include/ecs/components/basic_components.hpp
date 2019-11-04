@@ -40,17 +40,6 @@ namespace ecs
         float scale_z = 0;
     };
 
-
-    /////////////// Deprecated OpenGL render component ///////////////
-    struct render_component_old : public component<render_component_old>
-    {
-        char mesh_path[256];
-        asset::mesh_type mesh_format;
-        ogllib::vertex_array vao;
-        std::uint32_t gl_texture_id;
-        std::uint32_t element_count;
-    };
-
     ////////////////// Actual OpenGL render component //////////////////
     struct render_component_ogl : public component<render_component_ogl>
     {
@@ -96,7 +85,7 @@ namespace ecs
     {
         glm::vec3 color = glm::vec3(1.f);
         glm::vec3 position = glm::vec3(0.f);
-        float intensity = 1.f;
+        float intensity = 100.f;
     };
 
     ////////////////////////// AABB list component //////////////////////////
@@ -106,27 +95,28 @@ namespace ecs
         uint32_t aabb_count = 0;
     };
 
-    ////////////////////////// AABB list component //////////////////////////
-    struct physical_properties_component : public component<physical_properties_component>
+    ///////////////////////// Rigid Body component /////////////////////////
+    struct rigid_body_component : public component<rigid_body_component>
     {
+        glm::vec3 position;
+        glm::vec3 previous_position;
         glm::vec3 velocity;
-    };
+        glm::vec3 acceleration;
+        glm::vec3 force;
+        glm::vec3 gravity = glm::vec3(0, -9.8f, 0);
 
+        float mass() { return _mass; }
+        float mass_inverse() { return _mass_inverse; }
 
-
-
-
-    /** This is a dummy component, made to test in place construction. Do not use it for anything. */
-    class matrix_component : public component<matrix_component>
-    {
-    public:
-        matrix_component()
+        void set_mass(float mass)
         {
-            memset(&m, 0, sizeof(float) * 16);
-            m[0][0] = m[1][1] = m[2][2] = m[3][3] = 1.f;
+            _mass = mass;
+            _mass_inverse = 1.f / mass;
         }
 
-        float m[4][4];
+    private:
+        float _mass;
+        float _mass_inverse;
     };
 } // namespace ecs
 

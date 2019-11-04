@@ -9,7 +9,6 @@
 
 namespace physics_models
 {
-
     struct aabb
     {
         glm::vec3 min;

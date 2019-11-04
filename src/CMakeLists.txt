@@ -104,10 +104,10 @@ set (ECS_HEADER_LIST
 
 
 set (PHYSICS_SOURCE_LIST
-     physics/physics_world.cpp)
+     physics/physics_world.cpp physics/collisions.cpp)
 
 set (PHYSICS_HEADER_LIST
-     ../include/physics/physics_world.hpp)
+     ../include/physics/physics_world.hpp ../include/physics/collisions.hpp ../include/physics/intersection_tests.hpp ../include/physics/contact.hpp)
 
 set (PHYSICS_MODELS_SOURCE_LIST
      )

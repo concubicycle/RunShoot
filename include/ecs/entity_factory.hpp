@@ -83,7 +83,6 @@ namespace ecs
     private:
         std::unordered_map<component_bitset, archetype_pool> _archetype_pools;
         std::unordered_set<entity_id> _ids;
-        entity_id _max_id = 1;
         entity_id _next_id;
 
         inline entity_id next_id()

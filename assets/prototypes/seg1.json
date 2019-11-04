@@ -13,12 +13,12 @@
       "scale_z": 1.0
     },
     {
-      "component_bitshift": 3,
+      "component_bitshift": 2,
       "mesh_path": "./assets/models/seg1/seg1.gltf",
       "mesh_format": 2
     },
     {
-      "component_bitshift": 5,
+      "component_bitshift": 4,
       "colliders": [
         {
           "max": [
