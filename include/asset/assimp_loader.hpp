@@ -5,6 +5,8 @@
 #ifndef RS__ASSIMP_MESH_LOADER_HPP_
 #define RS__ASSIMP_MESH_LOADER_HPP_
 
+
+
 #include <vector>
 
 #include <vertex_pntx2d.h>

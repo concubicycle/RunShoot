@@ -13,5 +13,6 @@ template<> const component_shift ecs::component<ecs::transform_component>::compo
 template<> const component_shift ecs::component<ecs::camera_component>::component_bitshift = 1;
 template<> const component_shift ecs::component<ecs::render_component_ogl>::component_bitshift = 2;
 template<> const component_shift ecs::component<ecs::punctual_light_component>::component_bitshift = 3;
-template<> const component_shift ecs::component<ecs::aabb_component>::component_bitshift = 4;
-template<> const component_shift ecs::component<ecs::rigid_body_component>::component_bitshift = 5;
+template<> const component_shift ecs::component<ecs::aabb_collider_component>::component_bitshift = 4;
+template<> const component_shift ecs::component<ecs::sphere_collider_component>::component_bitshift = 5;
+template<> const component_shift ecs::component<ecs::rigid_body_component>::component_bitshift = 6;

@@ -12,6 +12,7 @@ std::map<component_shift, ecs::component_meta> ecs::component_meta::bit_metas
         {ecs::camera_component::component_bitshift, of<ecs::camera_component>()},
         {ecs::render_component_ogl::component_bitshift, of<ecs::render_component_ogl>()},
         {ecs::punctual_light_component::component_bitshift, of<ecs::punctual_light_component>()},
-        {ecs::aabb_component::component_bitshift, of<ecs::aabb_component>()},
+        {ecs::aabb_collider_component::component_bitshift, of<ecs::aabb_collider_component>()},
+        {ecs::sphere_collider_component::component_bitshift, of<ecs::sphere_collider_component>()},
         {ecs::rigid_body_component::component_bitshift, of<ecs::rigid_body_component>()}
     };

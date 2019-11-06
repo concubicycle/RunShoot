@@ -14,6 +14,7 @@
 #include <asset/mesh_type.hpp>
 
 #include <physics_models/aabb.hpp>
+#include <physics_models/collider.hpp>
 
 #include "../ecs_types.hpp"
 #include "../component.hpp"
@@ -22,7 +23,13 @@
 
 #define MAX_BASIC_COMPONENTS 16
 #define MAX_RENDER_MESHES 32
-#define MAX_AABB 64
+
+/*
+ * Each collider component will have an array of shapes, to allow for
+ * more than one of each collider type.
+ */
+#define MAX_COLLIDER_SHAPES 64
+
 
 
 namespace ecs
@@ -88,11 +95,18 @@ namespace ecs
         float intensity = 100.f;
     };
 
-    ////////////////////////// AABB list component //////////////////////////
-    struct aabb_component : public component<aabb_component>
+    /////////////////////// AABB Collider List component //////////////////////
+    struct aabb_collider_component : public component<aabb_collider_component>
     {
-        physics_models::aabb colliders[MAX_AABB];
-        uint32_t aabb_count = 0;
+        physics_models::aabb_collider colliders[MAX_COLLIDER_SHAPES];
+        uint32_t count = 0;
+    };
+
+    ////////////////////// Sphere Collider List component //////////////////////
+    struct sphere_collider_component : public component<sphere_collider_component>
+    {
+        physics_models::sphere_collider colliders[MAX_COLLIDER_SHAPES];
+        uint32_t count = 0;
     };
 
     ///////////////////////// Rigid Body component /////////////////////////
@@ -104,6 +118,8 @@ namespace ecs
         glm::vec3 acceleration;
         glm::vec3 force;
         glm::vec3 gravity = glm::vec3(0, -9.8f, 0);
+
+        bool is_kinematic;
 
         float mass() { return _mass; }
         float mass_inverse() { return _mass_inverse; }

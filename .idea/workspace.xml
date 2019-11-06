@@ -12,10 +12,10 @@
       <config projectName="RunShoot" targetName="tests" />
       <config projectName="RunShoot" targetName="glbinding" />
       <config projectName="RunShoot" targetName="core" />
+      <config projectName="RunShoot" targetName="physics_models" />
       <config projectName="RunShoot" targetName="physics" />
       <config projectName="RunShoot" targetName="platform" />
       <config projectName="RunShoot" targetName="ecs" />
-      <config projectName="RunShoot" targetName="tinygltf" />
       <config projectName="RunShoot" targetName="assimp" />
       <config projectName="RunShoot" targetName="expected" />
       <config projectName="RunShoot" targetName="memory" />
@@ -30,33 +30,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/sava.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/physics/collisions.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/physics/contact.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/physics/intersection_tests.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/physics_models/sphere.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/physics/collisions.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/physics_models/collider.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/physics_models/contact.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/generate_colliders.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/generate_colliders.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/prototypes/drone.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/drone.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/runshoot.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/runshoot.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/prototypes/player.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/player.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/prototypes/seg1.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/seg1.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/scenes/scene.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scenes/scene.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake_modules/add_expected.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake_modules/add_expected.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake_modules/add_glbinding.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake_modules/add_glbinding.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake_modules/add_glfw.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake_modules/add_glfw.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake_modules/add_glm.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake_modules/add_glm.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake_modules/add_assimp.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake_modules/add_assimp.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/asset/asset_types.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/asset/asset_types.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/asset/assimp_loader.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/asset/assimp_loader.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/asset/basic_mesh_reader.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/asset/basic_mesh_reader.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ecs/component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/component.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/entity_factory.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/entity_factory.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ecs/entity.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/entity.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/physics/collisions.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics/collisions.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/physics/contact.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics_models/contact.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/physics/physics_world.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics/physics_world.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/physics_models/aabb.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics_models/aabb.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/renderer/renderer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/renderer/renderer.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/physics_models/sphere.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics_models/sphere.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/asset/assimp_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/assimp_loader.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/asset/component_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/component_loader.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/asset/texture_manager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/texture_manager.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ecs/component_meta.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ecs/component_meta.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ecs/components/basic_components.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ecs/components/basic_components.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/physics/collisions.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/physics/collisions.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/physics/physics_world.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/physics/physics_world.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/renderer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/include/opengl_texture_2d.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/include/texture_2d.h" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -88,7 +92,7 @@
   </component>
   <component name="OCFindUsagesOptions" text="false" ivars="false" properties="true" derivedClasses="false" />
   <component name="OCResolveContextSettings">
-    <option name="configuration" value="0-physics" />
+    <option name="configuration" value="0-asset" />
   </component>
   <component name="ProjectId" id="1RkfA0cXEQvRmvTns35yj62oy90" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -96,21 +100,22 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="cf.advertisement.text.has.clang-format" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/CMakeLists.txt" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C/C++" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/assets/shaders" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/include/physics_models" />
       <recent name="$PROJECT_DIR$/build/assets/models" />
       <recent name="$PROJECT_DIR$/apps" />
       <recent name="$PROJECT_DIR$/thirdparty/opengllib/include" />
       <recent name="$PROJECT_DIR$/src/asset" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/shaders" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -196,6 +201,11 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="physics_models" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RunShoot" TARGET_NAME="physics_models" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="platform" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RunShoot" TARGET_NAME="platform" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -216,11 +226,6 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="tinygltf" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RunShoot" TARGET_NAME="tinygltf" CONFIG_NAME="Debug">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="CMake Application.assimp" />
       <item itemvalue="CMake Application.expected" />
@@ -232,12 +237,12 @@
       <item itemvalue="CMake Application.RunShoot" />
       <item itemvalue="CMake Application.spdlog" />
       <item itemvalue="CMake Application.tests" />
-      <item itemvalue="CMake Application.tinygltf" />
       <item itemvalue="CMake Application.asset" />
       <item itemvalue="CMake Application.core" />
       <item itemvalue="CMake Application.ecs" />
       <item itemvalue="CMake Application.memory" />
       <item itemvalue="CMake Application.physics" />
+      <item itemvalue="CMake Application.physics_models" />
       <item itemvalue="CMake Application.platform" />
       <item itemvalue="CMake Application.renderer" />
       <item itemvalue="CMake Application.ogllib" />
@@ -303,7 +308,10 @@
       <workItem from="1572841920062" duration="605000" />
       <workItem from="1572842760976" duration="22000" />
       <workItem from="1572843161611" duration="1980000" />
-      <workItem from="1572845160035" duration="4181000" />
+      <workItem from="1572845160035" duration="7600000" />
+      <workItem from="1572932437858" duration="20601000" />
+      <workItem from="1573006314601" duration="5259000" />
+      <workItem from="1573013814149" duration="701000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>
@@ -356,9 +364,9 @@
           <option name="timeStamp" value="32" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/apps/generate_colliders.cpp</url>
-          <line>40</line>
-          <option name="timeStamp" value="33" />
+          <url>file://$PROJECT_DIR$/src/asset/assimp_loader.cpp</url>
+          <line>42</line>
+          <option name="timeStamp" value="34" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -11,6 +11,10 @@ namespace physics_models
 {
     struct aabb
     {
+        aabb() : min(0.f), max(1.f)
+        {
+        }
+
         glm::vec3 min;
         glm::vec3 max;
     };

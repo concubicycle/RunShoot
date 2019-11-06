@@ -1,3 +1,5 @@
+#define _M3D_H_
+
 /////////////
 #include <GLFW/glfw3.h>
 #include <glbinding/glbinding.h>
@@ -10,10 +12,12 @@ using GLenum = gl::GLenum;
 
 #include <chrono>
 
+#include <asset/texture_manager.hpp>
 #include <asset/basic_mesh_reader.hpp>
 #include <asset/scene_loader.hpp>
-#include <asset/texture_manager.hpp>
+#include <asset/assimp_loader.hpp>
 #include <asset/prototype_loader.hpp>
+
 #include <core/frame_limiter.hpp>
 #include <core/frame_timer.hpp>
 #include <core/input_manager.hpp>
@@ -81,7 +85,8 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     ecs::entity_factory factory(1);
     ecs::entity_world entities(factory, events);
 
-    physics::physics_world physics(events);
+    physics::collisions collisions;
+    physics::physics_world physics(events, collisions);
 
     character_controller controller(events);
     drone_controller drone_controller(events);
@@ -107,9 +112,11 @@ void render_loop(game_systems &data, behaviors &behaviors)
 
     while (!glfwWindowShouldClose(data.window))
     {
+        float dt = data.timer.smoothed_delta_secs();
+
         data.timer.start();
 
-        data.physics.update(data.timer.smoothed_delta_secs());
+        data.physics.update(dt);
 
         behaviors.character.update(ctx);
         behaviors.drone.update(ctx);

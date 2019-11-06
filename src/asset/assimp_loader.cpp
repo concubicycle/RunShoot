@@ -2,15 +2,25 @@
 // Created by sava on 10/23/19.
 //
 
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
+// this file checks for stb header guard instead of the
+// implementation define, before duplicaitng stb implementations.
+// thanks...
+#define M3D_NOIMPORTER
+
+
+
 
 #include <asset/assimp_loader.hpp>
 #include <asset/mesh_type.hpp>
 #include <spdlog/spdlog.h>
 #include <ecs/components/basic_components.hpp>
 #include <platform/symbols.hpp>
+
+
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
+
 
 tl::expected<asset::assimp_model, asset::mesh_read_error> asset::assimp_loader::load_model(
     const std::string& path,

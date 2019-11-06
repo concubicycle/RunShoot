@@ -12,6 +12,9 @@ namespace asset
 {
     typedef models::model<ogllib::vertex_pntx2d> assimp_model;
     typedef models::multi_texture_mesh<ogllib::vertex_pntx2d> assimp_mesh;
+
+    typedef models::model<ogllib::vertex_pntx2d> gltf_model;
+    typedef models::multi_texture_mesh<ogllib::vertex_pntx2d> gltf_mesh;
 }
 
 #endif //__ASSET_TYPES_HPP_

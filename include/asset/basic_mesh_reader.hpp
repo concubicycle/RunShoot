@@ -7,7 +7,6 @@
 #include <asset/mesh.hpp>
 #include <asset/textured_mesh.hpp>
 #include <asset/model.hpp>
-#include <asset/assimp_loader.hpp>
 #include <string>
 #include <tl/expected.hpp>
 #include <spdlog/spdlog.h>

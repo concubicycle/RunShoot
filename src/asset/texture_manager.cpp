@@ -2,9 +2,10 @@
 // Created by sava on 10/16/19.
 //
 
-#define STB_IMAGE_IMPLEMENTATION
 
+#define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
+
 #include "asset/texture_manager.hpp"
 
 #include <functional>

@@ -68,32 +68,54 @@ void load_punctual_light(const json &j, ecs::entity &e, string_table &hashes)
     l.intensity = j["intensity"].get<float>();
 }
 
-void load_aabbs(const json &j, ecs::entity &e, string_table &hashes)
+void load_aabb(const json &j, ecs::entity &e, string_table &hashes)
 {
-    auto &a = e.get_component<ecs::aabb_component>();
+    auto &a = e.get_component<ecs::aabb_collider_component>();
     auto colliders = j["colliders"];
 
-    std::uint32_t count = 0;
+    a.count = 0;
 
     for (auto &aabb : colliders)
     {
         auto min = aabb["min"];
         auto max = aabb["max"];
 
-        a.colliders[count++] = {
-            glm::vec3(min[0].get<float>(), min[1].get<float>(), min[2].get<float>()),
-            glm::vec3(max[0].get<float>(), max[1].get<float>(), max[2].get<float>()),
-        };
+        physics_models::aabb shape;
+        shape.min = glm::vec3(min[0].get<float>(), min[1].get<float>(), min[2].get<float>());
+        shape.max = glm::vec3(max[0].get<float>(), max[1].get<float>(), max[2].get<float>());
+        a.colliders[a.count++] = physics_models::aabb_collider(shape);
     }
 }
 
-void load_physical_properties(const json &j, ecs::entity &e, string_table &hashes)
+void load_sphere(const json &j, ecs::entity &e, string_table &hashes)
+{
+    auto &a = e.get_component<ecs::sphere_collider_component>();
+    auto colliders = j["colliders"];
+
+    a.count = 0;
+
+    for (auto &sphere : colliders)
+    {
+        auto center = sphere["center"];
+        auto radius = sphere["radius"];
+
+        physics_models::sphere shape;
+        shape.center = glm::vec3(center[0].get<float>(), center[1].get<float>(), center[2].get<float>());
+        shape.radius = radius.get<float>();
+
+        a.colliders[a.count++] = physics_models::sphere_collider(shape);
+    }
+}
+
+void load_rigid_body(const json &j, ecs::entity &e, string_table &hashes)
 {
     auto &p = e.get_component<ecs::rigid_body_component>();
     p.velocity = glm::vec3(
         j["velocity"][0].get<float>(),
         j["velocity"][1].get<float>(),
         j["velocity"][2].get<float>());
+
+    p.is_kinematic = j["is_kinematic"].get<bool>();
 }
 
 
@@ -102,9 +124,10 @@ bitshift_to_component_loader asset::component_loader::loader_functions
         {ecs::transform_component::component_bitshift, load_transform},
         {ecs::camera_component::component_bitshift, load_camera},
         {ecs::render_component_ogl::component_bitshift, load_render_ogl},
-        {ecs::aabb_component::component_bitshift, load_aabbs},
+        {ecs::aabb_collider_component::component_bitshift, load_aabb},
+        {ecs::sphere_collider_component::component_bitshift, load_sphere},
         {ecs::punctual_light_component::component_bitshift, load_punctual_light },
-        {ecs::rigid_body_component::component_bitshift, load_physical_properties},
+        {ecs::rigid_body_component::component_bitshift, load_rigid_body},
     };
 
 

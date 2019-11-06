@@ -51,8 +51,16 @@ namespace ecs
             _active = false;
         }
 
-        template<class T>
+        template<typename T>
         T &get_component() { return *(_accessor.get_component<T>()); }
+
+        template<typename T>
+        std::optional<std::reference_wrapper<T>> get_component_opt()
+        {
+            return has<T>()
+                ? std::optional<std::reference_wrapper<T>>(*(_accessor.get_component<T>()))
+                : std::optional<std::reference_wrapper<T>>();
+        }
 
         template<class T>
         bool has()

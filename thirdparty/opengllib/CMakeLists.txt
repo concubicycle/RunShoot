@@ -13,12 +13,12 @@ add_library(ogllib STATIC
             include/index_buffer.h
             include/ogl_2d_tex.h
             include/opengl_afx.h
-            include/opengl_texture_2d.h
+
             include/program_info.h
             include/shader.h
             include/shader_program.h
             include/stb_image.h
-            include/texture_2d.h
+
             include/texture_3d.h
             include/vectormath.h
             include/vertex_array.h

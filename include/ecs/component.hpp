@@ -10,7 +10,6 @@
 
 namespace ecs
 {
-
     template<class T>
     class component
     {

@@ -5,10 +5,17 @@
 #ifndef __SPHERE_HPP_
 #define __SPHERE_HPP_
 
-struct sphere
+
+namespace physics_models
 {
-    glm::vec3 center;
-    float radius;
-};
+    struct sphere
+    {
+        sphere() : center(0.f), radius(1) {}
+
+        glm::vec3 center;
+        float radius;
+    };
+}
+
 
 #endif //__SPHERE_HPP_

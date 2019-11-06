@@ -33,6 +33,7 @@ set(SPDLOG "spdlog")
 set(MEM_LIB "memory")
 set(ECS_LIB "ecs")
 set(PHYSICS_LIB "physics")
+set(PHYSICS_MODELS_LIB "physics_models")
 
 
 # WARNING: Doesn't work when build directory isn't /build for some reason (with CLion)
@@ -48,7 +49,11 @@ add_executable(${TARGET_NAME}
                apps/character_controller.hpp
                apps/components/character_controller_component.cpp
                apps/components/character_controller_component.hpp
-               include/ecs/components/mesh_opengl.hpp apps/components/drone_controller_component.cpp apps/components/drone_controller_component.hpp apps/drone_controller.hpp apps/run_shoot_character_controller.cpp apps/run_shoot_character_controller.hpp)
+               apps/components/drone_controller_component.cpp
+               apps/components/drone_controller_component.hpp
+               apps/drone_controller.hpp
+               apps/run_shoot_character_controller.cpp
+               apps/run_shoot_character_controller.hpp)
 
 add_executable(generate_colliders apps/generate_colliders.cpp)
 
@@ -62,7 +67,7 @@ include(add_glm)
 include(add_spdlog)
 include(add_expected)
 include(add_assimp) # causes weird build issue on windows - can't close zlib.lib
-include(add_tinygltf)
+# include(add_tinygltf)
 include(add_glbinding)
 
 
@@ -89,7 +94,7 @@ include_directories(${TARGET_NAME}
                     ${SPDLOG_INCLUDE}
                     ${ASSIMP_INCLUDE}
                     thirdparty/opengllib/include
-                    ${TINYGLTF_INCLUDE}
+                    #${TINYGLTF_INCLUDE}
                     )
 
 
@@ -112,7 +117,8 @@ add_dependencies(${ECS_LIB}
                  ogllib
 				 nlohmann_json
                  ${MEM_LIB}
-                 ${GLM})
+                 ${GLM}
+                 ${PHYSICS_MODELS_LIB})
 
 add_dependencies(${RENDERER}
                  glbinding
@@ -136,7 +142,7 @@ add_dependencies(${TARGET_NAME}
                  ${RENDERER})
 
 add_dependencies(${ASSETLIB_NAME}
-                 tinygltf
+                 #tinygltf
                  ${ECS_LIB}
                  expected
                  ${OGLLIB_NAME}
@@ -154,7 +160,8 @@ add_dependencies(generate_colliders
                  ogllib)
 
 add_dependencies(${PHYSICS_LIB}
-                 ${ECS_LIB})
+                 ${ECS_LIB}
+                 ${PHYSICS_MODELS_LIB})
 
 target_link_libraries(${TARGET_NAME} PRIVATE
                       ${GLFW_LIB}
@@ -168,7 +175,8 @@ target_link_libraries(${TARGET_NAME} PRIVATE
                       ${ASSIMP_LIB}
                       ${GLBINDING_AUX_LIB}
                       ${GLBINDING_LIB}
-                      ${PHYSICS_LIB})
+                      ${PHYSICS_LIB}
+                      ${PHYSICS_MODELS_LIB})
 
 
 target_link_libraries(generate_colliders PRIVATE

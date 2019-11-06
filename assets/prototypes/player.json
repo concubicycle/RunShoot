@@ -28,8 +28,9 @@
       "mode": 1
     },
     {
-      "component_bitshift": 5,
-      "velocity": [0, 0, 0]
+      "component_bitshift": 6,
+      "velocity": [0, 0, 0],
+      "is_kinematic": true
     },
     {
       "component_bitshift": 17,
