@@ -32,7 +32,7 @@
       "components": [
         {
           "component_bitshift": 0,
-          "y": 10
+          "y": 20
         }
       ]
     },
@@ -51,9 +51,9 @@
           "component_bitshift": 0,
           "x": 0,
           "y": 2,
-          "z": 5,
+          "z": -10,
           "pitch": 0,
-          "yaw": 0.15,
+          "yaw": 0.0,
           "roll": 0,
           "scale_x": 1.0,
           "scale_y": 1.0,
@@ -68,8 +68,16 @@
           "component_bitshift": 4,
           "colliders": [
             {
-              "min": [-1, -1, -1],
-              "max": [1, 1, 1]
+              "min": [
+                -1,
+                -1,
+                -1
+              ],
+              "max": [
+                1,
+                1,
+                1
+              ]
             }
           ]
         }
@@ -78,6 +86,30 @@
     {
       "entity_id": 5,
       "prototype": "./assets/prototypes/cube_marker.json"
+    },
+    {
+      "entity_id": 7,
+      "prototype": "./assets/prototypes/phys_cube.json",
+      "components": [
+        {
+          "component_bitshift": 0,
+          "x": 0,
+          "y": 35,
+          "z": -30
+        }
+      ]
+    },
+    {
+      "entity_id": 8,
+      "prototype": "./assets/prototypes/phys_cube.json",
+      "components": [
+        {
+          "component_bitshift": 0,
+          "x": 0,
+          "y": 35,
+          "z": -40
+        }
+      ]
     }
   ]
 }

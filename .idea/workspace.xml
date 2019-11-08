@@ -31,10 +31,17 @@
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/runshoot.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/runshoot.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/blender/seg1.blend" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg1.blend" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/blender/seg1.blend1" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg1.blend1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg1/seg1.bin" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg1/seg1.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg1/seg1.gltf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg1/seg1.gltf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/cube_marker.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/cube_marker.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/drone.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/drone.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/phys_cube.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/phys_cube.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/player.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/player.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/seg1.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/seg1.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/scenes/scene.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scenes/scene.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/physics/physics_world.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics/physics_world.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/physics/physics_world.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/physics/physics_world.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/physics_models/collision_tests.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/physics_models/collision_tests.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -291,7 +298,7 @@
       <workItem from="1573109534495" duration="12680000" />
       <workItem from="1573164287396" duration="9407000" />
       <workItem from="1573173718752" duration="15869000" />
-      <workItem from="1573191001512" duration="6169000" />
+      <workItem from="1573191001512" duration="8705000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>
