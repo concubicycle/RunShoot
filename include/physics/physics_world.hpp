@@ -42,8 +42,8 @@ namespace physics
         listener_id _entity_create_listener_id;
         listener_id _entity_destroy_listener_id;
 
-        void integrate(ecs::entity& e, float frame_time);
-        void integrate_position(ecs::entity& e, float frame_time);
+        static void integrate(ecs::entity& e, float frame_time);
+        static void integrate_position(ecs::entity& e, float frame_time);
 
         void resolve_collisions(float frame_time);
 
@@ -54,9 +54,9 @@ namespace physics
         void resolve_collision_discrete(
             std::vector<physics::entity_contact>::iterator first_col);
 
-        void resolve_velocity(const physics::entity_contact& collision, ecs::entity& e);
+        static void resolve_velocity(const physics::entity_contact& collision, ecs::entity& e);
 
-        void update_collider_positions(ecs::entity& e);
+        static void update_collider_positions(ecs::entity& e);
 
         void grab_entity (ecs::entity &e);
         void forget_entity (ecs::entity &e);

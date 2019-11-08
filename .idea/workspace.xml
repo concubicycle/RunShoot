@@ -30,61 +30,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/prototypes/cube_marker.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/prototypes/phys_cube.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/physics/collider_iterator.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/physics/entity_contact.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/physics_models/aabb_collider.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/physics_models/collision_tests.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/physics_models/sphere_collider.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/physics_models/collision_tests.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/1911/scene.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/1911/scene.gltf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/1911/textures/lambert1_baseColor.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/1911/textures/lambert1_metallicRoughness.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/1911/textures/lambert1_normal.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/Avocado/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/Avocado/glTF-Binary/Avocado.glb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/Avocado/glTF-Draco/0.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/Avocado/glTF-Draco/Avocado.gltf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/Avocado/glTF-Draco/Avocado_baseColor.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/Avocado/glTF-Draco/Avocado_normal.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/Avocado/glTF-Draco/Avocado_roughnessMetallic.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/Avocado/glTF-pbrSpecularGlossiness/Avocado.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/Avocado/glTF-pbrSpecularGlossiness/Avocado.gltf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/Avocado/glTF-pbrSpecularGlossiness/Avocado_baseColor.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/Avocado/glTF-pbrSpecularGlossiness/Avocado_diffuse.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/Avocado/glTF-pbrSpecularGlossiness/Avocado_normal.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/Avocado/glTF-pbrSpecularGlossiness/Avocado_roughnessMetallic.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/Avocado/glTF-pbrSpecularGlossiness/Avocado_specularGlossiness.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/Avocado/glTF/Avocado.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/Avocado/glTF/Avocado.gltf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/Avocado/glTF/Avocado_baseColor.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/Avocado/glTF/Avocado_normal.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/Avocado/glTF/Avocado_roughnessMetallic.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/Avocado/screenshot/screenshot.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/roof/roof.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/roof/roof.gltf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/roof/roof_diff_cube.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/prototypes/player.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/player.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/prototypes/seg1.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/seg1.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/scenes/scene.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scenes/scene.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/asset/scene_loader.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/asset/scene_loader.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/physics/collisions.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics/collisions.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/physics/physics_world.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics/physics_world.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/physics_models/collider.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics_models/collider.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/physics_models/contact.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics_models/contact.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/asset/assimp_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/assimp_loader.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/asset/component_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/component_loader.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/asset/scene_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/scene_loader.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ecs/entity_world.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ecs/entity_world.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/physics/collisions.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/physics/collisions.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/physics/physics_world.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/physics/physics_world.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/renderer.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -340,7 +288,7 @@
       <workItem from="1573061141768" duration="20593000" />
       <workItem from="1573109534495" duration="12680000" />
       <workItem from="1573164287396" duration="9407000" />
-      <workItem from="1573173718752" duration="13701000" />
+      <workItem from="1573173718752" duration="14033000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>
@@ -391,6 +339,11 @@
           <url>file://$PROJECT_DIR$/apps/runshoot.hpp</url>
           <line>1</line>
           <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/physics/physics_world.cpp</url>
+          <line>86</line>
+          <option name="timeStamp" value="121" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

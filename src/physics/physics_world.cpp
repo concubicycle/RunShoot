@@ -4,8 +4,6 @@
 
 #include <physics/physics_world.hpp>
 #include <physics/collider_iterator.hpp>
-#include <glm/ext/scalar_constants.hpp>
-#include <glm/gtc/epsilon.hpp>
 
 physics::physics_world::physics_world(events::event_exchange &events,
                                       physics::collisions &collisions) :
@@ -42,8 +40,8 @@ void physics::physics_world::update(float frame_time)
 
     // detect collisions...
     auto n = _collision_entities.size();
-    for(int i=0; i<n; ++i)
-        for(int j=i+1; j<n; ++j)
+    for(size_t i=0; i<n; ++i)
+        for(size_t j=i+1; j<n; ++j)
             _contacts.emplace_back(
                 _collision_entities[i].get(),
                 _collision_entities[j].get(),
@@ -68,7 +66,7 @@ void physics::physics_world::update(float frame_time)
 
 void physics::physics_world::resolve_collisions(float frame_time)
 {
-    while (_contacts.size() > 0 && frame_time >= 0)
+    while (!_contacts.empty() && frame_time >= 0)
     {
         auto first_col = std::min_element(_contacts.begin(), _contacts.end(), entity_contact::compare);
         auto& collision = *first_col;
@@ -127,7 +125,7 @@ void physics::physics_world::grab_entity(ecs::entity &e)
     auto is_physical = e.has<ecs::rigid_body_component>();
 
     if (has_colliders)
-        _collision_entities.push_back(e);
+        _collision_entities.emplace_back(e);
 
     if (is_physical)
     {
@@ -142,7 +140,7 @@ void physics::physics_world::grab_entity(ecs::entity &e)
         while (it.end() != (cursor = it.get_next()))
             cursor->set_position(t.pos);
 
-        _physical_entities.push_back(e);
+        _physical_entities.emplace_back(e);
     }
 }
 
