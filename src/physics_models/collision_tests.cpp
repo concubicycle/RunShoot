@@ -3,6 +3,8 @@
 //
 
 #include <physics_models/collision_tests.hpp>
+#include <cstdlib>
+#include <glm/ext/scalar_constants.hpp>
 
 
 physics_models::contact physics_models::intersect(aabb& c0, aabb& c1, glm::vec3& combined_velocity)
@@ -59,10 +61,16 @@ physics_models::contact physics_models::intersect(aabb& c0, aabb& c1, glm::vec3&
         }
         else
         {
-            // shapes overlap at t=0 on this axis.
-            penetration[i] = c0_max > c1_min
-                ? c0_max - c1_min
-                : c0_min - c1_max;
+            if (c0_max == c1_min || c1_max == c0_min) // edge case
+            {
+                penetration[i] = 0.0001f;
+            }
+            else
+            {
+                penetration[i] = c0_max > c1_min
+                                 ? c0_max - c1_min
+                                 : c0_min - c1_max;
+            }
 
             if (c1_speed > 0)
             {
@@ -82,14 +90,16 @@ physics_models::contact physics_models::intersect(aabb& c0, aabb& c1, glm::vec3&
     bool intersect_at_start = penetration[0] != 0 && penetration[1] != 0 && penetration[2] != 0;
     if (intersect_at_start)
     {
-        float min_pen = penetration[0];
+        float min_pen = std::abs(penetration[0]);
         int min_pen_i = 0;
 
         for (int i = 1; i < 3; ++i)
         {
-            if (penetration[i] < min_pen)
+            auto pen = std::abs(penetration[i]);
+
+            if (pen < min_pen)
             {
-                min_pen = penetration[i];
+                min_pen = pen;
                 min_pen_i = i;
             }
         }

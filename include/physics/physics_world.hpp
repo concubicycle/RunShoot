@@ -19,7 +19,7 @@ namespace physics
     {
         const std::uint32_t NumContactsReserved = 1024;
         const std::uint32_t NumEntitiesReserved = 2048;
-        const float ContinuousCollisionResolutionBias = 0.00005f;
+        const float ContinuousCollisionResolutionBias = 0.0001f;
 
     public:
         explicit physics_world(
