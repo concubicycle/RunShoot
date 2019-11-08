@@ -71,7 +71,7 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     asset::texture_manager textures(app_string_table);
     asset::component_loader component_loader(app_string_table);
     asset::prototype_loader prototypes;
-    asset::scene_loader loader(component_loader, prototypes);
+    asset::scene_loader loader(events, component_loader, prototypes);
 
     core::system_info info;
     core::frame_timer timer;

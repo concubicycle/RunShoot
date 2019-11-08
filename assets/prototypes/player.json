@@ -3,8 +3,8 @@
     {
       "component_bitshift": 0,
       "x": 0,
-      "y": 0,
-      "z": 20,
+      "y": 10,
+      "z": 30,
       "pitch": 0,
       "yaw": 0,
       "roll": 0,
@@ -30,7 +30,8 @@
     {
       "component_bitshift": 6,
       "velocity": [0, 0, 0],
-      "is_kinematic": true
+      "is_kinematic": true,
+      "mass": 0
     },
     {
       "component_bitshift": 17,

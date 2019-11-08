@@ -26,12 +26,14 @@ namespace asset
     {
     public:
         explicit scene_loader(
+            events::event_exchange& events,
             component_loader& component_loader,
             prototype_loader& prototypes);
 
         asset::scene load_scene(const std::string& file_path, ecs::entity_world& world);
 
     private:
+        events::event_exchange& _events;
         component_loader& _component_loader;
         prototype_loader& _prototypes;
 

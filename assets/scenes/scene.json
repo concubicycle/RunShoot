@@ -38,6 +38,14 @@
     {
       "entity_id": 3,
       "prototype": "./assets/prototypes/drone.json"
+    },
+    {
+      "entity_id": 4,
+      "prototype": "./assets/prototypes/phys_cube.json"
+    },
+    {
+      "entity_id": 5,
+      "prototype": "./assets/prototypes/cube_marker.json"
     }
   ]
 }

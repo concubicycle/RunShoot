@@ -5,6 +5,7 @@
 #ifndef ECS_DEV_BASIC_COMPONENTS_H
 #define ECS_DEV_BASIC_COMPONENTS_H
 
+#include <cmath>
 #include <cstring>
 #include <vertex_array.h>
 #include <cstdint>
@@ -15,6 +16,8 @@
 
 #include <physics_models/aabb.hpp>
 #include <physics_models/collider.hpp>
+#include <physics_models/aabb_collider.hpp>
+#include <physics_models/sphere_collider.hpp>
 
 #include "../ecs_types.hpp"
 #include "../component.hpp"
@@ -75,13 +78,13 @@ namespace ecs
 
         glm::mat3 right_up_fwd()
         {
-            float cosp = cos(pitch);
-            float sinp = sin(pitch);
-            float siny = sin(yaw);
-            float cosy = cos(yaw);
+            float cos_p = std::cos(pitch);
+            float sin_p = std::sin(pitch);
+            float sin_y = std::sin(yaw);
+            float cosy = std::cos(yaw);
 
-            glm::vec3 fwd(siny * cosp, sinp, -cosp * cosy);
-            glm::vec3 up(-siny * sinp, cosp, sinp * cosy);
+            glm::vec3 fwd(sin_y * cos_p, sin_p, -cos_p * cosy);
+            glm::vec3 up(-sin_y * sin_p, cos_p, sin_p * cosy);
             return glm::mat3(glm::cross(fwd, up), up, fwd);
         }
     };

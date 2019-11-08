@@ -1,92 +1,38 @@
-//
-// Created by sava on 11/1/19.
-//
-
 #include <ecs/ecs_types.hpp>
 #include <physics/collisions.hpp>
+#include <physics/collider_iterator.hpp>
 
 
-using aabb_colliders = ecs::aabb_collider_component;
-using aabb_opt = std::optional<std::reference_wrapper<aabb_colliders>>;
-
-using sphere_colliders = ecs::sphere_collider_component;
-using sphere_opt = std::optional<std::reference_wrapper<sphere_colliders>>;
-
-
-physics_models::contact physics::collisions::check_collision_and_generate_contact(ecs::entity &one, ecs::entity &two)
+physics_models::contact physics::collisions::check_collision_and_generate_contact(
+    ecs::entity &one,
+    ecs::entity &two,
+    float frame_time
+    )
 {
     _contact_buffer.clear();
 
-    aabb_opt aabb_one = one.get_component_opt<aabb_colliders>();
-    aabb_opt aabb_two = two.get_component_opt<aabb_colliders>();
+    auto v0 = one.has<ecs::rigid_body_component>()
+              ? one.get_component<ecs::rigid_body_component>().velocity
+              : glm::vec3(0);
 
-    sphere_opt sphere_one = one.get_component_opt<sphere_colliders>();
-    sphere_opt sphere_two = two.get_component_opt<sphere_colliders>();
+    auto v1 = two.has<ecs::rigid_body_component>()
+              ? two.get_component<ecs::rigid_body_component>().velocity
+              : glm::vec3(0);
 
-    if (aabb_one && aabb_two)
-    {
-        auto count_one = aabb_one->get().count;
-        auto count_two = aabb_two->get().count;
+    auto combined_v = (v1 - v0) * frame_time;
 
-        for (std::uint32_t i = 0; i < count_one; ++i)
-        {
-            for (std::uint32_t j = 0; j < count_two; ++j)
-            {
-                auto& c1 = aabb_one->get().colliders[i];
-                auto& c2 = aabb_one->get().colliders[j];
-                _contact_buffer.insert(c1.accept(c2));
-            }
-        }
-    }
+    collider_iterator it1(one);
+    collider_iterator it2(two);
 
-    if (aabb_one && sphere_two)
-    {
-        auto count_one = aabb_one->get().count;
-        auto count_two = aabb_two->get().count;
+    physics_models::collider* c1;
+    physics_models::collider* c2;
 
-        for (std::uint32_t i = 0; i < count_one; ++i)
-        {
-            for (std::uint32_t j = 0; j < count_two; ++j)
-            {
-                auto& c1 = aabb_one->get().colliders[i];
-                auto& c2 = sphere_two->get().colliders[j];
-                _contact_buffer.insert(c1.accept(c2));
-            }
-        }
-    }
+    while (it1.end() != (c1 = it1.get_next()))
+        while (it2.end() != (c2 = it2.get_next()))
+            _contact_buffer.insert(c1->accept(*c2, combined_v));
 
-    if (sphere_one && aabb_two)
-    {
-        auto count_one = aabb_one->get().count;
-        auto count_two = aabb_two->get().count;
-
-        for (std::uint32_t i = 0; i < count_one; ++i)
-        {
-            for (std::uint32_t j = 0; j < count_two; ++j)
-            {
-                auto& c1 = sphere_one->get().colliders[i];
-                auto& c2 = aabb_two->get().colliders[j];
-                _contact_buffer.insert(c1.accept(c2));
-            }
-        }
-    }
-
-    if (sphere_one && sphere_two)
-    {
-        auto count_one = aabb_one->get().count;
-        auto count_two = aabb_two->get().count;
-
-        for (std::uint32_t i = 0; i < count_one; ++i)
-        {
-            for (std::uint32_t j = 0; j < count_two; ++j)
-            {
-                auto& c1 = sphere_one->get().colliders[i];
-                auto& c2 = sphere_two->get().colliders[j];
-                _contact_buffer.insert(c1.accept(c2));
-            }
-        }
-    }
-
-    return _contact_buffer.empty() ? physics_models::contact::None : *_contact_buffer.begin();
+    return _contact_buffer.empty()
+        ? physics_models::contact::None
+        : *(_contact_buffer.begin());
 }
 

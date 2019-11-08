@@ -116,7 +116,7 @@ void rendering::renderer::draw_scene(asset::scene &scene)
         auto &t = e.get_component<ecs::transform_component>();
 
         auto model = glm::mat4(1.f);
-        model = glm::scale(model, glm::vec3(t.scale_x, t.scale_y, t.scale_z)) * model;
+        model = glm::scale(model, glm::vec3(t.scale_x, t.scale_y, t.scale_z));
         model = glm::eulerAngleYXZ(t.yaw, t.pitch, t.roll) * model;
         set_translation(model, t.pos);
 
@@ -130,7 +130,7 @@ void rendering::renderer::draw_scene(asset::scene &scene)
 
 		auto light_pos = glm::vec3(0, 10.f, 10.f);
 		auto light_color = glm::vec3(0.5, 0.5, 0.5);
-		auto ambient_light = glm::vec3(0);
+		auto ambient_light = glm::vec3(0.2, 0.1, 0.2);
 		auto specular = glm::vec3(0.03f);
 
         if (r.mesh_format == asset::mesh_type::GLTF2)

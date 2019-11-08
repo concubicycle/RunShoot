@@ -111,19 +111,20 @@ set (PHYSICS_HEADER_LIST
      ../include/physics/physics_world.hpp
      ../include/physics/collisions.hpp
      ../include/physics/intersection_tests.hpp
-     ../include/physics_models/contact.hpp)
+     ../include/physics_models/contact.hpp ../include/physics/collider_iterator.hpp ../include/physics/entity_contact.hpp)
 
 
 set (PHYSICS_MODELS_SOURCE_LIST
      ${PROJECT_SOURCE_DIR}/src/physics_models/contact.cpp
-     )
+     physics_models/collision_tests.cpp)
 
 set (PHYSICS_MODELS_HEADER_LIST
      ../include/physics_models/aabb.hpp
      ../include/physics_models/sphere.hpp
      ../include/physics_models/collider.hpp
      ../include/physics_models/contact.hpp
-     )
+     ../include/physics_models/collision_tests.hpp
+     ../include/physics_models/aabb_collider.hpp ../include/physics_models/aabb_collider.hpp ../include/physics_models/sphere_collider.hpp)
 
 
 set(HEADER_LIST

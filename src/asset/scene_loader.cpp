@@ -13,8 +13,10 @@ using nlohmann::json;
 
 
 asset::scene_loader::scene_loader(
+    events::event_exchange& events,
     component_loader& component_loader,
     asset::prototype_loader& prototypes) :
+    _events(events),
     _component_loader(component_loader),
     _prototypes(prototypes)
     {}
@@ -33,6 +35,7 @@ asset::scene asset::scene_loader::load_scene(const std::string& file_path, ecs::
         component_bitset archetype_id = calc_archetype_id(components);
         ecs::entity &e = world.add_entity(archetype_id, id);
         load_entity_components(e, components);
+        _events.invoke<ecs::entity&>(events::event_type::entity_created, e);
     }
 
     return asset::scene(world);

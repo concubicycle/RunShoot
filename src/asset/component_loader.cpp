@@ -116,6 +116,8 @@ void load_rigid_body(const json &j, ecs::entity &e, string_table &hashes)
         j["velocity"][2].get<float>());
 
     p.is_kinematic = j["is_kinematic"].get<bool>();
+    float mass = j["mass"].get<float>();
+    p.set_mass(mass);
 }
 
 

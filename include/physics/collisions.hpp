@@ -13,6 +13,7 @@
 #include <ecs/entity.hpp>
 
 #include <physics_models/contact.hpp>
+#include "entity_contact.hpp"
 
 
 namespace physics
@@ -20,11 +21,11 @@ namespace physics
 
     class collisions
     {
-        static const unsigned int CollisionBufferSize = 256;
-        static const unsigned int ColliderBufferSize = 256;
-
     public:
-        physics_models::contact check_collision_and_generate_contact(ecs::entity &one, ecs::entity &two);
+        physics_models::contact check_collision_and_generate_contact(
+            ecs::entity &one,
+            ecs::entity &two,
+            float frame_time);
 
     private:
         std::set<physics_models::contact, physics_models::contact_compare> _contact_buffer;

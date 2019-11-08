@@ -42,7 +42,7 @@ asset::assimp_loader::mesh_result asset::assimp_loader::load_glf2(const std::str
     Assimp::Importer importer;
     const aiScene *scene = importer.ReadFile(
         path,
-        aiProcess_ValidateDataStructure | aiProcess_FixInfacingNormals);
+        aiProcess_ValidateDataStructure);// | aiProcess_FixInfacingNormals | aiProcess_GenNormals);
 
     auto error = importer.GetErrorString();
 
@@ -83,7 +83,7 @@ asset::assimp_mesh asset::assimp_loader::process_mesh(aiMesh *mesh, const aiScen
     {
         auto tex = mesh->mTextureCoords[0] == nullptr
                    ? glm::vec2(0)
-                   : glm::vec2(mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y);
+                   : glm::vec2(mesh->mTextureCoords[0][i].x, 1 - mesh->mTextureCoords[0][i].y);
 
         result.mesh_data.vertices.emplace_back(
             glm::vec3(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z),
