@@ -70,7 +70,7 @@ physics_models::contact physics_models::intersect(aabb& c0, aabb& c1, glm::vec3&
         {
             if (c1_max == c0_min) // edge case
             {
-                penetration[i] = 0.0000001f;
+                penetration[i] = -0.0000001f;
             }
             else if (c0_max == c1_min)
             {

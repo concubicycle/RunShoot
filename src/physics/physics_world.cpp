@@ -266,7 +266,7 @@ physics::physics_world::resolve_collision_discrete(std::vector<physics::entity_c
     else if (one_has_rb)
     {
         auto& rb0 = first_col->one().get_component<ecs::rigid_body_component>();
-        auto c0_move = first_col->contact().collision_axis() * 1.1f;
+        auto c0_move = first_col->contact().collision_axis() * -1.1f;
         rb0.position += c0_move;
         resolve_velocity(*first_col, first_col->one());
         update_collider_positions(first_col->one());
