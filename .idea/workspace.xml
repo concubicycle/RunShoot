@@ -31,7 +31,11 @@
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/runshoot.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/runshoot.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/physics_models/collision_tests.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics_models/collision_tests.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/physics_models/contact.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics_models/contact.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/physics/physics_world.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/physics/physics_world.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/physics_models/collision_tests.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/physics_models/collision_tests.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -304,7 +308,7 @@
       <workItem from="1573236738282" duration="20481000" />
       <workItem from="1573270201116" duration="3135000" />
       <workItem from="1573312689343" duration="952000" />
-      <workItem from="1573313655598" duration="17849000" />
+      <workItem from="1573313655598" duration="18638000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>

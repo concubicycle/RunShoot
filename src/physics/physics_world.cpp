@@ -8,12 +8,12 @@
 
 physics::physics_world::physics_world(events::event_exchange &events,
                                       physics::collisions &collisions) :
-                                      _events(events),
-                                      _collisions(collisions)
+    _events(events),
+    _collisions(collisions)
 {
-    auto grab_cam_fn = std::function<void(ecs::entity&)>([this](ecs::entity& e){ grab_entity(e); });
-    auto forget_cam_fn = std::function<void(ecs::entity&)>([this](ecs::entity& e){ forget_entity(e); });
-    _entity_create_listener_id = _events.subscribe<ecs::entity&>(events::entity_created, grab_cam_fn);
+    auto grab_cam_fn = std::function<void(ecs::entity &)>([this](ecs::entity &e) { grab_entity(e); });
+    auto forget_cam_fn = std::function<void(ecs::entity &)>([this](ecs::entity &e) { forget_entity(e); });
+    _entity_create_listener_id = _events.subscribe<ecs::entity &>(events::entity_created, grab_cam_fn);
     _entity_destroy_listener_id = _events.subscribe(events::entity_destroyed, forget_cam_fn);
 
     _contacts.reserve(NumContactsReserved);
@@ -34,7 +34,7 @@ void physics::physics_world::update(float frame_time)
     _contacts.clear();
 
     // apply gravity only once
-    for(auto& e : _physical_entities)
+    for (auto &e : _physical_entities)
     {
         integrate(e, frame_time);
     }
@@ -47,12 +47,12 @@ void physics::physics_world::update(float frame_time)
 void physics::physics_world::detect_collisions(float frame_time)
 {
     auto n = _collision_entities.size();
-    for(size_t i = 0; i<n; ++i)
+    for (size_t i = 0; i < n; ++i)
     {
         for (size_t j = i + 1; j < n; ++j)
         {
-            auto& e1 = _collision_entities[i].get();
-            auto& e2 = _collision_entities[j].get();
+            auto &e1 = _collision_entities[i].get();
+            auto &e2 = _collision_entities[j].get();
 
             _contacts.emplace_back(
                 e1,
@@ -67,7 +67,7 @@ void physics::physics_world::resolve_collisions(float frame_time)
     while (!_contacts.empty() && frame_time >= 0)
     {
         auto first_col = std::min_element(_contacts.begin(), _contacts.end(), entity_contact::compare);
-        auto& collision = *first_col;
+        auto &collision = *first_col;
 
         if (first_col == _contacts.end() || first_col->contact().time() > 1.f) // no more collisions this frame
         {
@@ -93,7 +93,7 @@ void physics::physics_world::resolve_collisions(float frame_time)
 
 void physics::physics_world::integrate(ecs::entity &e, float frame_time)
 {
-    auto& rb = e.get_component<ecs::rigid_body_component>();
+    auto &rb = e.get_component<ecs::rigid_body_component>();
 
     if (rb.is_kinematic) return;
 
@@ -106,7 +106,7 @@ void physics::physics_world::integrate(ecs::entity &e, float frame_time)
 
 void physics::physics_world::integrate_position(ecs::entity &e, float frame_time)
 {
-    auto& rb = e.get_component<ecs::rigid_body_component>();
+    auto &rb = e.get_component<ecs::rigid_body_component>();
 
     if (rb.is_kinematic) return;
 
@@ -118,7 +118,7 @@ void physics::physics_world::integrate_position(ecs::entity &e, float frame_time
 void physics::physics_world::grab_entity(ecs::entity &e)
 {
     auto has_colliders = e.has<ecs::aabb_collider_component>() ||
-        e.has<ecs::sphere_collider_component>();
+                         e.has<ecs::sphere_collider_component>();
 
     auto is_physical = e.has<ecs::rigid_body_component>();
 
@@ -127,13 +127,13 @@ void physics::physics_world::grab_entity(ecs::entity &e)
 
     if (is_physical)
     {
-        auto& t = e.get_component<ecs::transform_component>();
-        auto& rb = e.get_component<ecs::rigid_body_component>();
+        auto &t = e.get_component<ecs::transform_component>();
+        auto &rb = e.get_component<ecs::rigid_body_component>();
         rb.position = t.pos;
 
         // update collider positions/rotations(later)
         collider_iterator it(e);
-        physics_models::collider* cursor;
+        physics_models::collider *cursor;
 
         while (it.end() != (cursor = it.get_next()))
             cursor->set_position(t.pos);
@@ -142,9 +142,9 @@ void physics::physics_world::grab_entity(ecs::entity &e)
     } else
     {
         collider_iterator it(e);
-        auto& t = e.get_component<ecs::transform_component>();
+        auto &t = e.get_component<ecs::transform_component>();
 
-        physics_models::collider* cursor;
+        physics_models::collider *cursor;
         while (it.end() != (cursor = it.get_next()))
             cursor->set_position(t.pos);
     }
@@ -171,7 +171,7 @@ void physics::physics_world::resolve_collision_continuous(
     float t_col = first_col->contact().time() - ContinuousCollisionResolutionBias;
 
     // move everything up to time of collision minus epsilon
-    for(auto& e : _physical_entities)
+    for (auto &e : _physical_entities)
     {
         integrate_position(e, t_col * frame_time);
     }
@@ -184,11 +184,11 @@ void physics::physics_world::resolve_collision_continuous(
 
     _contacts.erase(first_col);
 
-    auto& e1 = first_col->one();
-    auto& e2 = first_col->two();
+    auto &e1 = first_col->one();
+    auto &e2 = first_col->two();
 
     // re-run collisions for collided entities - new collisions may occur
-    for (auto& it : _collision_entities)
+    for (auto &it : _collision_entities)
     {
         if (it.get().id() != e1.id())
         {
@@ -208,15 +208,15 @@ void physics::physics_world::resolve_collision_continuous(
     }
 }
 
-void physics::physics_world::resolve_velocity(const physics::entity_contact &collision, ecs::entity& e)
+void physics::physics_world::resolve_velocity(const physics::entity_contact &collision, ecs::entity &e)
 {
     if (!e.has<ecs::rigid_body_component>()) return;
 
-    auto& rb1 = e.get_component<ecs::rigid_body_component>();
+    auto &rb1 = e.get_component<ecs::rigid_body_component>();
     auto axis = collision.contact().collision_axis();
     auto n = glm::normalize(axis);
 
-    if(glm::all(glm::isnan(n)))
+    if (glm::all(glm::isnan(n)))
     {
         spdlog::warn("NaN in resolve_velocity() for the collision normal");
         return;
@@ -243,8 +243,8 @@ physics::physics_world::resolve_collision_discrete(std::vector<physics::entity_c
 
     if (one_has_rb && two_has_rb)
     {
-        auto& rb0 = first_col->one().get_component<ecs::rigid_body_component>();
-        auto& rb1 = first_col->two().get_component<ecs::rigid_body_component>();
+        auto &rb0 = first_col->one().get_component<ecs::rigid_body_component>();
+        auto &rb1 = first_col->two().get_component<ecs::rigid_body_component>();
         auto c0_move = first_col->contact().collision_axis() / 2.001f;
         auto c1_move = first_col->contact().collision_axis() / -2.001f;
         rb0.position += c0_move;
@@ -253,18 +253,16 @@ physics::physics_world::resolve_collision_discrete(std::vector<physics::entity_c
         resolve_velocity(*first_col, first_col->two());
         update_collider_positions(first_col->one());
         update_collider_positions(first_col->two());
-    }
-    else if (one_has_rb)
+    } else if (one_has_rb)
     {
-        auto& rb0 = first_col->one().get_component<ecs::rigid_body_component>();
+        auto &rb0 = first_col->one().get_component<ecs::rigid_body_component>();
         auto c0_move = first_col->contact().collision_axis() * -1.1f;
         rb0.position += c0_move;
         resolve_velocity(*first_col, first_col->one());
         update_collider_positions(first_col->one());
-    }
-    else
+    } else
     {
-        auto& rb1 = first_col->two().get_component<ecs::rigid_body_component>();
+        auto &rb1 = first_col->two().get_component<ecs::rigid_body_component>();
         auto c1_move = first_col->contact().collision_axis() * 1.1f;
         rb1.position += c1_move;
         resolve_velocity(*first_col, first_col->two());
@@ -277,24 +275,24 @@ physics::physics_world::resolve_collision_discrete(std::vector<physics::entity_c
 void physics::physics_world::update_collider_positions(ecs::entity &e)
 {
     collider_iterator it(e);
-    auto& rb = e.get_component<ecs::rigid_body_component>();
+    auto &rb = e.get_component<ecs::rigid_body_component>();
 
-    physics_models::collider* cursor;
+    physics_models::collider *cursor;
     while (it.end() != (cursor = it.get_next()))
         cursor->set_position(rb.position);
 }
 
 void physics::physics_world::update_transforms()
 {
-    for(auto& e : _physical_entities)
+    for (auto &e : _physical_entities)
     {
-        auto& rb = e.get().get_component<ecs::rigid_body_component>();
+        auto &rb = e.get().get_component<ecs::rigid_body_component>();
 
         if (rb.is_kinematic) continue;
 
         if (e.get().has<ecs::transform_component>())
         {
-            auto& t = e.get().get_component<ecs::transform_component>();
+            auto &t = e.get().get_component<ecs::transform_component>();
             t.pos = rb.position;
         }
     }
