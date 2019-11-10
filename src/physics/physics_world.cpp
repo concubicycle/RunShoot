@@ -4,6 +4,7 @@
 
 #include <physics/physics_world.hpp>
 #include <physics/collider_iterator.hpp>
+#include <spdlog/spdlog.h>
 
 physics::physics_world::physics_world(events::event_exchange &events,
                                       physics::collisions &collisions) :
@@ -81,20 +82,9 @@ void physics::physics_world::resolve_collisions(float frame_time)
         float t = first_col->contact().time();
 
         if (t == physics_models::contact::Intersecting)
-        {
             resolve_collision_discrete(first_col);
-        }
         else
-        {
-            // move everything up to time of collision minus epsilon
-            for(auto& e : _physical_entities)
-            {
-                integrate_position(e, t * frame_time);
-            }
-            _contacts.erase(first_col);
-        }
-//        else
-//            resolve_collision_continuous(frame_time, first_col);
+            resolve_collision_continuous(frame_time, first_col);
 
         frame_time -= t;
     }
@@ -228,6 +218,7 @@ void physics::physics_world::resolve_velocity(const physics::entity_contact &col
 
     if(glm::all(glm::isnan(n)))
     {
+        spdlog::warn("NaN in resolve_velocity() for the collision normal");
         return;
     }
 
@@ -270,18 +261,6 @@ physics::physics_world::resolve_collision_discrete(std::vector<physics::entity_c
         rb0.position += c0_move;
         resolve_velocity(*first_col, first_col->one());
         update_collider_positions(first_col->one());
-
-        if (rb0.velocity.y < 0)
-        {
-            int i = 0;
-            i++;
-        }
-
-        if (c0_move.y < 0)
-        {
-            int i = 0;
-            i++;
-        }
     }
     else
     {
@@ -290,18 +269,6 @@ physics::physics_world::resolve_collision_discrete(std::vector<physics::entity_c
         rb1.position += c1_move;
         resolve_velocity(*first_col, first_col->two());
         update_collider_positions(first_col->two());
-
-        if (rb1.velocity.y < 0)
-        {
-            int i = 0;
-            i++;
-        }
-
-        if (c1_move.y < 0)
-        {
-            int i = 0;
-            i++;
-        }
     }
 
     _contacts.erase(first_col);
