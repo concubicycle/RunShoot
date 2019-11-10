@@ -1,0 +1,91 @@
+{
+  "entities": [
+    {
+      "entity_id": 111,
+      "prototype": "./assets/prototypes/player.json",
+      "components": [
+        {
+          "component_bitshift": 0,
+          "y": 20
+        }
+      ]
+    },
+    {
+      "entity_id": 8,
+      "prototype": "./assets/prototypes/phys_cube.json",
+      "components": [
+        {
+          "component_bitshift": 0,
+          "x": 0,
+          "y": 35,
+          "z": -20
+        }
+      ]
+    },
+
+    {
+      "entity_id": 9,
+      "prototype": "./assets/prototypes/phys_cube.json",
+      "components": [
+        {
+          "component_bitshift": 0,
+          "x": 0,
+          "y": 35,
+          "z": -16
+        }
+      ]
+    },
+
+    {
+      "entity_id": 10,
+      "prototype": "./assets/prototypes/phys_cube.json",
+      "components": [
+        {
+          "component_bitshift": 0,
+          "x": 8,
+          "y": 35,
+          "z": -20
+        }
+      ]
+    },
+
+    {
+      "entity_id": 11,
+      "prototype": "./assets/prototypes/phys_cube.json",
+      "components": [
+        {
+          "component_bitshift": 0,
+          "x": 12,
+          "y": 35,
+          "z": -20
+        }
+      ]
+    },
+
+    {
+      "entity_id": 12,
+      "prototype": "./assets/prototypes/phys_cube.json",
+      "components": [
+        {
+          "component_bitshift": 0,
+          "x": 12,
+          "y": 35,
+          "z": -13
+        }
+      ]
+    },
+
+    {
+      "entity_id": 13,
+      "prototype": "./assets/prototypes/phys_cube.json",
+      "components": [
+        {
+          "component_bitshift": 0,
+          "x": 16,
+          "y": 35,
+          "z": -22
+        }
+      ]
+    }
+  ]
+}

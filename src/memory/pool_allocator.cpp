@@ -9,6 +9,9 @@ allocators::pool_allocator::pool_allocator(
     _total_allocated(0),
     _alignment(alignment)
 {
+    if (_alignment < alignof(void*))
+        _alignment = alignof(void*);
+
     // for an 8 chunk block, we will allocate new block when trying to get the penultimate chunk.
     // have the pool grab one extra chunk to actually have chunk_count capacity, before an allocation
     // is triggered.

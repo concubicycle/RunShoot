@@ -6,9 +6,16 @@
 #include <cstdlib>
 #include <glm/ext/scalar_constants.hpp>
 
+#include <iostream>
+#include <glm/gtx/string_cast.hpp>
+
 
 physics_models::contact physics_models::intersect(aabb& c0, aabb& c1, glm::vec3& combined_velocity)
 {
+    if (combined_velocity.y > 0)
+        std::cout << glm::to_string(combined_velocity) << std::endl;
+
+
     // c1 is moving, c0 is not.
     // do axis of separation, for axes (1,0,0), (0,1,0), (0,0,1)
     float t_first = contact::Intersecting, t_last = 999999.f;
@@ -17,7 +24,7 @@ physics_models::contact physics_models::intersect(aabb& c0, aabb& c1, glm::vec3&
 
     std::uint32_t collision_axis_index = 0;
 
-    for(int i = 0; i < 3; i++)
+    for(int i = 0; i < 3; ++i)
     {
         float c0_min = c0.min[i];
         float c0_max = c0.max[i];
@@ -61,15 +68,26 @@ physics_models::contact physics_models::intersect(aabb& c0, aabb& c1, glm::vec3&
         }
         else
         {
-            if (c0_max == c1_min || c1_max == c0_min) // edge case
+            if (c1_max == c0_min) // edge case
             {
-                penetration[i] = 0.0001f;
+                penetration[i] = 0.0000001f;
+            }
+            else if (c0_max == c1_min)
+            {
+                penetration[i] = 0.00000001f;
+            }
+            else if (c0_max > c1_max)
+            {
+                penetration[i] = c0_min - c1_max;
             }
             else
             {
-                penetration[i] = c0_max > c1_min
-                                 ? c0_max - c1_min
-                                 : c0_min - c1_max;
+                penetration[i] = c1_min - c0_max;
+            }
+
+            if (penetration[i] < -3 && i == 1)
+            {
+                int i = 0; i++;
             }
 
             if (c1_speed > 0)
@@ -90,6 +108,7 @@ physics_models::contact physics_models::intersect(aabb& c0, aabb& c1, glm::vec3&
     bool intersect_at_start = penetration[0] != 0 && penetration[1] != 0 && penetration[2] != 0;
     if (intersect_at_start)
     {
+        auto all_pen = penetration;
         float min_pen = std::abs(penetration[0]);
         int min_pen_i = 0;
 
@@ -108,7 +127,9 @@ physics_models::contact physics_models::intersect(aabb& c0, aabb& c1, glm::vec3&
             if (i != min_pen_i)
                 penetration[i] = 0;
 
-        return contact(penetration);
+        auto c = contact(penetration);
+        c.all_penetration = all_pen;
+        return c;
     }
 
     glm::vec3 collision_axis(0.f);

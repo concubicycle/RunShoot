@@ -29,6 +29,8 @@ namespace physics_models
             return frame_time - _time;
         }
 
+        glm::vec3 all_penetration;
+
     private:
         float _time;
 

@@ -2,6 +2,8 @@
 // Created by sava on 10/29/19.
 //
 
+#include <set>
+
 #include <nlohmann/json.hpp>
 using nlohmann::json;
 
@@ -23,7 +25,7 @@ bool compare_by_y(glm::vec3 a, glm::vec3 b)
 
 bool compare_by_z(glm::vec3 a, glm::vec3 b)
 {
-    return a.z < b.z;
+    return a.z > b.z;
 }
 
 
@@ -40,6 +42,7 @@ private:
 int main()
 {
     json aabbs;
+    std::set<float> y_values;
 
     asset::assimp_loader assimp_reader;
 
@@ -51,6 +54,7 @@ int main()
     for(auto& v : mesh.meshes[0].mesh_data.vertices)
     {
         vertices.push_back(v.position);
+        y_values.insert(round(v.position.y));
     }
 
     // determine the y extent of the ground block:
@@ -65,6 +69,8 @@ int main()
     ridge_height = vertices.back().y;
     ground_y_min = vertices.front().y;
 
+
+
     for (auto it = vertices.rbegin(); it != vertices.rend(); ++it)
     {
         if (glm::epsilonNotEqual(ridge_height, it->y, Epsilon) && ground_y_max == -999)
@@ -73,6 +79,9 @@ int main()
             break;
         }
     }
+
+    // NOTE: Set this manually, trying to determine ground height from mesh does not work.
+    ground_y_max = 1.f;
 
     // now, sort by z, and walk along z, finding spans along each equal-ish z value
     sort(vertices.begin(), vertices.end(), compare_by_z);
@@ -117,8 +126,8 @@ int main()
                 float box_xmax = last_xmax;
 
                 aabbs.push_back({
-                    {"min", {box_xmin, ground_y_min, box_zmin}},
-                    {"max", {box_xmax, ground_y_max, box_zmax}}
+                    {"min", {box_xmin, ground_y_min, box_zmax }},
+                    {"max", {box_xmax, ground_y_max, box_zmin }}
                 });
 
                 last_xmax = xmax;

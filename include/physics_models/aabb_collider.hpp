@@ -18,9 +18,9 @@ namespace physics_models
     class aabb_collider : public collider
     {
     public:
-        aabb_collider() {}
+        aabb_collider() : _position(0) {}
 
-        aabb_collider(aabb shape) : _shape(shape), _half_span((_shape.max - _shape.min) / 2.f) {}
+        aabb_collider(aabb shape) : _shape(shape), _position(0) {}
 
         contact visit(aabb &aabb, glm::vec3 &combined_velocity)
         {
@@ -39,15 +39,18 @@ namespace physics_models
 
         void set_position(glm::vec3& position)
         {
-            _shape.min = position - _half_span;
-            _shape.max = position + _half_span;
+            auto translate = position - _position;
+            _position = position;
+
+            _shape.min += translate;
+            _shape.max += translate;
         }
 
         aabb &shape() { return _shape; }
 
     private:
         aabb _shape;
-        glm::vec3 _half_span;
+        glm::vec3 _position;
     };
 
 }

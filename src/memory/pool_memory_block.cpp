@@ -70,9 +70,9 @@ allocators::pool_memory_block::~pool_memory_block()
  */
 void allocators::pool_memory_block::prepare_memory(std::uint8_t *mem)
 {
-    for (std::uint32_t chunk_index = 0; chunk_index < _chunk_count - 1; ++chunk_index)
+    for (std::uintptr_t chunk_index = 0; chunk_index < _chunk_count - 1; ++chunk_index)
     {
-        std::uint8_t *chunk = mem + (chunk_index * _chunk_size);
+        std::uint8_t *chunk = mem + (chunk_index * (std::uintptr_t)_chunk_size);
         *((std::uint8_t **) chunk) = chunk + _chunk_size;
     }
 

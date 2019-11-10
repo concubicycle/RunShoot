@@ -19,7 +19,7 @@ namespace physics
     {
         const std::uint32_t NumContactsReserved = 1024;
         const std::uint32_t NumEntitiesReserved = 2048;
-        const float ContinuousCollisionResolutionBias = 0.0001f;
+        const float ContinuousCollisionResolutionBias = 0.0005f;
 
     public:
         explicit physics_world(
@@ -45,6 +45,7 @@ namespace physics
         static void integrate(ecs::entity& e, float frame_time);
         static void integrate_position(ecs::entity& e, float frame_time);
 
+        void detect_collisions(float frame_time);
         void resolve_collisions(float frame_time);
 
         void resolve_collision_continuous(
@@ -54,9 +55,11 @@ namespace physics
         void resolve_collision_discrete(
             std::vector<physics::entity_contact>::iterator first_col);
 
-        static void resolve_velocity(const physics::entity_contact& collision, ecs::entity& e);
+        void update_transforms();
 
+        static void resolve_velocity(const physics::entity_contact& collision, ecs::entity& e);
         static void update_collider_positions(ecs::entity& e);
+
 
         void grab_entity (ecs::entity &e);
         void forget_entity (ecs::entity &e);

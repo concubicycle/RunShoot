@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.1)
 project(RunShoot C CXX)
 
+option(BUILD_OFFLINE "Build offline" ON)
+
+
 set(RunShoot_VERSION_MAJOR 0)
 set(RunShoot_VERSION_MINOR 1)
 
@@ -8,6 +11,10 @@ set(RunShoot_VERSION_MINOR 1)
 set(CMAKE_BUILD_TYPE Debug)
 ##############################
 
+
+if (${BUILD_OFFLINE})
+    set_property(DIRECTORY ${PROJECT_SOURCE_DIR} PROPERTY EP_UPDATE_DISCONNECTED ON)
+endif()
 
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake_modules")
 set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/install/")

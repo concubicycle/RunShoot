@@ -61,7 +61,7 @@ ecs::chunk_description ecs::chunk_component_accessor::chunk_size_for(component_b
 
         component_count++;
 
-        auto meta = component_meta::bit_metas.find(i)->second;
+        auto& meta = component_meta::bit_metas.find(i)->second;
 
         // we will have one component_ptr at the start
         chunk_size += calc_align_adjustment(chunk_size, component_ptr_align);
@@ -79,7 +79,7 @@ ecs::chunk_description ecs::chunk_component_accessor::chunk_size_for(component_b
         if (!(archetype_id & bit))
             continue;
 
-        auto meta = component_meta::bit_metas.find(i)->second;
+        auto& meta = component_meta::bit_metas.find(i)->second;
 
         chunk_size += calc_align_adjustment(chunk_size, meta.align());
 
@@ -88,6 +88,8 @@ ecs::chunk_description ecs::chunk_component_accessor::chunk_size_for(component_b
 
         chunk_size += meta.size();
     }
+
+    chunk_size += component_ptr_align; // TODO: This is a temporary fix
 
     return { chunk_size, header_offset, components_offset, component_count };
 }
@@ -99,9 +101,9 @@ uintptr_t ecs::chunk_component_accessor::calc_align_adjustment(uintptr_t raw, ui
     uintptr_t mask = (alignment - 1);
     uintptr_t misalignment = raw & mask;
 
-    std::uint32_t mask_32 = ((std::uint32_t) alignment) - 1;
-    std::uint32_t raw_32 = (std::uint32_t) raw;
-    std::uint32_t misalignment_32 = mask_32 & raw_32;
+//    std::uint32_t mask_32 = ((std::uint32_t) alignment) - 1;
+//    std::uint32_t raw_32 = (std::uint32_t) raw;
+//    std::uint32_t misalignment_32 = mask_32 & raw_32;
 
     return misalignment > 0
            ? alignment - misalignment

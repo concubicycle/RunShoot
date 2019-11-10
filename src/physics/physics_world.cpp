@@ -38,34 +38,25 @@ void physics::physics_world::update(float frame_time)
         integrate(e, frame_time);
     }
 
-    // detect collisions...
+    detect_collisions(frame_time);
+    resolve_collisions(frame_time);
+    update_transforms();
+}
+
+void physics::physics_world::detect_collisions(float frame_time)
+{
     auto n = _collision_entities.size();
     for(size_t i = 0; i<n; ++i)
     {
         for (size_t j = i + 1; j < n; ++j)
         {
-            auto& e1 =  _collision_entities[i].get();
+            auto& e1 = _collision_entities[i].get();
             auto& e2 = _collision_entities[j].get();
 
             _contacts.emplace_back(
                 e1,
                 e2,
                 _collisions.check_collision_and_generate_contact(e1, e2, frame_time));
-        }
-    }
-
-    resolve_collisions(frame_time);
-
-    for(auto& e : _physical_entities)
-    {
-        auto& rb = e.get().get_component<ecs::rigid_body_component>();
-
-        if (rb.is_kinematic) continue;
-
-        if (e.get().has<ecs::transform_component>())
-        {
-            auto& t = e.get().get_component<ecs::transform_component>();
-            t.pos = rb.position;
         }
     }
 }
@@ -90,9 +81,20 @@ void physics::physics_world::resolve_collisions(float frame_time)
         float t = first_col->contact().time();
 
         if (t == physics_models::contact::Intersecting)
+        {
             resolve_collision_discrete(first_col);
+        }
         else
-            resolve_collision_continuous(frame_time, first_col);
+        {
+            // move everything up to time of collision minus epsilon
+            for(auto& e : _physical_entities)
+            {
+                integrate_position(e, t * frame_time);
+            }
+            _contacts.erase(first_col);
+        }
+//        else
+//            resolve_collision_continuous(frame_time, first_col);
 
         frame_time -= t;
     }
@@ -101,24 +103,24 @@ void physics::physics_world::resolve_collisions(float frame_time)
 
 void physics::physics_world::integrate(ecs::entity &e, float frame_time)
 {
-    auto& phys_props = e.get_component<ecs::rigid_body_component>();
+    auto& rb = e.get_component<ecs::rigid_body_component>();
 
-    if (phys_props.is_kinematic) return;
+    if (rb.is_kinematic) return;
 
-    phys_props.force += phys_props.gravity / 100.f;
-    phys_props.previous_position = phys_props.position;
-    phys_props.acceleration += phys_props.mass_inverse() * phys_props.force;
-    phys_props.force = glm::vec3(0);
-    phys_props.velocity += phys_props.acceleration * frame_time; // not accurate
+    rb.force += rb.gravity / 100.f;
+    rb.previous_position = rb.position;
+    rb.acceleration += rb.mass_inverse() * rb.force;
+    rb.force = glm::vec3(0);
+    rb.velocity += rb.acceleration * frame_time; // not accurate
 }
 
 void physics::physics_world::integrate_position(ecs::entity &e, float frame_time)
 {
-    auto& phys_props = e.get_component<ecs::rigid_body_component>();
+    auto& rb = e.get_component<ecs::rigid_body_component>();
 
-    if (phys_props.is_kinematic) return;
+    if (rb.is_kinematic) return;
 
-    phys_props.position += phys_props.velocity * frame_time;
+    rb.position += rb.velocity * frame_time;
     update_collider_positions(e);
 }
 
@@ -224,6 +226,11 @@ void physics::physics_world::resolve_velocity(const physics::entity_contact &col
     auto axis = collision.contact().collision_axis();
     auto n = glm::normalize(axis);
 
+    if(glm::all(glm::isnan(n)))
+    {
+        return;
+    }
+
     // is this good math? project the velocity of each onto the face of the polygon
     rb1.velocity -= n * glm::dot(n, rb1.velocity);
 
@@ -247,8 +254,8 @@ physics::physics_world::resolve_collision_discrete(std::vector<physics::entity_c
     {
         auto& rb0 = first_col->one().get_component<ecs::rigid_body_component>();
         auto& rb1 = first_col->two().get_component<ecs::rigid_body_component>();
-        auto c0_move = first_col->contact().collision_axis() / 2.f;
-        auto c1_move = first_col->contact().collision_axis() / -2.f;
+        auto c0_move = first_col->contact().collision_axis() / 2.001f;
+        auto c1_move = first_col->contact().collision_axis() / -2.001f;
         rb0.position += c0_move;
         rb1.position += c1_move;
         resolve_velocity(*first_col, first_col->one());
@@ -259,18 +266,42 @@ physics::physics_world::resolve_collision_discrete(std::vector<physics::entity_c
     else if (one_has_rb)
     {
         auto& rb0 = first_col->one().get_component<ecs::rigid_body_component>();
-        auto c0_move = first_col->contact().collision_axis();
+        auto c0_move = first_col->contact().collision_axis() * 1.1f;
         rb0.position += c0_move;
         resolve_velocity(*first_col, first_col->one());
         update_collider_positions(first_col->one());
+
+        if (rb0.velocity.y < 0)
+        {
+            int i = 0;
+            i++;
+        }
+
+        if (c0_move.y < 0)
+        {
+            int i = 0;
+            i++;
+        }
     }
     else
     {
         auto& rb1 = first_col->two().get_component<ecs::rigid_body_component>();
-        auto c1_move = first_col->contact().collision_axis();
+        auto c1_move = first_col->contact().collision_axis() * 1.1f;
         rb1.position += c1_move;
         resolve_velocity(*first_col, first_col->two());
         update_collider_positions(first_col->two());
+
+        if (rb1.velocity.y < 0)
+        {
+            int i = 0;
+            i++;
+        }
+
+        if (c1_move.y < 0)
+        {
+            int i = 0;
+            i++;
+        }
     }
 
     _contacts.erase(first_col);
@@ -286,3 +317,18 @@ void physics::physics_world::update_collider_positions(ecs::entity &e)
         cursor->set_position(rb.position);
 }
 
+void physics::physics_world::update_transforms()
+{
+    for(auto& e : _physical_entities)
+    {
+        auto& rb = e.get().get_component<ecs::rigid_body_component>();
+
+        if (rb.is_kinematic) continue;
+
+        if (e.get().has<ecs::transform_component>())
+        {
+            auto& t = e.get().get_component<ecs::transform_component>();
+            t.pos = rb.position;
+        }
+    }
+}
