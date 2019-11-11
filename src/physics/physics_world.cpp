@@ -36,7 +36,7 @@ void physics::physics_world::update(float frame_time)
     for (auto &e : _physical_entities)
     {
         auto& rb = e.get().get_component<ecs::rigid_body_component>();
-        rb.force += rb.mass() * rb.gravity / 50.f;
+        rb.force += rb.mass() * rb.gravity;
         integrate(e, frame_time);
     }
 
@@ -195,20 +195,10 @@ void physics::physics_world::resolve_collision_continuous(
     for (auto &it : _collision_entities)
     {
         if (it.get().id() != e1.id())
-        {
-            _contacts.emplace_back(
-                it,
-                e1,
-                _collisions.check_collision_and_generate_contact(it, e1));
-        }
+            _contacts.emplace_back(it, e1, _collisions.check_collision_and_generate_contact(it, e1));
 
         if (it.get().id() != e2.id())
-        {
-            _contacts.emplace_back(
-                it,
-                e2,
-                _collisions.check_collision_and_generate_contact(it, e2));
-        }
+            _contacts.emplace_back(it, e2, _collisions.check_collision_and_generate_contact(it, e2));
     }
 }
 
