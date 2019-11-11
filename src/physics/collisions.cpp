@@ -28,8 +28,12 @@ physics_models::contact physics::collisions::check_collision_and_generate_contac
     physics_models::collider* c2;
 
     while (it1.end() != (c1 = it1.get_next()))
+    {
         while (it2.end() != (c2 = it2.get_next()))
             _contact_buffer.insert(c1->accept(*c2, combined_v));
+
+        it2.reset();
+    }
 
     return _contact_buffer.empty()
         ? physics_models::contact::None

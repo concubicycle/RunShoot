@@ -12,8 +12,9 @@
 #include <asset/scene.hpp>
 #include <core/frame_limiter.hpp>
 #include <physics/physics_world.hpp>
-#include "character_controller.hpp"
+#include "freefly_controller.hpp"
 #include "drone_controller.hpp"
+#include "player_controller.hpp"
 
 struct game_systems
 {
@@ -29,8 +30,9 @@ struct game_systems
 
 struct behaviors
 {
-    character_controller& character;
+    freefly_controller& character;
     drone_controller& drone;
+    player_controller& player;
 };
 
 

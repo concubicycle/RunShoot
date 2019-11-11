@@ -15,7 +15,7 @@ physics_models::contact physics_models::intersect(aabb& c0, aabb& c1, glm::vec3&
     // c1 is moving, c0 is not.
     // do axis of separation, for axes (1,0,0), (0,1,0), (0,0,1)
     float t_first = contact::Intersecting, t_last = 999999.f;
-    float t_max = 1.f;
+    float t_max = 1.000001f;
     std::uint32_t collision_axis_index = 0;
     glm::vec3 penetration(0.f);
 
@@ -118,7 +118,13 @@ physics_models::contact physics_models::intersect(aabb& c0, aabb& c1, glm::vec3&
     }
 
     glm::vec3 collision_axis(0.f);
-    collision_axis[collision_axis_index] = combined_velocity[collision_axis_index] * t_first;
+    collision_axis[collision_axis_index] = 1.f;
+
+    if (t_first == 0)
+    {
+        int i = 0;
+        i++;
+    }
 
     return contact(t_first, collision_axis);
 }

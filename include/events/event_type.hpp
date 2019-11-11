@@ -13,7 +13,8 @@ namespace events
     enum event_type : std::uint32_t
     {
         entity_created = 1,
-        entity_destroyed = 2
+        entity_destroyed = 2,
+        collision
     };
 
 }

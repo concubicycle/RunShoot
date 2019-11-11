@@ -34,24 +34,9 @@
       "mass": 0
     },
     {
-      "component_bitshift": 4,
-      "colliders": [
-        {
-          "max": [
-            2,
-            12,
-            2
-          ],
-          "min": [
-            -2,
-            1,
-            -2
-          ]
-        }]
-    },
-    {
-      "component_bitshift": 19,
-      "run_speed": 5
+      "component_bitshift": 17,
+      "run_speed": 5,
+      "walk_speed": 10
     }
   ]
 }

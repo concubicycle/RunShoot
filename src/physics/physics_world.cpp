@@ -36,6 +36,9 @@ void physics::physics_world::update(float frame_time)
     // apply gravity only once
     for (auto &e : _physical_entities)
     {
+        auto& rb = e.get().get_component<ecs::rigid_body_component>();
+        rb.force += rb.gravity / 100.f;
+
         integrate(e, frame_time);
     }
 
@@ -69,12 +72,14 @@ void physics::physics_world::resolve_collisions(float frame_time)
         auto first_col = std::min_element(_contacts.begin(), _contacts.end(), entity_contact::compare);
         auto &collision = *first_col;
 
+
         if (first_col == _contacts.end() || first_col->contact().time() > 1.f) // no more collisions this frame
         {
             for (auto &e : _physical_entities)
             {
                 integrate_position(e, frame_time);
             }
+
             _contacts.clear(); // discard the rest if any
             return;
         }
@@ -82,11 +87,17 @@ void physics::physics_world::resolve_collisions(float frame_time)
         float t = first_col->contact().time();
 
         if (t == physics_models::contact::Intersecting)
+        {
             resolve_collision_discrete(first_col);
+        }
         else
-            resolve_collision_continuous(frame_time, first_col);
+        {
+            resolve_collision_continuous(frame_time *t, first_col);
+        }
 
-        frame_time -= t;
+        _events.invoke<const entity_contact&>(events::collision, collision);
+
+        frame_time -= (t*frame_time);
     }
 }
 
@@ -95,9 +106,6 @@ void physics::physics_world::integrate(ecs::entity &e, float frame_time)
 {
     auto &rb = e.get_component<ecs::rigid_body_component>();
 
-    if (rb.is_kinematic) return;
-
-    rb.force += rb.gravity / 100.f;
     rb.previous_position = rb.position;
     rb.acceleration += rb.mass_inverse() * rb.force;
     rb.force = glm::vec3(0);
@@ -168,9 +176,12 @@ void physics::physics_world::resolve_collision_continuous(
     float frame_time,
     std::vector<physics::entity_contact>::iterator first_col)
 {
+    auto &e1 = first_col->one();
+    auto &e2 = first_col->two();
+
     float t_col = first_col->contact().time() - ContinuousCollisionResolutionBias;
 
-    // move everything up to time of collision minus epsilon
+    // move everything up to time of collision. add some bias for collided entities.
     for (auto &e : _physical_entities)
     {
         integrate_position(e, t_col * frame_time);
@@ -178,14 +189,14 @@ void physics::physics_world::resolve_collision_continuous(
 
     frame_time -= t_col;
 
+    for (auto& c : _contacts)
+        c.decrement_time(t_col);
+
     // kill velocity in direction of each other.
     resolve_velocity(*first_col, first_col->one());
     resolve_velocity(*first_col, first_col->two());
 
     _contacts.erase(first_col);
-
-    auto &e1 = first_col->one();
-    auto &e2 = first_col->two();
 
     // re-run collisions for collided entities - new collisions may occur
     for (auto &it : _collision_entities)
@@ -213,7 +224,7 @@ void physics::physics_world::resolve_velocity(const physics::entity_contact &col
     if (!e.has<ecs::rigid_body_component>()) return;
 
     auto &rb1 = e.get_component<ecs::rigid_body_component>();
-    auto axis = collision.contact().collision_axis();
+    auto axis = collision.collision_axis();
     auto n = glm::normalize(axis);
 
     if (glm::all(glm::isnan(n)))
@@ -223,6 +234,8 @@ void physics::physics_world::resolve_velocity(const physics::entity_contact &col
     }
 
     // is this good math? project the velocity of each onto the face of the polygon
+    // later: the math is fine, the approach is wrong. you can't just kill both velocities -
+    // you have to do this in terms of forces.
     rb1.velocity -= n * glm::dot(n, rb1.velocity);
 
     // zero out force, just don't mess with the physics for collided pairs anymore
@@ -232,39 +245,37 @@ void physics::physics_world::resolve_velocity(const physics::entity_contact &col
 void
 physics::physics_world::resolve_collision_discrete(std::vector<physics::entity_contact>::iterator first_col)
 {
-    bool one_has_rb = first_col->one().has<ecs::rigid_body_component>();
-    bool two_has_rb = first_col->two().has<ecs::rigid_body_component>();
+    auto rb0 = first_col->one().get_component_opt<ecs::rigid_body_component>();
+    auto rb1 = first_col->two().get_component_opt<ecs::rigid_body_component>();
+    auto rb0_physical = rb0 && !(rb0->get().is_kinematic);
+    auto rb1_physical = rb1 && !(rb1->get().is_kinematic);
 
-    if (!(one_has_rb || two_has_rb))
+    if (!(rb0_physical || rb1_physical))
     {
         _contacts.erase(first_col);
         return;
     }
 
-    if (one_has_rb && two_has_rb)
+    if (rb0_physical && rb1_physical)
     {
-        auto &rb0 = first_col->one().get_component<ecs::rigid_body_component>();
-        auto &rb1 = first_col->two().get_component<ecs::rigid_body_component>();
         auto c0_move = first_col->contact().collision_axis() / 2.001f;
         auto c1_move = first_col->contact().collision_axis() / -2.001f;
-        rb0.position += c0_move;
-        rb1.position += c1_move;
+        rb0->get().position += c0_move;
+        rb1->get().position += c1_move;
         resolve_velocity(*first_col, first_col->one());
         resolve_velocity(*first_col, first_col->two());
         update_collider_positions(first_col->one());
         update_collider_positions(first_col->two());
-    } else if (one_has_rb)
+    } else if (rb0_physical)
     {
-        auto &rb0 = first_col->one().get_component<ecs::rigid_body_component>();
-        auto c0_move = first_col->contact().collision_axis() * -1.1f;
-        rb0.position += c0_move;
+        auto c0_move = first_col->contact().collision_axis() * -1.001f;
+        rb0->get().position += c0_move;
         resolve_velocity(*first_col, first_col->one());
         update_collider_positions(first_col->one());
     } else
     {
-        auto &rb1 = first_col->two().get_component<ecs::rigid_body_component>();
-        auto c1_move = first_col->contact().collision_axis() * 1.1f;
-        rb1.position += c1_move;
+        auto c1_move = first_col->contact().collision_axis() * 1.001f;
+        rb1->get().position += c1_move;
         resolve_velocity(*first_col, first_col->two());
         update_collider_positions(first_col->two());
     }

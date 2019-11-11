@@ -2,8 +2,8 @@
 // Created by sava on 10/21/19.
 //
 
-#ifndef __CHARACTER_CONTROLLER_HPP_
-#define __CHARACTER_CONTROLLER_HPP_
+#ifndef __FREEFLY_CONTROLLER_HPP_
+#define __FREEFLY_CONTROLLER_HPP_
 
 #include <iostream>
 #include <core/behavior.hpp>
@@ -14,18 +14,18 @@
 #include <glm/gtx/vector_angle.hpp>
 #include <glm/gtx/string_cast.hpp>
 
-#include "components/character_controller_component.hpp"
+#include "components/freefly_controller_component.hpp"
 
 
-class character_controller : public core::behavior
+class freefly_controller : public core::behavior
 {
 public:
-    explicit character_controller(events::event_exchange& events)  : behavior(events) {}
+    explicit freefly_controller(events::event_exchange& events)  : behavior(events) {}
 
     component_bitset required_components()  const override
     {
         return
-            character_controller_component::archetype_bit |
+            freefly_controller_component::archetype_bit |
             ecs::transform_component::archetype_bit |
             ecs::camera_component::archetype_bit;
     }
@@ -36,7 +36,7 @@ protected:
     {
         auto& t = e.get_component<ecs::transform_component>();
         auto& c = e.get_component<ecs::camera_component>();
-        auto& ctr = e.get_component<character_controller_component>();
+        auto& ctr = e.get_component<freefly_controller_component>();
 
         auto& input = ctx.input;
         auto frame_time = ctx.time.smoothed_delta_secs();
@@ -93,4 +93,4 @@ protected:
 };
 
 
-#endif //__CHARACTER_CONTROLLER_HPP_
+#endif //__FREEFLY_CONTROLLER_HPP_

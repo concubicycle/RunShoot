@@ -30,9 +30,10 @@ using GLenum = gl::GLenum;
 #include <renderer/model_render_loader.hpp>
 #include <renderer/renderer.hpp>
 
-#include "character_controller.hpp"
+#include "freefly_controller.hpp"
 #include "components/add_custom_components.hpp"
 #include "runshoot.hpp"
+#include "player_controller.hpp"
 
 using float_seconds = std::chrono::duration<float>;
 
@@ -88,8 +89,9 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     physics::collisions collisions;
     physics::physics_world physics(events, collisions);
 
-    character_controller controller(events);
+    freefly_controller controller(events);
     drone_controller drone_controller(events);
+    player_controller player_controller(events);
 
     auto scene = loader.load_scene("./assets/scenes/scene.json", entities);
 
@@ -100,7 +102,7 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     textures.unload_all();
 
     game_systems data = {window, timer, limiter, input, renderer, scene, events, physics};
-    behaviors behaviors = {controller, drone_controller};
+    behaviors behaviors = {controller, drone_controller, player_controller};
     render_loop(data, behaviors);
 }
 
@@ -120,6 +122,7 @@ void render_loop(game_systems &data, behaviors &behaviors)
 
         behaviors.character.update(ctx);
         behaviors.drone.update(ctx);
+        behaviors.player.update(ctx);
 
         data.renderer.draw_scene(data.scene);
 

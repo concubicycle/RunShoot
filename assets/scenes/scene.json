@@ -1,34 +1,12 @@
 {
   "entities": [
     {
-      "entity_id": 1,
-      "components": [
-        {
-          "component_bitshift": 0,
-          "x": 5,
-          "y": 4,
-          "z": -12.0,
-          "pitch": 0,
-          "yaw": 0,
-          "roll": 0,
-          "scale_x": 1.0,
-          "scale_y": 1.0,
-          "scale_z": 1.0
-        },
-        {
-          "component_bitshift": 2,
-          "mesh_path": "./assets/models/wall_quad.json",
-          "mesh_format": 1
-        }
-      ]
-    },
-    {
       "entity_id": 2,
       "prototype": "./assets/prototypes/seg1.json"
     },
     {
       "entity_id": 111,
-      "prototype": "./assets/prototypes/player.json",
+      "prototype": "./assets/prototypes/freefly_player.json",
       "components": [
         {
           "component_bitshift": 0,
@@ -83,6 +61,8 @@
         }
       ]
     },
+
+
     {
       "entity_id": 7,
       "prototype": "./assets/prototypes/phys_cube.json",
@@ -90,14 +70,10 @@
         {
           "component_bitshift": 0,
           "x": 0,
-          "y": 35,
-          "z": -30
+          "y": 50,
+          "z": -9
         }
       ]
-    },
-    {
-      "entity_id": 2,
-      "prototype": "./assets/prototypes/seg1.json"
     },
     {
       "entity_id": 8,

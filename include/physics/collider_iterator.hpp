@@ -46,6 +46,12 @@ namespace physics
             return end();
         }
 
+        void reset()
+        {
+            _current_index = 0;
+            _current_type = aabb;
+        }
+
     private:
         enum collider_type
         {

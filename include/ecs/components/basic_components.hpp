@@ -130,7 +130,7 @@ namespace ecs
         void set_mass(float mass)
         {
             _mass = mass;
-            _mass_inverse = 1.f / mass;
+            _mass_inverse = mass == 0 ? 0 : 1.f / mass;
         }
 
     private:

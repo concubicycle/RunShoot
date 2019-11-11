@@ -24,9 +24,9 @@ namespace physics_models
         float time() const { return _time; }
         const glm::vec3& collision_axis() const { return _collision_axis; }
 
-        inline float decrement_time(float frame_time)
+        void decrement_time(float val)
         {
-            return frame_time - _time;
+            _time -= val;
         }
 
     private:

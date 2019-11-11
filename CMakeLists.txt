@@ -53,14 +53,17 @@ add_executable(${TARGET_NAME}
                apps/milestone1.hpp
                apps/milestone1.cpp
                apps/runshoot.cpp
-               apps/character_controller.hpp
-               apps/components/character_controller_component.cpp
-               apps/components/character_controller_component.hpp
+               apps/freefly_controller.hpp
+               apps/components/freefly_controller_component.cpp
+               apps/components/freefly_controller_component.hpp
                apps/components/drone_controller_component.cpp
                apps/components/drone_controller_component.hpp
                apps/drone_controller.hpp
-               apps/run_shoot_character_controller.cpp
-               apps/run_shoot_character_controller.hpp)
+               apps/player_controller.cpp
+               apps/player_controller.hpp
+               apps/components/player_controller_component.hpp
+               apps/components/player_controller_component.cpp
+               apps/components/runshoot_component.hpp)
 
 add_executable(generate_colliders apps/generate_colliders.cpp)
 
@@ -146,7 +149,8 @@ add_dependencies(${TARGET_NAME}
                  ${ASSETLIB_NAME}
                  ${CORELIB_NAME}
                  ${PLATFORMLIB_NAME}
-                 ${RENDERER})
+                 ${RENDERER}
+                 ${PHYSICS_LIB})
 
 add_dependencies(${ASSETLIB_NAME}
                  #tinygltf

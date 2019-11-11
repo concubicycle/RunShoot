@@ -20,7 +20,7 @@ namespace core
         explicit behavior(events::event_exchange &events) : _events(events)
         {
             std::function<void(ecs::entity&)> on_create =
-                std::bind(&behavior::on_entity_created, this, std::placeholders::_1);
+                std::bind(&behavior::_on_entity_created, this, std::placeholders::_1);
 
             std::function<void(ecs::entity&)> on_destroy =
                 std::bind(&behavior::on_entity_destroyed, this, std::placeholders::_1);
@@ -46,20 +46,23 @@ namespace core
 
     protected:
         virtual void update_single(ecs::entity& e, behavior_context &ctx) = 0;
+        virtual void on_entity_created(ecs::entity& e) {}
+        events::event_exchange& _events;
 
     private:
-        events::event_exchange& _events;
+
         std::vector<std::reference_wrapper<ecs::entity>> _entities;
         listener_id _listener_id_create;
         listener_id _listener_id_destroy;
 
-        void on_entity_created(ecs::entity& e)
+        void _on_entity_created(ecs::entity& e)
         {
             auto req_comps = required_components();
             auto e_comps = e.archetype_id();
             if ((req_comps & e_comps) == req_comps)
             {
                 _entities.emplace_back(e);
+                on_entity_created(e);
             }
         }
 

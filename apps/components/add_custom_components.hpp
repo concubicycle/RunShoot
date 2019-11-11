@@ -12,26 +12,34 @@
 #include <nlohmann/json.hpp>
 using nlohmann::json;
 
-#include "character_controller_component.hpp"
+#include "freefly_controller_component.hpp"
 #include "drone_controller_component.hpp"
+#include "player_controller_component.hpp"
 
 // add own custom components to static variables from ecs
 void add_custom_components()
 {
     ecs::component_meta::bit_metas.insert(std::make_pair(
-        character_controller_component::component_bitshift,
-        ecs::component_meta::of<character_controller_component>()));
+        freefly_controller_component::component_bitshift,
+        ecs::component_meta::of<freefly_controller_component>()));
 
     ecs::component_meta::bit_metas.insert(std::make_pair(
         drone_controller_component::component_bitshift,
         ecs::component_meta::of<drone_controller_component>()));
 
+    ecs::component_meta::bit_metas.insert(std::make_pair(
+        player_controller_component::component_bitshift,
+        ecs::component_meta::of<player_controller_component>()));
+
 
     asset::component_loader::loader_functions.insert(
-        std::make_pair(character_controller_component::component_bitshift, load_character_controller));
+        std::make_pair(freefly_controller_component::component_bitshift, load_character_controller));
 
     asset::component_loader::loader_functions.insert(
         std::make_pair(drone_controller_component::component_bitshift, load_drone_controller));
+
+    asset::component_loader::loader_functions.insert(
+        std::make_pair(player_controller_component::component_bitshift, load_player_controller));
 }
 
 #endif //__ADD_CUSTOM_COMPONENTS_HPP_

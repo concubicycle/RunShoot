@@ -26,14 +26,18 @@ namespace physics
 
         const physics_models::contact &contact() const { return _contact; }
 
+        const glm::vec3& collision_axis() const { return _contact.collision_axis(); }
+        float time() const { return _contact.time(); }
+        void decrement_time(float amount) { _contact.decrement_time(amount); }
+
         static bool compare(const entity_contact& a, const entity_contact& b)
         {
-            return a.contact().time() < b.contact().time();
+            return a.time() < b.time();
         }
 
         static bool compare_descending(const entity_contact& a, const entity_contact& b)
         {
-            return a.contact().time() > b.contact().time();
+            return a.time() > b.time();
         }
 
     private:

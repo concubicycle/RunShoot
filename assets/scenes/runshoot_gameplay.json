@@ -1,0 +1,12 @@
+{
+  "entities": [
+    {
+      "entity_id": 111,
+      "prototype": "./assets/prototypes/player.json"
+    },
+    {
+      "entity_id": 2,
+      "prototype": "./assets/prototypes/seg1.json"
+    }
+  ]
+}

@@ -30,10 +30,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/apps/components/player_controller_component.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/components/player_controller_component.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/components/runshoot_component.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/player_controller.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/player_controller.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/prototypes/freefly_player.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/scenes/runshoot_gameplay.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/character_controller.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/freefly_controller.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/components/add_custom_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/add_custom_components.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/components/character_controller_component.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/freefly_controller_component.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/components/character_controller_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/freefly_controller_component.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/components/drone_controller_component.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/drone_controller_component.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/run_shoot_character_controller.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/run_shoot_character_controller.hpp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/runshoot.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/runshoot.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/physics_models/collision_tests.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics_models/collision_tests.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/runshoot.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/runshoot.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/blender/seg1.blend" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg1.blend" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/blender/seg1.blend1" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg1.blend1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg1/seg1.bin" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg1/seg1.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg1/seg1.gltf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg1/seg1.gltf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/player.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/player.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/seg1.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/seg1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/scenes/scene.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scenes/scene.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/core/behavior.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/core/behavior.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/events/event_type.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/events/event_type.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/physics/collider_iterator.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics/collider_iterator.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/physics/entity_contact.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics/entity_contact.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/physics_models/contact.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics_models/contact.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/physics/collisions.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/physics/collisions.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/physics/physics_world.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/physics/physics_world.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/physics_models/collision_tests.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/physics_models/collision_tests.cpp" afterDir="false" />
     </list>
@@ -308,7 +337,9 @@
       <workItem from="1573236738282" duration="20481000" />
       <workItem from="1573270201116" duration="3135000" />
       <workItem from="1573312689343" duration="952000" />
-      <workItem from="1573313655598" duration="18638000" />
+      <workItem from="1573313655598" duration="22354000" />
+      <workItem from="1573417567049" duration="27652000" />
+      <workItem from="1573462909936" duration="7112000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>
@@ -369,6 +400,16 @@
           <url>file://$PROJECT_DIR$/apps/generate_colliders.cpp</url>
           <line>64</line>
           <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/physics_models/collision_tests.cpp</url>
+          <line>124</line>
+          <option name="timeStamp" value="82" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/physics/physics_world.cpp</url>
+          <line>90</line>
+          <option name="timeStamp" value="84" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
