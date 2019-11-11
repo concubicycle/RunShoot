@@ -5,9 +5,7 @@
 
 physics_models::contact physics::collisions::check_collision_and_generate_contact(
     ecs::entity &one,
-    ecs::entity &two,
-    float frame_time
-    )
+    ecs::entity &two)
 {
     _contact_buffer.clear();
 
@@ -19,7 +17,7 @@ physics_models::contact physics::collisions::check_collision_and_generate_contac
               ? two.get_component<ecs::rigid_body_component>().velocity
               : glm::vec3(0);
 
-    auto combined_v = (v1 - v0) * frame_time;
+    auto combined_v = v1 - v0;
 
     collider_iterator it1(one);
     collider_iterator it2(two);

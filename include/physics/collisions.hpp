@@ -24,8 +24,7 @@ namespace physics
     public:
         physics_models::contact check_collision_and_generate_contact(
             ecs::entity &one,
-            ecs::entity &two,
-            float frame_time);
+            ecs::entity &two);
 
     private:
         std::set<physics_models::contact, physics_models::contact_compare> _contact_buffer;

@@ -33,12 +33,10 @@ void physics::physics_world::update(float frame_time)
 {
     _contacts.clear();
 
-    // apply gravity only once
     for (auto &e : _physical_entities)
     {
         auto& rb = e.get().get_component<ecs::rigid_body_component>();
-        rb.force += rb.gravity / 100.f;
-
+        rb.force += rb.mass() * rb.gravity / 50.f;
         integrate(e, frame_time);
     }
 
@@ -60,7 +58,7 @@ void physics::physics_world::detect_collisions(float frame_time)
             _contacts.emplace_back(
                 e1,
                 e2,
-                _collisions.check_collision_and_generate_contact(e1, e2, frame_time));
+                _collisions.check_collision_and_generate_contact(e1, e2));
         }
     }
 }
@@ -72,8 +70,7 @@ void physics::physics_world::resolve_collisions(float frame_time)
         auto first_col = std::min_element(_contacts.begin(), _contacts.end(), entity_contact::compare);
         auto &collision = *first_col;
 
-
-        if (first_col == _contacts.end() || first_col->contact().time() > 1.f) // no more collisions this frame
+        if (first_col == _contacts.end() || first_col->contact().time() > frame_time) // no more collisions this frame
         {
             for (auto &e : _physical_entities)
             {
@@ -84,19 +81,14 @@ void physics::physics_world::resolve_collisions(float frame_time)
             return;
         }
 
-        float t_col = first_col->contact().time();
-        float dt = t_col * frame_time;
+        float dt = first_col->contact().time();
 
-        if (t_col == physics_models::contact::Intersecting)
-        {
+        if (dt == physics_models::contact::Intersecting)
             resolve_collision_discrete(first_col);
-        }
         else
-        {
             resolve_collision_continuous(dt, first_col);
-        }
 
-        _events.invoke<const entity_contact&>(events::collision, collision);
+        _events.invoke<const entity_contact&, float>(events::collision, collision, dt);
 
         frame_time -= dt;
     }
@@ -180,18 +172,18 @@ void physics::physics_world::resolve_collision_continuous(
     auto &e1 = first_col->one();
     auto &e2 = first_col->two();
 
-    float t_col = first_col->contact().time() - ContinuousCollisionResolutionBias;
+    float dt = first_col->contact().time() - ContinuousCollisionResolutionBias;
 
     // move everything up to time of collision. add some bias for collided entities.
     for (auto &e : _physical_entities)
     {
-        integrate_position(e, t_col * frame_time);
+        integrate_position(e, dt);
     }
 
-    frame_time -= t_col;
+    frame_time -= dt;
 
     for (auto& c : _contacts)
-        c.decrement_time(t_col);
+        c.decrement_time(dt);
 
     // kill velocity in direction of each other.
     resolve_velocity(*first_col, first_col->one());
@@ -207,7 +199,7 @@ void physics::physics_world::resolve_collision_continuous(
             _contacts.emplace_back(
                 it,
                 e1,
-                _collisions.check_collision_and_generate_contact(it, e1, frame_time));
+                _collisions.check_collision_and_generate_contact(it, e1));
         }
 
         if (it.get().id() != e2.id())
@@ -215,7 +207,7 @@ void physics::physics_world::resolve_collision_continuous(
             _contacts.emplace_back(
                 it,
                 e2,
-                _collisions.check_collision_and_generate_contact(it, e2, frame_time));
+                _collisions.check_collision_and_generate_contact(it, e2));
         }
     }
 }
@@ -259,8 +251,8 @@ physics::physics_world::resolve_collision_discrete(std::vector<physics::entity_c
 
     if (rb0_physical && rb1_physical)
     {
-        auto c0_move = first_col->contact().collision_axis() / 2.001f;
-        auto c1_move = first_col->contact().collision_axis() / -2.001f;
+        auto c0_move = first_col->contact().collision_axis() / 2.0001f;
+        auto c1_move = first_col->contact().collision_axis() / -2.0001f;
         rb0->get().position += c0_move;
         rb1->get().position += c1_move;
         resolve_velocity(*first_col, first_col->one());
@@ -269,13 +261,13 @@ physics::physics_world::resolve_collision_discrete(std::vector<physics::entity_c
         update_collider_positions(first_col->two());
     } else if (rb0_physical)
     {
-        auto c0_move = first_col->contact().collision_axis() * -1.001f;
+        auto c0_move = first_col->contact().collision_axis() * -1.01f;
         rb0->get().position += c0_move;
         resolve_velocity(*first_col, first_col->one());
         update_collider_positions(first_col->one());
     } else
     {
-        auto c1_move = first_col->contact().collision_axis() * -1.001f;
+        auto c1_move = first_col->contact().collision_axis() * -1.01f;
         rb1->get().position += c1_move;
         resolve_velocity(*first_col, first_col->two());
         update_collider_positions(first_col->two());

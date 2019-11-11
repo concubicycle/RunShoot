@@ -11,7 +11,7 @@
 #include <physics/collider_iterator.hpp>
 #include "components/player_controller_component.hpp"
 
-#define GRAVITY_ACCELERATION -6.f
+#define GRAVITY_ACCELERATION -0.5f
 
 class player_controller : public core::behavior
 {
@@ -21,9 +21,9 @@ class player_controller : public core::behavior
 public:
     player_controller(events::event_exchange& events)  : behavior(events)
     {
-        _collision_listener_id = _events.subscribe<const physics::entity_contact&>(
+        _collision_listener_id = _events.subscribe<const physics::entity_contact&, float>(
             events::collision,
-            std::function<void(const physics::entity_contact&)>(on_collision));
+            std::function<void(const physics::entity_contact&, float)>(on_collision));
     }
 
     ~player_controller()
@@ -51,8 +51,10 @@ protected:
         auto& player = e.get_component<player_controller_component>();
         auto& c = e.get_component<ecs::camera_component>();
         auto& t = e.get_component<ecs::transform_component>();
+        auto& rb = e.get_component<ecs::rigid_body_component>();
 
         player.to_camera = c.position - t.pos;
+        rb.velocity = player.direction * player.run_speed;
     }
 
 private:
@@ -60,35 +62,57 @@ private:
 
     static void update_running(ecs::entity& e, player_controller_component& comp, float frame_time)
     {
+        auto& rb = e.get_component<ecs::rigid_body_component>();
         auto& t = e.get_component<ecs::transform_component>();
-        move_component_positions(e, comp.direction * comp.run_speed * frame_time);
 
-        auto gravity_v= glm::vec3(0.f, 1.f, 0.f) * GRAVITY_ACCELERATION;
-        t.pos += frame_time * gravity_v;
+
+        if (comp.time_since_collision > 0.25f)
+        {
+            comp.is_grounded = false;
+        }
+
+        // integrate
+        auto fa = rb.force * rb.mass_inverse();
+        auto ga = glm::vec3(0.f, GRAVITY_ACCELERATION, 0.f);
+        rb.acceleration += fa;
+        rb.velocity += (fa + ga) * frame_time;
+        rb.force = glm::vec3(0);
+
+        move_component_positions(e, rb.velocity * frame_time);
     }
 
-    static void on_collision(const physics::entity_contact& collision)
+    static void on_collision(const physics::entity_contact& collision, float dt)
     {
         auto one_comp = collision.one().get_component_opt<player_controller_component>();
         auto two_comp = collision.two().get_component_opt<player_controller_component>();
-        if (one_comp) resolve_collision(collision, collision.one(), *one_comp);
-        if (two_comp) resolve_collision(collision, collision.two(), *two_comp);
+        if (one_comp) resolve_collision(collision, collision.one(), *one_comp, dt);
+        if (two_comp) resolve_collision(collision, collision.two(), *two_comp, dt);
     }
 
     static void resolve_collision(
         const physics::entity_contact& collision,
         ecs::entity& e,
-        player_controller_component& component)
+        player_controller_component& component,
+        float dt)
     {
+        auto& rb = e.get_component<ecs::rigid_body_component>();
         auto& n = collision.contact().collision_axis();
 
         component.is_grounded = true;
 
         auto intersecting = collision.contact().time() == physics_models::contact::Intersecting;
-        auto move = e.id() == collision.one().id() && intersecting
-            ? n * -1.5f
-            : n * 1.5f;
-        move_component_positions(e, move);
+
+        if (intersecting)
+        {
+            auto move = n * -1.5f;
+            move_component_positions(e, move);
+        } else
+        {
+            auto move = rb.velocity * (dt - 0.001f);
+            auto n = glm::normalize(collision.collision_axis());
+            rb.velocity -= n * glm::dot(n, rb.velocity);
+            rb.force.x = rb.force.y = rb.force.z = 0.f;
+        }
 
         component.time_since_collision = 0;
     }

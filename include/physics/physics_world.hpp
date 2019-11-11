@@ -20,7 +20,6 @@ namespace physics
         const std::uint32_t NumContactsReserved = 1024;
         const std::uint32_t NumEntitiesReserved = 2048;
         const float ContinuousCollisionResolutionBias = 0.0005f;
-        const float DiscreteCollisionResolutionBias = 0.002f;
 
     public:
         physics_world(events::event_exchange &events, collisions &collisions);

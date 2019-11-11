@@ -31,14 +31,11 @@
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/core/frame_timer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/core/frame_timer.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/physics/entity_contact.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics/entity_contact.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/player_controller.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/player.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/player.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/physics/collisions.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics/collisions.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/physics/physics_world.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics/physics_world.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/physics_models/collision_tests.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics_models/collision_tests.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/physics_models/contact.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics_models/contact.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/frame_timer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/frame_timer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/physics/collisions.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/physics/collisions.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/physics/physics_world.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/physics/physics_world.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -97,15 +94,15 @@
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C/C++" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/shaders" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/include/physics_models" />
       <recent name="$PROJECT_DIR$/build/assets/models" />
       <recent name="$PROJECT_DIR$/apps" />
       <recent name="$PROJECT_DIR$/thirdparty/opengllib/include" />
       <recent name="$PROJECT_DIR$/src/asset" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/assets/shaders" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -314,7 +311,7 @@
       <workItem from="1573312689343" duration="952000" />
       <workItem from="1573313655598" duration="22354000" />
       <workItem from="1573417567049" duration="27652000" />
-      <workItem from="1573462909936" duration="11949000" />
+      <workItem from="1573462909936" duration="17795000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>
@@ -375,6 +372,11 @@
           <url>file://$PROJECT_DIR$/apps/generate_colliders.cpp</url>
           <line>64</line>
           <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/physics/physics_world.cpp</url>
+          <line>86</line>
+          <option name="timeStamp" value="100" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
