@@ -42,3 +42,9 @@ float core::frame_timer::smoothed_delta_secs() const
 {
 	return std::chrono::duration_cast<float_seconds>(_smoothed_delta).count();
 }
+
+float core::frame_timer::delta_secs() const
+{
+    return std::chrono::duration_cast<float_seconds>(_delta).count();
+}
+

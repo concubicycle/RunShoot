@@ -120,7 +120,7 @@ namespace ecs
         glm::vec3 velocity;
         glm::vec3 acceleration;
         glm::vec3 force;
-        glm::vec3 gravity = glm::vec3(0, -9.8f, 0);
+        glm::vec3 gravity = glm::vec3(0, -3.8f, 0);
 
         bool is_kinematic;
 

@@ -32,12 +32,12 @@ public:
     void start();
     void end();
 
-    std::chrono::nanoseconds delta() const;
-    std::chrono::nanoseconds smoothed_delta() const;
-    float smoothed_delta_secs() const;
-    std::chrono::nanoseconds current_frame_time() const;
-
-    std::string frame_info() const;
+    [[nodiscard]] std::chrono::nanoseconds delta() const;
+    [[nodiscard]] std::chrono::nanoseconds smoothed_delta() const;
+    [[nodiscard]] float smoothed_delta_secs() const;
+    [[nodiscard]] float delta_secs() const;
+    [[nodiscard]] std::chrono::nanoseconds current_frame_time() const;
+    [[nodiscard]] std::string frame_info() const;
 };
 } // namespace core
 

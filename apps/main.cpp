@@ -114,11 +114,8 @@ void render_loop(game_systems &data, behaviors &behaviors)
 
     while (!glfwWindowShouldClose(data.window))
     {
-        float dt = data.timer.smoothed_delta_secs();
-
         data.timer.start();
-
-        data.physics.update(dt);
+        data.physics.update(data.timer.delta_secs());
 
         behaviors.character.update(ctx);
         behaviors.drone.update(ctx);

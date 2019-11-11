@@ -21,8 +21,8 @@ namespace physics_models
         explicit contact(float t, glm::vec3 collision_axis) : _time(t), _collision_axis(collision_axis) {}
         explicit contact(glm::vec3 penetration) : _collision_axis(penetration), _time(Intersecting)  {}
 
-        float time() const { return _time; }
-        const glm::vec3& collision_axis() const { return _collision_axis; }
+        [[nodiscard]] float time() const { return _time; }
+        [[nodiscard]] const glm::vec3& collision_axis() const { return _collision_axis; }
 
         void decrement_time(float val)
         {

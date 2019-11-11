@@ -17,7 +17,7 @@ namespace physics_models
     const float ContactNudge = 0.0000001f;
 
     // for combined_velocity, consider
-    contact intersect(aabb& c0, aabb& c1, glm::vec3& combined_velocity);
+    contact intersect(aabb& c0, aabb& c1, glm::vec3& c1_velocity);
     contact intersect(aabb& c0, sphere& c1, glm::vec3& combined_velocity);
     contact intersect(sphere& c0, sphere& c1, glm::vec3& combined_velocity);
 }

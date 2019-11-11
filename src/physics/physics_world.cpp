@@ -84,20 +84,21 @@ void physics::physics_world::resolve_collisions(float frame_time)
             return;
         }
 
-        float t = first_col->contact().time();
+        float t_col = first_col->contact().time();
+        float dt = t_col * frame_time;
 
-        if (t == physics_models::contact::Intersecting)
+        if (t_col == physics_models::contact::Intersecting)
         {
             resolve_collision_discrete(first_col);
         }
         else
         {
-            resolve_collision_continuous(frame_time *t, first_col);
+            resolve_collision_continuous(dt, first_col);
         }
 
         _events.invoke<const entity_contact&>(events::collision, collision);
 
-        frame_time -= (t*frame_time);
+        frame_time -= dt;
     }
 }
 
@@ -274,7 +275,7 @@ physics::physics_world::resolve_collision_discrete(std::vector<physics::entity_c
         update_collider_positions(first_col->one());
     } else
     {
-        auto c1_move = first_col->contact().collision_axis() * 1.001f;
+        auto c1_move = first_col->contact().collision_axis() * -1.001f;
         rb1->get().position += c1_move;
         resolve_velocity(*first_col, first_col->two());
         update_collider_positions(first_col->two());

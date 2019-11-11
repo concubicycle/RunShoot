@@ -20,14 +20,12 @@ namespace physics
         {
         }
 
-        ecs::entity &one() const { return _one.get(); }
+        [[nodiscard]] ecs::entity &one() const { return _one.get(); }
+        [[nodiscard]] ecs::entity &two() const { return _two.get(); }
+        [[nodiscard]] const physics_models::contact &contact() const { return _contact; }
+        [[nodiscard]] const glm::vec3& collision_axis() const { return _contact.collision_axis(); }
+        [[nodiscard]] float time() const { return _contact.time(); }
 
-        ecs::entity &two() const { return _two.get(); }
-
-        const physics_models::contact &contact() const { return _contact; }
-
-        const glm::vec3& collision_axis() const { return _contact.collision_axis(); }
-        float time() const { return _contact.time(); }
         void decrement_time(float amount) { _contact.decrement_time(amount); }
 
         static bool compare(const entity_contact& a, const entity_contact& b)
