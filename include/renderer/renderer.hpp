@@ -58,6 +58,13 @@ private:
 
     ecs::entity* _camera_entity;
     listener_id _cam_listener_id;
+    listener_id _cam_remove_listener_id;
+
+    float _screen_width, _screen_height;
+
+
+    void grab_entity(ecs::entity& e);
+    void forget_entity(ecs::entity& e);
 };
 } // namespace rendering
 

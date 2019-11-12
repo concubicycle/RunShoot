@@ -38,18 +38,26 @@ rendering::renderer::renderer(
     _events(events),
     _camera_entity(nullptr)
 {
-    auto grab_camera = [this](ecs::entity &e) {
-        if (e.archetype_id() & ecs::camera_component::archetype_bit)
-            _camera_entity = &e;
-    };
+    auto grab_cam_fn = std::function<void(ecs::entity &)>([this](ecs::entity &e) { grab_entity(e); });
+    auto forget_cam_fn = std::function<void(ecs::entity &)>([this](ecs::entity &e) { forget_entity(e); });
+    _cam_listener_id = _events.subscribe<ecs::entity &>(events::entity_created, grab_cam_fn);
+    _cam_remove_listener_id = _events.subscribe(events::entity_destroyed, forget_cam_fn);
 
-    // todo: if camera is destroyed, set pointer to null
-    _cam_listener_id = _events.subscribe(events::entity_created, std::function<void(ecs::entity &)>(grab_camera));
+    if (_config.fullscreen())
+    {
+        _screen_width = _system_info.monitor_width();
+        _screen_height = _system_info.monitor_height();
+    } else
+    {
+        _screen_width = _config.width();
+        _screen_height = _config.height();
+    }
 }
 
 rendering::renderer::~renderer()
 {
     _events.unsubscribe(events::entity_created, _cam_listener_id);
+    _events.unsubscribe(events::entity_destroyed, _cam_remove_listener_id);
 }
 
 
@@ -88,30 +96,11 @@ void rendering::renderer::draw_scene(asset::scene &scene)
 
     auto &entities = scene.entity_world();
 
-    // for now, just go through all entities,
-    // and draw them if they have required components.
     entities.for_all_entities([this](ecs::entity &e) {
-        auto is_rt =
-            (e.archetype_id() & ecs::render_component_ogl::archetype_bit) &&
-            (e.archetype_id() & ecs::transform_component::archetype_bit);
-
+        auto is_rt = e.has<ecs::render_component_ogl>() && e.has<ecs::transform_component>();
         if (!is_rt) return;
 
-        std::uint32_t width, height;
-
-        // todo: break out to separate method
-        if (_config.fullscreen())
-        {
-            width = _system_info.monitor_width();
-            height = _system_info.monitor_height();
-        } else
-        {
-            width = _config.width();
-            height = _config.height();
-        }
-
         auto &cam = _camera_entity->get_component<ecs::camera_component>();
-
         auto &r = e.get_component<ecs::render_component_ogl>();
         auto &t = e.get_component<ecs::transform_component>();
 
@@ -122,7 +111,7 @@ void rendering::renderer::draw_scene(asset::scene &scene)
 
         auto model_inverse = glm::inverse(model);
 
-        auto aspect = (float)width / (float)height;
+        auto aspect = _screen_width / _screen_height;
         auto projection = glm::perspective(cam.fov, aspect, cam.near, cam.far);
 
         auto cam_basis = cam.right_up_fwd();
@@ -190,5 +179,21 @@ void rendering::renderer::draw_scene(asset::scene &scene)
 void rendering::renderer::resize(std::uint32_t width, std::uint32_t height)
 {
     glViewport(0, 0, width, height);
+}
+
+void rendering::renderer::grab_entity(ecs::entity &e)
+{
+    if (e.archetype_id() & ecs::camera_component::archetype_bit)
+    {
+        _camera_entity = &e;
+    }
+}
+
+void rendering::renderer::forget_entity(ecs::entity &e)
+{
+    if (e.archetype_id() & ecs::camera_component::archetype_bit)
+    {
+        _camera_entity = nullptr;
+    }
 }
 

@@ -80,14 +80,7 @@ void physics::physics_world::resolve_collisions(float frame_time)
         if (dt == physics_models::contact::Intersecting)
             resolve_collision_discrete(first_col);
         else
-        {
-            for (auto& e : _physical_entities)
-                integrate_position(e, dt);
-            _contacts.erase(first_col);
-
-            //resolve_collision_continuous(dt, first_col);
-        }
-
+            resolve_collision_continuous(dt, first_col);
 
         _events.invoke<const entity_contact&, float>(events::collision, collision, dt);
 
