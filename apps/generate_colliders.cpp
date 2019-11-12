@@ -146,6 +146,15 @@ int main()
         current_z = v.z;
     }
 
+    float last_z = vertices.back().z;
+
+    aabbs.push_back({
+        {"min", {last_xmin, ground_y_min, last_z }},
+        {"max", {last_xmax, ground_y_max, last_span_change_z }}
+    });
+
+
+
     std::ofstream o("aabbs.json");
     o << std::setw(4) << aabbs << std::endl;
 };

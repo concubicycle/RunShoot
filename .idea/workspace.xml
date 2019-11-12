@@ -31,6 +31,14 @@
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/freefly_controller.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/freefly_controller.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/generate_colliders.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/generate_colliders.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/player_controller.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/freefly_player.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/freefly_player.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/player.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/player.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/seg1.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/seg1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/scenes/scene.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scenes/scene.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/physics/physics_world.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/physics/physics_world.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -306,7 +314,7 @@
       <workItem from="1573312689343" duration="952000" />
       <workItem from="1573313655598" duration="22354000" />
       <workItem from="1573417567049" duration="27652000" />
-      <workItem from="1573462909936" duration="18000000" />
+      <workItem from="1573462909936" duration="22442000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>
@@ -369,9 +377,9 @@
           <option name="timeStamp" value="34" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/physics/physics_world.cpp</url>
-          <line>86</line>
-          <option name="timeStamp" value="100" />
+          <url>file://$PROJECT_DIR$/apps/player_controller.hpp</url>
+          <line>84</line>
+          <option name="timeStamp" value="106" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

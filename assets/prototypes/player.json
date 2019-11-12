@@ -44,14 +44,14 @@
           ],
           "min": [
             -2,
-            1.1,
+            1.3,
             -2
           ]
         }]
     },
     {
       "component_bitshift": 19,
-      "run_speed": 5
+      "run_speed": 25
     }
   ]
 }

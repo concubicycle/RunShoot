@@ -35,8 +35,8 @@
     },
     {
       "component_bitshift": 17,
-      "run_speed": 5,
-      "walk_speed": 10
+      "run_speed": 35,
+      "walk_speed": 35
     }
   ]
 }

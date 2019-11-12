@@ -36,7 +36,7 @@ void physics::physics_world::update(float frame_time)
     for (auto &e : _physical_entities)
     {
         auto& rb = e.get().get_component<ecs::rigid_body_component>();
-        rb.force += rb.mass() * rb.gravity;
+        rb.force += rb.mass() * rb.gravity / 100.f;
         integrate(e, frame_time);
     }
 
@@ -54,11 +54,7 @@ void physics::physics_world::detect_collisions(float frame_time)
         {
             auto &e1 = _collision_entities[i].get();
             auto &e2 = _collision_entities[j].get();
-
-            _contacts.emplace_back(
-                e1,
-                e2,
-                _collisions.check_collision_and_generate_contact(e1, e2));
+            _contacts.emplace_back(e1, e2, _collisions.check_collision_and_generate_contact(e1, e2));
         }
     }
 }
@@ -68,16 +64,14 @@ void physics::physics_world::resolve_collisions(float frame_time)
     while (!_contacts.empty() && frame_time >= 0)
     {
         auto first_col = std::min_element(_contacts.begin(), _contacts.end(), entity_contact::compare);
-        auto &collision = *first_col;
+        auto collision = *first_col;
 
         if (first_col == _contacts.end() || first_col->contact().time() > frame_time) // no more collisions this frame
         {
             for (auto &e : _physical_entities)
-            {
                 integrate_position(e, frame_time);
-            }
 
-            _contacts.clear(); // discard the rest if any
+            _contacts.clear();
             return;
         }
 
@@ -86,7 +80,14 @@ void physics::physics_world::resolve_collisions(float frame_time)
         if (dt == physics_models::contact::Intersecting)
             resolve_collision_discrete(first_col);
         else
-            resolve_collision_continuous(dt, first_col);
+        {
+            for (auto& e : _physical_entities)
+                integrate_position(e, dt);
+            _contacts.erase(first_col);
+
+            //resolve_collision_continuous(dt, first_col);
+        }
+
 
         _events.invoke<const entity_contact&, float>(events::collision, collision, dt);
 

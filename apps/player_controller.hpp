@@ -9,6 +9,8 @@
 #include <core/behavior.hpp>
 #include <physics/entity_contact.hpp>
 #include <physics/collider_iterator.hpp>
+#include <glm/gtx/string_cast.hpp>
+#include <iostream>
 #include "components/player_controller_component.hpp"
 
 #define GRAVITY_ACCELERATION -0.5f
@@ -73,12 +75,17 @@ private:
 
         // integrate
         auto fa = rb.force * rb.mass_inverse();
-        auto ga = glm::vec3(0.f, GRAVITY_ACCELERATION, 0.f);
-        rb.acceleration += fa;
-        rb.velocity += (fa + ga) * frame_time;
+
+        rb.force += rb.gravity;
+
+        rb.acceleration = rb.force;
+        rb.velocity += rb.acceleration * frame_time;
         rb.force = glm::vec3(0);
 
         move_component_positions(e, rb.velocity * frame_time);
+
+        std::cout << glm::to_string(t.pos) << std::endl;
+        comp.time_since_collision += frame_time;
     }
 
     static void on_collision(const physics::entity_contact& collision, float dt)
@@ -104,7 +111,8 @@ private:
 
         if (intersecting)
         {
-            auto move = n * -1.5f;
+            auto move = n * -1.01f;
+            rb.velocity -= n * glm::dot(n, rb.velocity);
             move_component_positions(e, move);
         } else
         {
