@@ -24,8 +24,8 @@ public:
     glm::vec3 to_camera {0};
     float run_speed {5.f};
     float time_since_collision {0};
+    float time_since_grounded {0};
     player_state state {running};
-    bool is_grounded {true};
 };
 
 void load_player_controller(const json& j, ecs::entity& e, string_table& hashes);

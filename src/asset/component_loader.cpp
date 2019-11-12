@@ -118,6 +118,15 @@ void load_rigid_body(const json &j, ecs::entity &e, string_table &hashes)
     p.is_kinematic = j["is_kinematic"].get<bool>();
     float mass = j["mass"].get<float>();
     p.set_mass(mass);
+
+    if (j.find("gravity") != j.end())
+    {
+        p.gravity = glm::vec3(
+            j["gravity"][0].get<float>(),
+            j["gravity"][1].get<float>(),
+            j["gravity"][2].get<float>()
+            );
+    }
 }
 
 

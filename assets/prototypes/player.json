@@ -31,7 +31,8 @@
       "component_bitshift": 6,
       "velocity": [0, 0, 0],
       "is_kinematic": true,
-      "mass": 0
+      "mass": 0,
+      "gravity": [0, -12, 0]
     },
     {
       "component_bitshift": 4,
