@@ -21,7 +21,7 @@ set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/install/")
 set(CMAKE_BINARY_DIR "${PROJECT_SOURCE_DIR}/build")
 
 if (UNIX)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -pthread")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -pthread")
 endif (UNIX)
 
 set(EXTERNAL_INSTALL_LOCATION "${PROJECT_SOURCE_DIR}/external")
@@ -69,6 +69,7 @@ add_executable(generate_colliders apps/generate_colliders.cpp)
 
 add_executable(tests tests/main.cpp)
 
+add_executable(skybox apps/skybox.cpp)
 
 include(add_glfw)
 include(add_nlohmann_json)
@@ -87,8 +88,21 @@ target_compile_definitions(${TARGET_NAME}
                            ${DEFAULT_COMPILE_DEFINITIONS}
                            GLFW_INCLUDE_NONE)
 
+target_compile_definitions(skybox
+                           PRIVATE
+                           ${DEFAULT_COMPILE_DEFINITIONS}
+                           GLFW_INCLUDE_NONE)
+
 
 target_include_directories(${TARGET_NAME} PRIVATE
+                           ${GLFW_INCLUDE}
+                           ${JSON_INCLUDE}
+                           ${GLM_INCLUDE}
+                           ${SPDLOG_INCLUDE}
+                           ${EXPECTED_INCLUDE}
+                           ${GLBINDING_INCLUDE})
+
+target_include_directories(skybox PRIVATE
                            ${GLFW_INCLUDE}
                            ${JSON_INCLUDE}
                            ${GLM_INCLUDE}
@@ -152,6 +166,17 @@ add_dependencies(${TARGET_NAME}
                  ${RENDERER}
                  ${PHYSICS_LIB})
 
+add_dependencies(skybox
+                 glbinding
+                 assimp
+                 expected
+                 glfw
+                 ${ASSETLIB_NAME}
+                 ${CORELIB_NAME}
+                 ${PLATFORMLIB_NAME}
+                 ${RENDERER}
+                 ${PHYSICS_LIB})
+
 add_dependencies(${ASSETLIB_NAME}
                  #tinygltf
                  ${ECS_LIB}
@@ -175,6 +200,21 @@ add_dependencies(${PHYSICS_LIB}
                  ${PHYSICS_MODELS_LIB})
 
 target_link_libraries(${TARGET_NAME} PRIVATE
+                      ${GLFW_LIB}
+                      ${CORELIB_NAME}
+                      ${PLATFORMLIB_NAME}
+                      ${RENDERER}
+                      ${OGLLIB_NAME}
+                      ${ASSETLIB_NAME}
+                      ${ECS_LIB}
+                      ${MEM_LIB}
+                      ${ASSIMP_LIB}
+                      ${GLBINDING_AUX_LIB}
+                      ${GLBINDING_LIB}
+                      ${PHYSICS_LIB}
+                      ${PHYSICS_MODELS_LIB})
+
+target_link_libraries(skybox PRIVATE
                       ${GLFW_LIB}
                       ${CORELIB_NAME}
                       ${PLATFORMLIB_NAME}

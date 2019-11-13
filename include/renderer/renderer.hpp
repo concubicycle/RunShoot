@@ -26,6 +26,7 @@
 #include <asset/asset_types.hpp>
 
 #include <renderer/shader_set.hpp>
+#include "skybox.hpp"
 
 
 namespace rendering
@@ -62,6 +63,7 @@ private:
 
     float _screen_width, _screen_height;
 
+    skybox sky;
 
     void grab_entity(ecs::entity& e);
     void forget_entity(ecs::entity& e);

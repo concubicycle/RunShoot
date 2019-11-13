@@ -61,6 +61,11 @@ namespace ogllib
 		{
 			glUniform3fv(_info.getUniformLocation(name), 1, glm::value_ptr(val));
 		}
+
+        void set_uniform(std::string name, GLint val) const
+        {
+            glUniform1i(_info.getUniformLocation(name), val);
+        }
 		
 
         //COMPILATION

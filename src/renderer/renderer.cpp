@@ -96,6 +96,8 @@ void rendering::renderer::draw_scene(asset::scene &scene)
 
     auto &entities = scene.entity_world();
 
+    sky.draw(_camera_entity->get_component<ecs::camera_component>(), _screen_width, _screen_height);
+
     entities.for_all_entities([this](ecs::entity &e) {
         auto is_rt = e.has<ecs::render_component_ogl>() && e.has<ecs::transform_component>();
         if (!is_rt) return;
@@ -170,9 +172,6 @@ void rendering::renderer::draw_scene(asset::scene &scene)
 
             shader.unbind();
         }
-
-        auto err = glGetError();
-
     });
 }
 

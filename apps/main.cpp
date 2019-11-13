@@ -93,7 +93,7 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     drone_controller drone_controller(events);
     player_controller player_controller(events);
 
-    auto scene = loader.load_scene("./assets/scenes/scene.json", entities);
+    auto scene = loader.load_scene("./assets/scenes/runshoot_gameplay.json", entities);
 
     renderer.init();
     glfwSetFramebufferSizeCallback(window, build_framebuffer_callback(renderer));
