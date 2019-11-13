@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.1)
 project(RunShoot C CXX)
 
-option(BUILD_OFFLINE "Build offline" ON)
+option(BUILD_OFFLINE "Build offline" OFF)
 
 
 set(RunShoot_VERSION_MAJOR 0)
@@ -141,15 +141,15 @@ add_dependencies(${RENDERER}
                  ${SPDLOG})
 
 add_dependencies(${TARGET_NAME}
-                 glbinding
-                 assimp
-                 expected
-                 glfw
                  ${ASSETLIB_NAME}
                  ${CORELIB_NAME}
                  ${PLATFORMLIB_NAME}
                  ${RENDERER}
-                 ${PHYSICS_LIB})
+                 ${PHYSICS_LIB}
+                 glfw
+                 glbinding
+                 assimp
+                 expected)
 
 add_dependencies(${ASSETLIB_NAME}
                  #tinygltf
