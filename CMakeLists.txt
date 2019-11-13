@@ -102,14 +102,6 @@ target_include_directories(${TARGET_NAME} PRIVATE
                            ${EXPECTED_INCLUDE}
                            ${GLBINDING_INCLUDE})
 
-target_include_directories(skybox PRIVATE
-                           ${GLFW_INCLUDE}
-                           ${JSON_INCLUDE}
-                           ${GLM_INCLUDE}
-                           ${SPDLOG_INCLUDE}
-                           ${EXPECTED_INCLUDE}
-                           ${GLBINDING_INCLUDE})
-
 include_directories(${TARGET_NAME}
                     ${JSON_INCLUDE}
                     ${GLM_INCLUDE}
@@ -166,17 +158,6 @@ add_dependencies(${TARGET_NAME}
                  ${RENDERER}
                  ${PHYSICS_LIB})
 
-add_dependencies(skybox
-                 glbinding
-                 assimp
-                 expected
-                 glfw
-                 ${ASSETLIB_NAME}
-                 ${CORELIB_NAME}
-                 ${PLATFORMLIB_NAME}
-                 ${RENDERER}
-                 ${PHYSICS_LIB})
-
 add_dependencies(${ASSETLIB_NAME}
                  #tinygltf
                  ${ECS_LIB}
@@ -197,24 +178,13 @@ add_dependencies(generate_colliders
 
 add_dependencies(${PHYSICS_LIB}
                  ${ECS_LIB}
-                 ${PHYSICS_MODELS_LIB})
+                 ${PHYSICS_MODELS_LIB}
+				 nlohmann_json)
+				 
+add_dependencies(${PHYSICS_MODELS_LIB}
+				glm)
 
 target_link_libraries(${TARGET_NAME} PRIVATE
-                      ${GLFW_LIB}
-                      ${CORELIB_NAME}
-                      ${PLATFORMLIB_NAME}
-                      ${RENDERER}
-                      ${OGLLIB_NAME}
-                      ${ASSETLIB_NAME}
-                      ${ECS_LIB}
-                      ${MEM_LIB}
-                      ${ASSIMP_LIB}
-                      ${GLBINDING_AUX_LIB}
-                      ${GLBINDING_LIB}
-                      ${PHYSICS_LIB}
-                      ${PHYSICS_MODELS_LIB})
-
-target_link_libraries(skybox PRIVATE
                       ${GLFW_LIB}
                       ${CORELIB_NAME}
                       ${PLATFORMLIB_NAME}

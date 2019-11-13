@@ -7,6 +7,7 @@
 
 #include "chunk_component_accessor.hpp"
 #include "ecs_types.hpp"
+#include <optional>
 
 namespace ecs
 {
