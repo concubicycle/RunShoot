@@ -45,12 +45,12 @@ rendering::renderer::renderer(
 
     if (_config.fullscreen())
     {
-        _screen_width = _system_info.monitor_width();
-        _screen_height = _system_info.monitor_height();
+        _screen_width = (float)_system_info.monitor_width();
+        _screen_height = (float)_system_info.monitor_height();
     } else
     {
-        _screen_width = _config.width();
-        _screen_height = _config.height();
+        _screen_width = (float) _config.width();
+        _screen_height = (float)_config.height();
     }
 }
 

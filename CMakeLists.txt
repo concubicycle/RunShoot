@@ -69,7 +69,6 @@ add_executable(generate_colliders apps/generate_colliders.cpp)
 
 add_executable(tests tests/main.cpp)
 
-add_executable(skybox apps/skybox.cpp)
 
 include(add_glfw)
 include(add_nlohmann_json)
@@ -87,12 +86,6 @@ target_compile_definitions(${TARGET_NAME}
                            PRIVATE
                            ${DEFAULT_COMPILE_DEFINITIONS}
                            GLFW_INCLUDE_NONE)
-
-target_compile_definitions(skybox
-                           PRIVATE
-                           ${DEFAULT_COMPILE_DEFINITIONS}
-                           GLFW_INCLUDE_NONE)
-
 
 target_include_directories(${TARGET_NAME} PRIVATE
                            ${GLFW_INCLUDE}
