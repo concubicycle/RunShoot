@@ -5,6 +5,8 @@
 #ifndef __CUBEMAP_HPP_
 #define __CUBEMAP_HPP_
 
+#include <vector>
+
 #include <opengl_afx.h>
 #include "vertex_p.h"
 
