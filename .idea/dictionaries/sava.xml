@@ -5,6 +5,8 @@
       <w>bitset</w>
       <w>collider</w>
       <w>colliders</w>
+      <w>cubemap</w>
+      <w>skybox</w>
     </words>
   </dictionary>
 </component>

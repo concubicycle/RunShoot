@@ -4,8 +4,9 @@
 
 #include "player_controller.hpp"
 
-void player_controller::update_single(ecs::entity &e, core::behavior_context &ctx)
+glm::vec3 last_n;
 
+void player_controller::update_single(ecs::entity &e, core::behavior_context &ctx)
 {
     auto& player = e.get_component<player_controller_component>();
     auto& t = e.get_component<ecs::transform_component>();
@@ -33,7 +34,7 @@ void player_controller::update_single(ecs::entity &e, core::behavior_context &ct
     switch (player.state)
     {
         case running:
-            update_running(e, player, ctx.time.smoothed_delta_secs());
+            update_running(e, player, ctx);
             break;
         case airborne:
             update_airborne(e, player, ctx.time.smoothed_delta_secs());
@@ -53,10 +54,14 @@ void player_controller::on_entity_created(ecs::entity &e)
     rb.velocity = player.direction * player.run_speed;
 }
 
-void player_controller::update_running(ecs::entity &e, player_controller_component &comp, float frame_time)
+void player_controller::update_running(ecs::entity &e, player_controller_component &comp, core::behavior_context &ctx)
 {
+    auto frame_time = ctx.time.smoothed_delta_secs();
     auto& rb = e.get_component<ecs::rigid_body_component>();
     auto& t = e.get_component<ecs::transform_component>();
+
+    if (ctx.input.was_key_pressed(GLFW_KEY_SPACE))
+        _jump_debounce(e);
 
     auto fa = rb.force * rb.mass_inverse();
     rb.force += rb.gravity;
@@ -80,9 +85,9 @@ void player_controller::update_airborne(ecs::entity &e, player_controller_compon
     auto& t = e.get_component<ecs::transform_component>();
 
     auto fa = rb.force * rb.mass_inverse();
-    //rb.force += rb.gravity;
-    rb.acceleration += rb.force;
-    rb.velocity += (rb.acceleration + rb.gravity) * frame_time;
+    rb.force += rb.gravity;
+    rb.acceleration = rb.force;
+    rb.velocity += rb.acceleration * frame_time;
     rb.force = glm::vec3(0);
     move_component_positions(e, rb.velocity * frame_time);
 
@@ -95,8 +100,10 @@ void player_controller::update_airborne(ecs::entity &e, player_controller_compon
     }
 }
 
+
+
 void player_controller::resolve_collision(const physics::entity_contact &collision, ecs::entity &e,
-                                          player_controller_component &component, float dt)
+                                          player_controller_component &player, float dt)
 {
     auto& rb = e.get_component<ecs::rigid_body_component>();
     auto& n = collision.contact().collision_axis();
@@ -116,7 +123,7 @@ void player_controller::resolve_collision(const physics::entity_contact &collisi
         // probably a problem with collision system - not sure if this
         // would happen with a non-kinematic object. but, at least
         // smooth out for the player. but we can cheat here.
-    else if (component.time_since_collision < 0.01f && n.y == 0)
+    else if (player.time_since_collision < 0.01f && n.y == 0)
     {
         rb.force += glm::vec3(0, 2, 0);
     }
@@ -127,17 +134,17 @@ void player_controller::resolve_collision(const physics::entity_contact &collisi
         move_component_positions(e, move);
     }
 
-    component.time_since_collision = 0;
+    player.time_since_collision = 0;
 
-    if (n.y != 0)
+    if (n.y < 0)
     {
-        // footsetp animation thing
-        if (component.time_since_grounded > 0.01f)
+        if (player.time_since_grounded > 0.01f)
         {
-            rb.force += glm::vec3(0, 125, 0);
+            rb.force += glm::vec3(0, player.footstep_force, 0);
         }
 
-        component.time_since_grounded = 0;
+        player.time_since_grounded = 0;
+        last_n = n;
     }
 }
 

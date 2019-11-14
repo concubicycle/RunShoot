@@ -26,7 +26,6 @@
 #include <asset/asset_types.hpp>
 
 #include <renderer/shader_set.hpp>
-#include "skybox.hpp"
 
 
 namespace rendering
@@ -45,11 +44,7 @@ public:
     bool init();
 
     void draw_scene(asset::scene& scene);
-    void resize(std::uint32_t width, std::uint32_t height);
-
-  //  void (*build_framebuffer_callback(rendering::renderer& r))(GLFWwindow*, int, int);
-
-
+    static void resize(std::uint32_t width, std::uint32_t height);
 
 private:
     const core::startup_config &_config;
@@ -63,7 +58,7 @@ private:
 
     float _screen_width, _screen_height;
 
-    skybox sky;
+    void draw_skybox();
 
     void grab_entity(ecs::entity& e);
     void forget_entity(ecs::entity& e);

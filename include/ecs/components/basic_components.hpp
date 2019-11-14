@@ -9,6 +9,7 @@
 #include <cstring>
 #include <vertex_array.h>
 #include <cstdint>
+#include <optional>
 
 #include <glm/vec3.hpp>
 #include <glm/mat4x4.hpp>
@@ -18,6 +19,7 @@
 #include <physics_models/collider.hpp>
 #include <physics_models/aabb_collider.hpp>
 #include <physics_models/sphere_collider.hpp>
+#include <cubemap.hpp>
 
 #include "../ecs_types.hpp"
 #include "../component.hpp"
@@ -75,6 +77,15 @@ namespace ecs
         camera_mode mode = perspective;
         float pitch = 0, yaw = 0, roll = 0;
         float fov = 45.f, near = 0.1f, far = 1000.f;
+
+        std::optional<ogllib::cubemap> skybox;
+        std::string skybox_left;
+        std::string skybox_top;
+        std::string skybox_front;
+        std::string skybox_bottom;
+        std::string skybox_right;
+        std::string skybox_back;
+
 
         glm::mat3 right_up_fwd()
         {

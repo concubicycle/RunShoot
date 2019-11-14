@@ -7,6 +7,18 @@
     {
       "entity_id": 2,
       "prototype": "./assets/prototypes/seg1.json"
+    },
+    {
+      "entity_id": 3,
+      "prototype": "./assets/prototypes/seg2.json",
+      "components":[
+        {
+          "component_bitshift": 0,
+          "x": 0,
+          "y": 0,
+          "z": -545
+        }
+      ]
     }
   ]
 }

@@ -12,12 +12,14 @@
 #include <glm/gtx/string_cast.hpp>
 #include <iostream>
 #include "components/player_controller_component.hpp"
+#include <util/debounce.hpp>
 
 
 class player_controller : public core::behavior
 {
 public:
-    player_controller(events::event_exchange& events) : behavior(events)
+    player_controller(events::event_exchange& events) :
+        behavior(events), _jump_debounce(std::chrono::duration<float>(0.7), jump)
     {
         _collision_listener_id = _events.subscribe<const physics::entity_contact&, float>(
             events::collision,
@@ -38,8 +40,9 @@ protected:
 
 private:
     listener_id _collision_listener_id;
+    debounce<ecs::entity&> _jump_debounce;
 
-    static void update_running(ecs::entity& e, player_controller_component& comp, float frame_time);
+    void update_running(ecs::entity& e, player_controller_component& comp, core::behavior_context &ctx);
     static void update_airborne(ecs::entity& e, player_controller_component& comp, float frame_time);
     static void on_collision(const physics::entity_contact& collision, float dt);
     static void move_component_positions(ecs::entity& e, glm::vec3 displacement);
@@ -47,7 +50,7 @@ private:
 
     static void resolve_collision(const physics::entity_contact& collision,
                                   ecs::entity& e,
-                                  player_controller_component& component,
+                                  player_controller_component& player,
                                   float dt);
 
     static component_bitset player_components()
@@ -57,6 +60,15 @@ private:
             player_controller_component::archetype_bit |
             ecs::transform_component::archetype_bit |
             ecs::camera_component::archetype_bit;
+    }
+
+    static void jump(ecs::entity& e)
+    {
+        auto& rb = e.get_component<ecs::rigid_body_component>();
+        auto& player = e.get_component<player_controller_component>();
+
+        rb.force += glm::vec3(0, player.jump_force, 0);
+        player.state = player_state::airborne;
     }
 };
 

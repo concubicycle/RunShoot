@@ -27,6 +27,6 @@ add_library(ogllib STATIC
             include/vertex_pc.h
             include/vertex_pctx2d.h
             include/vertex_ptx2d.h
-            include/vertex_pntx2d.h)
+            include/vertex_pntx2d.h include/cubemap.hpp cubemap.cpp)
 
 target_include_directories(ogllib PUBLIC ./include ../../external/glbinding/include)

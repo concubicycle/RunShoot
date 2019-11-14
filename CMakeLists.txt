@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.1)
 project(RunShoot C CXX)
 
-option(BUILD_OFFLINE "Build offline" OFF)
+option(BUILD_OFFLINE "Build offline" ON)
 
 
 set(RunShoot_VERSION_MAJOR 0)

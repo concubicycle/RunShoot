@@ -15,7 +15,7 @@ using nlohmann::json;
 #include <bits/stdc++.h>
 #include <glm/gtc/epsilon.hpp>
 
-const float Epsilon = 0.1f;
+const float Epsilon = 10.0f;
 
 
 bool compare_by_y(glm::vec3 a, glm::vec3 b)
@@ -46,7 +46,7 @@ int main()
 
     asset::assimp_loader assimp_reader;
 
-    auto mesh_ret = assimp_reader.load_model("./assets/models/seg1/seg1.gltf", asset::mesh_type::GLTF2);
+    auto mesh_ret = assimp_reader.load_model("./assets/models/seg2/seg2.gltf", asset::mesh_type::GLTF2);
     auto mesh = *mesh_ret;
 
     std::vector<glm::vec3> vertices;
@@ -152,8 +152,6 @@ int main()
         {"min", {last_xmin, ground_y_min, last_z }},
         {"max", {last_xmax, ground_y_max, last_span_change_z }}
     });
-
-
 
     std::ofstream o("aabbs.json");
     o << std::setw(4) << aabbs << std::endl;

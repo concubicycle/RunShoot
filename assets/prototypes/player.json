@@ -25,14 +25,20 @@
       "fov": 45,
       "near": 0.1,
       "far": 1000.0,
-      "mode": 1
+      "mode": 1,
+      "skybox_left": "./assets/textures/city/left.png",
+      "skybox_top": "./assets/textures/city/top.png",
+      "skybox_front": "./assets/textures/city/front.png",
+      "skybox_bottom": "./assets/textures/city/bottom.png",
+      "skybox_right": "./assets/textures/city/right.png",
+      "skybox_back": "./assets/textures/city/back.png"
     },
     {
       "component_bitshift": 6,
       "velocity": [0, 0, 0],
       "is_kinematic": true,
       "mass": 0,
-      "gravity": [0, -12, 0]
+      "gravity": [0, -15, 0]
     },
     {
       "component_bitshift": 4,
@@ -52,7 +58,9 @@
     },
     {
       "component_bitshift": 19,
-      "run_speed": 25
+      "run_speed": 30,
+      "footstep_force": 170,
+      "jump_force": 550
     }
   ]
 }

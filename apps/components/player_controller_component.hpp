@@ -26,6 +26,8 @@ public:
     float time_since_collision {0};
     float time_since_grounded {0};
     player_state state {running};
+    float jump_force {0};
+    float footstep_force {0};
 };
 
 void load_player_controller(const json& j, ecs::entity& e, string_table& hashes);

@@ -13,6 +13,18 @@
 namespace ogllib
 {
     template<>
+    void shader_program<ogllib::vertex_p>::set_attrib_pointers() const
+    {
+        auto posIndex = _info.getAttribLocation("position");
+
+        size_t posOffset = offsetof(ogllib::vertex_p, position);
+
+        glVertexAttribPointer(posIndex, 3, gl::GLenum::GL_FLOAT, GL_FALSE, sizeof(ogllib::vertex_p),
+            reinterpret_cast<void *>(posOffset));
+        glEnableVertexAttribArray(posIndex);
+    }
+
+    template<>
     void shader_program<ogllib::vertex_pc>::set_attrib_pointers() const
     {
         auto posIndex = _info.getAttribLocation("position");

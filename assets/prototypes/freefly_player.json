@@ -25,7 +25,13 @@
       "fov": 45,
       "near": 0.1,
       "far": 1000.0,
-      "mode": 1
+      "mode": 1,
+      "skybox_left": "./assets/textures/left.png",
+      "skybox_top": "./assets/textures/top.png",
+      "skybox_front": "./assets/textures/front.png",
+      "skybox_bottom": "./assets/textures/bottom.png",
+      "skybox_right": "./assets/textures/right.png",
+      "skybox_back": "./assets/textures/back.png"
     },
     {
       "component_bitshift": 6,

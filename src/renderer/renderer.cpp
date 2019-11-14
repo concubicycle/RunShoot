@@ -81,7 +81,7 @@ bool rendering::renderer::init()
 
     // During init, enable debug output
     glEnable(GL_DEBUG_OUTPUT);
-    glDebugMessageCallback(MessageCallback, 0);
+    glDebugMessageCallback(MessageCallback, nullptr);
 
     return true;
 }
@@ -96,7 +96,7 @@ void rendering::renderer::draw_scene(asset::scene &scene)
 
     auto &entities = scene.entity_world();
 
-    sky.draw(_camera_entity->get_component<ecs::camera_component>(), _screen_width, _screen_height);
+    draw_skybox();
 
     entities.for_all_entities([this](ecs::entity &e) {
         auto is_rt = e.has<ecs::render_component_ogl>() && e.has<ecs::transform_component>();
@@ -121,7 +121,7 @@ void rendering::renderer::draw_scene(asset::scene &scene)
 
 		auto light_pos = glm::vec3(0, 10.f, 10.f);
 		auto light_color = glm::vec3(0.5, 0.5, 0.5);
-		auto ambient_light = glm::vec3(0.2, 0.1, 0.2);
+		auto ambient_light = glm::vec3(0.5, 0.5, 0.5);
 		auto specular = glm::vec3(0.03f);
 
         if (r.mesh_format == asset::mesh_type::GLTF2)
@@ -147,7 +147,7 @@ void rendering::renderer::draw_scene(asset::scene &scene)
                 glBindTexture(GL_TEXTURE_2D, r.meshes[i].diffuse_texture_id);
 
                 glBindVertexArray(r.meshes[i].vao);
-                glDrawElements(GL_TRIANGLES, r.meshes[i].element_count, GL_UNSIGNED_INT, 0);
+                glDrawElements(GL_TRIANGLES, r.meshes[i].element_count, GL_UNSIGNED_INT, nullptr);
             }
 
             glBindVertexArray(0);
@@ -167,7 +167,7 @@ void rendering::renderer::draw_scene(asset::scene &scene)
             shader.set_uniform("projection_view_model", projection_view_model);
 
             glBindVertexArray(r.meshes[0].vao);
-            glDrawElements(GL_TRIANGLES, r.meshes[0].element_count, GL_UNSIGNED_INT, 0);
+            glDrawElements(GL_TRIANGLES, r.meshes[0].element_count, GL_UNSIGNED_INT, nullptr);
             glBindVertexArray(0);
 
             shader.unbind();
@@ -185,6 +185,21 @@ void rendering::renderer::grab_entity(ecs::entity &e)
     if (e.archetype_id() & ecs::camera_component::archetype_bit)
     {
         _camera_entity = &e;
+
+        auto& cam = e.get_component<ecs::camera_component>();
+        cam.skybox.emplace(
+            cam.skybox_left,
+            cam.skybox_top,
+            cam.skybox_front,
+            cam.skybox_bottom,
+            cam.skybox_right,
+            cam.skybox_back);
+
+        cam.skybox->bind();
+        _shaders.skybox().set_attrib_pointers();
+        _shaders.skybox().bind();
+        _shaders.skybox().set_uniform("skybox", 0);
+        cam.skybox->unbind();
     }
 }
 
@@ -194,5 +209,31 @@ void rendering::renderer::forget_entity(ecs::entity &e)
     {
         _camera_entity = nullptr;
     }
+}
+
+void rendering::renderer::draw_skybox()
+{
+    auto& cam = _camera_entity->get_component<ecs::camera_component>();
+
+    auto aspect = _screen_width / _screen_height;
+    auto projection = glm::perspective(cam.fov, aspect, cam.near, cam.far);
+
+    auto cam_basis = cam.right_up_fwd();
+    auto view = glm::lookAt(cam.position, cam.position + cam_basis[2], cam_basis[1]);
+    set_translation(view, 0, 0, 0);
+
+    glDepthMask(GL_FALSE);
+
+    glDepthFunc(GL_LEQUAL);
+    _shaders.skybox().bind();
+    _shaders.skybox().set_uniform("view", view);
+    _shaders.skybox().set_uniform("projection", projection);
+
+    glActiveTexture(GL_TEXTURE0);
+    cam.skybox->bind();
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+    cam.skybox->unbind();
+    glDepthFunc(GL_LESS);
+    glDepthMask(GL_TRUE);
 }
 

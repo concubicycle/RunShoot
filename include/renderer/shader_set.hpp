@@ -18,15 +18,14 @@ namespace rendering
             _simple("./assets/shaders/simple.vert", "./assets/shaders/simple.frag"),
             _ptx2d_basic("./assets/shaders/ptx2d_basic.vert", "./assets/shaders/ptx2d_basic.frag"),
             _ptx2d_pvm("./assets/shaders/ptx2d_pvm.vert", "./assets/shaders/ptx2d_pvm.frag"),
-            _default("./assets/shaders/default.vert", "./assets/shaders/default.frag") {}
+            _default("./assets/shaders/default.vert", "./assets/shaders/default.frag"),
+            _skybox("./assets/shaders/skybox.vert", "./assets/shaders/skybox.frag"){}
 
-        const ogllib::shader_program<ogllib::vertex_ptx2d> &simple() const { return _simple; }
-
-        const ogllib::shader_program<ogllib::vertex_ptx2d> &ptx2d_basic() const { return _ptx2d_basic; }
-
-        const ogllib::shader_program<ogllib::vertex_ptx2d> &ptx2d_pvm() const { return _ptx2d_pvm; }
-
-        const ogllib::shader_program<ogllib::vertex_pntx2d> &default_shader() const { return _default; }
+        [[nodiscard]] const ogllib::shader_program<ogllib::vertex_ptx2d> &simple() const { return _simple; }
+        [[nodiscard]] const ogllib::shader_program<ogllib::vertex_ptx2d> &ptx2d_basic() const { return _ptx2d_basic; }
+        [[nodiscard]] const ogllib::shader_program<ogllib::vertex_ptx2d> &ptx2d_pvm() const { return _ptx2d_pvm; }
+        [[nodiscard]] const ogllib::shader_program<ogllib::vertex_pntx2d> &default_shader() const { return _default; }
+        [[nodiscard]] const ogllib::shader_program<ogllib::vertex_p> &skybox() const { return _skybox; }
 
     private:
 
@@ -42,6 +41,8 @@ namespace rendering
         // Program taking position, normal, and 2d tex cords,
         // and a proj*view*model matrix, along with a normal transform matrix.
         ogllib::shader_program<ogllib::vertex_pntx2d> _default;
+
+        ogllib::shader_program<ogllib::vertex_p> _skybox;
     };
 
 }
