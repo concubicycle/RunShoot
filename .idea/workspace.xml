@@ -30,42 +30,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/prototypes/seg2.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/thirdparty/opengllib/cubemap.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/thirdparty/opengllib/include/cubemap.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/sava.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/sava.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/components/player_controller_component.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/player_controller_component.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/components/player_controller_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/player_controller_component.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/generate_colliders.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/generate_colliders.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/player_controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/player_controller.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blender/seg1.blend" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg1.blend" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blender/seg1.blend1" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg1.blend1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blender/seg2.blend" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg2.blend" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blender/seg2.blend1" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg2.blend1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/seg1/seg1.bin" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg1/seg1.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/seg1/seg1.gltf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg1/seg1.gltf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/seg2/grey_roof_tiles_02_diff_1k.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/seg2/seg2.bin" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg2/seg2.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/seg2/seg2.gltf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg2/seg2.gltf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/prototypes/freefly_player.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/freefly_player.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/prototypes/player.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/player.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/prototypes/seg1.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/seg1.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/scenes/runshoot_gameplay.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scenes/runshoot_gameplay.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake_modules/add_glm.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake_modules/add_glm.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake_modules/add_nlohmann_json.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake_modules/add_nlohmann_json.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/renderer/renderer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/renderer/renderer.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/renderer/shader_set.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/renderer/shader_set.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/renderer/skybox.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/util/debounce.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/util/debounce.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/asset/component_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/component_loader.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/physics_models/collision_tests.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/physics_models/collision_tests.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/renderer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/shader_program.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/shader_program.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/events/event.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/events/event.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/events/event_exchange.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/events/event_exchange.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -346,7 +316,8 @@
       <workItem from="1573462909936" duration="22613000" />
       <workItem from="1573522470606" duration="4201000" />
       <workItem from="1573669016807" duration="15258000" />
-      <workItem from="1573693999863" duration="9321000" />
+      <workItem from="1573693999863" duration="16609000" />
+      <workItem from="1573763656391" duration="1556000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>

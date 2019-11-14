@@ -19,23 +19,24 @@ class player_controller : public core::behavior
 {
 public:
     player_controller(events::event_exchange& events) :
-        behavior(events), _jump_debounce(std::chrono::duration<float>(0.7), jump)
+        behavior(events),
+        _jump_debounce(std::chrono::duration<float>(0.7), jump)
     {
         _collision_listener_id = _events.subscribe<const physics::entity_contact&, float>(
             events::collision,
             std::function<void(const physics::entity_contact&, float)>(on_collision));
     }
 
-    ~player_controller()
+    ~player_controller() override
     {
-        _events.unsubscribe<const physics::entity_contact&>(events::collision, _collision_listener_id);
+        _events.unsubscribe(events::collision, _collision_listener_id);
     }
 
-    component_bitset required_components()  const override { return player_components(); }
+    [[nodiscard]] component_bitset required_components()  const override { return player_components(); }
 
 protected:
     void update_single(ecs::entity& e, core::behavior_context &ctx) override;
-    virtual void on_entity_created(ecs::entity& e) override;
+    void on_entity_created(ecs::entity& e) override;
 
 
 private:

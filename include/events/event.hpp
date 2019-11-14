@@ -50,6 +50,8 @@ namespace events
     private:
         std::unordered_map<listener_id, listener_type> _listeners = {};
 
+
+
         static std::atomic_uint next_listener_id;
     };
 

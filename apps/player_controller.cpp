@@ -4,7 +4,6 @@
 
 #include "player_controller.hpp"
 
-glm::vec3 last_n;
 
 void player_controller::update_single(ecs::entity &e, core::behavior_context &ctx)
 {
@@ -106,7 +105,7 @@ void player_controller::resolve_collision(const physics::entity_contact &collisi
                                           player_controller_component &player, float dt)
 {
     auto& rb = e.get_component<ecs::rigid_body_component>();
-    auto& n = collision.contact().collision_axis();
+    auto n = collision.contact().collision_axis();
 
     auto intersecting = collision.contact().time() == physics_models::contact::Intersecting;
 
@@ -115,16 +114,16 @@ void player_controller::resolve_collision(const physics::entity_contact &collisi
         auto res_t = std::max(dt - 0.001f, 0.f);
         auto move = rb.velocity * (res_t);
 
-        auto n = glm::normalize(collision.collision_axis());
-        rb.velocity -= n * glm::dot(n, rb.velocity);
+        auto n_norm = glm::normalize(collision.collision_axis());
+        rb.velocity -= n_norm * glm::dot(n, rb.velocity);
         rb.force.x = rb.force.y = rb.force.z = 0.f;
     }
-        // resolving xz plane collisions can jerk the player around.
-        // probably a problem with collision system - not sure if this
-        // would happen with a non-kinematic object. but, at least
-        // smooth out for the player. but we can cheat here.
     else if (player.time_since_collision < 0.01f && n.y == 0)
     {
+        // resolving xz plane collisions can jerk the player around.
+        // probably a problem with collision system - not sure if this
+        // would happen with a non-kinematic object. either way, we can
+        // cheat here.
         rb.force += glm::vec3(0, 2, 0);
     }
     else
@@ -144,7 +143,6 @@ void player_controller::resolve_collision(const physics::entity_contact &collisi
         }
 
         player.time_since_grounded = 0;
-        last_n = n;
     }
 }
 
