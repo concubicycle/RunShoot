@@ -56,11 +56,9 @@ namespace events
 
         static bool compare(const future_invoke<TArgs...>& a, const future_invoke<TArgs...>& b)
         {
-            return a.time() < b.time();
+            return a.time() > b.time();
         }
     };
-
-
 }
 
 #endif //__FUTURE_INVOKE_HPP_
