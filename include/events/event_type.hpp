@@ -14,7 +14,9 @@ namespace events
     {
         entity_created = 1,
         entity_destroyed = 2,
-        collision
+        collision = 3,
+
+        delay_entity_jump = 4
     };
 
 }

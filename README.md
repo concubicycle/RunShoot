@@ -49,6 +49,45 @@ which is a map of metadata objects for each component type (kind of like manual 
 Components are mostly just structs with data. The logic resides in `core::behavior` implementations,
 such as `character_controller` and `drone_controller`.
 
+## Milestone 3
+
+The event system has been implemented using `std::function` callbacks, and variadic templates.
+The main class for it is `event_exchange`.
+
+Subscribing to events works like:
+```oclight
+auto listener_id = _event_exchange.subscribe<ecs::entity&>(
+    events::entity_created, 
+    std::function<void(ecs::entity&)>(on_entity_created));
+```
+
+Then, it's clients need to unsubscribe like:
+```oclight
+auto listener_id = _event_exchange.unsubscribe(
+    events::entity_created, 
+    listener_id);
+```
+
+There are analogous `invoke` and `invoke_delayed` functions:
+```oclight
+ _events.invoke<ecs::entity&>(
+            events::entity_created,
+            e);
+```
+
+```oclight
+ _events.invoke_delayed<ecs::entity&>(
+            events::delay_entity_jump,
+            std::chrono::duration<float>(3),
+            e);
+```
+
+Physics and Rendering classes are relying on the entity_created event to 
+actually handle anything, so if the game works at all, those are working. 
+
+In order to show the delayed event, a dummy 'delayed jump' event is invoked
+when the player jumps (space). This will fire 3 seconds after the actual jump. 
+
 
 ## Building
 

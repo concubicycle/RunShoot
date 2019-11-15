@@ -27,7 +27,7 @@ namespace events
         template <class... TArgs>
         listener_id subscribe(event_type type, std::function<void(TArgs...)> f)
         {
-            auto& e = find_event2<TArgs...>(type);
+            auto& e = find_event<TArgs...>(type);
             return e.add_listener(f);
         }
 
@@ -36,18 +36,30 @@ namespace events
             unsubscribe_all(_event_maps, type, id);
         }
 
+        void update(float_seconds dt)
+        {
+            update_all(_event_maps, dt);
+        }
+
         template <class... TArgs>
         void invoke(event_type type, TArgs... args)
         {
-            auto& e = find_event2<TArgs...>(type);
+            auto& e = find_event<TArgs...>(type);
             e.invoke(args...);
+        }
+
+        template <class... TArgs>
+        void invoke_delayed(event_type type, float_seconds delay, TArgs... args)
+        {
+            auto& e = find_event<TArgs...>(type);
+            e.invoke_delayed(delay, args...);
         }
 
     private:
         event_maps _event_maps;
 
         template <class... TArgs>
-        event<TArgs...>& find_event2(event_type type)
+        event<TArgs...>& find_event(event_type type)
         {
             auto& events = std::get<std::unordered_map<event_type, event<TArgs...>>>(_event_maps);
             auto it = events.find(type);
@@ -87,6 +99,34 @@ namespace events
         void unsubscribe_all(event_maps& tuple, event_type type, listener_id id) {
             const auto size = std::tuple_size<event_maps>::value;
             unsubscribe_all_recurse<size - 1, Ts...>{}(tuple, type, id);
+        }
+
+        template<int index, typename... Ts>
+        struct update_all_recurse {
+            void operator() (event_maps& tuple, float_seconds dt)
+            {
+                auto& e_map = std::get<index>(tuple);
+                for (auto& pair : e_map)
+                    pair.second.update(dt);
+
+                update_all_recurse<index - 1, Ts...>{}(tuple, dt);
+            }
+        };
+
+        template<typename... Ts>
+        struct update_all_recurse<0, Ts...> {
+            void operator() (event_maps& tuple, float_seconds dt) {
+                auto& e_map = std::get<0>(tuple);
+                for (auto& pair : e_map)
+                    pair.second.update(dt);
+
+            }
+        };
+
+        template<typename... Ts>
+        void update_all(event_maps& tuple, float_seconds dt) {
+            const auto size = std::tuple_size<event_maps>::value;
+            update_all_recurse<size - 1, Ts...>{}(tuple, dt);
         }
     };
 }

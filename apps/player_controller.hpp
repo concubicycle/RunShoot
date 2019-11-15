@@ -1,7 +1,3 @@
-//
-// Created by sava on 10/30/19.
-//
-
 #ifndef __PLAYER_CONTROLLER_HPP_
 #define __PLAYER_CONTROLLER_HPP_
 
@@ -25,7 +21,19 @@ public:
         _collision_listener_id = _events.subscribe<const physics::entity_contact&, float>(
             events::collision,
             std::function<void(const physics::entity_contact&, float)>(on_collision));
+
+        // remove this
+        events.subscribe<ecs::entity&>(
+            events::delay_entity_jump,
+            std::function<void(ecs::entity&)>(on_jump_delay));
     }
+
+    // this is temporary, only to show delayed events
+    static void on_jump_delay(ecs::entity& e)
+    {
+        jump(e);
+    }
+
 
     ~player_controller() override
     {

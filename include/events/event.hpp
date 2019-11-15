@@ -8,22 +8,36 @@
 #include <unordered_map>
 #include <events/listener.hpp>
 #include <atomic>
+#include <vector>
+#include <queue>
+#include <chrono>
+#include <tuple>
 
+#include "future_invoke.hpp"
 
 namespace events
 {
 
+
     template<class... TArgs>
     class event
     {
+        using listener_type = listener<TArgs...>;
+        using future=future_invoke<TArgs...>;
+        using future_compare=future_invoke_compare<TArgs...>;
+        using float_seconds = std::chrono::duration<float>;
+
+        static const size_t DelayQueueSize = 512;
 
     public:
-        using listener_type = listener<TArgs...>;
+        event()
+        {
+            _delayed.reserve(DelayQueueSize);
+        }
 
         listener_id add_listener(std::function<void(TArgs...)> f)
         {
             listener_id id = ++next_listener_id;
-
             _listeners.emplace(std::piecewise_construct,
                 std::forward_as_tuple(id),
                 std::forward_as_tuple(f, id));
@@ -40,24 +54,53 @@ namespace events
         {
             if (_listeners.empty()) return;
 
-            for(auto& pair : _listeners)
+            for (auto &pair : _listeners)
             {
-                listener<TArgs...> l = pair.second;
+                listener<TArgs...>& l = pair.second;
                 l(args...);
             }
         }
 
+        void invoke_delayed(float_seconds time, TArgs... args)
+        {
+            if (_listeners.empty()) return;
+
+            for (auto &pair : _listeners)
+            {
+                listener<TArgs...>& l = pair.second;
+
+                _delayed.emplace_back(time, l, std::forward_as_tuple(args...));
+                std::push_heap(_delayed.begin(), _delayed.end(), future_compare::compare);
+            }
+        }
+
+        void update(float_seconds dt)
+        {
+            for(auto& v : _delayed)
+                v.update(dt);
+
+            while (!_delayed.empty())
+            {
+                auto& front = _delayed.front();
+                if (front.time() > dt) break;
+
+                front.call();
+
+                std::pop_heap (_delayed.begin(),_delayed.end(), future_compare::compare);
+                _delayed.pop_back();
+            }
+        }
+
+
     private:
         std::unordered_map<listener_id, listener_type> _listeners = {};
-
-
+        std::vector<future> _delayed;
+        future_compare future_invoke_comparator;
 
         static std::atomic_uint next_listener_id;
     };
 
     template<class... TArgs>
     std::atomic_uint event<TArgs...>::next_listener_id(0);
-
-
 }
 #endif //__EVENT_HPP_

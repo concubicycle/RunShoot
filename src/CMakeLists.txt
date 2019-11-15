@@ -67,8 +67,15 @@ set(UTIL_SOURCE_LIST
 )
 
 set(EVENTS_SOURCE_LIST
-    ${PROJECT_SOURCE_DIR}/src/events/event_dispatcher.cpp
+
 )
+
+set(EVENTS_HEADER_LIST
+    ${PROJECT_SOURCE_DIR}/include/events/event.hpp
+    ${PROJECT_SOURCE_DIR}/include/events/event_exchange.hpp
+    ${PROJECT_SOURCE_DIR}/include/events/event_type.hpp
+    ${PROJECT_SOURCE_DIR}/include/events/listener.hpp
+    )
 
 set(MEMORY_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/memory/pool_allocator.cpp

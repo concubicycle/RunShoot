@@ -60,7 +60,13 @@ void player_controller::update_running(ecs::entity &e, player_controller_compone
     auto& t = e.get_component<ecs::transform_component>();
 
     if (ctx.input.was_key_pressed(GLFW_KEY_SPACE))
+    {
         _jump_debounce(e);
+        _events.invoke_delayed<ecs::entity&>(
+            events::delay_entity_jump,
+            std::chrono::duration<float>(3),
+            e);
+    }
 
     auto fa = rb.force * rb.mass_inverse();
     rb.force += rb.gravity;
