@@ -2,25 +2,25 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="RunShoot" targetName="glfw" />
-      <config projectName="RunShoot" targetName="spdlog" />
-      <config projectName="RunShoot" targetName="glm" />
-      <config projectName="RunShoot" targetName="asset" />
-      <config projectName="RunShoot" targetName="RunShoot" />
-      <config projectName="RunShoot" targetName="generate_colliders" />
-      <config projectName="RunShoot" targetName="ogllib" />
-      <config projectName="RunShoot" targetName="tests" />
-      <config projectName="RunShoot" targetName="glbinding" />
-      <config projectName="RunShoot" targetName="core" />
-      <config projectName="RunShoot" targetName="physics_models" />
-      <config projectName="RunShoot" targetName="physics" />
-      <config projectName="RunShoot" targetName="platform" />
-      <config projectName="RunShoot" targetName="ecs" />
       <config projectName="RunShoot" targetName="assimp" />
-      <config projectName="RunShoot" targetName="expected" />
-      <config projectName="RunShoot" targetName="memory" />
+      <config projectName="RunShoot" targetName="generate_colliders" />
+      <config projectName="RunShoot" targetName="glbinding" />
+      <config projectName="RunShoot" targetName="asset" />
+      <config projectName="RunShoot" targetName="ogllib" />
       <config projectName="RunShoot" targetName="nlohmann_json" />
+      <config projectName="RunShoot" targetName="physics" />
+      <config projectName="RunShoot" targetName="tests" />
+      <config projectName="RunShoot" targetName="physics_models" />
+      <config projectName="RunShoot" targetName="RunShoot" />
+      <config projectName="RunShoot" targetName="glfw" />
+      <config projectName="RunShoot" targetName="memory" />
       <config projectName="RunShoot" targetName="renderer" />
+      <config projectName="RunShoot" targetName="ecs" />
+      <config projectName="RunShoot" targetName="core" />
+      <config projectName="RunShoot" targetName="spdlog" />
+      <config projectName="RunShoot" targetName="expected" />
+      <config projectName="RunShoot" targetName="glm" />
+      <config projectName="RunShoot" targetName="platform" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -30,14 +30,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/apps/components/segment_component.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/components/segment_component.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/components/player_controller_component.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/player_controller_component.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/components/add_custom_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/add_custom_components.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/components/player_controller_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/player_controller_component.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/components/runshoot_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/runshoot_component.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/generate_colliders.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/generate_colliders.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/player_controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/player_controller.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/prototypes/player.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/player.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/prototypes/seg1.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/seg1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/seg2.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/seg2.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/include/shader_program.h" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/include/shader_program.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/shader_program.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/shader_program.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -95,15 +101,15 @@
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C/C++" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/assets/shaders" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/apps/components" />
       <recent name="$PROJECT_DIR$/include/physics_models" />
       <recent name="$PROJECT_DIR$/build/assets/models" />
       <recent name="$PROJECT_DIR$/apps" />
       <recent name="$PROJECT_DIR$/thirdparty/opengllib/include" />
-      <recent name="$PROJECT_DIR$/src/asset" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/shaders" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -317,6 +323,7 @@
       <workItem from="1573669016807" duration="15258000" />
       <workItem from="1573693999863" duration="16609000" />
       <workItem from="1573763656391" duration="1556000" />
+      <workItem from="1573841187826" duration="2662000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>
@@ -370,7 +377,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/apps/generate_colliders.cpp</url>
-          <line>48</line>
+          <line>47</line>
           <option name="timeStamp" value="49" />
         </line-breakpoint>
       </breakpoints>

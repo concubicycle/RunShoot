@@ -11,9 +11,8 @@ using nlohmann::json;
 #include <asset/assimp_loader.hpp>
 #include <asset/basic_mesh_reader.hpp>
 
-
-#include <bits/stdc++.h>
 #include <glm/gtc/epsilon.hpp>
+#include <fstream>
 
 
 float Overlap = 0.5f;
@@ -164,5 +163,5 @@ int main(int argc, char** argv)
     });
 
     std::ofstream o("aabbs.json");
-    o << std::setw(4) << aabbs << std::endl;
+    o << aabbs << std::endl;
 };

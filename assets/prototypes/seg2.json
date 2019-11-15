@@ -18,6 +18,9 @@
       "mesh_format": 2
     },
     {
+      "component_bitshift": 20
+    },
+    {
       "component_bitshift": 4,
       "colliders": [
         {

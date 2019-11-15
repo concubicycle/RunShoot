@@ -24,6 +24,9 @@ namespace ogllib
         glEnableVertexAttribArray(posIndex);
     }
 
+    template<class TVertexFormat>
+    program_info &shader_program<TVertexFormat>::get_info() { return _info; }
+
     template<>
     void shader_program<ogllib::vertex_pc>::set_attrib_pointers() const
     {

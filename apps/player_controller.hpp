@@ -76,7 +76,7 @@ private:
 
 
     static void resolve_collision(const physics::entity_contact& collision,
-                                  ecs::entity& e,
+                                  ecs::entity& player_entity,
                                   player_controller_component& player,
                                   float dt);
 

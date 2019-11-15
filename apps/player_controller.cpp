@@ -54,25 +54,27 @@ void player_controller::update_running(ecs::entity &e, player_controller_compone
         _jump_debounce(e);
         player.state = airborne;
     }
-    else if (ctx.input.was_key_pressed(GLFW_KEY_D))
+    else if (ctx.input.was_key_pressed(GLFW_KEY_D) && player.turn_counter < 1)
     {
         player.current_turn_duration = 0;
         player.target_direction = _right_turn * glm::vec4(player.direction, 1.f);
         player.previous_direction = player.direction;
         player.state = turning;
-        player.turn_dir = player_controller_component::right;
         player.previous_yaw = cam.yaw;
         player.target_yaw = cam.yaw += glm::half_pi<float>();
+        player.turn_dir = player_controller_component::right;
+        player.turn_counter += player.turn_dir;
     }
-    else if (ctx.input.was_key_pressed(GLFW_KEY_A))
+    else if (ctx.input.was_key_pressed(GLFW_KEY_A) && player.turn_counter > -1)
     {
         player.current_turn_duration = 0;
         player.target_direction = _left_turn * glm::vec4(player.direction, 1.f);
         player.previous_direction = player.direction;
         player.state = turning;
-        player.turn_dir = player_controller_component::left;
         player.previous_yaw = cam.yaw;
         player.target_yaw = cam.yaw -= glm::half_pi<float>();
+        player.turn_dir = player_controller_component::left;
+        player.turn_counter += player.turn_dir;
     }
 
     integrate(e, rb, frame_time);
@@ -185,12 +187,14 @@ void player_controller::update_player_look(ecs::entity& e, core::input_manager& 
 
 void player_controller::resolve_collision(
     const physics::entity_contact &collision,
-    ecs::entity &e,
+    ecs::entity &player_entity,
     player_controller_component &player,
     float dt)
 {
-    auto& rb = e.get_component<ecs::rigid_body_component>();
+    auto& rb = player_entity.get_component<ecs::rigid_body_component>();
     auto n = collision.contact().collision_axis();
+
+
 
     auto intersecting = collision.contact().time() == physics_models::contact::Intersecting;
 
@@ -215,7 +219,7 @@ void player_controller::resolve_collision(
     {
         auto move = n * -1.01f;
         rb.velocity -= n * glm::dot(n, rb.velocity);
-        move_component_positions(e, move);
+        move_component_positions(player_entity, move);
     }
 
     player.time_since_collision = 0;

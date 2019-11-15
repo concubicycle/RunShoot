@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
+#include <utility>
 #include <vector>
 #include <memory>
 
@@ -47,22 +48,22 @@ namespace ogllib
         void set_attrib_pointers() const;
         
 		
-		void set_uniform(std::string name, GLfloat val) const
+		void set_uniform(const std::string& name, GLfloat val) const
 		{
 			glUniform1f(_info.getUniformLocation(name), val);
 		}
 
-		void set_uniform(std::string name, glm::mat4& val) const
+		void set_uniform(const std::string& name, glm::mat4& val) const
 		{
 			glUniformMatrix4fv(_info.getUniformLocation(name), 1, GL_FALSE, glm::value_ptr(val));
 		}
 
-		void set_uniform(std::string name, glm::vec3& val) const
+		void set_uniform(const std::string& name, glm::vec3& val) const
 		{
 			glUniform3fv(_info.getUniformLocation(name), 1, glm::value_ptr(val));
 		}
 
-        void set_uniform(std::string name, GLint val) const
+        void set_uniform(const std::string& name, GLint val) const
         {
             glUniform1i(_info.getUniformLocation(name), val);
         }
@@ -71,8 +72,8 @@ namespace ogllib
         //COMPILATION
         void build(std::string vertex_shader_path, std::string fragment_shader_path)
         {
-            shader<FileReadStd> vertex(GL_VERTEX_SHADER, vertex_shader_path);
-            shader<FileReadStd> fragment(GL_FRAGMENT_SHADER, fragment_shader_path);
+            shader<FileReadStd> vertex(GL_VERTEX_SHADER, std::move(vertex_shader_path));
+            shader<FileReadStd> fragment(GL_FRAGMENT_SHADER, std::move(fragment_shader_path));
 
             vertex.compile();
             glAttachShader(_id, vertex.id());
@@ -114,9 +115,9 @@ namespace ogllib
         }
 
 
-        unsigned int id() const { return _id; }
+        [[nodiscard]] unsigned int id() const { return _id; }
 
-        program_info &get_info() { return _info; }
+        program_info &get_info();
 
     private:
         ogllib::program_info _info;

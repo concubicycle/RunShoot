@@ -21,7 +21,7 @@ enum player_state
 class player_controller_component : public ecs::component<player_controller_component>
 {
 public:
-    enum turn_direction {left = -1, right = 1};
+    enum turn_direction : int {left = -1, right = 1};
 
     glm::vec3 previous_direction {0.f, 0.f, -1.f};
     glm::vec3 direction { 0.f, 0.f, -1.f};
@@ -31,6 +31,7 @@ public:
     turn_direction turn_dir;
     float previous_yaw;
     float target_yaw;
+    std::int8_t turn_counter {0};
 
 
     glm::vec3 to_camera {0};
