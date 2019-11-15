@@ -15,7 +15,10 @@ using nlohmann::json;
 #include <bits/stdc++.h>
 #include <glm/gtc/epsilon.hpp>
 
-const float Epsilon = 10.0f;
+
+float Overlap = 0.5f;
+float Epsilon = 1.0f;
+std::string Model = "./assets/models/seg1/seg1.gltf";
 
 
 bool compare_by_y(glm::vec3 a, glm::vec3 b)
@@ -39,14 +42,23 @@ private:
 
 
 
-int main()
+int main(int argc, char** argv)
 {
+    if (argc > 1)
+    {
+        Epsilon = atof(argv[1]);
+    }
+    if (argc > 2)
+    {
+        Model = std::string(argv[2]);
+    }
+
     json aabbs;
     std::set<float> y_values;
 
     asset::assimp_loader assimp_reader;
 
-    auto mesh_ret = assimp_reader.load_model("./assets/models/seg2/seg2.gltf", asset::mesh_type::GLTF2);
+    auto mesh_ret = assimp_reader.load_model(Model, asset::mesh_type::GLTF2);
     auto mesh = *mesh_ret;
 
     std::vector<glm::vec3> vertices;
@@ -68,8 +80,6 @@ int main()
 
     ridge_height = vertices.back().y;
     ground_y_min = vertices.front().y;
-
-
 
     for (auto it = vertices.rbegin(); it != vertices.rend(); ++it)
     {
@@ -120,14 +130,14 @@ int main()
                                   glm::epsilonNotEqual(xmax, last_xmax, Epsilon);
             if (span_changed)
             {
-                float box_zmin = last_span_change_z;
-                float box_zmax = current_z;
+                float box_zmax = last_span_change_z;
+                float box_zmin = current_z;
                 float box_xmin = last_xmin;
                 float box_xmax = last_xmax;
 
                 aabbs.push_back({
-                    {"min", {box_xmin, ground_y_min, box_zmax }},
-                    {"max", {box_xmax, ground_y_max, box_zmin }}
+                    {"min", {box_xmin- Overlap, ground_y_min, box_zmin - Overlap }},
+                    {"max", {box_xmax+ Overlap, ground_y_max, box_zmax+ Overlap }}
                 });
 
                 last_xmax = xmax;
@@ -149,8 +159,8 @@ int main()
     float last_z = vertices.back().z;
 
     aabbs.push_back({
-        {"min", {last_xmin, ground_y_min, last_z }},
-        {"max", {last_xmax, ground_y_max, last_span_change_z }}
+        {"min", {last_xmin - Overlap, ground_y_min, last_z - Overlap }},
+        {"max", {last_xmax + Overlap, ground_y_max, last_span_change_z + Overlap }}
     });
 
     std::ofstream o("aabbs.json");
