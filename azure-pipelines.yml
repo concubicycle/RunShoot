@@ -10,9 +10,18 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
+
+- script: mkdir build && cd build
+  displayName: 'go to build'
+
 - task: CMake@1
   inputs:
-    cmakeArgs: 
+    cmakeArgs: -G "Visual Studio 16 2019" ..
+
+- task: CMake@1
+  inputs:
+      cmakeArgs: --build .
+
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
