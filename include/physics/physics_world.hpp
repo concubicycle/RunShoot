@@ -38,9 +38,9 @@ namespace physics
         listener_id _entity_create_listener_id;
         listener_id _entity_destroy_listener_id;
 
-        void detect_collisions(float frame_time);
+        void detect_collisions();
         void resolve_collisions(float frame_time);
-        void resolve_collision_continuous(float t, std::vector<physics::entity_contact>::iterator first_col);
+        void resolve_collision_continuous(std::vector<physics::entity_contact>::iterator first_col);
         void resolve_collision_discrete(std::vector<physics::entity_contact>::iterator first_col);
         void update_transforms();
         void grab_entity (ecs::entity &e);

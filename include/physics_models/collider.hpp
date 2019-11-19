@@ -31,7 +31,14 @@ namespace physics_models
     class collider : public shape_element, public shape_visitor
     {
     public:
+        explicit collider(bool is_trigger) : _is_trigger(is_trigger) {}
+
         virtual void set_position(glm::vec3& position) = 0;
+
+        [[nodiscard]] bool is_trigger() const { return _is_trigger; }
+
+    private:
+        bool _is_trigger;
     };
 }
 

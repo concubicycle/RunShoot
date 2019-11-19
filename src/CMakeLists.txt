@@ -53,7 +53,7 @@ set(ASSET_HEADER_LIST
     ../include/asset/mesh_type.hpp
     ../include/asset/asset_types.hpp
     ../include/asset/prototype_loader.hpp
-    ../include/asset/component_loader.hpp)
+    ../include/asset/component_loader.hpp ../include/asset/scene_graph_node.hpp)
 
 set(PLATFORM_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/platform/sleep.cpp

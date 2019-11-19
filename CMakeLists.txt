@@ -63,7 +63,7 @@ add_executable(${TARGET_NAME}
                apps/player_controller.hpp
                apps/components/player_controller_component.hpp
                apps/components/player_controller_component.cpp
-               apps/components/runshoot_component.hpp apps/components/segment_component.hpp apps/components/segment_component.cpp)
+               apps/components/runshoot_component.hpp apps/components/segment_component.hpp apps/components/segment_component.cpp apps/components/turn_trigger_component.cpp apps/components/turn_trigger_component.hpp apps/components/turn_direction.hpp)
 
 add_executable(generate_colliders apps/generate_colliders.cpp)
 

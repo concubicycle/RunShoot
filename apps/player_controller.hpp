@@ -69,10 +69,10 @@ private:
 
     static void on_collision(const physics::entity_contact& collision, float dt);
     static void move_component_positions(ecs::entity& e, glm::vec3 displacement);
-    void update_player_look(ecs::entity& e, core::input_manager& input, float frame_time);
-    void update_turn_look(ecs::entity& e);
+    static void update_player_look(ecs::entity& e, core::input_manager& input, float frame_time);
+    static void update_turn_look(ecs::entity& e);
 
-    void integrate(ecs::entity& e, ecs::rigid_body_component& rb, float frame_time);
+    static void integrate(ecs::entity& e, ecs::rigid_body_component& rb, float frame_time);
 
 
     static void resolve_collision(const physics::entity_contact& collision,

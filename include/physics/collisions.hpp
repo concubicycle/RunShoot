@@ -6,6 +6,7 @@
 #define __COLLISIONS_HPP_
 
 #include <set>
+#include <vector>
 #include <functional>
 #include <unordered_map>
 
@@ -18,16 +19,17 @@
 
 namespace physics
 {
-
     class collisions
     {
+        const std::uint16_t ContactBufferSize = 64;
+
     public:
-        physics_models::contact check_collision_and_generate_contact(
-            ecs::entity &one,
-            ecs::entity &two);
+        collisions();
+
+        physics_models::contact check_collision_and_generate_contact(ecs::entity &one, ecs::entity &two);
 
     private:
-        std::set<physics_models::contact, physics_models::contact_compare> _contact_buffer;
+        std::vector<physics_models::contact> _contact_buffer;
     };
 
 }

@@ -3,6 +3,7 @@
 //
 
 #include <asset/component_loader.hpp>
+#include <spdlog/spdlog.h>
 
 
 using bitshift_to_component_loader =
@@ -84,33 +85,44 @@ void load_aabb(const json &j, ecs::entity &e, string_table &hashes)
 
     for (auto &aabb : colliders)
     {
+        if (a.count == MAX_COLLIDER_SHAPES)
+        {
+            spdlog::warn("Collider limit exceeded for entity {0}!", e.id());
+            break;
+        }
+
         auto min = aabb["min"];
         auto max = aabb["max"];
-
+        auto is_trigger = aabb.value("is_trigger", false);
         physics_models::aabb shape;
         shape.min = glm::vec3(min[0].get<float>(), min[1].get<float>(), min[2].get<float>());
         shape.max = glm::vec3(max[0].get<float>(), max[1].get<float>(), max[2].get<float>());
-        a.colliders[a.count++] = physics_models::aabb_collider(shape);
+        a.colliders[a.count++] = physics_models::aabb_collider(shape, is_trigger);
     }
 }
 
 void load_sphere(const json &j, ecs::entity &e, string_table &hashes)
 {
-    auto &a = e.get_component<ecs::sphere_collider_component>();
+    auto &s = e.get_component<ecs::sphere_collider_component>();
     auto colliders = j["colliders"];
 
-    a.count = 0;
+    s.count = 0;
 
     for (auto &sphere : colliders)
     {
+        if (s.count == MAX_COLLIDER_SHAPES)
+        {
+            spdlog::warn("Collider limit exceeded for entity {0}!", e.id());
+            break;
+        }
+
         auto center = sphere["center"];
         auto radius = sphere["radius"];
-
+        auto is_trigger = sphere.value("is_trigger", false);
         physics_models::sphere shape;
         shape.center = glm::vec3(center[0].get<float>(), center[1].get<float>(), center[2].get<float>());
         shape.radius = radius.get<float>();
-
-        a.colliders[a.count++] = physics_models::sphere_collider(shape);
+        s.colliders[s.count++] = physics_models::sphere_collider(shape, is_trigger);
     }
 }
 

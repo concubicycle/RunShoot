@@ -33,7 +33,7 @@
  * Each collider component will have an array of shapes, to allow for
  * more than one of each collider type.
  */
-#define MAX_COLLIDER_SHAPES 64
+#define MAX_COLLIDER_SHAPES 48
 
 
 

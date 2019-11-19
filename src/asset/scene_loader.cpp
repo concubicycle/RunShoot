@@ -4,7 +4,7 @@
 
 #include <unordered_map>
 #include <asset/scene_loader.hpp>
-#include <set>
+#include <unordered_set>
 #include <fstream>
 #include <nlohmann/json.hpp>
 
@@ -66,7 +66,7 @@ void asset::scene_loader::load_entity_components(ecs::entity &e, const json &com
 
 json asset::scene_loader::merge_prototype_and_scene_entity(json &entity_json)
 {
-    std::set<std::uint8_t > prototype_component_shifts;
+    std::unordered_set<std::uint8_t > prototype_component_shifts;
     std::unordered_map<std::uint8_t, json> shift_to_entity_component;
 
     auto entity_components = entity_json["components"];

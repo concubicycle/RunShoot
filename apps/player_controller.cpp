@@ -15,7 +15,6 @@ void player_controller::update_single(ecs::entity &e, core::behavior_context &ct
     auto& c = e.get_component<ecs::camera_component>();
 
     auto& input = ctx.input;
-    auto frame_time = ctx.time.smoothed_delta_secs();
 
     switch (player.state)
     {
@@ -62,7 +61,7 @@ void player_controller::update_running(ecs::entity &e, player_controller_compone
         player.state = turning;
         player.previous_yaw = cam.yaw;
         player.target_yaw = cam.yaw += glm::half_pi<float>();
-        player.turn_dir = player_controller_component::right;
+        player.turn_dir = right;
         player.turn_counter += player.turn_dir;
     }
     else if (ctx.input.was_key_pressed(GLFW_KEY_A) && player.turn_counter > -1)
@@ -73,7 +72,7 @@ void player_controller::update_running(ecs::entity &e, player_controller_compone
         player.state = turning;
         player.previous_yaw = cam.yaw;
         player.target_yaw = cam.yaw -= glm::half_pi<float>();
-        player.turn_dir = player_controller_component::left;
+        player.turn_dir = left;
         player.turn_counter += player.turn_dir;
     }
 

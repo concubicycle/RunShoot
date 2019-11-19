@@ -8,6 +8,7 @@
 #include <ecs/component.hpp>
 #include <ecs/entity.hpp>
 #include <util/string_table.hpp>
+#include "turn_direction.hpp"
 
 enum player_state
 {
@@ -21,7 +22,6 @@ enum player_state
 class player_controller_component : public ecs::component<player_controller_component>
 {
 public:
-    enum turn_direction : int {left = -1, right = 1};
 
     glm::vec3 previous_direction {0.f, 0.f, -1.f};
     glm::vec3 direction { 0.f, 0.f, -1.f};

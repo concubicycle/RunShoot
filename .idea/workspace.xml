@@ -2,25 +2,25 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="RunShoot" targetName="assimp" />
-      <config projectName="RunShoot" targetName="generate_colliders" />
-      <config projectName="RunShoot" targetName="glbinding" />
-      <config projectName="RunShoot" targetName="asset" />
-      <config projectName="RunShoot" targetName="ogllib" />
-      <config projectName="RunShoot" targetName="nlohmann_json" />
-      <config projectName="RunShoot" targetName="physics" />
-      <config projectName="RunShoot" targetName="tests" />
-      <config projectName="RunShoot" targetName="physics_models" />
-      <config projectName="RunShoot" targetName="RunShoot" />
       <config projectName="RunShoot" targetName="glfw" />
-      <config projectName="RunShoot" targetName="memory" />
-      <config projectName="RunShoot" targetName="renderer" />
-      <config projectName="RunShoot" targetName="ecs" />
-      <config projectName="RunShoot" targetName="core" />
       <config projectName="RunShoot" targetName="spdlog" />
-      <config projectName="RunShoot" targetName="expected" />
       <config projectName="RunShoot" targetName="glm" />
+      <config projectName="RunShoot" targetName="asset" />
+      <config projectName="RunShoot" targetName="RunShoot" />
+      <config projectName="RunShoot" targetName="generate_colliders" />
+      <config projectName="RunShoot" targetName="ogllib" />
+      <config projectName="RunShoot" targetName="tests" />
+      <config projectName="RunShoot" targetName="glbinding" />
+      <config projectName="RunShoot" targetName="core" />
+      <config projectName="RunShoot" targetName="physics_models" />
+      <config projectName="RunShoot" targetName="physics" />
       <config projectName="RunShoot" targetName="platform" />
+      <config projectName="RunShoot" targetName="ecs" />
+      <config projectName="RunShoot" targetName="assimp" />
+      <config projectName="RunShoot" targetName="expected" />
+      <config projectName="RunShoot" targetName="memory" />
+      <config projectName="RunShoot" targetName="nlohmann_json" />
+      <config projectName="RunShoot" targetName="renderer" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -30,8 +30,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/apps/components/turn_direction.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/components/turn_trigger_component.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/components/turn_trigger_component.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/prototypes/turn_trigger.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/asset/scene_graph_node.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/events/future_invoke.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/events/future_invoke.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/components/add_custom_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/add_custom_components.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/components/player_controller_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/player_controller_component.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/components/runshoot_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/runshoot_component.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/freefly_controller.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/freefly_controller.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/player_controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/player_controller.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/seg1.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/seg1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/asset/scene.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/asset/scene.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/physics/collisions.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics/collisions.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/physics/physics_world.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics/physics_world.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/physics_models/aabb_collider.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics_models/aabb_collider.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/physics_models/collider.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics_models/collider.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/physics_models/contact.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics_models/contact.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/physics_models/sphere_collider.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics_models/sphere_collider.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/asset/component_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/component_loader.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/asset/scene_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/scene_loader.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/physics/collisions.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/physics/collisions.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/physics/physics_world.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/physics/physics_world.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -311,7 +336,14 @@
       <workItem from="1573669016807" duration="15258000" />
       <workItem from="1573693999863" duration="16609000" />
       <workItem from="1573763656391" duration="1556000" />
-      <workItem from="1573841187826" duration="3381000" />
+      <workItem from="1573841187826" duration="7027000" />
+      <workItem from="1573885607015" duration="1054000" />
+      <workItem from="1573954939925" duration="4224000" />
+      <workItem from="1574023284384" duration="610000" />
+      <workItem from="1574052835662" duration="606000" />
+      <workItem from="1574103068316" duration="8848000" />
+      <workItem from="1574121976621" duration="4119000" />
+      <workItem from="1574130950491" duration="4268000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>
