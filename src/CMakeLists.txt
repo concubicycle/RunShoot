@@ -103,7 +103,7 @@ set (ECS_SOURCE_LIST
      ${PROJECT_SOURCE_DIR}/src/ecs/component_meta.cpp
      ${PROJECT_SOURCE_DIR}/src/ecs/entity_factory.cpp
      ${PROJECT_SOURCE_DIR}/src/ecs/entity_world.cpp
-     ecs/chunk_component_accessor.cpp)
+     ecs/chunk_component_accessor.cpp ecs/entity.cpp)
 
 set (ECS_HEADER_LIST
      ${PROJECT_SOURCE_DIR}/include/ecs/components/basic_components.hpp

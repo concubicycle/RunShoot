@@ -10,7 +10,8 @@
 
 
 using nlohmann::json;
-
+using scene_node_t = scene_graph::scene_graph_root<ecs::entity, entity_id>;
+using scene_node_base_t = scene_graph::scene_graph_node_base<ecs::entity, entity_id>;
 
 asset::scene_loader::scene_loader(
     events::event_exchange& events,
@@ -30,7 +31,7 @@ scene_graph::scene asset::scene_loader::load_scene(const std::string& file_path,
 
     for (auto &entity_json : scene_json["entities"])
     {
-        entity_id id = entity_json["entity_id"].get<entity_id>();
+        auto id = entity_json["entity_id"].get<entity_id>();
         json prototype = inflate_prototype(entity_json);
         auto& e = load_prototype(prototype, world, scene.scene_graph(), id);
     }
@@ -55,23 +56,21 @@ void asset::scene_loader::load_entity_components(ecs::entity &e, const json &com
 {
     for (auto &component : component_array)
     {
-        std::uint8_t bit_shift = component["component_bitshift"].get<std::uint8_t>();
+        auto bit_shift = component["component_bitshift"].get<std::uint8_t>();
        _component_loader.load_component(e, component, bit_shift);
     }
 }
 
-
 json asset::scene_loader::inflate_prototype(json &entity_json)
 {
     auto entity_components = entity_json["components"];
-
     auto prototype_path_it = entity_json.find("prototype");
+
     if (prototype_path_it == entity_json.end())
-        return {{"root", {"components", entity_components}}};
+        return {{"root", entity_json}};
 
     auto prototype_path = prototype_path_it.value().get<std::string>();
     json prototype_json = _prototypes.load(prototype_path);
-
     merge_component_props(prototype_json["root"], entity_json);
     return prototype_json;
 }
@@ -189,27 +188,44 @@ asset::scene_loader::load_prototype(
 }
 
 void
-asset::scene_loader::scene_graph_insert(scene_graph::scene::scene_graph_t &scene_graph, ecs::entity &e, entity_id parent_id)
+asset::scene_loader::scene_graph_insert(
+    scene_graph::scene::scene_graph_t &scene_graph,
+    ecs::entity &e,
+    entity_id parent_id)
 {
     auto t_opt = e.get_component_opt<ecs::transform_component>();
+    auto insert_result = t_opt
+        ? scene_graph.insert(e, e.id(), parent_id, t_opt->get().to_mat4())
+        : scene_graph.insert(e, e.id(), parent_id);
 
-    if (t_opt)
-        scene_graph.insert(e, e.id(), parent_id, t_opt->get().to_mat4());
-    else
-        scene_graph.insert(e, e.id(), parent_id);
+    if (insert_result)
+    {
+        scene_node_base_t* node_ptr = &(insert_result->get());
+        e.graph_node = node_ptr;
+    }
 }
 
-void asset::scene_loader::scene_graph_insert(scene_graph::scene::scene_graph_t& scene_graph, ecs::entity &e,  json& e_json)
+void asset::scene_loader::scene_graph_insert(
+    scene_graph::scene::scene_graph_t& scene_graph,
+    ecs::entity &e,
+    json& e_json)
 {
     auto t_opt = e.get_component_opt<ecs::transform_component>();
     auto parent_id = e_json.value("parent_id", -1);
+    std::optional<std::reference_wrapper<scene_node_base_t>> insert_result;
 
     if (t_opt && parent_id != -1)
-        scene_graph.insert(e, e.id(), parent_id, t_opt->get().to_mat4());
+        insert_result = scene_graph.insert(e, e.id(), parent_id, t_opt->get().to_mat4());
     else if (parent_id != -1)
-        scene_graph.insert(e, e.id(), parent_id);
+        insert_result = scene_graph.insert(e, e.id(), parent_id);
     else if (t_opt)
-        scene_graph.add_child(e, e.id(), t_opt->get().to_mat4());
+        insert_result = scene_graph.add_child(e, e.id(), t_opt->get().to_mat4());
     else
-        scene_graph.add_child(e, e.id());
+        insert_result = scene_graph.add_child(e, e.id());
+
+    if (insert_result)
+    {
+        scene_node_base_t* node_ptr = &(insert_result->get());
+        e.graph_node = node_ptr;
+    }
 }

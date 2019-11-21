@@ -8,87 +8,49 @@
 #include "chunk_component_accessor.hpp"
 #include "ecs_types.hpp"
 #include <optional>
+#include <scene/scene_graph_node.hpp>
 
 namespace ecs
 {
-
-/**
- * Need better .. semantics? around constructors/destructors. Don't want to call _accessor.destruct() in
- * entity's destructor, since that will actually destroy the components in memory, when we might just be
- * moving the entity. We can delete copy constructor, and only pass around references, with a master copy
- * being kept in a map in archetype_store. hmm...
- */
     class entity
     {
     public:
+        // TODO: Fix design, this is a quick hack
+        scene_graph::scene_graph_node_base<entity, entity_id>* graph_node = nullptr;
+
         entity(
             entity_id id,
             component_bitset archetype_id,
-            std::uint8_t *chunk_ptr) :
-            _id(id),
-            _accessor(chunk_ptr, archetype_id),
-            _active(true),
-            _archetype_id(archetype_id)
-        {
-            _accessor.construct();
-        }
+            std::uint8_t *chunk_ptr);
 
-        entity(const entity& other) :
-            _id(other._id),
-            _accessor(other._accessor),
-            _active(other._active),
-            _archetype_id(other._archetype_id)
-        {
-        }
+        entity(const entity& other);
 
-        entity_id id() { return _id; }
+        [[nodiscard]] entity_id id() const { return _id; }
+        [[nodiscard]] void *ptr() const { return _accessor.ptr(); }
+        [[nodiscard]] component_bitset archetype_id() const { return _archetype_id; }
+        [[nodiscard]] bool has(component_bitset component_bit) const { return _archetype_id & component_bit; }
 
-        void *ptr() const { return _accessor.ptr(); }
-        component_bitset archetype_id() const { return _archetype_id; }
-
-        void destroy()
-        {
-            _accessor.destruct();
-            _active = false;
-        }
+        void destroy();
+        void copy_components_from(entity& other);
 
         template<typename T>
-        T &get_component() { return *(_accessor.get_component<T>()); }
+        T &get_component()
+        {
+            return *(_accessor.get_component<T>());
+        }
 
         template<typename T>
         std::optional<std::reference_wrapper<T>> get_component_opt()
         {
             return has<T>()
-                ? std::optional<std::reference_wrapper<T>>(*(_accessor.get_component<T>()))
-                : std::optional<std::reference_wrapper<T>>();
+                   ? std::optional<std::reference_wrapper<T>>(*(_accessor.get_component<T>()))
+                   : std::optional<std::reference_wrapper<T>>();
         }
 
         template<class T>
         bool has()
         {
             return _archetype_id & component<T>::archetype_bit;
-        }
-
-        bool has(component_bitset component_bit) const
-        {
-            return _archetype_id & component_bit;
-        }
-
-        void copy_components_from(entity& other)
-        {
-            for(std::uint8_t i = 0; i < ECS_MAX_COMPONENT_TYPES; ++i)
-            {
-                component_bitset bit = component_bitset(1) << i;
-
-                if (!has(bit) || !other.has(bit)) continue;
-
-                auto& meta = component_meta::bit_metas.find(i)->second;
-
-                void* destination = _accessor.get_component(i);
-                void* source = other._accessor.get_component(i);
-
-                meta.copy(destination, source);
-            }
         }
 
 

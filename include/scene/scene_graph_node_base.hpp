@@ -18,10 +18,10 @@ namespace scene_graph
         using traverse_callback = std::function<void(TData &, glm::mat4 &)>;
 
         virtual void traverse(traverse_callback callback) = 0;
-        virtual void add_child(TData &data, TId id) = 0;
-        virtual void add_child(TData &data, TId id, glm::mat4 transform) = 0;
-        virtual void insert(TData& data, TId id, TId parent_id) = 0;
-        virtual void insert(TData& data, TId id, TId parent_id, glm::mat4 transform) = 0;
+        virtual TNode& add_child(TData &data, TId id) = 0;
+        virtual TNode& add_child(TData &data, TId id, glm::mat4 transform) = 0;
+        virtual std::optional<std::reference_wrapper<TNode>> insert(TData& data, TId id, TId parent_id) = 0;
+        virtual std::optional<std::reference_wrapper<TNode>> insert(TData& data, TId id, TId parent_id, glm::mat4 transform) = 0;
 
         virtual glm::mat4& transform() = 0;
 

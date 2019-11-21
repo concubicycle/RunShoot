@@ -193,7 +193,7 @@ void player_controller::resolve_collision(
     auto& rb = player_entity.get_component<ecs::rigid_body_component>();
     auto n = collision.contact().collision_axis();
 
-
+    if (collision.contact().is_trigger_contact()) return;
 
     auto intersecting = collision.contact().time() == physics_models::contact::Intersecting;
 

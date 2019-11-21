@@ -118,31 +118,31 @@ void physics::physics_world::grab_entity(ecs::entity &e)
 
     auto is_physical = e.has<ecs::rigid_body_component>();
 
+    auto total_t = e.graph_node->absolute_transform();
+    auto pos = glm::vec3(total_t[3]);
+
     if (has_colliders)
         _collision_entities.emplace_back(e);
 
     if (is_physical)
     {
-        auto &t = e.get_component<ecs::transform_component>();
         auto &rb = e.get_component<ecs::rigid_body_component>();
-        rb.position = t.pos;
+        rb.position = pos;
 
         // update collider positions/rotations(later)
         collider_iterator it(e);
         physics_models::collider *cursor;
 
         while (it.end() != (cursor = it.get_next()))
-            cursor->set_position(t.pos);
+            cursor->set_position(pos);
 
         _physical_entities.emplace_back(e);
     } else
     {
         collider_iterator it(e);
-        auto &t = e.get_component<ecs::transform_component>();
-
         physics_models::collider *cursor;
         while (it.end() != (cursor = it.get_next()))
-            cursor->set_position(t.pos);
+            cursor->set_position(pos);
     }
 }
 
@@ -269,7 +269,6 @@ void physics::physics_world::resolve_collision_trigger(std::vector<physics::enti
 
     _contacts.erase(first_col);
 }
-
 
 void physics::physics_world::update_collider_positions(ecs::entity &e)
 {

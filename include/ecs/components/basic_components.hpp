@@ -23,14 +23,11 @@
 #include <physics_models/aabb_collider.hpp>
 #include <physics_models/sphere_collider.hpp>
 
-#include <scene/scene_graph_node.hpp>
-
 #include <cubemap.hpp>
 #include <vectormath.h>
+#include <ecs/component.hpp>
+#include <ecs/components/mesh_opengl.hpp>
 
-#include "../ecs_types.hpp"
-#include "../component.hpp"
-#include "mesh_opengl.hpp"
 
 
 #define MAX_BASIC_COMPONENTS 16
@@ -58,7 +55,9 @@ namespace ecs
         float scale_y = 0;
         float scale_z = 0;
 
-        glm::mat4 to_mat4() const
+
+
+        [[nodiscard]] glm::mat4 to_mat4() const
         {
             auto model = glm::mat4(1.f);
             model = glm::scale(model, glm::vec3(scale_x, scale_y, scale_z));

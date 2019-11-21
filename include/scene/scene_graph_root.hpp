@@ -17,6 +17,7 @@ namespace scene_graph
     class scene_graph_root : public scene_graph_node_base<TData, TId>
     {
         using TNode = scene_graph_node<TData, TId>;
+        using TNodeBase = scene_graph_node_base<TData, TId>;
         using traverse_callback = typename scene_graph_node_base<TData, TId>::traverse_callback;
 
     public:
@@ -25,24 +26,36 @@ namespace scene_graph
             for (auto& c : _children) c.traverse(callback);
         }
 
-        void add_child(TData &data, TId id) override
+        TNodeBase& add_child(TData &data, TId id) override
         {
             _children.emplace_back(data, id, *this);
+            return _children.back();
         }
 
-        void add_child(TData &data, TId id, glm::mat4 transform) override
+        TNodeBase& add_child(TData &data, TId id, glm::mat4 transform) override
         {
             _children.emplace_back(data, id, transform, *this);
+            return _children.back();
         }
 
-        void insert(TData& data, TId id, TId parent_id) override
+        std::optional<std::reference_wrapper<TNodeBase>> insert(TData& data, TId id, TId parent_id) override
         {
-            for (auto& c : _children) c.insert(data, id, parent_id);
+            for (auto& c : _children)
+            {
+                auto opt = c.insert(data, id, parent_id);
+                if (opt) return opt;
+            }
+            return std::optional<std::reference_wrapper<TNodeBase>>();
         }
 
-        void insert(TData& data, TId id, TId parent_id, glm::mat4 transform) override
+        std::optional<std::reference_wrapper<TNodeBase>> insert(TData& data, TId id, TId parent_id, glm::mat4 transform) override
         {
-            for (auto& c : _children) c.insert(data, id, parent_id, transform);
+            for (auto& c : _children)
+            {
+                auto opt = c.insert(data, id, parent_id, transform);
+                if (opt) return opt;
+            }
+            return std::optional<std::reference_wrapper<TNodeBase>>();
         }
 
         [[nodiscard]] glm::mat4& transform() override { return  _transform; }

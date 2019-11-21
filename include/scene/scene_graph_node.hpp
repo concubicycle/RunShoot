@@ -50,30 +50,52 @@ namespace scene_graph
             traverse_recurse(glm::mat4(1.f), callback);
         }
 
-        void add_child(TData &data, TId id) override
+        TNodeBase& add_child(TData &data, TId id) override
         {
             _children.emplace_back(data, id, *this);
+            return _children.back();
         }
 
-        void add_child(TData &data, TId id, glm::mat4 transform) override
+        TNodeBase& add_child(TData &data, TId id, glm::mat4 transform) override
         {
             _children.emplace_back(data, id, transform, *this);
+            return _children.back();
         }
 
-        void insert(TData &data, TId id, TId parent_id) override
+        std::optional<std::reference_wrapper<TNodeBase>> insert(TData &data, TId id, TId parent_id) override
         {
-            if (parent_id == _id) add_child(data, id);
+            if (parent_id == _id)
+            {
+                return std::optional<std::reference_wrapper<TNodeBase>>(add_child(data, id));
+            }
             else
+            {
                 for (auto &c : _children)
-                    c.insert(data, id, parent_id);
+                {
+                    auto opt = c.insert(data, id, parent_id);
+                    if (opt) return opt;
+                }
+            }
+
+            return std::optional<std::reference_wrapper<TNodeBase>>();
         }
 
-        void insert(TData &data, TId id, TId parent_id, glm::mat4 transform) override
+        std::optional<std::reference_wrapper<TNodeBase>> insert(TData &data, TId id, TId parent_id, glm::mat4 transform) override
         {
-            if (parent_id == _id) add_child(data, id, transform);
+            if (parent_id == _id)
+            {
+                return std::optional<std::reference_wrapper<TNodeBase>>(add_child(data, id, transform));
+            }
             else
+            {
                 for (auto &c : _children)
-                    c.insert(data, id, parent_id, transform);
+                {
+                    auto opt = c.insert(data, id, parent_id, transform);
+                    if (opt) return opt;
+                }
+            }
+
+            return std::optional<std::reference_wrapper<TNodeBase>>();
         }
 
         [[nodiscard]] glm::mat4 &transform() override { return _transform; }
