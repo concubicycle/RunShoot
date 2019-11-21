@@ -31,24 +31,11 @@
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/runshoot.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/runshoot.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/prototypes/cube_marker.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/cube_marker.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/prototypes/drone.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/drone.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/prototypes/freefly_player.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/freefly_player.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/prototypes/phys_cube.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/phys_cube.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/prototypes/player.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/player.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/prototypes/seg1.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/seg1.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/prototypes/seg2.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/seg2.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/prototypes/turn_trigger.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/turn_trigger.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/azure-pipelines.yml" beforeDir="false" afterPath="$PROJECT_DIR$/azure-pipelines.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/asset/scene.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/asset/scene.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/asset/scene_graph_node.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/asset/scene_graph_node.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/physics/intersection_tests.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/physics/physics_world.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/physics/physics_world.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/physics_models/collision_tests.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/physics_models/collision_tests.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/asset/scene_loader.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/asset/scene_loader.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ecs/entity_world.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/entity_world.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/asset/scene_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/scene_loader.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ecs/entity_world.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ecs/entity_world.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -391,6 +378,11 @@
           <url>file://$PROJECT_DIR$/apps/generate_colliders.cpp</url>
           <line>47</line>
           <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/asset/scene_loader.cpp</url>
+          <line>37</line>
+          <option name="timeStamp" value="82" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

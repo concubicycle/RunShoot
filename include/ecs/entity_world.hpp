@@ -32,6 +32,8 @@ namespace ecs
         }
 
         entity& add_entity(component_bitset archetype_id, entity_id id);
+        entity& add_entity(component_bitset archetype_id);
+
 
         entity& get_entity(entity_id id);
 
@@ -67,6 +69,7 @@ namespace ecs
         events::event_exchange& _events;
 
         std::unordered_map<entity_id, entity> _entity_lookup;
+        static std::atomic_uint next_entity_id;
     };
 }
 

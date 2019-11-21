@@ -5,6 +5,12 @@
 #include <ecs/entity.hpp>
 #include <ecs/entity_world.hpp>
 
+ecs::entity &ecs::entity_world::add_entity(component_bitset archetype_id)
+{
+    return add_entity(archetype_id, next_entity_id++);
+}
+
+
 ecs::entity& ecs::entity_world::add_entity(component_bitset archetype_id, entity_id id)
 {
     auto it = _entity_lookup.find(id);
@@ -15,6 +21,9 @@ ecs::entity& ecs::entity_world::add_entity(component_bitset archetype_id, entity
     }
 
     it = _entity_lookup.find(id);
+
+    if (id >= next_entity_id) next_entity_id = id + 1;
+
     return it->second;
 }
 
@@ -30,3 +39,6 @@ ecs::entity &ecs::entity_world::get_entity(entity_id id)
 {
     return _entity_lookup.find(id)->second;
 }
+
+std::atomic_uint ecs::entity_world::next_entity_id = 1;
+

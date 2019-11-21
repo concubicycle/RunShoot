@@ -20,6 +20,9 @@
 #include <physics_models/aabb_collider.hpp>
 #include <physics_models/sphere_collider.hpp>
 #include <cubemap.hpp>
+#include <glm/gtx/euler_angles.hpp>
+#include <glm/ext/matrix_transform.hpp>
+#include <vectormath.h>
 
 #include "../ecs_types.hpp"
 #include "../component.hpp"
@@ -50,6 +53,15 @@ namespace ecs
         float scale_x = 0;
         float scale_y = 0;
         float scale_z = 0;
+
+        glm::mat4 to_mat4() const
+        {
+            auto model = glm::mat4(1.f);
+            model = glm::scale(model, glm::vec3(scale_x, scale_y, scale_z));
+            model = glm::eulerAngleYXZ(yaw, pitch, roll) * model;
+            set_translation(model, pos);
+            return model;
+        }
     };
 
     ////////////////// Actual OpenGL render component //////////////////

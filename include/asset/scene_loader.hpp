@@ -40,7 +40,29 @@ namespace asset
         component_bitset calc_archetype_id(const json &components) const;
         void load_entity_components(ecs::entity &e, const json& component_array) const;
 
-        json merge_prototype_and_scene_entity(json& scene_entity);
+        json inflate_prototype(json& entity_json);
+        static void merge_component_props(json& target, json& source);
+
+        ecs::entity& load_prototype(
+            json& prototype,
+            ecs::entity_world& world,
+            asset::scene::scene_graph_t& scene_graph,
+            entity_id id);
+
+        ecs::entity& load_prototype(
+            json& prototype,
+            ecs::entity_world& world,
+            asset::scene::scene_graph_t& scene_graph);
+
+        ecs::entity& load_prototype(
+            json& prototype,
+            ecs::entity_world& world,
+            asset::scene::scene_graph_t& scene_graph,
+            ecs::entity& e_root);
+
+        void scene_graph_insert(asset::scene::scene_graph_t& scene_graph, ecs::entity& e, json& e_json);
+        void scene_graph_insert(asset::scene::scene_graph_t& scene_graph, ecs::entity& e, entity_id parent_id);
+
     };
 }
 
