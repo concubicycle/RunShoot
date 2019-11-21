@@ -22,10 +22,11 @@
 #include <asset/mesh.hpp>
 #include <asset/textured_mesh.hpp>
 #include <asset/texture_manager.hpp>
-#include <scene/scene.hpp>
+#include <asset/scene.hpp>
 #include <asset/asset_types.hpp>
 
 #include <renderer/shader_set.hpp>
+
 
 
 namespace rendering
@@ -43,7 +44,7 @@ public:
 
     bool init();
 
-    void draw_scene(scene_graph::scene& scene);
+    void draw_scene(asset::scene& scene);
     static void resize(std::uint32_t width, std::uint32_t height);
 
 private:

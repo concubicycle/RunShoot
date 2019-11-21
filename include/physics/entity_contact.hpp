@@ -38,11 +38,18 @@ namespace physics
             return a.time() > b.time();
         }
 
+        ecs::entity& the_other(entity_id this_entity) const
+        {
+            return _one.get().id() == this_entity ? _two.get() : _one.get();
+        }
+
     private:
         std::reference_wrapper<ecs::entity> _one;
         std::reference_wrapper<ecs::entity> _two;
         physics_models::contact _contact;
     };
+
+
 
 }
 

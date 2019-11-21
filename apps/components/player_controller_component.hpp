@@ -33,6 +33,7 @@ public:
     float target_yaw;
     std::int8_t turn_counter {0};
 
+    entity_id current_segment_id;
 
     glm::vec3 to_camera {0};
     float run_speed {5.f};

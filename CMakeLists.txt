@@ -68,7 +68,7 @@ add_executable(${TARGET_NAME}
                apps/components/segment_component.cpp
                apps/components/turn_trigger_component.cpp
                apps/components/turn_trigger_component.hpp
-               apps/components/turn_direction.hpp)
+               apps/components/turn_direction.hpp apps/runshoot_event.hpp apps/segment_spawner.hpp)
 
 add_executable(generate_colliders apps/generate_colliders.cpp)
 

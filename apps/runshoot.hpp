@@ -9,12 +9,13 @@
 #include <core/frame_timer.hpp>
 #include <core/input_manager.hpp>
 #include <renderer/renderer.hpp>
-#include <scene/scene.hpp>
+#include <asset/scene.hpp>
 #include <core/frame_limiter.hpp>
 #include <physics/physics_world.hpp>
 #include "freefly_controller.hpp"
 #include "drone_controller.hpp"
 #include "player_controller.hpp"
+
 
 struct game_systems
 {
@@ -23,7 +24,7 @@ struct game_systems
     core::frame_limiter &limiter;
     core::input_manager& input;
     rendering::renderer& renderer;
-    scene_graph::scene& scene;
+    asset::scene& scene;
     events::event_exchange& events;
     physics::physics_world& physics;
 };

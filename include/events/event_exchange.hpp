@@ -48,6 +48,13 @@ namespace events
             e.invoke(args...);
         }
 
+        template <typename TEvent, class... TArgs>
+        void invoke(TEvent type, TArgs... args)
+        {
+            auto& e = find_event<TArgs...>(static_cast<event_type>(type));
+            e.invoke(args...);
+        }
+
         template <class... TArgs>
         void invoke_delayed(event_type type, float_seconds delay, TArgs... args)
         {

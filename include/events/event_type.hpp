@@ -9,7 +9,6 @@
 
 namespace events
 {
-
     enum event_type : std::uint32_t
     {
         entity_created = 1,
@@ -18,7 +17,6 @@ namespace events
 
         delay_entity_jump = 4
     };
-
 }
 
 #endif //__EVENT_TYPE_HPP_

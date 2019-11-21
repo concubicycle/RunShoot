@@ -10,7 +10,7 @@
 #include <functional>
 #include <nlohmann/json.hpp>
 #include <ecs/entity.hpp>
-#include <scene/scene.hpp>
+#include <asset/scene.hpp>
 #include <asset/texture_manager.hpp>
 #include <ecs/components/basic_components.hpp>
 
@@ -19,6 +19,8 @@
 #include <util/string_table.hpp>
 #include "component_loader.hpp"
 #include "prototype_loader.hpp"
+#include "prototype_spawner.hpp"
+#include "scene.hpp"
 
 using nlohmann::json;
 
@@ -28,56 +30,12 @@ namespace asset
     {
 
     public:
-        explicit scene_loader(
-            events::event_exchange& events,
-            component_loader& component_loader,
-            prototype_loader& prototypes);
+        explicit scene_loader(prototype_spawner& spawner);
 
-        scene_graph::scene load_scene(
-            const std::string& file_path,
-            ecs::entity_world& world);
+        asset::scene load_scene(const std::string& file_path, ecs::entity_world& world);
 
     private:
-        events::event_exchange& _events;
-        component_loader& _component_loader;
-        prototype_loader& _prototypes;
-
-        [[nodiscard]] component_bitset calc_archetype_id(const json &components) const;
-        void load_entity_components(ecs::entity &e, const json& component_array) const;
-
-        json inflate_prototype(json& entity_json);
-
-        ecs::entity& load_prototype(
-            json& prototype,
-            ecs::entity_world& world,
-            scene_graph::scene::scene_graph_t& scene_graph,
-            entity_id id);
-
-        ecs::entity& load_prototype(
-            json& prototype,
-            ecs::entity_world& world,
-            scene_graph::scene::scene_graph_t& scene_graph);
-
-        ecs::entity& load_prototype(
-            json& prototype,
-            ecs::entity_world& world,
-            scene_graph::scene::scene_graph_t& scene_graph,
-            ecs::entity& e_root);
-
-
-        static void merge_component_props(
-            json& target,
-            json& source);
-
-        static void scene_graph_insert(
-            scene_graph::scene::scene_graph_t& scene_graph,
-            ecs::entity& e,
-            json& e_json);
-
-        static void scene_graph_insert(
-            scene_graph::scene::scene_graph_t& scene_graph,
-            ecs::entity& e,
-            entity_id parent_id);
+        prototype_spawner& _spawner;
     };
 }
 

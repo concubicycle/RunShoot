@@ -15,7 +15,7 @@ namespace asset
     class prototype_loader
     {
     public:
-        json load(std::string path);
+        json load(const std::string& path);
 
     private:
         std::unordered_map<std::string, json> _path_to_component;

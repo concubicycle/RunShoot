@@ -1,4 +1,5 @@
 #include "renderer/renderer.hpp"
+#include <asset/scene.hpp>
 
 #include <glbinding/gl/gl.h>
 #include <glm/gtx/euler_angles.hpp>
@@ -87,7 +88,7 @@ bool rendering::renderer::init()
 }
 
 
-void rendering::renderer::draw_scene(scene_graph::scene &scene)
+void rendering::renderer::draw_scene(asset::scene &scene)
 {
     if (_camera_entity == nullptr)
         return;

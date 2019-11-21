@@ -7,7 +7,7 @@
 
 using nlohmann::json;
 
-json asset::prototype_loader::load(std::string path)
+json asset::prototype_loader::load(const std::string& path)
 {
     auto it = _path_to_component.find(path);
 

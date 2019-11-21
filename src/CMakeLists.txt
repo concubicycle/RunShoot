@@ -6,7 +6,6 @@ set(CORE_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/core/frame_timer.cpp
     ${PROJECT_SOURCE_DIR}/src/core/framerate.cpp
     ${PROJECT_SOURCE_DIR}/src/core/startup_config.cpp
-    ${PROJECT_SOURCE_DIR}/src/core/scene.cpp
     ${PROJECT_SOURCE_DIR}/src/core/input_manager.cpp
     ${PROJECT_SOURCE_DIR}/src/core/system_info.cpp)
 
@@ -39,7 +38,8 @@ set(ASSET_SOURCE_LIST
     asset/assimp_loader.cpp
     asset/tinygltf_loader.cpp
     asset/prototype_loader.cpp
-    asset/component_loader.cpp)
+    asset/component_loader.cpp
+    asset/prototype_spawner.cpp)
 
 set(ASSET_HEADER_LIST
     ${PROJECT_SOURCE_DIR}/include/asset/texture_manager.hpp
@@ -53,7 +53,9 @@ set(ASSET_HEADER_LIST
     ../include/asset/mesh_type.hpp
     ../include/asset/asset_types.hpp
     ../include/asset/prototype_loader.hpp
-    ../include/asset/component_loader.hpp )
+    ../include/asset/component_loader.hpp
+    ../include/asset/prototype_spawner.hpp
+    ../include/asset/scene.hpp)
 
 set(SCENE_SOURCE_LIST
     )

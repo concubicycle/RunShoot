@@ -7,6 +7,7 @@
       <w>colliders</w>
       <w>cubemap</w>
       <w>skybox</w>
+      <w>spawner</w>
     </words>
   </dictionary>
 </component>
