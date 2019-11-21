@@ -1,39 +1,40 @@
 {
-  "components": [
-    {
-      "component_bitshift": 0,
-      "x": 0,
-      "y": 0,
-      "z": 0,
-      "pitch": 0,
-      "yaw": 0,
-      "roll": 0,
-      "scale_x": 1.0,
-      "scale_y": 1.0,
-      "scale_z": 1.0
-    },
-    {
-      "component_bitshift": 21,
-      "direction": -1
-    },
-    {
-      "component_bitshift": 4,
-      "colliders": [
-        {
-          "is_trigger": true,
-          "max": [
-            75,
-            75,
-            2
-          ],
-          "min": [
-            -75,
-            -75,
-            -2
-          ]
-        }
-      ]
-    }
-  ]
+  "root": {
+    "components": [
+      {
+        "component_bitshift": 0,
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "pitch": 0,
+        "yaw": 0,
+        "roll": 0,
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "scale_z": 1.0
+      },
+      {
+        "component_bitshift": 21,
+        "direction": -1
+      },
+      {
+        "component_bitshift": 4,
+        "colliders": [
+          {
+            "is_trigger": true,
+            "max": [
+              75,
+              75,
+              2
+            ],
+            "min": [
+              -75,
+              -75,
+              -2
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }
-u

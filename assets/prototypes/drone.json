@@ -1,27 +1,29 @@
 {
-  "components": [
-    {
-      "component_bitshift": 0,
-      "x": 2,
-      "y": 10,
-      "z": -20,
-      "pitch": 0,
-      "yaw": 0,
-      "roll": 0,
-      "scale_x": 1.0,
-      "scale_y": 1.0,
-      "scale_z": 1.0
-    },
-    {
-      "component_bitshift": 2,
-      "mesh_path": "./assets/models/drone/drone.gltf",
-      "mesh_format": 2
-    },
-    {
-      "component_bitshift": 18,
-      "acceleration": 10,
-      "flash_frequency": 20,
-      "state": 1
-    }
-  ]
+  "root": {
+    "components": [
+      {
+        "component_bitshift": 0,
+        "x": 2,
+        "y": 10,
+        "z": -20,
+        "pitch": 0,
+        "yaw": 0,
+        "roll": 0,
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "scale_z": 1.0
+      },
+      {
+        "component_bitshift": 2,
+        "mesh_path": "./assets/models/drone/drone.gltf",
+        "mesh_format": 2
+      },
+      {
+        "component_bitshift": 18,
+        "acceleration": 10,
+        "flash_frequency": 20,
+        "state": 1
+      }
+    ]
+  }
 }

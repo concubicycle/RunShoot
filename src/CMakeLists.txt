@@ -28,7 +28,8 @@ set(RENDERER_SOURCE_LIST
 set(RENDERER_HEADER_LIST
     ${PROJECT_SOURCE_DIR}/include/renderer/renderer.hpp
     ../include/renderer/model_render_loader.hpp
-    ../include/renderer/shader_set.hpp)
+    ../include/renderer/shader_set.hpp
+    )
 
 set(ASSET_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/asset/mesh.cpp
@@ -53,7 +54,7 @@ set(ASSET_HEADER_LIST
     ../include/asset/mesh_type.hpp
     ../include/asset/asset_types.hpp
     ../include/asset/prototype_loader.hpp
-    ../include/asset/component_loader.hpp ../include/asset/scene_graph_node.hpp)
+    ../include/asset/component_loader.hpp ../include/asset/scene_graph_node.hpp ../include/asset/scene_graph_root.hpp ../include/asset/scene_graph_node_base.hpp)
 
 set(PLATFORM_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/platform/sleep.cpp
@@ -117,8 +118,9 @@ set (PHYSICS_SOURCE_LIST
 set (PHYSICS_HEADER_LIST
      ../include/physics/physics_world.hpp
      ../include/physics/collisions.hpp
-     ../include/physics/intersection_tests.hpp
-     ../include/physics_models/contact.hpp ../include/physics/collider_iterator.hpp ../include/physics/entity_contact.hpp)
+     ../include/physics_models/contact.hpp
+     ../include/physics/collider_iterator.hpp
+     ../include/physics/entity_contact.hpp)
 
 
 set (PHYSICS_MODELS_SOURCE_LIST

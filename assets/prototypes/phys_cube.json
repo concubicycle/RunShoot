@@ -1,36 +1,50 @@
 {
-  "components": [
-    {
-      "component_bitshift": 0,
-      "x": 0,
-      "y": 25,
-      "z": -10,
-      "pitch": 0,
-      "yaw": 0.15,
-      "roll": 0,
-      "scale_x": 1.0,
-      "scale_y": 1.0,
-      "scale_z": 1.0
-    },
-    {
-      "component_bitshift": 2,
-      "mesh_path": "./assets/models/cube/cube.gltf",
-      "mesh_format": 2
-    },
-    {
-      "component_bitshift": 4,
-      "colliders": [
-        {
-          "min": [-1, -1, -1],
-          "max": [1, 1, 1]
-        }
-      ]
-    },
-    {
-      "component_bitshift": 6,
-      "velocity": [0, 0, 0],
-      "is_kinematic": false,
-      "mass": 1
-    }
-  ]
+  "root": {
+    "components": [
+      {
+        "component_bitshift": 0,
+        "x": 0,
+        "y": 25,
+        "z": -10,
+        "pitch": 0,
+        "yaw": 0.15,
+        "roll": 0,
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "scale_z": 1.0
+      },
+      {
+        "component_bitshift": 2,
+        "mesh_path": "./assets/models/cube/cube.gltf",
+        "mesh_format": 2
+      },
+      {
+        "component_bitshift": 4,
+        "colliders": [
+          {
+            "min": [
+              -1,
+              -1,
+              -1
+            ],
+            "max": [
+              1,
+              1,
+              1
+            ]
+          }
+        ]
+      },
+      {
+        "component_bitshift": 6,
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "is_kinematic": false,
+        "mass": 1
+      }
+    ]
+  }
 }

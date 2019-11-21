@@ -76,8 +76,9 @@ void physics::physics_world::resolve_collisions(float frame_time)
         }
 
         float dt = first_col->contact().time();
+        bool is_trigger_collision = first_col->contact().is_trigger_contact();
 
-        if (dt == physics_models::contact::Intersecting && !first_col->contact().is_trigger_contact())
+        if (dt == physics_models::contact::Intersecting && !is_trigger_collision)
             resolve_collision_discrete(first_col);
         else
             resolve_collision_continuous(first_col);
@@ -107,7 +108,6 @@ void physics::physics_world::integrate_position(ecs::entity &e, float frame_time
     rb.position += rb.velocity * frame_time;
     update_collider_positions(e);
 }
-
 
 void physics::physics_world::grab_entity(ecs::entity &e)
 {

@@ -1,48 +1,54 @@
 {
-  "components": [
-    {
-      "component_bitshift": 0,
-      "x": 0,
-      "y": 0,
-      "z": -5,
-      "pitch": 0,
-      "yaw": 0,
-      "roll": 0,
-      "scale_x": 1.0,
-      "scale_y": 1.0,
-      "scale_z": 1.0
-    },
-    {
-      "component_bitshift": 1,
-      "position": {
+  "root": {
+    "components": [
+      {
+        "component_bitshift": 0,
         "x": 0,
-        "y": 12,
-        "z": 0
+        "y": 0,
+        "z": -5,
+        "pitch": 0,
+        "yaw": 0,
+        "roll": 0,
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "scale_z": 1.0
       },
-      "pitch": 0,
-      "yaw": 0,
-      "roll": 0,
-      "fov": 45,
-      "near": 0.1,
-      "far": 1000.0,
-      "mode": 1,
-      "skybox_left": "./assets/textures/left.png",
-      "skybox_top": "./assets/textures/top.png",
-      "skybox_front": "./assets/textures/front.png",
-      "skybox_bottom": "./assets/textures/bottom.png",
-      "skybox_right": "./assets/textures/right.png",
-      "skybox_back": "./assets/textures/back.png"
-    },
-    {
-      "component_bitshift": 6,
-      "velocity": [0, 0, 0],
-      "is_kinematic": true,
-      "mass": 0
-    },
-    {
-      "component_bitshift": 17,
-      "run_speed": 35,
-      "walk_speed": 35
-    }
-  ]
+      {
+        "component_bitshift": 1,
+        "position": {
+          "x": 0,
+          "y": 12,
+          "z": 0
+        },
+        "pitch": 0,
+        "yaw": 0,
+        "roll": 0,
+        "fov": 45,
+        "near": 0.1,
+        "far": 1000.0,
+        "mode": 1,
+        "skybox_left": "./assets/textures/left.png",
+        "skybox_top": "./assets/textures/top.png",
+        "skybox_front": "./assets/textures/front.png",
+        "skybox_bottom": "./assets/textures/bottom.png",
+        "skybox_right": "./assets/textures/right.png",
+        "skybox_back": "./assets/textures/back.png"
+      },
+      {
+        "component_bitshift": 6,
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "is_kinematic": true,
+        "mass": 0
+      },
+      {
+        "component_bitshift": 17,
+        "run_speed": 35,
+        "walk_speed": 35
+      }
+    ]
+  }
 }

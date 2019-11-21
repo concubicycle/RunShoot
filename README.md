@@ -134,3 +134,72 @@ C:/sandbox/dev/RunShoot/build
 * Generate
 * Open Project
 * Build/run RunShoot
+
+
+## Scene file format
+
+The level files are in JSON format, and allow for a basic description of a scene, 
+with some parenting and data inheritance support. 
+
+### Scene
+
+A scene is a collection of entities. Child relationships can be represented
+as an an entity id:
+
+```json
+{
+  "entities": [
+    {
+      "entity_id": 1,
+      "components": []
+    },
+    {
+      "entity_id": 2,
+      "parent_id": 1,
+      "components": []
+    }]
+}
+```
+
+All the ids in these files should be set, since they ought to be generated 
+by an editor eventually. But I guess there's no real reason not to auto-generate
+and id if one is omitted.
+
+
+### Components
+
+Components are currently identified by a `component_bitshift` property, which 
+isn't very friendly, but again, these files should probably be editor-generated
+anyway. There are currently a maximum of 16 built in components. The current ones
+are:
+
+```
+template<> const component_shift ecs::component<ecs::transform_component>::component_bitshift = 0;
+template<> const component_shift ecs::component<ecs::camera_component>::component_bitshift = 1;
+template<> const component_shift ecs::component<ecs::render_component_ogl>::component_bitshift = 2;
+template<> const component_shift ecs::component<ecs::punctual_light_component>::component_bitshift = 3;
+template<> const component_shift ecs::component<ecs::aabb_collider_component>::component_bitshift = 4;
+template<> const component_shift ecs::component<ecs::sphere_collider_component>::component_bitshift = 5;
+template<> const component_shift ecs::component<ecs::rigid_body_component>::component_bitshift = 6;
+```
+
+All the properties other than the component_bitshift depend on the type of component.
+
+### Prototypes
+
+A prototype is like a Unity prefab. It is a template for some entity, which can have
+children entities. Its format is:
+```
+{
+    "root": {},
+    "children": []
+}
+```
+Where the root object and each `children` element are entities. These do not have ids.
+The elements of "children" have the `root` entity as their implied parent. 
+They can, alternatively, define parents that are within the `children` array
+by index. So the property is called `parent_index` 
+
+### Authoring Components
+
+WIP
