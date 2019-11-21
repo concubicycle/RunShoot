@@ -42,6 +42,8 @@ namespace physics
         void resolve_collisions(float frame_time);
         void resolve_collision_continuous(std::vector<physics::entity_contact>::iterator first_col);
         void resolve_collision_discrete(std::vector<physics::entity_contact>::iterator first_col);
+        void resolve_collision_trigger(std::vector<physics::entity_contact>::iterator first_col);
+
         void update_transforms();
         void grab_entity (ecs::entity &e);
         void forget_entity (ecs::entity &e);

@@ -47,7 +47,7 @@ namespace scene_graph
 
         void traverse(traverse_callback callback) override
         {
-            traverse_recurse(_transform, callback);
+            traverse_recurse(glm::mat4(1.f), callback);
         }
 
         void add_child(TData &data, TId id) override
@@ -91,8 +91,9 @@ namespace scene_graph
 
         void traverse_recurse(glm::mat4 accum, traverse_callback callback)
         {
-            callback(_data, _transform);
-            for (auto &c : _children) c.traverse_recurse(_transform * accum, callback);
+            accum = _transform * accum;
+            callback(_data, accum);
+            for (auto &c : _children) c.traverse_recurse(accum, callback);
         }
     };
 

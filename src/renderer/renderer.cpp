@@ -98,18 +98,13 @@ void rendering::renderer::draw_scene(scene_graph::scene &scene)
 
     draw_skybox();
 
-    entities.for_all_entities([this](ecs::entity &e) {
+    scene.scene_graph().traverse([this](ecs::entity &e, glm::mat4& model) {
         auto is_rt = e.has<ecs::render_component_ogl>() && e.has<ecs::transform_component>();
         if (!is_rt) return;
 
         auto &cam = _camera_entity->get_component<ecs::camera_component>();
         auto &r = e.get_component<ecs::render_component_ogl>();
         auto &t = e.get_component<ecs::transform_component>();
-
-        auto model = glm::mat4(1.f);
-        model = glm::scale(model, glm::vec3(t.scale_x, t.scale_y, t.scale_z));
-        model = glm::eulerAngleYXZ(t.yaw, t.pitch, t.roll) * model;
-        set_translation(model, t.pos);
 
         auto model_inverse = glm::inverse(model);
 
@@ -119,26 +114,26 @@ void rendering::renderer::draw_scene(scene_graph::scene &scene)
         auto cam_basis = cam.right_up_fwd();
         auto view = glm::lookAt(cam.position, cam.position + cam_basis[2], cam_basis[1]);
 
-		auto light_pos = glm::vec3(0, 10.f, 10.f);
-		auto light_color = glm::vec3(0.5, 0.5, 0.5);
-		auto ambient_light = glm::vec3(0.5, 0.5, 0.5);
-		auto specular = glm::vec3(0.03f);
+        auto light_pos = glm::vec3(0, 10.f, 10.f);
+        auto light_color = glm::vec3(0.5, 0.5, 0.5);
+        auto ambient_light = glm::vec3(0.5, 0.5, 0.5);
+        auto specular = glm::vec3(0.03f);
 
         if (r.mesh_format == asset::mesh_type::GLTF2)
         {
             auto& shader = _shaders.default_shader();
             shader.bind();
-            
-			shader.set_uniform("model", model);
-			shader.set_uniform("view", view);
-			shader.set_uniform("projection", projection);
-			shader.set_uniform("model_inverse", model_inverse);
-			shader.set_uniform("view_pos", cam.position);
-			shader.set_uniform("light_pos", light_pos);
-			shader.set_uniform("point_light", light_color);
-			shader.set_uniform("ambient_light", ambient_light);
-			shader.set_uniform("specular", specular);            
-			shader.set_uniform("shininess", 0.2f);
+
+            shader.set_uniform("model", model);
+            shader.set_uniform("view", view);
+            shader.set_uniform("projection", projection);
+            shader.set_uniform("model_inverse", model_inverse);
+            shader.set_uniform("view_pos", cam.position);
+            shader.set_uniform("light_pos", light_pos);
+            shader.set_uniform("point_light", light_color);
+            shader.set_uniform("ambient_light", ambient_light);
+            shader.set_uniform("specular", specular);
+            shader.set_uniform("shininess", 0.2f);
             shader.set_uniform("light_intensity", 100.f);
 
             for (std::uint32_t i = 0; i < r.mesh_count; ++i)

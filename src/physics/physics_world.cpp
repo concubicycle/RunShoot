@@ -78,7 +78,9 @@ void physics::physics_world::resolve_collisions(float frame_time)
         float dt = first_col->contact().time();
         bool is_trigger_collision = first_col->contact().is_trigger_contact();
 
-        if (dt == physics_models::contact::Intersecting && !is_trigger_collision)
+        if (is_trigger_collision)
+            resolve_collision_trigger(first_col);
+        else if (dt == physics_models::contact::Intersecting)
             resolve_collision_discrete(first_col);
         else
             resolve_collision_continuous(first_col);
@@ -171,26 +173,20 @@ void physics::physics_world::resolve_collision_continuous(std::vector<physics::e
     for (auto &c : _contacts)
         c.decrement_time(dt);
 
-    if (!first_col->contact().is_trigger_contact())
-    {
-        // kill velocity in direction of each other.
-        resolve_velocity(*first_col, first_col->one());
-        resolve_velocity(*first_col, first_col->two());
-    }
+    // kill velocity in direction of each other.
+    resolve_velocity(*first_col, first_col->one());
+    resolve_velocity(*first_col, first_col->two());
 
     _contacts.erase(first_col);
 
-    if (!first_col->contact().is_trigger_contact())
+    // re-run collisions for collided entities - new collisions may occur
+    for (auto &it : _collision_entities)
     {
-        // re-run collisions for collided entities - new collisions may occur
-        for (auto &it : _collision_entities)
-        {
-            if (it.get().id() != e1.id())
-                _contacts.emplace_back(it, e1, _collisions.check_collision_and_generate_contact(it, e1));
+        if (it.get().id() != e1.id())
+            _contacts.emplace_back(it, e1, _collisions.check_collision_and_generate_contact(it, e1));
 
-            if (it.get().id() != e2.id())
-                _contacts.emplace_back(it, e2, _collisions.check_collision_and_generate_contact(it, e2));
-        }
+        if (it.get().id() != e2.id())
+            _contacts.emplace_back(it, e2, _collisions.check_collision_and_generate_contact(it, e2));
     }
 }
 
@@ -260,6 +256,21 @@ physics::physics_world::resolve_collision_discrete(std::vector<physics::entity_c
     _contacts.erase(first_col);
 }
 
+void physics::physics_world::resolve_collision_trigger(std::vector<physics::entity_contact>::iterator first_col)
+{
+    float dt = first_col->contact().time();
+
+    // move everything up to time of collision. add some bias for collided entities.
+    for (auto &e : _physical_entities)
+        integrate_position(e, dt);
+
+    for (auto &c : _contacts)
+        c.decrement_time(dt);
+
+    _contacts.erase(first_col);
+}
+
+
 void physics::physics_world::update_collider_positions(ecs::entity &e)
 {
     collider_iterator it(e);
@@ -285,3 +296,4 @@ void physics::physics_world::update_transforms()
             t.pos = rb.position;
     }
 }
+

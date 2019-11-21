@@ -13,15 +13,19 @@
 
 #include <glm/vec3.hpp>
 #include <glm/mat4x4.hpp>
+#include <glm/gtx/euler_angles.hpp>
+#include <glm/ext/matrix_transform.hpp>
+
 #include <asset/mesh_type.hpp>
 
 #include <physics_models/aabb.hpp>
 #include <physics_models/collider.hpp>
 #include <physics_models/aabb_collider.hpp>
 #include <physics_models/sphere_collider.hpp>
+
+#include <scene/scene_graph_node.hpp>
+
 #include <cubemap.hpp>
-#include <glm/gtx/euler_angles.hpp>
-#include <glm/ext/matrix_transform.hpp>
 #include <vectormath.h>
 
 #include "../ecs_types.hpp"
