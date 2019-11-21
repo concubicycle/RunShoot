@@ -130,6 +130,7 @@ add_dependencies(ogllib
 add_dependencies(${ECS_LIB}
                  ogllib
 				 nlohmann_json
+                 scene
                  ${MEM_LIB}
                  ${GLM}
                  ${PHYSICS_MODELS_LIB})
@@ -151,6 +152,7 @@ add_dependencies(${TARGET_NAME}
                  ${PLATFORMLIB_NAME}
                  ${RENDERER}
                  ${PHYSICS_LIB}
+                 scene
                  glfw
                  glbinding
                  assimp
@@ -158,6 +160,7 @@ add_dependencies(${TARGET_NAME}
 
 add_dependencies(${ASSETLIB_NAME}
                  #tinygltf
+                 scene
                  ${ECS_LIB}
                  expected
                  ${OGLLIB_NAME}

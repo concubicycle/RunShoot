@@ -21,9 +21,9 @@ asset::scene_loader::scene_loader(
     _prototypes(prototypes)
     {}
 
-asset::scene asset::scene_loader::load_scene(const std::string& file_path, ecs::entity_world &world)
+scene_graph::scene asset::scene_loader::load_scene(const std::string& file_path, ecs::entity_world &world)
 {
-    asset::scene scene(world);
+    scene_graph::scene scene(world);
     std::ifstream i(file_path);
     json scene_json;
     i >> scene_json;
@@ -124,7 +124,7 @@ ecs::entity &
 asset::scene_loader::load_prototype(
     json &prototype,
     ecs::entity_world &world,
-    asset::scene::scene_graph_t &scene_graph,
+    scene_graph::scene::scene_graph_t &scene_graph,
     entity_id id)
 {
     auto& root = prototype["root"];
@@ -141,7 +141,7 @@ asset::scene_loader::load_prototype(
 ecs::entity &asset::scene_loader::load_prototype(
     json &prototype,
     ecs::entity_world &world,
-    asset::scene::scene_graph_t &scene_graph)
+    scene_graph::scene::scene_graph_t &scene_graph)
 {
     auto& root = prototype["root"];
     auto archetype_id = calc_archetype_id(root["components"]);
@@ -156,7 +156,7 @@ ecs::entity &
 asset::scene_loader::load_prototype(
     json &prototype,
     ecs::entity_world &world,
-    asset::scene::scene_graph_t &scene_graph,
+    scene_graph::scene::scene_graph_t &scene_graph,
     ecs::entity &e_root)
 {
     if (prototype.find("children") == prototype.end()) return e_root;
@@ -189,7 +189,7 @@ asset::scene_loader::load_prototype(
 }
 
 void
-asset::scene_loader::scene_graph_insert(asset::scene::scene_graph_t &scene_graph, ecs::entity &e, entity_id parent_id)
+asset::scene_loader::scene_graph_insert(scene_graph::scene::scene_graph_t &scene_graph, ecs::entity &e, entity_id parent_id)
 {
     auto t_opt = e.get_component_opt<ecs::transform_component>();
 
@@ -199,7 +199,7 @@ asset::scene_loader::scene_graph_insert(asset::scene::scene_graph_t &scene_graph
         scene_graph.insert(e, e.id(), parent_id);
 }
 
-void asset::scene_loader::scene_graph_insert(asset::scene::scene_graph_t& scene_graph, ecs::entity &e,  json& e_json)
+void asset::scene_loader::scene_graph_insert(scene_graph::scene::scene_graph_t& scene_graph, ecs::entity &e,  json& e_json)
 {
     auto t_opt = e.get_component_opt<ecs::transform_component>();
     auto parent_id = e_json.value("parent_id", -1);

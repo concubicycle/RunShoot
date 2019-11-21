@@ -8,7 +8,7 @@
 #include <glm/mat4x4.hpp>
 #include <functional>
 
-namespace asset
+namespace scene_graph
 {
     template <typename TData, typename TId>
     class scene_graph_node_base

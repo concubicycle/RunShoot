@@ -180,14 +180,17 @@ void physics::physics_world::resolve_collision_continuous(std::vector<physics::e
 
     _contacts.erase(first_col);
 
-    // re-run collisions for collided entities - new collisions may occur
-    for (auto &it : _collision_entities)
+    if (!first_col->contact().is_trigger_contact())
     {
-        if (it.get().id() != e1.id())
-            _contacts.emplace_back(it, e1, _collisions.check_collision_and_generate_contact(it, e1));
+        // re-run collisions for collided entities - new collisions may occur
+        for (auto &it : _collision_entities)
+        {
+            if (it.get().id() != e1.id())
+                _contacts.emplace_back(it, e1, _collisions.check_collision_and_generate_contact(it, e1));
 
-        if (it.get().id() != e2.id())
-            _contacts.emplace_back(it, e2, _collisions.check_collision_and_generate_contact(it, e2));
+            if (it.get().id() != e2.id())
+                _contacts.emplace_back(it, e2, _collisions.check_collision_and_generate_contact(it, e2));
+        }
     }
 }
 

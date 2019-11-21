@@ -10,7 +10,7 @@
 #include "scene_graph_node.hpp"
 #include "scene_graph_node_base.hpp"
 
-namespace asset
+namespace scene_graph
 {
 
     template<typename TData, typename TId>

@@ -47,14 +47,22 @@ set(ASSET_HEADER_LIST
     ${PROJECT_SOURCE_DIR}/include/asset/mesh.hpp
     ${PROJECT_SOURCE_DIR}/include/asset/basic_mesh_reader.hpp
     ${PROJECT_SOURCE_DIR}/include/asset/mesh_read_error.hpp
-    ${PROJECT_SOURCE_DIR}/include/asset/scene.hpp
     ${PROJECT_SOURCE_DIR}/include/asset/scene_loader.hpp
     ${PROJECT_SOURCE_DIR}/include/asset/assimp_loader.hpp
     ${PROJECT_SOURCE_DIR}/include/asset/tinygltf_loader.hpp
     ../include/asset/mesh_type.hpp
     ../include/asset/asset_types.hpp
     ../include/asset/prototype_loader.hpp
-    ../include/asset/component_loader.hpp ../include/asset/scene_graph_node.hpp ../include/asset/scene_graph_root.hpp ../include/asset/scene_graph_node_base.hpp)
+    ../include/asset/component_loader.hpp )
+
+set(SCENE_SOURCE_LIST
+    )
+
+set(SCENE_HEADER_LIST
+    ../include/scene/scene_graph_node.hpp
+    ../include/scene/scene_graph_root.hpp
+    ../include/scene/scene_graph_node_base.hpp
+    )
 
 set(PLATFORM_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/platform/sleep.cpp
@@ -152,6 +160,8 @@ add_library(${ECS_LIB} STATIC ${ECS_SOURCE_LIST} ${ECS_HEADER_LIST})
 add_library(${PHYSICS_LIB} STATIC ${PHYSICS_SOURCE_LIST} ${PHYSICS_HEADER_LIST})
 add_library(${PHYSICS_MODELS_LIB} STATIC ${PHYSICS_MODELS_SOURCE_LIST} ${PHYSICS_MODELS_HEADER_LIST})
 
+add_library(scene INTERFACE)
+target_include_directories(scene INTERFACE ${SCENE_HEADER_LIST})
 
 
 # We need this directory, and users of our library will need it too

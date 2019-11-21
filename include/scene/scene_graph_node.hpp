@@ -11,7 +11,7 @@
 #include <functional>
 #include "scene_graph_node_base.hpp"
 
-namespace asset
+namespace scene_graph
 {
     template<typename TData, typename TId>
     class scene_graph_node : public scene_graph_node_base<TData, TId>

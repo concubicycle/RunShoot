@@ -10,7 +10,7 @@
 #include <functional>
 #include <nlohmann/json.hpp>
 #include <ecs/entity.hpp>
-#include <asset/scene.hpp>
+#include <scene/scene.hpp>
 #include <asset/texture_manager.hpp>
 #include <ecs/components/basic_components.hpp>
 
@@ -30,7 +30,7 @@ namespace asset
             component_loader& component_loader,
             prototype_loader& prototypes);
 
-        asset::scene load_scene(const std::string& file_path, ecs::entity_world& world);
+        scene_graph::scene load_scene(const std::string& file_path, ecs::entity_world& world);
 
     private:
         events::event_exchange& _events;
@@ -46,22 +46,22 @@ namespace asset
         ecs::entity& load_prototype(
             json& prototype,
             ecs::entity_world& world,
-            asset::scene::scene_graph_t& scene_graph,
+            scene_graph::scene::scene_graph_t& scene_graph,
             entity_id id);
 
         ecs::entity& load_prototype(
             json& prototype,
             ecs::entity_world& world,
-            asset::scene::scene_graph_t& scene_graph);
+            scene_graph::scene::scene_graph_t& scene_graph);
 
         ecs::entity& load_prototype(
             json& prototype,
             ecs::entity_world& world,
-            asset::scene::scene_graph_t& scene_graph,
+            scene_graph::scene::scene_graph_t& scene_graph,
             ecs::entity& e_root);
 
-        void scene_graph_insert(asset::scene::scene_graph_t& scene_graph, ecs::entity& e, json& e_json);
-        void scene_graph_insert(asset::scene::scene_graph_t& scene_graph, ecs::entity& e, entity_id parent_id);
+        void scene_graph_insert(scene_graph::scene::scene_graph_t& scene_graph, ecs::entity& e, json& e_json);
+        void scene_graph_insert(scene_graph::scene::scene_graph_t& scene_graph, ecs::entity& e, entity_id parent_id);
 
     };
 }

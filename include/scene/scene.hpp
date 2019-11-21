@@ -10,7 +10,7 @@
 #include <ecs/entity_world.hpp>
 #include "scene_graph_root.hpp"
 
-namespace asset
+namespace scene_graph
 {
     class scene
     {

@@ -31,11 +31,18 @@
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/runshoot.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/runshoot.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/asset/scene.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/asset/scene_graph_node.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/asset/scene_graph_node_base.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/asset/scene_graph_root.hpp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/include/asset/scene_loader.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/asset/scene_loader.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/entity_world.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/entity_world.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/renderer/renderer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/renderer/renderer.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/asset/scene_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/scene_loader.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ecs/entity_world.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ecs/entity_world.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/physics/physics_world.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/physics/physics_world.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/renderer.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -378,11 +385,6 @@
           <url>file://$PROJECT_DIR$/apps/generate_colliders.cpp</url>
           <line>47</line>
           <option name="timeStamp" value="49" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/asset/scene_loader.cpp</url>
-          <line>37</line>
-          <option name="timeStamp" value="82" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

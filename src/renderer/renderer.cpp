@@ -87,7 +87,7 @@ bool rendering::renderer::init()
 }
 
 
-void rendering::renderer::draw_scene(asset::scene &scene)
+void rendering::renderer::draw_scene(scene_graph::scene &scene)
 {
     if (_camera_entity == nullptr)
         return;
