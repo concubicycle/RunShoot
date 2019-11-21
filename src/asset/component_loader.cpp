@@ -32,7 +32,8 @@ void load_render_ogl(const json &j, ecs::entity &e, string_table &hashes)
     r.mesh_format = asset::mesh_type(j["mesh_format"].get<unsigned int>());
 }
 
-
+#undef near
+#undef far
 void load_camera(const json &j, ecs::entity &e, string_table &hashes)
 {
     auto &c = e.get_component<ecs::camera_component>();
