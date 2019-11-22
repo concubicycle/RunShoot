@@ -31,9 +31,22 @@ namespace events
             return e.add_listener(f);
         }
 
+        template <typename TEvent, class... TArgs>
+        listener_id subscribe(TEvent type, std::function<void(TArgs...)> f)
+        {
+            auto& e = find_event<TArgs...>(static_cast<event_type>(type));
+            return e.add_listener(f);
+        }
+
         void unsubscribe(event_type type, listener_id id)
         {
             unsubscribe_all(_event_maps, type, id);
+        }
+
+        template <typename TEvent>
+        void unsubscribe(TEvent type, listener_id id)
+        {
+            unsubscribe_all(_event_maps, static_cast<event_type>(type), id);
         }
 
         void update(float_seconds dt)

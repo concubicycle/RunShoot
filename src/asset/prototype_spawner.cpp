@@ -3,7 +3,7 @@
 //
 
 #include <asset/prototype_spawner.hpp>
-#include <utility>
+
 
 
 using nlohmann::json;
@@ -22,12 +22,12 @@ asset::prototype_spawner::prototype_spawner(
 
 
 ecs::entity &asset::prototype_spawner::load_prototype(
-    std::string prototype_path,
+    const std::string& prototype_path,
     ecs::entity_world &world,
     scene_graph_t &scene_graph,
     entity_id parent_id)
 {
-    auto prototype = _prototypes.load(std::move(prototype_path));
+    auto prototype = _prototypes.load(prototype_path);
     auto &root = prototype["root"];
     auto archetype_id = calc_archetype_id(root["components"]);
     auto &e_root = world.add_entity(archetype_id);
@@ -38,11 +38,11 @@ ecs::entity &asset::prototype_spawner::load_prototype(
 }
 
 ecs::entity &asset::prototype_spawner::load_prototype(
-    std::string prototype_path,
+    const std::string& prototype_path,
     ecs::entity_world &world,
     scene_graph_t &scene_graph)
 {
-    auto prototype = _prototypes.load(std::move(prototype_path));
+    auto prototype = _prototypes.load(prototype_path);
     auto &root = prototype["root"];
     auto archetype_id = calc_archetype_id(root["components"]);
     auto &e_root = world.add_entity(archetype_id);
@@ -126,11 +126,7 @@ asset::prototype_spawner::scene_graph_insert(
     scene_graph_t &scene_graph,
     ecs::entity &e)
 {
-    auto t_opt = e.get_component_opt<ecs::transform_component>();
-    auto& insert_result = t_opt
-                         ? scene_graph.add_child(e, e.id(), t_opt->get().to_mat4())
-                         : scene_graph.add_child(e, e.id());
-
+    auto& insert_result = scene_graph.add_child(e, e.id());
     scene_node_base_t *node_ptr = &insert_result;
     e.graph_node = node_ptr;
 }
@@ -141,11 +137,7 @@ asset::prototype_spawner::scene_graph_insert(
     ecs::entity &e,
     entity_id parent_id)
 {
-    auto t_opt = e.get_component_opt<ecs::transform_component>();
-    auto insert_result = t_opt
-                         ? scene_graph.insert(e, e.id(), parent_id, t_opt->get().to_mat4())
-                         : scene_graph.insert(e, e.id(), parent_id);
-
+    auto insert_result = scene_graph.insert(e, e.id(), parent_id);
     if (insert_result)
     {
         scene_node_base_t *node_ptr = &(insert_result->get());
@@ -158,16 +150,11 @@ void asset::prototype_spawner::scene_graph_insert(
     ecs::entity &e,
     json &e_json)
 {
-    auto t_opt = e.get_component_opt<ecs::transform_component>();
     auto parent_id = e_json.value("parent_id", -1);
     std::optional<std::reference_wrapper<scene_node_base_t>> insert_result;
 
-    if (t_opt && parent_id != -1)
-        insert_result = scene_graph.insert(e, e.id(), parent_id, t_opt->get().to_mat4());
-    else if (parent_id != -1)
+    if (parent_id != -1)
         insert_result = scene_graph.insert(e, e.id(), parent_id);
-    else if (t_opt)
-        insert_result = scene_graph.add_child(e, e.id(), t_opt->get().to_mat4());
     else
         insert_result = scene_graph.add_child(e, e.id());
 

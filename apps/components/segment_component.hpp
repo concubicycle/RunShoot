@@ -9,13 +9,14 @@
 #include <util/string_table.hpp>
 #include <nlohmann/json.hpp>
 #include <ecs/entity.hpp>
+#include "turn_direction.hpp"
 
 using nlohmann::json;
 
-class segment_component : public ecs::component<segment_component>
+struct segment_component : public ecs::component<segment_component>
 {
-public:
-
+    glm::vec3 end_position {0.f};
+    turn_direction turn {none};
 };
 
 void load_segment_component(const json& j, ecs::entity& e, string_table& hashes);

@@ -15,6 +15,7 @@
 #include "freefly_controller.hpp"
 #include "drone_controller.hpp"
 #include "player_controller.hpp"
+#include "segment_spawner.hpp"
 
 
 struct game_systems
@@ -34,6 +35,7 @@ struct behaviors
     freefly_controller& character;
     drone_controller& drone;
     player_controller& player;
+    segment_spawner& segment_spawn;
 };
 
 

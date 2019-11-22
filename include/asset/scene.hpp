@@ -22,17 +22,32 @@ namespace asset
     public:
         using scene_graph_t = scene_graph::scene_graph_root<ecs::entity, entity_id>;
 
-        scene(prototype_spawner& spawner, ecs::entity_world& world) : _spawner(spawner), _entity_world(world)
+        scene(prototype_spawner& spawner, ecs::entity_world& world) :
+            _spawner(spawner),
+            _entity_world(world),
+            _scene_graph(extract_transform)
         {}
 
         ecs::entity_world& entity_world() { return _entity_world; }
 
         scene_graph_t& scene_graph() { return _scene_graph; }
 
+        ecs::entity &load_prototype(const std::string& prototype_path)
+        {
+            return _spawner.load_prototype(prototype_path, _entity_world, _scene_graph);
+        }
+
     private:
         prototype_spawner& _spawner;
         ecs::entity_world& _entity_world;
         scene_graph_t _scene_graph;
+
+        static glm::mat4 extract_transform(ecs::entity& e)
+        {
+            return e.has<ecs::transform_component>()
+                ? e.get_component<ecs::transform_component>().to_mat4()
+                : glm::mat4(1.f);
+        }
     };
 }
 

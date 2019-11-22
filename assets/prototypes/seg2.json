@@ -19,7 +19,9 @@
         "mesh_format": 2
       },
       {
-        "component_bitshift": 20
+        "component_bitshift": 20,
+        "end_position": [-336,0,-370],
+        "turn": -1
       },
       {
         "component_bitshift": 4,

@@ -23,19 +23,27 @@ namespace scene_graph
 
     public:
 
-        explicit scene_graph_node(TData &data, TId id, scene_graph_node_base<TData, TId>& parent) :
+        explicit scene_graph_node(
+            TData &data,
+            TId id,
+            scene_graph_node_base<TData, TId>& parent) :
             _id(id),
             _data(data),
-            _parent(parent) {}
+            _parent(parent),
+            _extract_transform([]() { return glm::mat4(1.f); }){}
 
-        explicit scene_graph_node(TData &data, TId id, glm::mat4 &transform, scene_graph_node_base<TData, TId>& parent) :
-            _transform(transform),
+        explicit scene_graph_node(
+            TData &data,
+            TId id,
+            std::function<glm::mat4(TData&)> extract_transform,
+            scene_graph_node_base<TData, TId>& parent) :
+            _extract_transform(extract_transform),
             _id(id),
             _data(data),
             _parent(parent) {}
 
         scene_graph_node(const TNode& other) :
-            _transform(other._transform),
+            _extract_transform(other._extract_transform),
             _data(other._data),
             _id(other._id),
             _parent(other._parent)
@@ -52,13 +60,7 @@ namespace scene_graph
 
         TNodeBase& add_child(TData &data, TId id) override
         {
-            _children.emplace_back(data, id, *this);
-            return _children.back();
-        }
-
-        TNodeBase& add_child(TData &data, TId id, glm::mat4 transform) override
-        {
-            _children.emplace_back(data, id, transform, *this);
+            _children.emplace_back(data, id, _extract_transform, *this);
             return _children.back();
         }
 
@@ -80,32 +82,14 @@ namespace scene_graph
             return std::optional<std::reference_wrapper<TNodeBase>>();
         }
 
-        std::optional<std::reference_wrapper<TNodeBase>> insert(TData &data, TId id, TId parent_id, glm::mat4 transform) override
-        {
-            if (parent_id == _id)
-            {
-                return std::optional<std::reference_wrapper<TNodeBase>>(add_child(data, id, transform));
-            }
-            else
-            {
-                for (auto &c : _children)
-                {
-                    auto opt = c.insert(data, id, parent_id, transform);
-                    if (opt) return opt;
-                }
-            }
-
-            return std::optional<std::reference_wrapper<TNodeBase>>();
-        }
-
-        [[nodiscard]] glm::mat4 &transform() override { return _transform; }
-        [[nodiscard]] glm::mat4 absolute_transform() const override { return _parent.absolute_transform() * _transform; }
+        [[nodiscard]] glm::mat4 transform() const override { return _extract_transform(_data); }
+        [[nodiscard]] glm::mat4 absolute_transform() const override { return _parent.absolute_transform() * transform(); }
 
     private:
         std::vector<scene_graph_node<TData, TId>> _children;
 
 
-        glm::mat4 _transform{1.f};
+        std::function<glm::mat4(TData&)> _extract_transform;
         TId _id;
         TData &_data;
         scene_graph_node_base<TData, TId>& _parent;
@@ -113,7 +97,7 @@ namespace scene_graph
 
         void traverse_recurse(glm::mat4 accum, traverse_callback callback)
         {
-            accum = _transform * accum;
+            accum = transform() * accum;
             callback(_data, accum);
             for (auto &c : _children) c.traverse_recurse(accum, callback);
         }

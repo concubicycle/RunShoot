@@ -17,45 +17,28 @@ using nlohmann::json;
 #include "player_controller_component.hpp"
 #include "segment_component.hpp"
 #include "turn_trigger_component.hpp"
+#include "segment_spawner_component.hpp"
+
+template <typename TComponent>
+void add_component(std::function<void(const json &, ecs::entity &, string_table &)> load_func)
+{
+    ecs::component_meta::bit_metas.insert(std::make_pair(
+        TComponent::component_bitshift,
+        ecs::component_meta::of<TComponent>()));
+
+    asset::component_loader::loader_functions.insert(
+        std::make_pair(TComponent::component_bitshift, load_func));
+}
 
 // add own custom components to static variables from ecs
 void add_custom_components()
 {
-    ecs::component_meta::bit_metas.insert(std::make_pair(
-        freefly_controller_component::component_bitshift,
-        ecs::component_meta::of<freefly_controller_component>()));
-
-    ecs::component_meta::bit_metas.insert(std::make_pair(
-        drone_controller_component::component_bitshift,
-        ecs::component_meta::of<drone_controller_component>()));
-
-    ecs::component_meta::bit_metas.insert(std::make_pair(
-        player_controller_component::component_bitshift,
-        ecs::component_meta::of<player_controller_component>()));
-
-    ecs::component_meta::bit_metas.insert(std::make_pair(
-        segment_component::component_bitshift,
-        ecs::component_meta::of<segment_component>()));
-
-    ecs::component_meta::bit_metas.insert(std::make_pair(
-        turn_trigger_component::component_bitshift,
-        ecs::component_meta::of<turn_trigger_component>()));
-
-
-    asset::component_loader::loader_functions.insert(
-        std::make_pair(freefly_controller_component::component_bitshift, load_character_controller));
-
-    asset::component_loader::loader_functions.insert(
-        std::make_pair(drone_controller_component::component_bitshift, load_drone_controller));
-
-    asset::component_loader::loader_functions.insert(
-        std::make_pair(player_controller_component::component_bitshift, load_player_controller));
-
-    asset::component_loader::loader_functions.insert(
-        std::make_pair(segment_component::component_bitshift, load_segment_component));
-
-    asset::component_loader::loader_functions.insert(
-        std::make_pair(turn_trigger_component::component_bitshift, load_turn_trigger));
+    add_component<freefly_controller_component>(load_character_controller);
+    add_component<drone_controller_component>(load_drone_controller);
+    add_component<player_controller_component>(load_player_controller);
+    add_component<segment_component>(load_segment_component);
+    add_component<turn_trigger_component>(load_turn_trigger);
+    add_component<segment_spawner_component>(load_segment_spawner);
 }
 
 #endif //__ADD_CUSTOM_COMPONENTS_HPP_

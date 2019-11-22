@@ -65,6 +65,47 @@ namespace ecs
             set_translation(model, pos);
             return model;
         }
+
+        void set_from_mat4(glm::mat4& mat)
+        {
+            pos = mat[4];
+            glm::mat3 rot(mat);
+            float r31 = rot[0][2];
+            float r32 = rot[1][2];
+            float r33 = rot[2][2];
+            float r21 = rot[0][1];
+            float r11 = rot[0][0];
+            float r12 = rot[1][0];
+            float r13 = rot[2][0];
+
+            if (r31 != 1 && r31 != -1)
+            {
+                float yaw1 = -std::asin(r31);
+                float yaw2 = glm::pi<float>() - yaw1;
+                float cosyaw1 = std::cos(yaw1);
+                float cosyaw2 = std::cos(yaw2);
+                float pitch1 = std::atan2(r32 / cosyaw1, r33 / cosyaw1);
+                float pitch2 = std::atan2(r32 / cosyaw2, r33 / cosyaw2);
+                float roll1 = std::atan2(r21 / cosyaw1, r11 / cosyaw1);
+                float roll2 = std::atan2(r21 / cosyaw2, r11 / cosyaw2);
+                pitch = pitch1;
+                yaw = yaw1;
+                roll = roll1;
+            }
+            else
+            {
+                roll = 0;
+                if (r31 == -1)
+                {
+                    yaw = glm::pi<float>() / 2.f;
+                    pitch = roll + std::atan2(r12, r13);
+                } else
+                {
+                    yaw = glm::pi<float>() / -2.f;
+                    pitch = roll + std::atan2(-r12, -r13);
+                }
+            }
+        }
     };
 
     ////////////////// Actual OpenGL render component //////////////////

@@ -93,6 +93,7 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     freefly_controller controller(events);
     drone_controller drone_controller(events);
     player_controller player_controller(events);
+    segment_spawner segment_spawn(events);
 
     auto scene = loader.load_scene("./assets/scenes/runshoot_gameplay.json", entities);
 
@@ -103,7 +104,7 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     textures.unload_all();
 
     game_systems data = {window, timer, limiter, input, renderer, scene, events, physics};
-    behaviors behaviors = {controller, drone_controller, player_controller};
+    behaviors behaviors = {controller, drone_controller, player_controller, segment_spawn};
     render_loop(data, behaviors);
 }
 
@@ -111,7 +112,7 @@ void render_loop(game_systems &data, behaviors &behaviors)
 {
     auto &player = data.scene.entity_world().get_entity(111);
 
-    core::behavior_context ctx = {data.timer, data.input};
+    core::behavior_context ctx = {data.timer, data.input, data.scene};
 
     while (!glfwWindowShouldClose(data.window))
     {
@@ -122,6 +123,7 @@ void render_loop(game_systems &data, behaviors &behaviors)
         behaviors.character.update(ctx);
         behaviors.drone.update(ctx);
         behaviors.player.update(ctx);
+        behaviors.segment_spawn.update(ctx);
 
         data.renderer.draw_scene(data.scene);
 

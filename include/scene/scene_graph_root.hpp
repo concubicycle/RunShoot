@@ -21,6 +21,8 @@ namespace scene_graph
         using traverse_callback = typename scene_graph_node_base<TData, TId>::traverse_callback;
 
     public:
+        scene_graph_root(std::function<glm::mat4(TData&)> extract_transform) : _extract_transform(extract_transform) {}
+
         void traverse(traverse_callback callback) override
         {
             for (auto& c : _children) c.traverse(callback);
@@ -28,13 +30,7 @@ namespace scene_graph
 
         TNodeBase& add_child(TData &data, TId id) override
         {
-            _children.emplace_back(data, id, *this);
-            return _children.back();
-        }
-
-        TNodeBase& add_child(TData &data, TId id, glm::mat4 transform) override
-        {
-            _children.emplace_back(data, id, transform, *this);
+            _children.emplace_back(data, id, _extract_transform, *this);
             return _children.back();
         }
 
@@ -48,22 +44,14 @@ namespace scene_graph
             return std::optional<std::reference_wrapper<TNodeBase>>();
         }
 
-        std::optional<std::reference_wrapper<TNodeBase>> insert(TData& data, TId id, TId parent_id, glm::mat4 transform) override
-        {
-            for (auto& c : _children)
-            {
-                auto opt = c.insert(data, id, parent_id, transform);
-                if (opt) return opt;
-            }
-            return std::optional<std::reference_wrapper<TNodeBase>>();
-        }
-
-        [[nodiscard]] glm::mat4& transform() override { return  _transform; }
+        [[nodiscard]] glm::mat4 transform() const override { return  _transform; }
         [[nodiscard]] glm::mat4 absolute_transform() const override { return _transform; }
 
     private:
         std::vector<TNode> _children {};
         glm::mat4 _transform{1.f};
+        std::function<glm::mat4(TData&)> _extract_transform;
+
     };
 
 }

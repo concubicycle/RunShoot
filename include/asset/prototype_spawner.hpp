@@ -26,13 +26,13 @@ namespace asset
             prototype_loader &prototypes);
 
         ecs::entity &load_prototype(
-            std::string prototype_path,
+            const std::string& prototype_path,
             ecs::entity_world &world,
             scene_graph_t &scene_graph,
             entity_id id);
 
         ecs::entity &load_prototype(
-            std::string prototype_path,
+            const std::string& prototype_path,
             ecs::entity_world &world,
             scene_graph_t &scene_graph);
 
