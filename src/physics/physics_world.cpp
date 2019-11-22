@@ -33,6 +33,9 @@ void physics::physics_world::update(float frame_time)
 {
     _contacts.clear();
 
+    for (auto &e : _collision_entities)
+        sync_to_transform(e);
+
     for (auto &e : _physical_entities)
     {
         auto &rb = e.get().get_component<ecs::rigid_body_component>();
@@ -118,8 +121,7 @@ void physics::physics_world::grab_entity(ecs::entity &e)
 
     auto is_physical = e.has<ecs::rigid_body_component>();
 
-    auto total_t = e.graph_node->absolute_transform();
-    auto pos = glm::vec3(total_t[3]);
+    auto transform = e.graph_node->absolute_transform();
 
     if (has_colliders)
         _collision_entities.emplace_back(e);
@@ -127,14 +129,14 @@ void physics::physics_world::grab_entity(ecs::entity &e)
     if (is_physical)
     {
         auto &rb = e.get_component<ecs::rigid_body_component>();
-        rb.position = pos;
+        rb.position = transform[3];
 
         // update collider positions/rotations(later)
         collider_iterator it(e);
         physics_models::collider *cursor;
 
         while (it.end() != (cursor = it.get_next()))
-            cursor->set_position(pos);
+            cursor->set_transform(transform);
 
         _physical_entities.emplace_back(e);
     } else
@@ -142,7 +144,7 @@ void physics::physics_world::grab_entity(ecs::entity &e)
         collider_iterator it(e);
         physics_models::collider *cursor;
         while (it.end() != (cursor = it.get_next()))
-            cursor->set_position(pos);
+            cursor->set_transform(transform);
     }
 }
 
@@ -294,5 +296,20 @@ void physics::physics_world::update_transforms()
         else
             t.pos = rb.position;
     }
+}
+
+void physics::physics_world::sync_to_transform(ecs::entity &e)
+{
+    auto rb_opt = e.get_component_opt<ecs::rigid_body_component>();
+
+    auto transform = e.graph_node->absolute_transform();
+
+    if (rb_opt)
+        rb_opt->get().position = transform[3];
+
+    collider_iterator it(e);
+    physics_models::collider *cursor;
+    while (it.end() != (cursor = it.get_next()))
+        cursor->set_transform(transform);
 }
 

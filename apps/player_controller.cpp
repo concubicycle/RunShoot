@@ -81,7 +81,7 @@ void player_controller::update_running(ecs::entity &e, player_controller_compone
         player.previous_direction = player.direction;
         player.state = turning;
         player.previous_yaw = cam.yaw;
-        player.target_yaw = cam.yaw += glm::half_pi<float>();
+        player.target_yaw = cam.yaw + glm::half_pi<float>();
         player.turn_dir = right;
         player.turn_counter += player.turn_dir;
     } else if (ctx.input.was_key_pressed(GLFW_KEY_A) && player.turn_counter > -1)
@@ -91,7 +91,7 @@ void player_controller::update_running(ecs::entity &e, player_controller_compone
         player.previous_direction = player.direction;
         player.state = turning;
         player.previous_yaw = cam.yaw;
-        player.target_yaw = cam.yaw -= glm::half_pi<float>();
+        player.target_yaw = cam.yaw - glm::half_pi<float>();
         player.turn_dir = left;
         player.turn_counter += player.turn_dir;
     }
@@ -160,45 +160,35 @@ void player_controller::update_turning(ecs::entity &e, player_controller_compone
 
 void player_controller::update_turn_look(ecs::entity &e)
 {
-    auto &t = e.get_component<ecs::transform_component>();
     auto &c = e.get_component<ecs::camera_component>();
     auto &player = e.get_component<player_controller_component>();
 
     auto t_turn = player.turn_t();
 
-    t.yaw = player.previous_yaw + t_turn * (player.target_yaw - player.previous_yaw);
-    t.roll = 0;
+    c.yaw = player.previous_yaw + t_turn * (player.target_yaw - player.previous_yaw);
+    c.roll = 0;
 
     auto half_pi = glm::pi<float>() / 2.f;
-    if (t.pitch > half_pi)
-        t.pitch = half_pi;
-    if (t.pitch < -half_pi)
-        t.pitch = -half_pi;
-
-    c.pitch = t.pitch;
-    c.yaw = t.yaw;
-    c.roll = t.roll;
+    if (c.pitch > half_pi)
+        c.pitch = half_pi;
+    if (c.pitch < -half_pi)
+        c.pitch = -half_pi;
 }
 
 void player_controller::update_player_look(ecs::entity &e, core::input_manager &input, float frame_time)
 {
-    auto &t = e.get_component<ecs::transform_component>();
     auto &c = e.get_component<ecs::camera_component>();
     auto mouse_delta = input.mouse_delta();
 
-    t.pitch -= mouse_delta.y * 0.1f * frame_time;
-    t.yaw += mouse_delta.x * 0.1f * frame_time;
-    t.roll = 0;
+    c.pitch -= mouse_delta.y * 0.1f * frame_time;
+    c.yaw += mouse_delta.x * 0.1f * frame_time;
+    c.roll = 0;
 
     auto half_pi = glm::pi<float>() / 2.f;
-    if (t.pitch > half_pi)
-        t.pitch = half_pi;
-    if (t.pitch < -half_pi)
-        t.pitch = -half_pi;
-
-    c.pitch = t.pitch;
-    c.yaw = t.yaw;
-    c.roll = t.roll;
+    if (c.pitch > half_pi)
+        c.pitch = half_pi;
+    if (c.pitch < -half_pi)
+        c.pitch = -half_pi;
 }
 
 void player_controller::resolve_collision(
@@ -255,7 +245,14 @@ void player_controller::resolve_collision(
     {
         if (player.current_segment_id != other_entity.id())
         {
+            player.seg_clear_count++;
             player.current_segment_id = other_entity.id();
+        }
+
+        if (player.seg_clear_count > player.segments_to_clear)
+        {
+            player.seg_clear_count = 0;
+            player.segments_to_clear = 0;
             _events.invoke<runshoot_event, ecs::entity&>(segment_cleared, other_entity);
         }
     }
@@ -288,13 +285,8 @@ void player_controller::move_component_positions(ecs::entity &e, glm::vec3 displ
     auto &t = e.get_component<ecs::transform_component>();
     auto &c = e.get_component<ecs::camera_component>();
     t.pos += displacement;
-    rb.position = t.pos;
+    //rb.position = t.pos;
     c.position = t.pos + player.to_camera;
-
-    physics::collider_iterator it(e);
-    physics_models::collider *cursor;
-    while (it.end() != (cursor = it.get_next()))
-        cursor->set_position(rb.position);
 }
 
 void player_controller::integrate(ecs::entity &e, ecs::rigid_body_component &rb, float frame_time)

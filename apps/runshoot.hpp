@@ -12,6 +12,7 @@
 #include <asset/scene.hpp>
 #include <core/frame_limiter.hpp>
 #include <physics/physics_world.hpp>
+#include <renderer/debug_drawer.hpp>
 #include "freefly_controller.hpp"
 #include "drone_controller.hpp"
 #include "player_controller.hpp"
@@ -28,6 +29,7 @@ struct game_systems
     asset::scene& scene;
     events::event_exchange& events;
     physics::physics_world& physics;
+    rendering::debug_drawer& debug_draw;
 };
 
 struct behaviors

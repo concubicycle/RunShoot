@@ -201,7 +201,7 @@ void rendering::renderer::grab_entity(ecs::entity &e)
 
 void rendering::renderer::forget_entity(ecs::entity &e)
 {
-    if (e.archetype_id() & ecs::camera_component::archetype_bit)
+    if (_camera_entity != nullptr && _camera_entity->id() == e.id())
     {
         _camera_entity = nullptr;
     }

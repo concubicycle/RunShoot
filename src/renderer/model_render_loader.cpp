@@ -5,19 +5,68 @@
 #include <renderer/model_render_loader.hpp>
 #include <ecs/components/basic_components.hpp>
 
+void model_load_error(asset::mesh_read_error err)
+{
+    spdlog::error("Mesh read error: {0}", err);
+}
+
+
 
 rendering::model_render_loader::model_render_loader(
     const shader_set &shaders,
     const asset::basic_mesh_reader& reader,
     const asset::assimp_loader& assimp_loader,
     string_table &hashes,
-    asset::texture_manager& textures) :
+    asset::texture_manager& textures,
+    events::event_exchange& events) :
     _shaders(shaders),
     _reader(reader),
     _assimp_loader(assimp_loader),
     _string_table(hashes),
-    _textures(textures)
-{}
+    _textures(textures),
+    _events(events)
+{
+    auto grab_cam_fn = std::function([this](ecs::entity &e) { grab_entity(e); });
+    _entity_created_listener_id = _events.subscribe<ecs::entity &>(events::entity_created, grab_cam_fn);
+}
+
+rendering::model_render_loader::~model_render_loader()
+{
+    _events.unsubscribe(events::entity_created, _entity_created_listener_id);
+}
+
+
+void rendering::model_render_loader::grab_entity(ecs::entity &e)
+{
+    using basic_mesh = models::textured_mesh<ogllib::vertex_ptx2d>;
+
+    if (!e.has<ecs::render_component_ogl>()) return;
+    auto &r = e.get_component<ecs::render_component_ogl>();
+
+    auto mesh_type = r.mesh_format;
+    auto mesh_path = _string_table[r.mesh_path_hash];
+
+    auto ptx2d_load = [this, &r](models::textured_mesh<ogllib::vertex_ptx2d> mesh)
+    {
+        init_render_component(r, mesh);
+    };
+
+    auto assimp_load = [this, &r](asset::assimp_model mesh)
+    {
+        init_render_component(r, mesh);
+    };
+
+
+    switch (r.mesh_format)
+    {
+        case asset::mesh_type::P_TX2D:
+            _reader.read_mesh_ptx2d(mesh_path).map(ptx2d_load).map_error(model_load_error);
+            break;
+        case asset::mesh_type::GLTF2:
+            _assimp_loader.load_model(mesh_path, mesh_type).map(assimp_load).map_error(model_load_error);
+            break;
+    }
+}
 
 
 void rendering::model_render_loader::init_render_component(
@@ -132,42 +181,5 @@ void rendering::model_render_loader::init_mesh(
 }
 
 
-void model_load_error(asset::mesh_read_error err)
-{
-    spdlog::error("Mesh read error: {0}", err);
-}
-
-void rendering::model_render_loader::init_entity_world_render_components(ecs::entity_world world)
-{
-    world.for_all_entities([this](ecs::entity &e)
-    {
-        using basic_mesh = models::textured_mesh<ogllib::vertex_ptx2d>;
-
-        if (!e.has<ecs::render_component_ogl>()) return;
-        auto &r = e.get_component<ecs::render_component_ogl>();
-
-        auto mesh_type = r.mesh_format;
-        auto mesh_path = _string_table[r.mesh_path_hash];
-
-        auto ptx2d_load = [this, &r](models::textured_mesh<ogllib::vertex_ptx2d> mesh)
-        {
-            init_render_component(r, mesh);
-        };
-
-        auto assimp_load = [this, &r](asset::assimp_model mesh)
-        {
-            init_render_component(r, mesh);
-        };
 
 
-        switch (r.mesh_format)
-        {
-            case asset::mesh_type::P_TX2D:
-                _reader.read_mesh_ptx2d(mesh_path).map(ptx2d_load).map_error(model_load_error);
-                break;
-            case asset::mesh_type::GLTF2:
-                _assimp_loader.load_model(mesh_path, mesh_type).map(assimp_load).map_error(model_load_error);
-                break;
-        }
-    });
-}

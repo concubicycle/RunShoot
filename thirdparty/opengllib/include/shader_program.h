@@ -50,22 +50,30 @@ namespace ogllib
 		
 		void set_uniform(const std::string& name, GLfloat val) const
 		{
-			glUniform1f(_info.getUniformLocation(name), val);
+            auto loc = _info.getUniformLocation(name);
+            if (loc == -1) return;
+			glUniform1f(loc, val);
 		}
 
 		void set_uniform(const std::string& name, glm::mat4& val) const
 		{
-			glUniformMatrix4fv(_info.getUniformLocation(name), 1, GL_FALSE, glm::value_ptr(val));
+		    auto loc = _info.getUniformLocation(name);
+		    if (loc == -1) return;
+			glUniformMatrix4fv(loc, 1, GL_FALSE, glm::value_ptr(val));
 		}
 
 		void set_uniform(const std::string& name, glm::vec3& val) const
 		{
-			glUniform3fv(_info.getUniformLocation(name), 1, glm::value_ptr(val));
+            auto loc = _info.getUniformLocation(name);
+            if (loc == -1) return;
+			glUniform3fv(loc, 1, glm::value_ptr(val));
 		}
 
         void set_uniform(const std::string& name, GLint val) const
         {
-            glUniform1i(_info.getUniformLocation(name), val);
+            auto loc = _info.getUniformLocation(name);
+            if (loc == -1) return;
+            glUniform1i(loc, val);
         }
 		
 

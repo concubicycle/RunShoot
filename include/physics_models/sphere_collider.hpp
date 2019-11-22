@@ -18,7 +18,8 @@ namespace physics_models
 
         explicit sphere_collider(sphere shape, bool is_trigger = false) :
             collider(is_trigger),
-            _shape(shape) {}
+            _shape(shape),
+            _shape_original(shape) {}
 
         contact visit(aabb &box, glm::vec3 &combined_velocity) override
         {
@@ -38,13 +39,19 @@ namespace physics_models
 
         void set_position(glm::vec3& position) override
         {
-            _shape.center = position;
+            _shape.center = _shape_original.center + position;
+        }
+
+        void set_transform(glm::mat4& transform) override
+        {
+            _shape.center = transform * glm::vec4(_shape_original.center, 1);
         }
 
         sphere &shape() { return _shape; }
 
     private:
         sphere _shape;
+        sphere _shape_original;
     };
 
 }

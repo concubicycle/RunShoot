@@ -21,7 +21,18 @@ namespace scene_graph
         using traverse_callback = typename scene_graph_node_base<TData, TId>::traverse_callback;
 
     public:
-        scene_graph_root(std::function<glm::mat4(TData&)> extract_transform) : _extract_transform(extract_transform) {}
+        scene_graph_root(std::function<glm::mat4(TData&)> extract_transform) : _extract_transform(extract_transform)
+        {
+            _children.reserve(64);
+        }
+
+        scene_graph_root(const scene_graph_root<TData, TId>& other) = delete;
+
+        scene_graph_root(scene_graph_root&& other) :
+            _extract_transform(other._extract_transform),
+            _children(std::move(other._children)),
+            _transform(other._transform) {}
+
 
         void traverse(traverse_callback callback) override
         {

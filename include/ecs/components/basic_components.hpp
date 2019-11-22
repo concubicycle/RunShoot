@@ -68,7 +68,7 @@ namespace ecs
 
         void set_from_mat4(glm::mat4& mat)
         {
-            pos = mat[4];
+            pos = mat[3];
             glm::mat3 rot(mat);
             float r31 = rot[0][2];
             float r32 = rot[1][2];

@@ -19,13 +19,15 @@ namespace rendering
             _ptx2d_basic("./assets/shaders/ptx2d_basic.vert", "./assets/shaders/ptx2d_basic.frag"),
             _ptx2d_pvm("./assets/shaders/ptx2d_pvm.vert", "./assets/shaders/ptx2d_pvm.frag"),
             _default("./assets/shaders/default.vert", "./assets/shaders/default.frag"),
-            _skybox("./assets/shaders/skybox.vert", "./assets/shaders/skybox.frag"){}
+            _skybox("./assets/shaders/skybox.vert", "./assets/shaders/skybox.frag"),
+            _debug("./assets/shaders/debug.vert", "./assets/shaders/debug.frag"){}
 
         [[nodiscard]] const ogllib::shader_program<ogllib::vertex_ptx2d> &simple() const { return _simple; }
         [[nodiscard]] const ogllib::shader_program<ogllib::vertex_ptx2d> &ptx2d_basic() const { return _ptx2d_basic; }
         [[nodiscard]] const ogllib::shader_program<ogllib::vertex_ptx2d> &ptx2d_pvm() const { return _ptx2d_pvm; }
         [[nodiscard]] const ogllib::shader_program<ogllib::vertex_pntx2d> &default_shader() const { return _default; }
         [[nodiscard]] const ogllib::shader_program<ogllib::vertex_p> &skybox() const { return _skybox; }
+        [[nodiscard]] const ogllib::shader_program<ogllib::vertex_p> &debug() const { return _debug; }
 
     private:
 
@@ -43,6 +45,8 @@ namespace rendering
         ogllib::shader_program<ogllib::vertex_pntx2d> _default;
 
         ogllib::shader_program<ogllib::vertex_p> _skybox;
+
+        ogllib::shader_program<ogllib::vertex_p> _debug;
     };
 
 }

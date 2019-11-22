@@ -23,9 +23,9 @@
         "pitch": 0,
         "yaw": 0,
         "roll": 0,
-        "fov": 45,
+        "fov": 70,
         "near": 0.1,
-        "far": 1000.0,
+        "far": 5000.0,
         "mode": 1,
         "skybox_left": "./assets/textures/city/left.png",
         "skybox_top": "./assets/textures/city/top.png",
@@ -68,9 +68,9 @@
       },
       {
         "component_bitshift": 19,
-        "run_speed": 65,
+        "run_speed": 100,
         "footstep_force": 170,
-        "jump_force": 550,
+        "jump_force": 775,
         "total_turn_duration": 0.85
       }
     ]

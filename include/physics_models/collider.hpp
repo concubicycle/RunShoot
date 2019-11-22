@@ -34,6 +34,7 @@ namespace physics_models
         explicit collider(bool is_trigger) : _is_trigger(is_trigger) {}
 
         virtual void set_position(glm::vec3& position) = 0;
+        virtual void set_transform(glm::mat4& transform) = 0;
 
         [[nodiscard]] bool is_trigger() const { return _is_trigger; }
 

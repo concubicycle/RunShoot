@@ -29,6 +29,7 @@ using GLenum = gl::GLenum;
 #include <file_read_std.h>
 #include <renderer/model_render_loader.hpp>
 #include <renderer/renderer.hpp>
+#include <renderer/debug_drawer.hpp>
 
 #include "freefly_controller.hpp"
 #include "components/add_custom_components.hpp"
@@ -81,8 +82,9 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     core::input_manager input(window);
 
     rendering::shader_set shaders;
-    rendering::model_render_loader render_loader(shaders, reader, assimp_reader, app_string_table, textures);
+    rendering::model_render_loader render_loader(shaders, reader, assimp_reader, app_string_table, textures, events);
     rendering::renderer renderer(conf, info, shaders, events);
+    rendering::debug_drawer debug_draw(conf, info, events, shaders, input);
 
     ecs::entity_factory factory(1);
     ecs::entity_world entities(factory, events);
@@ -95,15 +97,15 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     player_controller player_controller(events);
     segment_spawner segment_spawn(events);
 
-    auto scene = loader.load_scene("./assets/scenes/runshoot_gameplay.json", entities);
+    auto scene = loader.load_scene("./assets/scenes/testground.json", entities);
 
     renderer.init();
     glfwSetFramebufferSizeCallback(window, build_framebuffer_callback(renderer));
 
-    render_loader.init_entity_world_render_components(entities);
-    textures.unload_all();
+//    render_loader.init_entity_world_render_components(entities);
+//    textures.unload_all();
 
-    game_systems data = {window, timer, limiter, input, renderer, scene, events, physics};
+    game_systems data = {window, timer, limiter, input, renderer, scene, events, physics, debug_draw};
     behaviors behaviors = {controller, drone_controller, player_controller, segment_spawn};
     render_loop(data, behaviors);
 }
@@ -126,6 +128,7 @@ void render_loop(game_systems &data, behaviors &behaviors)
         behaviors.segment_spawn.update(ctx);
 
         data.renderer.draw_scene(data.scene);
+        data.debug_draw.update();
 
         glfwSwapBuffers(data.window);
 

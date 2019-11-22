@@ -53,5 +53,6 @@ int ogllib::program_info::getAttribLocation(const std::string &name) const
 
 int ogllib::program_info::getUniformLocation(const std::string &name) const
 {
+    if (_uniformLocations.find(name) == _uniformLocations.end()) return -1;
 	return _uniformLocations.at(name);
 }

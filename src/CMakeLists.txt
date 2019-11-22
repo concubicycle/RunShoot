@@ -28,7 +28,7 @@ set(RENDERER_HEADER_LIST
     ${PROJECT_SOURCE_DIR}/include/renderer/renderer.hpp
     ../include/renderer/model_render_loader.hpp
     ../include/renderer/shader_set.hpp
-    )
+    ../include/renderer/debug_drawer.hpp)
 
 set(ASSET_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/asset/mesh.cpp

@@ -26,14 +26,17 @@ namespace rendering
             const asset::basic_mesh_reader& reader,
             const asset::assimp_loader& assimp_loader,
             string_table& hashes,
-            asset::texture_manager& textures);
+            asset::texture_manager& textures,
+            events::event_exchange& events);
+
+        ~model_render_loader();
 
 
         void init_render_component(ecs::render_component_ogl &r, asset::assimp_model &mesh);
 
         void init_render_component(ecs::render_component_ogl &r, models::textured_mesh<ogllib::vertex_ptx2d> &mesh);
 
-        void init_entity_world_render_components(ecs::entity_world world);
+        void grab_entity (ecs::entity &e);
 
     private:
         const shader_set& _shaders;
@@ -41,6 +44,9 @@ namespace rendering
         const asset::assimp_loader& _assimp_loader;
         string_table& _string_table;
         asset::texture_manager &_textures;
+        events::event_exchange& _events;
+
+        listener_id _entity_created_listener_id;
 
 
         void init_mesh(

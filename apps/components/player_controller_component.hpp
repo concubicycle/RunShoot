@@ -34,6 +34,8 @@ public:
     std::int8_t turn_counter {0};
 
     entity_id current_segment_id;
+    int seg_clear_count {0};
+    int segments_to_clear {2};
 
     glm::vec3 to_camera {0};
     float run_speed {5.f};

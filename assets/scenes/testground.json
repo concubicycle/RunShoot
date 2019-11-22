@@ -2,17 +2,15 @@
   "entities": [
     {
       "entity_id": 111,
-      "prototype": "./assets/prototypes/freefly_player.json",
-      "components": [
-        {
-          "component_bitshift": 0,
-          "y": 20
-        }
-      ]
+      "prototype": "./assets/prototypes/player.json"
     },
     {
       "entity_id": 1,
-      "prototype": "./assets/prototypes/seg2.json"
+      "components": [
+        {
+          "component_bitshift": 22
+        }
+      ]
     }
   ]
 }

@@ -52,6 +52,7 @@ namespace physics
         static void update_collider_positions(ecs::entity& e);
         static void integrate(ecs::entity& e, float frame_time);
         static void integrate_position(ecs::entity& e, float frame_time);
+        static void sync_to_transform(ecs::entity& e);
     };
 
 }
