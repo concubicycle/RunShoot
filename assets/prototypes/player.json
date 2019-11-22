@@ -5,7 +5,7 @@
         "component_bitshift": 0,
         "x": 0,
         "y": 0,
-        "z": -5,
+        "z": 0,
         "pitch": 0,
         "yaw": 0,
         "roll": 0,
@@ -23,9 +23,9 @@
         "pitch": 0,
         "yaw": 0,
         "roll": 0,
-        "fov": 45,
+        "fov": 1.0471975512,
         "near": 0.1,
-        "far": 5000.0,
+        "far": 1000.0,
         "mode": 1,
         "skybox_left": "./assets/textures/city/left.png",
         "skybox_top": "./assets/textures/city/top.png",
@@ -69,8 +69,8 @@
       {
         "component_bitshift": 19,
         "run_speed": 75,
-        "footstep_force": 250,
-        "jump_force": 800,
+        "footstep_force": 200,
+        "jump_force": 1000,
         "total_turn_duration": 0.85
       }
     ]

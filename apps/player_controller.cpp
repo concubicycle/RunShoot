@@ -34,6 +34,8 @@ void player_controller::update_single(ecs::entity &e, core::behavior_context &ct
     auto &c = e.get_component<ecs::camera_component>();
     auto &input = ctx.input;
 
+    auto& rb = e.get_component<ecs::rigid_body_component>();
+
     switch (player.state)
     {
         case running:
@@ -77,7 +79,7 @@ void player_controller::update_running(ecs::entity &e, player_controller_compone
     } else if (ctx.input.was_key_pressed(GLFW_KEY_D) && player.turn_counter < 1)
     {
         player.current_turn_duration = 0;
-        player.target_direction = _right_turn * glm::vec4(player.direction, 1.f);
+        player.target_direction = glm::round( _right_turn * glm::vec4(player.direction, 1.f));
         player.previous_direction = player.direction;
         player.state = turning;
         player.previous_yaw = cam.yaw;
@@ -87,14 +89,17 @@ void player_controller::update_running(ecs::entity &e, player_controller_compone
     } else if (ctx.input.was_key_pressed(GLFW_KEY_A) && player.turn_counter > -1)
     {
         player.current_turn_duration = 0;
-        player.target_direction = _left_turn * glm::vec4(player.direction, 1.f);
+        player.target_direction = glm::round(_left_turn * glm::vec4(player.direction, 1.f));
         player.previous_direction = player.direction;
         player.state = turning;
         player.previous_yaw = cam.yaw;
         player.target_yaw = cam.yaw - glm::half_pi<float>();
         player.turn_dir = left;
         player.turn_counter += player.turn_dir;
+
     }
+
+    t.yaw = player.target_yaw;
 
     integrate(e, rb, frame_time);
     update_player_look(e, ctx.input, frame_time);
@@ -102,7 +107,7 @@ void player_controller::update_running(ecs::entity &e, player_controller_compone
     player.time_since_collision += frame_time;
     player.time_since_grounded += frame_time;
 
-    if (player.time_since_grounded > 0.5f)
+    if (player.time_since_grounded > 0.4f)
     {
         player.state = player_state::airborne;
     }
@@ -133,9 +138,9 @@ void player_controller::update_turning(ecs::entity &e, player_controller_compone
 
     if (glm::all(glm::epsilonEqual(player.direction, player.target_direction, glm::epsilon<float>())))
     {
-        player.direction = glm::round(player.direction);
-        player.target_direction = glm::round(player.target_direction);
+        player.direction = player.target_direction;
         player.state = running;
+        rb.velocity = player.direction * glm::length(rb.velocity);
     } else
     {
         player.current_turn_duration += frame_time;
@@ -287,6 +292,7 @@ void player_controller::move_component_positions(ecs::entity &e, glm::vec3 displ
     t.pos += displacement;
     //rb.position = t.pos;
     c.position = t.pos + player.to_camera;
+    rb.position = t.pos;
 }
 
 void player_controller::integrate(ecs::entity &e, ecs::rigid_body_component &rb, float frame_time)

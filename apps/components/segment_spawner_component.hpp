@@ -13,7 +13,7 @@
 struct segment_spawner_component : ecs::component<segment_spawner_component>
 {
     std::uint32_t num_initial_segments {5};
-    float turn_frequency {0.3f};
+    float turn_frequency {0.2f};
 
     glm::vec4 current_direction {0, 0, -1, 0};
     glm::vec3 current_position;
