@@ -106,7 +106,7 @@ namespace rendering
 
         void update()
         {
-            if (_input.was_key_pressed(GLFW_KEY_F))
+            if (_input.was_key_pressed(GLFW_KEY_F1))
                 _enabled = !_enabled;
 
             if (!_enabled) return;

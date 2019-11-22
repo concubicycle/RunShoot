@@ -23,7 +23,7 @@
         "pitch": 0,
         "yaw": 0,
         "roll": 0,
-        "fov": 70,
+        "fov": 45,
         "near": 0.1,
         "far": 5000.0,
         "mode": 1,
@@ -45,7 +45,7 @@
         "mass": 0,
         "gravity": [
           0,
-          -15,
+          -20,
           0
         ]
       },
@@ -68,9 +68,9 @@
       },
       {
         "component_bitshift": 19,
-        "run_speed": 100,
-        "footstep_force": 170,
-        "jump_force": 775,
+        "run_speed": 75,
+        "footstep_force": 250,
+        "jump_force": 800,
         "total_turn_duration": 0.85
       }
     ]

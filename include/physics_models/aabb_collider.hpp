@@ -45,8 +45,8 @@ namespace physics_models
 
         void set_position(glm::vec3& position) override
         {
-            _shape.min += _shape_original.min + position;
-            _shape.max += _shape_original.max + position;
+            _shape.min = _shape_original.min + position;
+            _shape.max = _shape_original.max + position;
         }
 
         void set_transform(glm::mat4& transform) override

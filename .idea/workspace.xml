@@ -30,36 +30,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/shaders/debug.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/shaders/debug.vert" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/renderer/debug_drawer.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/components/player_controller_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/player_controller_component.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/components/segment_spawner_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/segment_spawner_component.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/player_controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/runshoot.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/runshoot.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/runshoot.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/runshoot.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/segment_spawner.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/segment_spawner.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/segment_spawner.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/segment_spawner.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/blender/seg2.blend" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg2.blend" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/blender/seg2.blend1" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg2.blend1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg2/seg2.bin" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg2/seg2.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg2/seg2.gltf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg2/seg2.gltf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/prototypes/player.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/player.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/scenes/testground.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scenes/testground.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/asset/scene.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/asset/scene.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/seg2.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/seg2.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/physics/physics_world.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics/physics_world.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/physics_models/aabb_collider.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics_models/aabb_collider.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/physics_models/collider.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics_models/collider.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/physics_models/sphere_collider.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics_models/sphere_collider.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/renderer/model_render_loader.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/renderer/model_render_loader.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/renderer/shader_set.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/renderer/shader_set.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/scene/scene_graph_root.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/scene/scene_graph_root.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/asset/prototype_spawner.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/prototype_spawner.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/physics/physics_world.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/physics/physics_world.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/model_render_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/model_render_loader.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/renderer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/include/shader_program.h" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/include/shader_program.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/program_info.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/program_info.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/renderer/debug_drawer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/renderer/debug_drawer.hpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -358,7 +339,8 @@
       <workItem from="1574406862388" duration="3086000" />
       <workItem from="1574409967658" duration="4764000" />
       <workItem from="1574414748426" duration="4856000" />
-      <workItem from="1574447733370" duration="5168000" />
+      <workItem from="1574447733370" duration="7250000" />
+      <workItem from="1574457575970" duration="3635000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>
@@ -406,9 +388,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/include/renderer/debug_drawer.hpp</url>
-          <line>109</line>
-          <option name="timeStamp" value="55" />
+          <url>file://$PROJECT_DIR$/src/physics/physics_world.cpp</url>
+          <line>86</line>
+          <option name="timeStamp" value="59" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
