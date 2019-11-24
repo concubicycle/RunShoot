@@ -2,7 +2,7 @@
   "entities": [
     {
       "entity_id": 2,
-      "prototype": "./assets/prototypes/seg1.json"
+      "prototype": "./assets/prototypes/seg3.json"
     },
     {
       "entity_id": 111,
@@ -15,7 +15,7 @@
       ]
     },
     {
-      "entity_id": 3,
+      "entity_id": 133,
       "prototype": "./assets/prototypes/drone.json"
     },
     {

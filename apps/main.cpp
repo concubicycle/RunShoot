@@ -104,9 +104,6 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     renderer.init();
     glfwSetFramebufferSizeCallback(window, build_framebuffer_callback(renderer));
 
-//    render_loader.init_entity_world_render_components(entities);
-//    textures.unload_all();
-
     game_systems data = {window, timer, limiter, input, renderer, scene, events, physics, debug_draw};
     behaviors behaviors = {controller, drone_controller, player_controller, segment_spawn, drone_spawn};
     render_loop(data, behaviors);
@@ -141,7 +138,7 @@ void render_loop(game_systems &data, behaviors &behaviors)
         data.limiter.wait_remainder();
         data.timer.end();
 
-        if (ctx.input.was_key_pressed(GLFW_KEY_ESCAPE)) break;
+        if (data.input.was_key_pressed(GLFW_KEY_ESCAPE)) break;
     }
 }
 

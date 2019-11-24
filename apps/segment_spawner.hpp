@@ -36,9 +36,11 @@ private:
     std::queue<std::reference_wrapper<ecs::entity>> _segments;
     std::string seg_one_path = "./assets/prototypes/seg1.json";
     std::string seg_two_path = "./assets/prototypes/seg2.json";
+    std::string seg_three_path = "./assets/prototypes/seg3.json";
     std::vector<std::string> _segment_prototype_paths {
         seg_one_path,
-        seg_two_path
+        seg_two_path,
+        seg_three_path
     };
 
     void spawn_enough_segments(ecs::entity& e, core::behavior_context &ctx);

@@ -88,7 +88,7 @@ protected:
 
         c.position = t.pos;
 
-        //std::cout << glm::to_string(t.pos) << std::endl;
+        std::cout << glm::to_string(t.pos) << std::endl;
     }
 };
 

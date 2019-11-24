@@ -14,9 +14,9 @@
 class drone_controller : public core::behavior
 {
 public:
-    explicit drone_controller(events::event_exchange& events)  : behavior(events) {}
+    explicit drone_controller(events::event_exchange &events) : behavior(events) {}
 
-    component_bitset required_components()  const override
+    component_bitset required_components() const override
     {
         return
             drone_controller_component::archetype_bit |
@@ -26,13 +26,12 @@ public:
 
 protected:
 
-    void update_single(ecs::entity& e, core::behavior_context &ctx) override
+    void update_single(ecs::entity &e, core::behavior_context &ctx) override
     {
-        auto& rb = e.get_component<ecs::rigid_body_component>();
-        auto& component = e.get_component<drone_controller_component>();
-        auto& transform = e.get_component<ecs::transform_component>();
+        auto &rb = e.get_component<ecs::rigid_body_component>();
+        auto &component = e.get_component<drone_controller_component>();
+        auto &transform = e.get_component<ecs::transform_component>();
 
-        if (!component.player_ptr) return;
 
         auto frame_time = ctx.time.smoothed_delta_secs();
 
@@ -41,10 +40,10 @@ protected:
         friction(rb, component);
     }
 
-    void thrust_toward_target(ecs::entity& e)
+    void thrust_toward_target(ecs::entity &e)
     {
-        auto& rb = e.get_component<ecs::rigid_body_component>();
-        auto& drone = e.get_component<drone_controller_component>();
+        auto &rb = e.get_component<ecs::rigid_body_component>();
+        auto &drone = e.get_component<drone_controller_component>();
         auto to_target = drone.target - rb.position;
 
         if (to_target.y < 0) to_target.y = 0.1f;
@@ -55,7 +54,7 @@ protected:
         rb.force += to_target * drone.acceleration;
     }
 
-    void friction(ecs::rigid_body_component& rb, drone_controller_component& drone)
+    void friction(ecs::rigid_body_component &rb, drone_controller_component &drone)
     {
         // up the friction when close to target
         auto to_target = drone.target - rb.position;
@@ -63,42 +62,44 @@ protected:
         float friction = drone.friction + std::min((1 - drone.friction) * 0.7f, 1.f / to_target.length());
 
 
-
         rb.force += -(rb.velocity) * friction;
 
         // cancel off some tangent velocity, try not to orbit the player
         float tan_speed = glm::dot(rb.velocity, tangent);
 
-        if (tan_speed > 10.f)
-            rb.force -= 0.85f * tan_speed * tangent;
+        if (tan_speed * tan_speed > 100.f)
+            rb.force -= 1.5f * tan_speed * tangent;
     }
 
 private:
 
     void set_target(ecs::entity &e)
     {
-        auto& rb = e.get_component<ecs::rigid_body_component>();
-        auto& drone = e.get_component<drone_controller_component>();
-        if (drone.player_ptr)
+        auto &rb = e.get_component<ecs::rigid_body_component>();
+        auto &drone = e.get_component<drone_controller_component>();
+        if (!drone.player_ptr)
         {
-            auto& player = drone.player_ptr->get_component<player_controller_component>();
-            auto& player_t = drone.player_ptr->get_component<ecs::transform_component>();
-            drone.target = player_t.pos + player.direction * 50.f;
-            drone.target.y = 20.f;
+            drone.target = glm::vec3(0.f, 15.f, 0.f);
+            return;
+        }
 
-            auto to_player = player_t.pos - rb.position;
-            drone.target += glm::normalize(glm::cross(to_player, glm::vec3(0, 1, 0))) * drone.horizontal_offset;
-            drone.target += glm::vec3(0, 1, 0) * drone.vertical_offset;
-            drone.target += player.direction * drone.z_offset;
+        auto &player = drone.player_ptr->get_component<player_controller_component>();
+        auto &player_t = drone.player_ptr->get_component<ecs::transform_component>();
+        drone.target = player_t.pos + player.direction * 50.f;
+        drone.target.y = 20.f;
 
-            float d_sq = glm::length2(drone.target - rb.position);
+        auto to_player = player_t.pos - rb.position;
+        drone.target += glm::normalize(glm::cross(to_player, glm::vec3(0, 1, 0))) * drone.horizontal_offset;
+        drone.target += glm::vec3(0, 1, 0) * drone.vertical_offset;
+        drone.target += player.direction * drone.z_offset;
 
-            if (d_sq < 4.f)
-            {
-                auto offset = glm::linearRand(glm::vec3(-1.f), glm::vec3(1.f));
-                offset.y *= 0.5f;
-                drone.target += offset;
-            }
+        float d_sq = glm::length2(drone.target - rb.position);
+
+        if (d_sq < 4.f)
+        {
+            auto offset = glm::linearRand(glm::vec3(-1.f), glm::vec3(1.f));
+            offset.y *= 0.5f;
+            drone.target += offset;
         }
     }
 };
