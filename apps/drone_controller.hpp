@@ -67,7 +67,7 @@ protected:
         // cancel off some tangent velocity, try not to orbit the player
         float tan_speed = glm::dot(rb.velocity, tangent);
 
-        if (tan_speed * tan_speed > 100.f)
+        if (tan_speed * tan_speed > 50.f)
             rb.force -= 1.5f * tan_speed * tangent;
     }
 
@@ -92,15 +92,6 @@ private:
         drone.target += glm::normalize(glm::cross(to_player, glm::vec3(0, 1, 0))) * drone.horizontal_offset;
         drone.target += glm::vec3(0, 1, 0) * drone.vertical_offset;
         drone.target += player.direction * drone.z_offset;
-
-        float d_sq = glm::length2(drone.target - rb.position);
-
-        if (d_sq < 4.f)
-        {
-            auto offset = glm::linearRand(glm::vec3(-1.f), glm::vec3(1.f));
-            offset.y *= 0.5f;
-            drone.target += offset;
-        }
     }
 };
 

@@ -37,7 +37,8 @@ rendering::renderer::renderer(
     _system_info(system_info),
     _shaders(shaders),
     _events(events),
-    _camera_entity(nullptr)
+    _camera_entity(nullptr),
+    _overlay(shaders)
 {
     auto grab_cam_fn = std::function<void(ecs::entity &)>([this](ecs::entity &e) { grab_entity(e); });
     auto forget_cam_fn = std::function<void(ecs::entity &)>([this](ecs::entity &e) { forget_entity(e); });
@@ -169,6 +170,9 @@ void rendering::renderer::draw_scene(asset::scene &scene)
             shader.unbind();
         }
     });
+
+    _overlay.draw(_screen_width, _screen_height);
+
 }
 
 void rendering::renderer::resize(std::uint32_t width, std::uint32_t height)

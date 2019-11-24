@@ -26,6 +26,7 @@
 #include <asset/asset_types.hpp>
 
 #include <renderer/shader_set.hpp>
+#include <renderer/overlay.hpp>
 
 
 
@@ -52,6 +53,7 @@ private:
     const core::system_info& _system_info;
     const shader_set& _shaders;
     events::event_exchange& _events;
+    overlay_temporary _overlay;
 
     ecs::entity* _camera_entity;
     listener_id _cam_listener_id;
