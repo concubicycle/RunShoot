@@ -20,9 +20,37 @@
       },
       {
         "component_bitshift": 18,
-        "acceleration": 10,
+        "acceleration": 15,
         "flash_frequency": 20,
-        "state": 1
+        "state": 1,
+        "friction": 0.4
+      },
+      {
+        "component_bitshift": 6,
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "is_kinematic": false,
+        "mass": 1
+      },
+      {
+        "component_bitshift": 4,
+        "colliders": [
+          {
+            "min": [
+              -1,
+              -1,
+              -1
+            ],
+            "max": [
+              1,
+              1,
+              1
+            ]
+          }
+        ]
       }
     ]
   }

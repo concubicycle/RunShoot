@@ -6,7 +6,7 @@
 #define __SCENE_GRAPH_ROOT_HPP_
 
 
-#include <vector>
+#include <list>
 #include "scene_graph_node.hpp"
 #include "scene_graph_node_base.hpp"
 
@@ -23,7 +23,6 @@ namespace scene_graph
     public:
         scene_graph_root(std::function<glm::mat4(TData&)> extract_transform) : _extract_transform(extract_transform)
         {
-            _children.reserve(64);
         }
 
         scene_graph_root(const scene_graph_root<TData, TId>& other) = delete;
@@ -55,11 +54,24 @@ namespace scene_graph
             return std::optional<std::reference_wrapper<TNodeBase>>();
         }
 
+        void remove(TNodeBase& node) override
+        {
+            _children.remove_if([&node](TNode& child) { return child.id() == node.id(); });
+        }
+
+        void remove_from_parent() override
+        {
+            return;
+        }
+
+
+        [[nodiscard]] TId id() const override { return -1; }
         [[nodiscard]] glm::mat4 transform() const override { return  _transform; }
         [[nodiscard]] glm::mat4 absolute_transform() const override { return _transform; }
 
     private:
-        std::vector<TNode> _children {};
+        std::list<TNode> _children {};
+
         glm::mat4 _transform{1.f};
         std::function<glm::mat4(TData&)> _extract_transform;
 

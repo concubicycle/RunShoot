@@ -42,3 +42,16 @@ ecs::entity &ecs::entity_world::get_entity(entity_id id)
 
 std::atomic_uint ecs::entity_world::next_entity_id = 1;
 
+void ecs::entity_world::remove_entity(entity_id entity_id)
+{
+    auto it = _entity_lookup.find(entity_id);
+    if (it == _entity_lookup.end()) return;
+
+    auto& e = it->second;
+
+    _events.invoke<entity&>(events::entity_destroyed, e);
+
+    _entity_factory.free_entity(e);
+    _entity_lookup.erase(it);
+}
+

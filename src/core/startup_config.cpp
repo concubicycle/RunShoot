@@ -33,6 +33,7 @@ std::uint32_t core::startup_config::height() const { return config_json["height"
 std::uint32_t core::startup_config::width() const { return config_json["width"].get<std::uint32_t>(); }
 float core::startup_config::fov() const { return config_json["fov"]; }
 bool core::startup_config::backface_culling() const { return config_json["backfaceCulling"].get<bool>(); }
+bool core::startup_config::free_mouse() const { return config_json["free_mouse"].get<bool>(); }
 
 json core::startup_config::make_default() const
 {
@@ -41,5 +42,6 @@ json core::startup_config::make_default() const
         {"height", 800},
         {"width", 1400},
         {"fov", 45},
-        {"backfaceCulling", true}};
+        {"backfaceCulling", true},
+        {"free_mouse", false}};
 }

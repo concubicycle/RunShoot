@@ -35,6 +35,7 @@ using GLenum = gl::GLenum;
 #include "components/add_custom_components.hpp"
 #include "runshoot.hpp"
 #include "player_controller.hpp"
+#include "drone_spawner.hpp"
 
 using float_seconds = std::chrono::duration<float>;
 
@@ -96,8 +97,9 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     drone_controller drone_controller(events);
     player_controller player_controller(events);
     segment_spawner segment_spawn(events);
+    drone_spawner drone_spawn(events);
 
-    auto scene = loader.load_scene("./assets/scenes/testground.json", entities);
+    auto scene = loader.load_scene("./assets/scenes/runshoot_gameplay.json", entities);
 
     renderer.init();
     glfwSetFramebufferSizeCallback(window, build_framebuffer_callback(renderer));
@@ -106,7 +108,7 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
 //    textures.unload_all();
 
     game_systems data = {window, timer, limiter, input, renderer, scene, events, physics, debug_draw};
-    behaviors behaviors = {controller, drone_controller, player_controller, segment_spawn};
+    behaviors behaviors = {controller, drone_controller, player_controller, segment_spawn, drone_spawn};
     render_loop(data, behaviors);
 }
 
@@ -126,6 +128,7 @@ void render_loop(game_systems &data, behaviors &behaviors)
         behaviors.drone.update(ctx);
         behaviors.player.update(ctx);
         behaviors.segment_spawn.update(ctx);
+        behaviors.drone_spawn.update(ctx);
 
         data.renderer.draw_scene(data.scene);
         data.debug_draw.update();
@@ -137,6 +140,8 @@ void render_loop(game_systems &data, behaviors &behaviors)
 
         data.limiter.wait_remainder();
         data.timer.end();
+
+        if (ctx.input.was_key_pressed(GLFW_KEY_ESCAPE)) break;
     }
 }
 

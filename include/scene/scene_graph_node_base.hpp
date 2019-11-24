@@ -19,14 +19,23 @@ namespace scene_graph
 
         virtual void traverse(traverse_callback callback) = 0;
         virtual TNode& add_child(TData &data, TId id) = 0;
+
+
         virtual std::optional<std::reference_wrapper<TNode>> insert(TData& data, TId id, TId parent_id) = 0;
 
         virtual glm::mat4 transform() const = 0;
         virtual glm::mat4 absolute_transform() const = 0;
 
-    private:
+        virtual void remove(scene_graph_node_base<TData, TId>& node) = 0;
+        virtual void remove_from_parent() = 0;
+        virtual TId id() const = 0;
 
 
+
+        bool operator==(const scene_graph_node_base<TData, TId>& obj2) const
+        {
+            return id() == obj2.id();
+        }
     };
 }
 

@@ -17,7 +17,7 @@ struct segment_spawner_component : ecs::component<segment_spawner_component>
 
     glm::vec4 current_direction {0, 0, -1, 0};
     glm::vec3 current_position;
-    float jump_distance { 90.f };
+    float jump_distance { 80.f };
     float jump_distance_variance {30.f};
 
     glm::mat4 rotation {1.f};

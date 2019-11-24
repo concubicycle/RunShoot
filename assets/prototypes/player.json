@@ -45,7 +45,7 @@
         "mass": 0,
         "gravity": [
           0,
-          -20,
+          -25,
           0
         ]
       },
@@ -54,24 +54,25 @@
         "colliders": [
           {
             "max": [
-              2,
+              4,
               12,
-              2
+              4
             ],
             "min": [
-              -2,
+              -4,
               1.3,
-              -2
+              -4
             ]
           }
         ]
       },
       {
         "component_bitshift": 19,
-        "run_speed": 75,
+        "run_speed": 60,
         "footstep_force": 200,
         "jump_force": 1000,
-        "total_turn_duration": 0.85
+        "total_turn_duration": 0.85,
+        "run_acceleration": 0.005
       }
     ]
   }

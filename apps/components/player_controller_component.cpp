@@ -17,5 +17,6 @@ void load_player_controller(const json& j, ecs::entity& e, string_table& hashes)
     c.jump_force = j["jump_force"].get<float>();
     c.footstep_force = j["footstep_force"].get<float>();
     c.total_turn_duration = j["total_turn_duration"].get<float>();
+    c.run_acceleration = j["run_acceleration"].get<float>();
 }
 

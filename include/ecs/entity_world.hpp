@@ -34,6 +34,8 @@ namespace ecs
         entity& add_entity(component_bitset archetype_id, entity_id id);
         entity& add_entity(component_bitset archetype_id);
 
+        void remove_entity(entity_id entity_id);
+
 
         entity& get_entity(entity_id id);
 

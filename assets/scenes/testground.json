@@ -11,6 +11,14 @@
           "component_bitshift": 22
         }
       ]
+    },
+    {
+      "entity_id": 1,
+      "components": [
+        {
+          "component_bitshift": 23
+        }
+      ]
     }
   ]
 }

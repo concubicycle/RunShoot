@@ -83,7 +83,7 @@
           "component_bitshift": 0,
           "x": 0,
           "y": 35,
-          "z": -20
+          "z": -35
         }
       ]
     },
@@ -95,7 +95,7 @@
           "component_bitshift": 0,
           "x": 0,
           "y": 35,
-          "z": -16
+          "z": -45
         }
       ]
     },
@@ -108,7 +108,7 @@
           "component_bitshift": 0,
           "x": 3,
           "y": 35,
-          "z": -16
+          "z": -50
         }
       ]
     },
@@ -119,9 +119,9 @@
       "components": [
         {
           "component_bitshift": 0,
-          "x": 3,
+          "x": -5,
           "y": 35,
-          "z": 10
+          "z": -40
         }
       ]
     },
@@ -132,7 +132,7 @@
       "components": [
         {
           "component_bitshift": 0,
-          "x": 3,
+          "x": 0,
           "y": 50,
           "z": 25
         }
@@ -146,9 +146,9 @@
       "components": [
         {
           "component_bitshift": 0,
-          "x": 6,
+          "x": 9,
           "y": 35,
-          "z": -16
+          "z": -30
         }
       ]
     },

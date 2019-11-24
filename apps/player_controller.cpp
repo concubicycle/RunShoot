@@ -32,9 +32,23 @@ void player_controller::update_single(ecs::entity &e, core::behavior_context &ct
     auto &player = e.get_component<player_controller_component>();
     auto &t = e.get_component<ecs::transform_component>();
     auto &c = e.get_component<ecs::camera_component>();
+    auto& rb = e.get_component<ecs::rigid_body_component>();
+
     auto &input = ctx.input;
 
-    auto& rb = e.get_component<ecs::rigid_body_component>();
+    rb.velocity *= 1.f + player.run_acceleration * ctx.time.smoothed_delta_secs();
+
+    float speed_sq = glm::length2(rb.velocity);
+
+    if (glm::epsilonEqual(speed_sq, 0.f, glm::epsilon<float>()))
+    {
+        rb.velocity = player.direction;
+    }
+
+    if (speed_sq < player.run_speed*player.run_speed)
+    {
+        rb.velocity *= 1 + (0.4 * ctx.time.smoothed_delta_secs());
+    }
 
     switch (player.state)
     {

@@ -20,4 +20,5 @@ void load_drone_controller(const json& j, ecs::entity& e, string_table& hashes)
     c.flash_frequency = j["flash_frequency"].get<float>();
     c.acceleration = j["acceleration"].get<float>();
     c.state = (drone_controller_component::drone_state) j["state"].get<int>();
+    c.friction = j["friction"].get<float>();
 }

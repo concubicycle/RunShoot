@@ -151,7 +151,7 @@ void asset::prototype_spawner::scene_graph_insert(
     json &e_json)
 {
     auto parent_id = e_json.value("parent_id", -1);
-    scene_node_base_t *node_ptr;
+    scene_node_base_t *node_ptr = nullptr;
 
     if (parent_id != -1)
     {

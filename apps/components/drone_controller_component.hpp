@@ -20,12 +20,14 @@ struct drone_controller_component : public ecs::component<drone_controller_compo
 
     float acceleration;
     float flash_frequency;
+    glm::vec3 target {0.f, 15.f, 0.f};
+    float friction {0.5f};
 
-    // temp for milestone 2 - fly up/down
-    float time_to_dir_switch = 0;
-    float dir_switch_interval = 0.75f;
-    int dir = 10;
+    float horizontal_offset { 0.f};
+    float vertical_offset { 0.f};
+    float z_offset { 0.f};
 
+    ecs::entity* player_ptr { nullptr };
 };
 
 void load_drone_controller(const json& j, ecs::entity& e, string_table& hashes);

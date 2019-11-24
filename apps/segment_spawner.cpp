@@ -11,8 +11,8 @@
 
 segment_spawner::segment_spawner(events::event_exchange &events) :
     behavior(events),
-    _right_turn(glm::rotate(-glm::half_pi<float>(), glm::vec3(0, 1, 0))),
     _left_turn(glm::rotate(glm::half_pi<float>(), glm::vec3(0, 1, 0))),
+    _right_turn(glm::rotate(-glm::half_pi<float>(), glm::vec3(0, 1, 0))),
     _spawn_new_segment(std::chrono::duration<float>(1.75), [this](ecs::entity& e) {
         spawn_new_segment(e);
     })
@@ -78,4 +78,11 @@ void segment_spawner::spawn_segment(ecs::entity &e, core::behavior_context &ctx)
     }
 
     _segments.push(seg_e);
+}
+
+void segment_spawner::spawn_new_segment(ecs::entity &current_segment)
+{
+    auto& seg_to_remove = _segments.front().get();
+    _segments.pop();
+    remove_entity(seg_to_remove);
 }

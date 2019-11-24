@@ -7,7 +7,7 @@
 
 #include <glm/mat4x4.hpp>
 
-#include <vector>
+#include <list>
 #include <functional>
 #include "scene_graph_node_base.hpp"
 
@@ -82,11 +82,23 @@ namespace scene_graph
             return std::optional<std::reference_wrapper<TNodeBase>>();
         }
 
+
+        void remove(TNodeBase& node) override
+        {
+            _children.remove_if([&node](TNode& child) { return child.id() == node.id(); });
+        }
+
+        void remove_from_parent() override
+        {
+            _parent.remove(*this);
+        }
+
+        [[nodiscard]] TId id() const override { return _id; }
         [[nodiscard]] glm::mat4 transform() const override { return _extract_transform(_data); }
         [[nodiscard]] glm::mat4 absolute_transform() const override { return _parent.absolute_transform() * transform(); }
 
     private:
-        std::vector<scene_graph_node<TData, TId>> _children;
+        std::list<scene_graph_node<TData, TId>> _children;
 
 
         std::function<glm::mat4(TData&)> _extract_transform;

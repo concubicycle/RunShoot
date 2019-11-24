@@ -100,8 +100,8 @@ void physics::physics_world::integrate(ecs::entity &e, float frame_time)
     auto &rb = e.get_component<ecs::rigid_body_component>();
     rb.previous_position = rb.position;
     rb.acceleration += rb.mass_inverse() * rb.force;
-    rb.force = glm::vec3(0);
     rb.velocity += rb.acceleration * frame_time; // not accurate
+    rb.force = rb.acceleration = glm::vec3(0);
 }
 
 void physics::physics_world::integrate_position(ecs::entity &e, float frame_time)

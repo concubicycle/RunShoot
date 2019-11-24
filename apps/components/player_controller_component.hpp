@@ -32,6 +32,7 @@ public:
     float previous_yaw;
     float target_yaw;
     std::int8_t turn_counter {0};
+    float run_acceleration {0.01f};
 
     entity_id current_segment_id;
     int seg_clear_count {0};

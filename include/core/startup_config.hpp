@@ -28,6 +28,7 @@ public:
 	std::uint32_t width() const;
     float fov() const;
     bool backface_culling() const;
+    bool free_mouse() const;
 
 private:
     json make_default() const;

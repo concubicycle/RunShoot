@@ -44,6 +44,19 @@ namespace asset
             return _spawner.load_prototype(prototype_path, _entity_world, _scene_graph);
         }
 
+        void remove(ecs::entity& entity)
+        {
+            // remove all entities, except 'entity', because we need it afterwards
+            entity.graph_node->traverse([this, &entity] (ecs::entity& e, glm::mat4& transform) {
+                if (e.id() != entity.id())
+                    _entity_world.remove_entity(e.id());
+            });
+
+            entity.graph_node->remove_from_parent();
+            entity.graph_node = nullptr;
+            _entity_world.remove_entity(entity.id());
+        }
+
     private:
         prototype_spawner &_spawner;
         ecs::entity_world &_entity_world;
