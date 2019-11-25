@@ -30,10 +30,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/player_controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/player_controller.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/prototypes/player.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/player.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake_modules/add_glfw.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake_modules/add_glfw.cmake" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -91,7 +91,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/CMakeLists.txt" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.externalTools" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -379,6 +379,7 @@
       <path value="$PROJECT_DIR$/build/glm/src/glm" />
       <path value="$PROJECT_DIR$/build/nlohmann_json/src/nlohmann_json" />
       <path value="$PROJECT_DIR$/build/spdlog/src/spdlog" />
+      <path value="$PROJECT_DIR$/thirdparty/LearnOpenGL" />
     </ignored-roots>
     <MESSAGE value="ECS stuff" />
     <MESSAGE value="ECS stuff and cmake config" />

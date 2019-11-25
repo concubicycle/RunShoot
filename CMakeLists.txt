@@ -68,7 +68,16 @@ add_executable(${TARGET_NAME}
                apps/components/segment_component.cpp
                apps/components/turn_trigger_component.cpp
                apps/components/turn_trigger_component.hpp
-               apps/components/turn_direction.hpp apps/runshoot_event.hpp apps/segment_spawner.hpp apps/components/segment_spawner_component.cpp apps/components/segment_spawner_component.hpp apps/segment_spawner.cpp apps/components/drone_spawner_component.cpp apps/components/drone_spawner_component.hpp apps/drone_spawner.cpp apps/drone_spawner.hpp)
+               apps/components/turn_direction.hpp
+               apps/runshoot_event.hpp
+               apps/segment_spawner.hpp
+               apps/components/segment_spawner_component.cpp
+               apps/components/segment_spawner_component.hpp
+               apps/segment_spawner.cpp
+               apps/components/drone_spawner_component.cpp
+               apps/components/drone_spawner_component.hpp
+               apps/drone_spawner.cpp
+               apps/drone_spawner.hpp)
 
 add_executable(generate_colliders apps/generate_colliders.cpp)
 
