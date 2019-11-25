@@ -2,12 +2,13 @@
 // Created by sava on 10/30/19.
 //
 
+#include <glm/gtc/epsilon.hpp>
+#include <glm/gtx/matrix_interpolation.hpp>
+
 #include "player_controller.hpp"
 #include "components/turn_trigger_component.hpp"
 #include "components/segment_component.hpp"
 #include "runshoot_event.hpp"
-#include <glm/gtc/epsilon.hpp>
-#include <glm/gtx/matrix_interpolation.hpp>
 
 
 player_controller::player_controller(events::event_exchange &events) :
@@ -25,6 +26,10 @@ player_controller::player_controller(events::event_exchange &events) :
             }));
 }
 
+player_controller::~player_controller()
+{
+    _events.unsubscribe(events::collision, _collision_listener_id);
+}
 
 
 void player_controller::update_single(ecs::entity &e, core::behavior_context &ctx)
@@ -319,7 +324,22 @@ void player_controller::integrate(ecs::entity &e, ecs::rigid_body_component &rb,
     move_component_positions(e, rb.velocity * frame_time);
 }
 
-component_bitset player_controller::player_components()
+void player_controller::jump(ecs::entity &e)
+{
+    auto& rb = e.get_component<ecs::rigid_body_component>();
+    auto& player = e.get_component<player_controller_component>();
+
+    rb.force += glm::vec3(0, player.jump_force, 0);
+    player.state = player_state::airborne;
+}
+
+void player_controller::adjust_turn_counter(ecs::entity &e, turn_direction direction)
+{
+    auto& player = e.get_component<player_controller_component>();
+    player.turn_counter -= direction; // naive implementation
+}
+
+component_bitset player_controller::required_components() const
 {
     return
         ecs::transform_component::archetype_bit |

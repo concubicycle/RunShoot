@@ -16,74 +16,59 @@
 #include "components/player_controller_component.hpp"
 
 
-
 class player_controller : public core::behavior
 {
 public:
-    explicit player_controller(events::event_exchange& events);
+    explicit player_controller(events::event_exchange &events);
 
-    ~player_controller() override
-    {
-        _events.unsubscribe(events::collision, _collision_listener_id);
-    }
+    ~player_controller() override;
 
-
-    [[nodiscard]] component_bitset required_components()  const override { return player_components(); }
+    [[nodiscard]] component_bitset required_components() const override;
 
 protected:
-    void update_single(ecs::entity& e, core::behavior_context &ctx) override;
-    void on_entity_created(ecs::entity& e) override;
+    void update_single(ecs::entity &e, core::behavior_context &ctx) override;
+
+    void on_entity_created(ecs::entity &e) override;
 
 
 private:
     listener_id _collision_listener_id;
-    debounce<ecs::entity&> _jump_debounce;
-    debounce<ecs::entity&, turn_direction> _turn_debounce;
+    debounce<ecs::entity &> _jump_debounce;
+    debounce<ecs::entity &, turn_direction> _turn_debounce;
     glm::mat4 _right_turn;
     glm::mat4 _left_turn;
 
+    void update_running(ecs::entity &e, player_controller_component &player, core::behavior_context &ctx);
 
+    void on_collision(const physics::entity_contact &collision, float dt);
 
-    void update_running(ecs::entity& e, player_controller_component& player, core::behavior_context &ctx);
+    void resolve_collision(
+        const physics::entity_contact &collision,
+        ecs::entity &player_entity,
+        player_controller_component &player,
+        float dt);
 
-
-    void on_collision(const physics::entity_contact& collision, float dt);
-
-    void resolve_collision(const physics::entity_contact& collision,
-                                  ecs::entity& player_entity,
-                                  player_controller_component& player,
-                                  float dt);
-
-    void resolve_trigger_collision(const physics::entity_contact& collision,
-                                  ecs::entity& player_entity,
-                                  player_controller_component& player,
-                                  float dt);
-
+    void resolve_trigger_collision(
+        const physics::entity_contact &collision,
+        ecs::entity &player_entity,
+        player_controller_component &player,
+        float dt);
 
     static void update_airborne(ecs::entity &e, player_controller_component &comp, core::behavior_context &ctx);
+
     static void update_turning(ecs::entity &e, player_controller_component &player, core::behavior_context &ctx);
-    static void update_player_look(ecs::entity& e, core::input_manager& input, float frame_time);
-    static void update_turn_look(ecs::entity& e);
 
-    static void integrate(ecs::entity& e, ecs::rigid_body_component& rb, float frame_time);
-    static void move_component_positions(ecs::entity& e, glm::vec3 displacement);
+    static void update_player_look(ecs::entity &e, core::input_manager &input, float frame_time);
 
-    static component_bitset player_components();
+    static void update_turn_look(ecs::entity &e);
 
-    static void jump(ecs::entity& e)
-    {
-        auto& rb = e.get_component<ecs::rigid_body_component>();
-        auto& player = e.get_component<player_controller_component>();
+    static void integrate(ecs::entity &e, ecs::rigid_body_component &rb, float frame_time);
 
-        rb.force += glm::vec3(0, player.jump_force, 0);
-        player.state = player_state::airborne;
-    }
+    static void move_component_positions(ecs::entity &e, glm::vec3 displacement);
 
-    static void adjust_turn_counter(ecs::entity& e, turn_direction direction)
-    {
-        auto& player = e.get_component<player_controller_component>();
-        player.turn_counter -= direction; // naive implementation
-    }
+    static void jump(ecs::entity &e);
+
+    static void adjust_turn_counter(ecs::entity &e, turn_direction direction);
 };
 
 
