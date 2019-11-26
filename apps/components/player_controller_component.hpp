@@ -46,6 +46,8 @@ public:
     float jump_force {0};
     float footstep_force {0};
 
+    glm::vec2 recoil_acceleration {0.f};
+
     // 0...1 value used to interpolate between previous and target direction
     float turn_t()
     {

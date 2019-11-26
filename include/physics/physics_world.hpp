@@ -10,6 +10,7 @@
 #include <events/event_exchange.hpp>
 #include <ecs/entity.hpp>
 #include <physics_models/contact.hpp>
+#include <physics_models/ray.hpp>
 #include "collisions.hpp"
 
 
@@ -26,6 +27,9 @@ namespace physics
         ~physics_world();
 
         void update(float frame_time);
+
+        void raycast(physics_models::ray ray, const std::function<void(ecs::entity&)>& callback);
+        void raycast(physics_models::ray ray, const std::function<void(ecs::entity&)>& callback, component_bitset archetype);
 
     private:
         events::event_exchange &_events;

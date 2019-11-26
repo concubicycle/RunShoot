@@ -85,6 +85,10 @@ bool rendering::renderer::init()
     glEnable(GL_DEBUG_OUTPUT);
     glDebugMessageCallback(MessageCallback, nullptr);
 
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
     return true;
 }
 
@@ -113,8 +117,19 @@ void rendering::renderer::draw_scene(asset::scene &scene)
         auto aspect = _screen_width / _screen_height;
         auto projection = glm::perspective(cam.fov, aspect, cam.near, cam.far);
 
-        auto cam_basis = cam.right_up_fwd();
-        auto view = glm::lookAt(cam.position, cam.position + cam_basis[2], cam_basis[1]);
+        auto view = cam.view();
+
+        if (r.billboard)
+        {
+            glm::vec3 a(0.f, 0.f, 1.f);
+            glm::vec3 a_p = glm::normalize(cam.position - glm::vec3(model[3]));
+            float theta = acos(glm::dot(a, a_p));
+            glm::vec3 axis = glm::cross(a, a_p);
+            glm::mat4 rotation = glm::rotate(theta, axis);
+            auto pos = model[3];
+            model = rotation;
+            set_translation(model, pos);
+        }
 
         auto light_pos = glm::vec3(0, 10.f, 10.f);
         auto light_color = glm::vec3(0.5, 0.5, 0.5);

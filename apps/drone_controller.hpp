@@ -32,6 +32,11 @@ protected:
         auto &component = e.get_component<drone_controller_component>();
         auto &transform = e.get_component<ecs::transform_component>();
 
+        if (component.state == drone_controller_component::exploding)
+        {
+            //rb.force -= rb.velocity * 0.5f * ctx.time.smoothed_delta_secs();
+            return;
+        }
 
         auto frame_time = ctx.time.smoothed_delta_secs();
 

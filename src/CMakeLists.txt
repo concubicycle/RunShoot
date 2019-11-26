@@ -143,7 +143,7 @@ set (PHYSICS_MODELS_HEADER_LIST
      ../include/physics_models/collider.hpp
      ../include/physics_models/contact.hpp
      ../include/physics_models/collision_tests.hpp
-     ../include/physics_models/aabb_collider.hpp ../include/physics_models/aabb_collider.hpp ../include/physics_models/sphere_collider.hpp)
+     ../include/physics_models/aabb_collider.hpp ../include/physics_models/aabb_collider.hpp ../include/physics_models/sphere_collider.hpp ../include/physics_models/ray.hpp)
 
 
 set(HEADER_LIST

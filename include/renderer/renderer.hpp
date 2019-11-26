@@ -48,6 +48,8 @@ public:
     void draw_scene(asset::scene& scene);
     static void resize(std::uint32_t width, std::uint32_t height);
 
+    [[nodiscard]] glm::vec2 screen_size() const { return {_screen_width, _screen_height}; }
+
 private:
     const core::startup_config &_config;
     const core::system_info& _system_info;

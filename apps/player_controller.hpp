@@ -69,6 +69,10 @@ private:
     static void jump(ecs::entity &e);
 
     static void adjust_turn_counter(ecs::entity &e, turn_direction direction);
+
+    static void apply_acceleration(ecs::entity &e, core::behavior_context ctx);
+
+    static void shoot(ecs::entity &e, core::behavior_context ctx);
 };
 
 

@@ -30,6 +30,10 @@ void load_render_ogl(const json &j, ecs::entity &e, string_table &hashes)
 
     r.mesh_path_hash = hashes.hash_and_store(path);
     r.mesh_format = asset::mesh_type(j["mesh_format"].get<unsigned int>());
+    if (j.find("billboard") != j.end())
+    {
+        r.billboard = j["billboard"].get<bool>();
+    }
 }
 
 #undef near

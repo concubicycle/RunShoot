@@ -113,7 +113,7 @@ void render_loop(game_systems &data, behaviors &behaviors)
 {
     auto &player = data.scene.entity_world().get_entity(111);
 
-    core::behavior_context ctx = {data.timer, data.input, data.scene};
+    core::behavior_context ctx = {data.timer, data.input, data.scene, data.physics, data.renderer };
 
     while (!glfwWindowShouldClose(data.window))
     {

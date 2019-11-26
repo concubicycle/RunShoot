@@ -43,6 +43,47 @@ namespace physics_models
             return visitor.visit(_shape, combined_velocity);
         }
 
+        std::optional<float> intersect_ray(const ray& r) override
+        {
+            float t_min = 0;
+            float t_max =  std::numeric_limits<float>::max();
+
+            for (int i = 0; i < 3; i++)
+            {
+                float min = _shape.min[i];
+                float max = _shape.max[i];
+                float d_ray = r.direction[i];
+                float p_ray = r.start[i];
+
+                auto not_moving = glm::abs(d_ray) < glm::epsilon<float>();
+                auto outside = p_ray < min || p_ray > max;
+
+                if (not_moving && outside)
+                    return std::optional<float>();
+
+                if (p_ray < min && d_ray < 0) return std::optional<float>();
+                if (p_ray > max && d_ray > 0) return std::optional<float>();
+
+                float ood = 1.f / d_ray;
+                float t1 = (min - p_ray) * ood;
+                float t2 = (max - p_ray) * ood;
+
+                if (t1 > t2)
+                {
+                    float dummy = t1;
+                    t1 = t2;
+                    t2 = dummy;
+                }
+
+                t_min = std::max(t_min, t1);
+                t_max = std::min(t_max, t2);
+
+                if (t_min > t_max) return std::optional<float>();
+            }
+
+            return t_min;
+        }
+
         void set_position(glm::vec3& position) override
         {
             _shape.min = _shape_original.min + position;

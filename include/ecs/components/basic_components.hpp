@@ -115,6 +115,7 @@ namespace ecs
         std::uint32_t mesh_count;
         std::uint64_t mesh_path_hash;
         asset::mesh_type mesh_format;
+        bool billboard {false};
     };
 
 #undef near
@@ -153,6 +154,28 @@ namespace ecs
             glm::vec3 fwd(sin_y * cos_p, sin_p, -cos_p * cosy);
             glm::vec3 up(-sin_y * sin_p, cos_p, sin_p * cosy);
             return glm::mat3(glm::cross(fwd, up), up, fwd);
+        }
+
+        glm::mat4 view()
+        {
+            float cos_p = std::cos(pitch);
+            float sin_p = std::sin(pitch);
+            float sin_y = std::sin(yaw);
+            float cosy = std::cos(yaw);
+            glm::vec3 fwd(sin_y * cos_p, sin_p, -cos_p * cosy);
+            glm::vec3 up(-sin_y * sin_p, cos_p, sin_p * cosy);
+
+            auto cam_basis = right_up_fwd();
+            return glm::lookAt(position, position + fwd, up);
+        }
+
+        glm::vec3 fwd()
+        {
+            float cos_p = std::cos(pitch);
+            float sin_p = std::sin(pitch);
+            float sin_y = std::sin(yaw);
+            float cosy = std::cos(yaw);
+            return glm::vec3(sin_y * cos_p, sin_p, -cos_p * cosy);
         }
     };
 

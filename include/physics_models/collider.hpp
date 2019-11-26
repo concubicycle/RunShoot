@@ -7,6 +7,7 @@
 
 #include "contact.hpp"
 #include "sphere.hpp"
+#include "ray.hpp"
 
 #include <glm/vec3.hpp>
 
@@ -35,6 +36,8 @@ namespace physics_models
 
         virtual void set_position(glm::vec3& position) = 0;
         virtual void set_transform(glm::mat4& transform) = 0;
+
+        virtual std::optional<float> intersect_ray(const ray& r) = 0;
 
         [[nodiscard]] bool is_trigger() const { return _is_trigger; }
 

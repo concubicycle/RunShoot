@@ -2,13 +2,18 @@
 // Created by sava on 10/30/19.
 //
 
+#include <ctime>
+#include <cstdlib>
+
 #include <glm/gtc/epsilon.hpp>
 #include <glm/gtx/matrix_interpolation.hpp>
+#include <glm/gtc/random.hpp>
 
 #include "player_controller.hpp"
 #include "components/turn_trigger_component.hpp"
 #include "components/segment_component.hpp"
 #include "runshoot_event.hpp"
+#include "components/drone_controller_component.hpp"
 
 
 player_controller::player_controller(events::event_exchange &events) :
@@ -37,23 +42,12 @@ void player_controller::update_single(ecs::entity &e, core::behavior_context &ct
     auto &player = e.get_component<player_controller_component>();
     auto &t = e.get_component<ecs::transform_component>();
     auto &c = e.get_component<ecs::camera_component>();
-    auto& rb = e.get_component<ecs::rigid_body_component>();
-
     auto &input = ctx.input;
 
-    rb.velocity *= 1.f + player.run_acceleration * ctx.time.smoothed_delta_secs();
+    apply_acceleration(e, ctx);
 
-    float speed_sq = glm::length2(rb.velocity);
-
-    if (glm::epsilonEqual(speed_sq, 0.f, glm::epsilon<float>()))
-    {
-        rb.velocity = player.direction;
-    }
-
-    if (speed_sq < player.run_speed*player.run_speed)
-    {
-        rb.velocity *= 1 + (0.4 * ctx.time.smoothed_delta_secs());
-    }
+    if (ctx.input.was_mouse_clicked(GLFW_MOUSE_BUTTON_1))
+        shoot(e, ctx);
 
     switch (player.state)
     {
@@ -98,7 +92,7 @@ void player_controller::update_running(ecs::entity &e, player_controller_compone
     } else if (ctx.input.was_key_pressed(GLFW_KEY_D) && player.turn_counter < 1)
     {
         player.current_turn_duration = 0;
-        player.target_direction = glm::round( _right_turn * glm::vec4(player.direction, 1.f));
+        player.target_direction = glm::round(_right_turn * glm::vec4(player.direction, 1.f));
         player.previous_direction = player.direction;
         player.state = turning;
         player.previous_yaw = cam.yaw;
@@ -230,6 +224,14 @@ void player_controller::resolve_collision(
         return;
     }
 
+    auto &other_entity = collision.the_other(player_entity.id());
+
+    auto drone_opt = other_entity.get_component_opt<drone_controller_component>();
+    auto is_dead_drone = drone_opt &&
+        drone_opt->get().state == drone_controller_component::exploding;
+    if (is_dead_drone)
+        return;
+
     auto intersecting = collision.contact().time() == physics_models::contact::Intersecting;
 
     if (!intersecting)
@@ -264,7 +266,6 @@ void player_controller::resolve_collision(
         player.time_since_grounded = 0;
     }
 
-    auto& other_entity = collision.the_other(player_entity.id());
     if (other_entity.has<segment_component>())
     {
         if (player.current_segment_id != other_entity.id())
@@ -277,7 +278,7 @@ void player_controller::resolve_collision(
         {
             player.seg_clear_count = 0;
             player.segments_to_clear = 0;
-            _events.invoke<runshoot_event, ecs::entity&>(segment_cleared, other_entity);
+            _events.invoke<runshoot_event, ecs::entity &>(segment_cleared, other_entity);
         }
     }
 }
@@ -326,8 +327,8 @@ void player_controller::integrate(ecs::entity &e, ecs::rigid_body_component &rb,
 
 void player_controller::jump(ecs::entity &e)
 {
-    auto& rb = e.get_component<ecs::rigid_body_component>();
-    auto& player = e.get_component<player_controller_component>();
+    auto &rb = e.get_component<ecs::rigid_body_component>();
+    auto &player = e.get_component<player_controller_component>();
 
     rb.force += glm::vec3(0, player.jump_force, 0);
     player.state = player_state::airborne;
@@ -335,7 +336,7 @@ void player_controller::jump(ecs::entity &e)
 
 void player_controller::adjust_turn_counter(ecs::entity &e, turn_direction direction)
 {
-    auto& player = e.get_component<player_controller_component>();
+    auto &player = e.get_component<player_controller_component>();
     player.turn_counter -= direction; // naive implementation
 }
 
@@ -346,4 +347,57 @@ component_bitset player_controller::required_components() const
         player_controller_component::archetype_bit |
         ecs::transform_component::archetype_bit |
         ecs::camera_component::archetype_bit;
+}
+
+void player_controller::apply_acceleration(ecs::entity &e, core::behavior_context ctx)
+{
+    auto &rb = e.get_component<ecs::rigid_body_component>();
+    auto &player = e.get_component<player_controller_component>();
+    auto &cam = e.get_component<ecs::camera_component>();
+
+    rb.velocity *= 1.f + player.run_acceleration * ctx.time.smoothed_delta_secs();
+
+    float speed_sq = glm::length2(rb.velocity);
+
+    if (glm::epsilonEqual(speed_sq, 0.f, glm::epsilon<float>()))
+        rb.velocity = player.direction;
+
+    if (speed_sq < player.run_speed * player.run_speed)
+        rb.velocity *= 1 + (0.4 * ctx.time.smoothed_delta_secs());
+
+    cam.pitch += player.recoil_acceleration.y * ctx.time.smoothed_delta_secs();
+    cam.yaw += player.recoil_acceleration.x * ctx.time.smoothed_delta_secs();
+
+
+    if (player.recoil_acceleration.x != 0 || player.recoil_acceleration.y != 0)
+    {
+        auto mu = 0.85f;
+        auto N = 10.5f;
+        auto friction_d = -glm::normalize(player.recoil_acceleration);
+        auto friction_m = mu * N;
+        auto f = friction_d * friction_m;
+        auto old_a = player.recoil_acceleration;
+        player.recoil_acceleration += f * ctx.time.smoothed_delta_secs();
+        if (glm::dot(old_a, player.recoil_acceleration) < 0)
+            player.recoil_acceleration = glm::vec2(0.f);
+    }
+}
+
+void player_controller::shoot(ecs::entity &e, core::behavior_context ctx)
+{
+    auto &cam = e.get_component<ecs::camera_component>();
+    auto &player = e.get_component<player_controller_component>();
+
+    physics_models::ray ray = {cam.position, cam.fwd()};
+
+    ctx.physics.raycast(ray, [](ecs::entity &hit_entity) {
+        if (!hit_entity.has<drone_controller_component>()) return;
+        auto &drone = hit_entity.get_component<drone_controller_component>();
+        drone.state = drone_controller_component::exploding;
+    }, drone_controller_component::archetype_bit);
+
+    player.recoil_acceleration = {
+        glm::linearRand(-1.f, 1.f),
+        glm::linearRand(0.f, 2.75f)
+    };
 }

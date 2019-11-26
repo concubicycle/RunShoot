@@ -2,9 +2,9 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
+      <config projectName="RunShoot" targetName="glm" />
       <config projectName="RunShoot" targetName="glfw" />
       <config projectName="RunShoot" targetName="spdlog" />
-      <config projectName="RunShoot" targetName="glm" />
       <config projectName="RunShoot" targetName="asset" />
       <config projectName="RunShoot" targetName="RunShoot" />
       <config projectName="RunShoot" targetName="generate_colliders" />
@@ -13,8 +13,8 @@
       <config projectName="RunShoot" targetName="glbinding" />
       <config projectName="RunShoot" targetName="core" />
       <config projectName="RunShoot" targetName="physics_models" />
-      <config projectName="RunShoot" targetName="physics" />
       <config projectName="RunShoot" targetName="platform" />
+      <config projectName="RunShoot" targetName="physics" />
       <config projectName="RunShoot" targetName="ecs" />
       <config projectName="RunShoot" targetName="assimp" />
       <config projectName="RunShoot" targetName="expected" />
@@ -30,10 +30,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/models/light_quad.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/prototypes/drone_light.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/physics_models/ray.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake_modules/add_glfw.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake_modules/add_glfw.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/components/player_controller_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/player_controller_component.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/drone_controller.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/drone_controller.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/player_controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/player_controller.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/blender/seg2.blend" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg2.blend" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/blender/seg2.blend1" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg2.blend1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg2/seg2.bin" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg2/seg2.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg2/seg2.gltf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg2/seg2.gltf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/drone.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/drone.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/scenes/scene.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scenes/scene.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/core/behavior_context.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/core/behavior_context.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/core/input_manager.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/core/input_manager.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/physics/physics_world.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics/physics_world.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/physics_models/aabb_collider.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics_models/aabb_collider.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/physics_models/collider.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics_models/collider.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/physics_models/sphere_collider.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics_models/sphere_collider.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/renderer/renderer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/renderer/renderer.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/asset/component_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/component_loader.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/input_manager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/input_manager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/physics/physics_world.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/physics/physics_world.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/renderer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/include/shader.h" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/include/shader.h" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -341,6 +366,8 @@
       <workItem from="1574580509981" duration="707000" />
       <workItem from="1574585130750" duration="4809000" />
       <workItem from="1574617731035" duration="15716000" />
+      <workItem from="1574713635505" duration="958000" />
+      <workItem from="1574715757346" duration="32810000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>

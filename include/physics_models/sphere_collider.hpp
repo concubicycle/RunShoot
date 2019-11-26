@@ -37,6 +37,11 @@ namespace physics_models
             return visitor.visit(_shape, combined_velocity);
         }
 
+        std::optional<float> intersect_ray(const ray& r) override
+        {
+            return std::optional<float>();
+        }
+
         void set_position(glm::vec3& position) override
         {
             _shape.center = _shape_original.center + position;

@@ -288,7 +288,7 @@ void physics::physics_world::update_transforms()
     {
         if (!e.get().has<ecs::transform_component>()) continue;
 
-        auto& t = e.get().get_component<ecs::transform_component>();
+        auto &t = e.get().get_component<ecs::transform_component>();
         auto &rb = e.get().get_component<ecs::rigid_body_component>();
 
         if (rb.is_kinematic)
@@ -311,5 +311,40 @@ void physics::physics_world::sync_to_transform(ecs::entity &e)
     physics_models::collider *cursor;
     while (it.end() != (cursor = it.get_next()))
         cursor->set_transform(transform);
+}
+
+void physics::physics_world::raycast(
+    physics_models::ray ray,
+    const std::function<void(ecs::entity &)>& callback)
+{
+    for (auto &e : _collision_entities)
+    {
+        collider_iterator it(e);
+        physics_models::collider *cursor;
+        while (it.end() != (cursor = it.get_next()))
+        {
+            auto t = cursor->intersect_ray(ray);
+            if (t) callback(e);
+        }
+    }
+}
+
+void physics::physics_world::raycast(
+    physics_models::ray ray,
+    const std::function<void(ecs::entity &)>& callback,
+    component_bitset archetype)
+{
+    for (auto &e : _collision_entities)
+    {
+        if ((e.get().archetype_id() & archetype) != archetype) continue;
+
+        collider_iterator it(e);
+        physics_models::collider *cursor;
+        while (it.end() != (cursor = it.get_next()))
+        {
+            auto t = cursor->intersect_ray(ray);
+            if (t) callback(e);
+        }
+    }
 }
 
