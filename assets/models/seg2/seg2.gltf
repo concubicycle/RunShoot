@@ -11,7 +11,8 @@
                 0,
                 1,
                 2,
-                3
+                3,
+                4
             ]
         }
     ],
@@ -61,6 +62,10 @@
         },
         {
             "name" : "Empty"
+        },
+        {
+            "mesh" : 1,
+            "name" : "Cube.001"
         }
     ],
     "cameras" : [
@@ -86,6 +91,18 @@
                 "metallicFactor" : 0,
                 "roughnessFactor" : 0.4000000059604645
             }
+        },
+        {
+            "doubleSided" : true,
+            "name" : "Material.002",
+            "pbrMetallicRoughness" : {
+                "baseColorTexture" : {
+                    "index" : 1,
+                    "texCoord" : 0
+                },
+                "metallicFactor" : 0,
+                "roughnessFactor" : 0.4000000059604645
+            }
         }
     ],
     "meshes" : [
@@ -102,18 +119,40 @@
                     "material" : 0
                 }
             ]
+        },
+        {
+            "name" : "Cube.001",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 4,
+                        "NORMAL" : 5,
+                        "TEXCOORD_0" : 6
+                    },
+                    "indices" : 7,
+                    "material" : 1
+                }
+            ]
         }
     ],
     "textures" : [
         {
             "source" : 0
+        },
+        {
+            "source" : 1
         }
     ],
     "images" : [
         {
+            "mimeType" : "image/png",
+            "name" : "seg1_rooftop",
+            "uri" : "seg1_rooftop.png"
+        },
+        {
             "mimeType" : "image/jpeg",
-            "name" : "wall",
-            "uri" : "wall.jpg"
+            "name" : "windows_wall_lowres",
+            "uri" : "windows_wall_lowres.jpg"
         }
     ],
     "accessors" : [
@@ -150,6 +189,40 @@
             "componentType" : 5123,
             "count" : 924,
             "type" : "SCALAR"
+        },
+        {
+            "bufferView" : 4,
+            "componentType" : 5126,
+            "count" : 594,
+            "max" : [
+                73.50856018066406,
+                -5.101107597351074,
+                1.312464714050293
+            ],
+            "min" : [
+                -342.1404724121094,
+                -129.9044189453125,
+                -432.7863464355469
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 5,
+            "componentType" : 5126,
+            "count" : 594,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 6,
+            "componentType" : 5126,
+            "count" : 594,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 7,
+            "componentType" : 5123,
+            "count" : 924,
+            "type" : "SCALAR"
         }
     ],
     "bufferViews" : [
@@ -172,11 +245,31 @@
             "buffer" : 0,
             "byteLength" : 1848,
             "byteOffset" : 18752
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 7128,
+            "byteOffset" : 20600
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 7128,
+            "byteOffset" : 27728
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 4752,
+            "byteOffset" : 34856
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 1848,
+            "byteOffset" : 39608
         }
     ],
     "buffers" : [
         {
-            "byteLength" : 20600,
+            "byteLength" : 41456,
             "uri" : "seg2.bin"
         }
     ]

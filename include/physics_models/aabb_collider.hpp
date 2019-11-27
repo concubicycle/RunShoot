@@ -69,11 +69,7 @@ namespace physics_models
                 float t2 = (max - p_ray) * ood;
 
                 if (t1 > t2)
-                {
-                    float dummy = t1;
-                    t1 = t2;
-                    t2 = dummy;
-                }
+                    std::swap(t1, t2);
 
                 t_min = std::max(t_min, t1);
                 t_max = std::min(t_max, t2);

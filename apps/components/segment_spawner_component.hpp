@@ -20,7 +20,6 @@ struct segment_spawner_component : ecs::component<segment_spawner_component>
     float jump_distance_variance {30.f};
 
     std::uint8_t num_initial_segments {10};
-    std::uint8_t initial_straights {3};
 
     glm::mat4 rotation {1.f};
 };

@@ -30,7 +30,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/azure-pipelines.yml" beforeDir="false" afterPath="$PROJECT_DIR$/azure-pipelines.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/components/drone_controller_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/drone_controller_component.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/components/segment_spawner_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/segment_spawner_component.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/blender/seg1.blend" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg1.blend" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/blender/seg1.blend1" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg1.blend1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/blender/seg2.blend" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg2.blend" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/blender/seg2.blend1" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg2.blend1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/blender/seg3.blend" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg3.blend" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/blender/seg3.blend1" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg3.blend1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg1/seg1.bin" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg1/seg1.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg1/seg1.gltf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg1/seg1.gltf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg2/seg2.bin" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg2/seg2.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg2/seg2.gltf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg2/seg2.gltf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg3/seg3.bin" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg3/seg3.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg3/seg3.gltf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg3/seg3.gltf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/physics_models/aabb_collider.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics_models/aabb_collider.hpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -343,7 +358,7 @@
       <workItem from="1574798397988" duration="12732000" />
       <workItem from="1574813595268" duration="477000" />
       <workItem from="1574814326891" duration="16708000" />
-      <workItem from="1574842857296" duration="5992000" />
+      <workItem from="1574842857296" duration="9945000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>

@@ -29,8 +29,8 @@ struct drone_controller_component : public ecs::component<drone_controller_compo
 
     ecs::entity* player_ptr { nullptr };
 
-    float time_to_flash { 3.f };
-    float initial_time_to_flash { 3.f };
+    float time_to_flash { 4.f };
+    float initial_time_to_flash { 4.f };
     float initial_warning_light_duration {1.f};
     float warning_light_duration {1.f};
     float initial_warning_light_interval { 1.f };
