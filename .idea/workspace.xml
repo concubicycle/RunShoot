@@ -30,46 +30,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/apps/drone_controller.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/shaders/glare.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/shaders/glare.vert" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/ecs/components/camera_property.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/components/drone_controller_component.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/drone_controller_component.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/components/drone_controller_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/drone_controller_component.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/components/drone_spawner_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/drone_spawner_component.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/components/player_controller_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/player_controller_component.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/components/segment_spawner_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/segment_spawner_component.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/drone_controller.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/drone_controller.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/drone_spawner.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/drone_spawner.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/player_controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/player_controller.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/segment_spawner.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/segment_spawner.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/prototypes/drone.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/drone.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/prototypes/drone_light.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/drone_light.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/scenes/scene.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scenes/scene.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/shaders/default.frag" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/default.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/shaders/skybox.frag" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/skybox.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/textures/glare.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/textures/glare.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/azure-pipelines.yml" beforeDir="false" afterPath="$PROJECT_DIR$/azure-pipelines.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/components/mesh_opengl.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/components/mesh_opengl.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/entity.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/entity.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/events/event_exchange.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/events/event_exchange.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/events/event_type.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/events/event_type.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/renderer/renderer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/renderer/renderer.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/renderer/shader_set.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/renderer/shader_set.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/scene/scene_graph_node.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/scene/scene_graph_node.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/scene/scene_graph_node_base.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/scene/scene_graph_node_base.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/scene/scene_graph_root.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/scene/scene_graph_root.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/asset/component_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/component_loader.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/asset/prototype_spawner.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/prototype_spawner.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/model_render_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/model_render_loader.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/renderer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/include/shader_program.h" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/include/shader_program.h" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -382,7 +343,7 @@
       <workItem from="1574798397988" duration="12732000" />
       <workItem from="1574813595268" duration="477000" />
       <workItem from="1574814326891" duration="16708000" />
-      <workItem from="1574842857296" duration="5899000" />
+      <workItem from="1574842857296" duration="5992000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>
