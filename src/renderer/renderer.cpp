@@ -3,6 +3,7 @@
 
 #include <glbinding/gl/gl.h>
 #include <glm/gtx/euler_angles.hpp>
+#include <utility>
 
 #include <vectormath.h>
 
@@ -54,12 +55,22 @@ rendering::renderer::renderer(
         _screen_width = (float) _config.width();
         _screen_height = (float)_config.height();
     }
+
+    std::function<void(std::string name, float prop)> cam_prop_set([this](std::string name, float prop){
+        if (_camera_entity == nullptr) return;
+
+        auto& cam = _camera_entity->get_component<ecs::camera_component>();
+        cam.set_float(std::move(name), prop);
+    });
+
+    _cam_float_set_id = _events.subscribe<std::string, float>(events::camera_prop_set, cam_prop_set);
 }
 
 rendering::renderer::~renderer()
 {
     _events.unsubscribe(events::entity_created, _cam_listener_id);
     _events.unsubscribe(events::entity_destroyed, _cam_remove_listener_id);
+    _events.unsubscribe(events::camera_prop_set, _cam_float_set_id);
 }
 
 
@@ -79,7 +90,6 @@ bool rendering::renderer::init()
     }
 
     glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
 
     // During init, enable debug output
     glEnable(GL_DEBUG_OUTPUT);
@@ -105,6 +115,8 @@ void rendering::renderer::draw_scene(asset::scene &scene)
     draw_skybox();
 
     scene.scene_graph().traverse([this](ecs::entity &e, glm::mat4& model) {
+        if (!e.active()) return;
+
         auto is_rt = e.has<ecs::render_component_ogl>() && e.has<ecs::transform_component>();
         if (!is_rt) return;
 
@@ -153,6 +165,9 @@ void rendering::renderer::draw_scene(asset::scene &scene)
             shader.set_uniform("shininess", 0.2f);
             shader.set_uniform("light_intensity", 100.f);
 
+            for (int i = 0; i < cam.float_count; ++i)
+                shader.set_uniform(cam.float_props[i].name, cam.float_props[i].data);
+
             for (std::uint32_t i = 0; i < r.mesh_count; ++i)
             {
                 glActiveTexture(GL_TEXTURE0);
@@ -167,7 +182,9 @@ void rendering::renderer::draw_scene(asset::scene &scene)
             shader.unbind();
         } else
         {
-            auto& shader = _shaders.ptx2d_pvm();
+            const ogllib::shader_program_base& shader = r.shader
+                ? _shaders.get_program(*(r.shader))
+                : _shaders.get_program("ptx2d_pvm");
 
             auto projection_view_model = projection * view * model;
 
@@ -178,6 +195,8 @@ void rendering::renderer::draw_scene(asset::scene &scene)
 
             shader.set_uniform("projection_view_model", projection_view_model);
 
+            if (r.hue) shader.set_uniform("hue", *r.hue);
+
             glBindVertexArray(r.meshes[0].vao);
             glDrawElements(GL_TRIANGLES, r.meshes[0].element_count, GL_UNSIGNED_INT, nullptr);
             glBindVertexArray(0);
@@ -187,7 +206,6 @@ void rendering::renderer::draw_scene(asset::scene &scene)
     });
 
     _overlay.draw(_screen_width, _screen_height);
-
 }
 
 void rendering::renderer::resize(std::uint32_t width, std::uint32_t height)
@@ -239,16 +257,18 @@ void rendering::renderer::draw_skybox()
 
     glDepthMask(GL_FALSE);
 
-    glDepthFunc(GL_LEQUAL);
     _shaders.skybox().bind();
     _shaders.skybox().set_uniform("view", view);
     _shaders.skybox().set_uniform("projection", projection);
+
+    for (int i = 0; i < cam.float_count; ++i)
+        _shaders.skybox().set_uniform(cam.float_props[i].name, cam.float_props[i].data);
 
     glActiveTexture(GL_TEXTURE0);
     cam.skybox->bind();
     glDrawArrays(GL_TRIANGLES, 0, 36);
     cam.skybox->unbind();
-    glDepthFunc(GL_LESS);
+
     glDepthMask(GL_TRUE);
 }
 

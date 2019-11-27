@@ -30,6 +30,7 @@ namespace scene_graph
         virtual void remove_from_parent() = 0;
         virtual TId id() const = 0;
 
+        virtual void print(std::string prefix) = 0;
 
 
         bool operator==(const scene_graph_node_base<TData, TId>& obj2) const

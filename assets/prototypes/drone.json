@@ -21,7 +21,7 @@
       {
         "component_bitshift": 18,
         "acceleration": 15,
-        "flash_frequency": 20,
+        "initial_time_to_flash": 10,
         "state": 1,
         "friction": 0.4
       },
@@ -59,7 +59,36 @@
       "prototype": "./assets/prototypes/drone_light.json",
       "components": [  {
         "component_bitshift": 0,
-        "y": -0.8
+        "x": -0.8,
+        "y": -0.5,
+        "z": -0.8
+      }]
+    },
+    {
+      "prototype": "./assets/prototypes/drone_light.json",
+      "components": [  {
+        "component_bitshift": 0,
+        "x": 0.8,
+        "y": -0.5,
+        "z": 0.8
+      }]
+    },
+    {
+      "prototype": "./assets/prototypes/drone_light.json",
+      "components": [  {
+        "component_bitshift": 0,
+        "x": -0.8,
+        "y": -0.5,
+        "z": 0.8
+      }]
+    },
+    {
+      "prototype": "./assets/prototypes/drone_light.json",
+      "components": [  {
+        "component_bitshift": 0,
+        "x": 0.8,
+        "y": -0.5,
+        "z": -0.8
       }]
     }
   ]

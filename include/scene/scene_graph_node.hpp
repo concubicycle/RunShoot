@@ -97,6 +97,15 @@ namespace scene_graph
         [[nodiscard]] glm::mat4 transform() const override { return _extract_transform(_data); }
         [[nodiscard]] glm::mat4 absolute_transform() const override { return _parent.absolute_transform() * transform(); }
 
+        void print(std::string prefix) override
+        {
+            std::cout << prefix << _id << std::endl;
+            for (auto& c : _children)
+            {
+                c.print(prefix + "\t");
+            }
+        }
+
     private:
         std::list<scene_graph_node<TData, TId>> _children;
 

@@ -119,7 +119,7 @@ set (ECS_HEADER_LIST
      ${PROJECT_SOURCE_DIR}/include/ecs/entity_factory.hpp
      ${PROJECT_SOURCE_DIR}/include/ecs/entity_world.hpp
      ${PROJECT_SOURCE_DIR}/include/ecs/entity.hpp
-     ${PROJECT_SOURCE_DIR}/include/ecs/components/mesh_opengl.hpp)
+     ${PROJECT_SOURCE_DIR}/include/ecs/components/mesh_opengl.hpp ../include/ecs/components/camera_property.hpp)
 
 
 set (PHYSICS_SOURCE_LIST

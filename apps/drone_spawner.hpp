@@ -45,6 +45,9 @@ public:
         auto& spawner = e.get_component<drone_spawner_component>();
         spawner.time_to_spawn -= ctx.time.smoothed_delta_secs();
 
+        if (spawner.drone_spawn_interval > spawner.min_drone_spawn_interval)
+             spawner.drone_spawn_interval -= ctx.time.smoothed_delta_secs() * 0.1f;
+
         if (spawner.time_to_spawn < 0)
         {
             spawner.time_to_spawn = spawner.drone_spawn_interval;

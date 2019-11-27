@@ -27,11 +27,12 @@
 #include <vectormath.h>
 #include <ecs/component.hpp>
 #include <ecs/components/mesh_opengl.hpp>
-
+#include "camera_property.hpp"
 
 
 #define MAX_BASIC_COMPONENTS 16
 #define MAX_RENDER_MESHES 32
+#define NUM_CAM_PROPS 8
 
 /*
  * Each collider component will have an array of shapes, to allow for
@@ -112,6 +113,8 @@ namespace ecs
     struct render_component_ogl : public component<render_component_ogl>
     {
         mesh_opengl meshes[MAX_RENDER_MESHES];
+        std::optional<glm::vec3> hue;
+        std::optional<std::string> shader;
         std::uint32_t mesh_count;
         std::uint64_t mesh_path_hash;
         asset::mesh_type mesh_format;
@@ -129,6 +132,9 @@ namespace ecs
             perspective = 1,
             orthographic = 2
         };
+
+        camera_property<float> float_props[NUM_CAM_PROPS];
+        std::uint8_t float_count {0};
 
         glm::vec3 position = glm::vec3(0.f);
         camera_mode mode = perspective;
@@ -176,6 +182,31 @@ namespace ecs
             float sin_y = std::sin(yaw);
             float cosy = std::cos(yaw);
             return glm::vec3(sin_y * cos_p, sin_p, -cos_p * cosy);
+        }
+
+        // TODO: redesign, templatize
+        void set_float(std::string name, float val)
+        {
+            for (int i = 0; i < float_count; ++i)
+            {
+                if (float_props[i].name == name)
+                {
+                    float_props[i].data = val;
+                    return;
+                }
+            }
+
+            float_props[float_count].name = name;
+            float_props[float_count++].data = val;
+        }
+
+        float get_float(std::string name)
+        {
+            for (int i = 0; i < float_count; ++i)
+                if (float_props[i].name == name)
+                    return float_props[i].data;
+
+            return 0;
         }
     };
 

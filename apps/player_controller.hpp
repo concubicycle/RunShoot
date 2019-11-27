@@ -33,7 +33,7 @@ protected:
 
 private:
     listener_id _collision_listener_id;
-    debounce<ecs::entity &> _jump_debounce;
+    debounce<ecs::entity &, core::behavior_context&> _jump_debounce;
     debounce<ecs::entity &, turn_direction> _turn_debounce;
     glm::mat4 _right_turn;
     glm::mat4 _left_turn;
@@ -66,7 +66,7 @@ private:
 
     static void move_component_positions(ecs::entity &e, glm::vec3 displacement);
 
-    static void jump(ecs::entity &e);
+    static void jump(ecs::entity &e, core::behavior_context& ctx);
 
     static void adjust_turn_counter(ecs::entity &e, turn_direction direction);
 

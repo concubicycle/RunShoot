@@ -26,14 +26,22 @@ void load_transform(const json &j, ecs::entity &e, string_table &hashes)
 void load_render_ogl(const json &j, ecs::entity &e, string_table &hashes)
 {
     auto &r = e.get_component<ecs::render_component_ogl>();
-    std::string path = j["mesh_path"].get<std::string>();
+    auto path = j["mesh_path"].get<std::string>();
 
     r.mesh_path_hash = hashes.hash_and_store(path);
     r.mesh_format = asset::mesh_type(j["mesh_format"].get<unsigned int>());
+
+    if (j.find("shader") != j.end())
+        r.shader.emplace(j["shader"].get<std::string>());
+
     if (j.find("billboard") != j.end())
-    {
         r.billboard = j["billboard"].get<bool>();
-    }
+
+    if (j.find("hue") != j.end())
+        r.hue.emplace(
+            j["hue"][0].get<float>(),
+            j["hue"][1].get<float>(),
+            j["hue"][2].get<float>());
 }
 
 #undef near

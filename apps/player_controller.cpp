@@ -18,8 +18,8 @@
 
 player_controller::player_controller(events::event_exchange &events) :
     behavior(events),
-    _jump_debounce(std::chrono::duration<float>(0.7), jump),
-    _turn_debounce(std::chrono::duration<float>(1.25), adjust_turn_counter),
+    _jump_debounce(std::chrono::duration<float>(0.4f), jump),
+    _turn_debounce(std::chrono::duration<float>(1.25f), adjust_turn_counter),
     _right_turn(glm::rotate(-glm::half_pi<float>(), glm::vec3(0, 1, 0))),
     _left_turn(glm::rotate(glm::half_pi<float>(), glm::vec3(0, 1, 0)))
 {
@@ -65,6 +65,15 @@ void player_controller::update_single(ecs::entity &e, core::behavior_context &ct
         case dead:
             break;
     }
+
+
+    float color_multiplier = c.get_float("color_multiplier");
+    if (color_multiplier != 1)
+    {
+        float d = 1 - color_multiplier;
+        color_multiplier += d * ctx.time.smoothed_delta_secs();
+        c.set_float("color_multiplier", color_multiplier);
+    }
 }
 
 void player_controller::on_entity_created(ecs::entity &e)
@@ -87,7 +96,7 @@ void player_controller::update_running(ecs::entity &e, player_controller_compone
 
     if (ctx.input.was_key_pressed(GLFW_KEY_SPACE))
     {
-        _jump_debounce(e);
+        _jump_debounce(e, ctx);
         player.state = airborne;
     } else if (ctx.input.was_key_pressed(GLFW_KEY_D) && player.turn_counter < 1)
     {
@@ -325,13 +334,22 @@ void player_controller::integrate(ecs::entity &e, ecs::rigid_body_component &rb,
     move_component_positions(e, rb.velocity * frame_time);
 }
 
-void player_controller::jump(ecs::entity &e)
+void player_controller::jump(ecs::entity &e, core::behavior_context& ctx)
 {
     auto &rb = e.get_component<ecs::rigid_body_component>();
     auto &player = e.get_component<player_controller_component>();
+    auto& t = e.get_component<ecs::transform_component>();
 
-    rb.force += glm::vec3(0, player.jump_force, 0);
-    player.state = player_state::airborne;
+    bool nothing_under = true;
+    ctx.physics.raycast({t.pos, glm::vec3(0.f, -1.f, 0.f)}, [&nothing_under] (ecs::entity& e) {
+       nothing_under = false;
+    });
+
+    if (!nothing_under)
+    {
+        rb.force += glm::vec3(0, player.jump_force, 0);
+        player.state = player_state::airborne;
+    }
 }
 
 void player_controller::adjust_turn_counter(ecs::entity &e, turn_direction direction)
@@ -372,7 +390,7 @@ void player_controller::apply_acceleration(ecs::entity &e, core::behavior_contex
     if (player.recoil_acceleration.x != 0 || player.recoil_acceleration.y != 0)
     {
         auto mu = 0.85f;
-        auto N = 10.5f;
+        auto N = 20.f;
         auto friction_d = -glm::normalize(player.recoil_acceleration);
         auto friction_m = mu * N;
         auto f = friction_d * friction_m;
@@ -398,6 +416,6 @@ void player_controller::shoot(ecs::entity &e, core::behavior_context ctx)
 
     player.recoil_acceleration = {
         glm::linearRand(-1.f, 1.f),
-        glm::linearRand(0.f, 2.75f)
+        glm::linearRand(1.f, 2.25f)
     };
 }

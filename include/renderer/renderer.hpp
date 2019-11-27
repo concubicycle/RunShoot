@@ -1,7 +1,7 @@
 #ifndef __RENDERER_H_
 #define __RENDERER_H_
 
-
+#include <unordered_map>
 #include <vector>
 #include <cstdint>
 #include <opengl_afx.h>
@@ -27,7 +27,6 @@
 
 #include <renderer/shader_set.hpp>
 #include <renderer/overlay.hpp>
-
 
 
 namespace rendering
@@ -60,6 +59,7 @@ private:
     ecs::entity* _camera_entity;
     listener_id _cam_listener_id;
     listener_id _cam_remove_listener_id;
+    listener_id _cam_float_set_id;
 
     float _screen_width, _screen_height;
 

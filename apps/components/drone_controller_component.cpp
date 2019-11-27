@@ -17,7 +17,7 @@ template<> const std::uint8_t ecs::component<drone_controller_component>::compon
 void load_drone_controller(const json& j, ecs::entity& e, string_table& hashes)
 {
     auto& c = e.get_component<drone_controller_component>();
-    c.flash_frequency = j["flash_frequency"].get<float>();
+    c.initial_time_to_flash = j["initial_time_to_flash"].get<float>();
     c.acceleration = j["acceleration"].get<float>();
     c.state = (drone_controller_component::drone_state) j["state"].get<int>();
     c.friction = j["friction"].get<float>();

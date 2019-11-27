@@ -45,6 +45,9 @@ void (*build_framebuffer_callback(rendering::renderer& r))(GLFWwindow*, int, int
 
 int main()
 {
+    std::srand (std::time(nullptr));
+
+
     core::startup_config conf = core::startup_config();
     conf.load();
 

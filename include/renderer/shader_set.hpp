@@ -13,6 +13,7 @@ namespace rendering
 
     class shader_set
     {
+        using shader_getter=const ogllib::shader_program_base& (shader_set::*)(void);
     public:
         shader_set() :
             _simple("./assets/shaders/simple.vert", "./assets/shaders/simple.frag"),
@@ -21,8 +22,9 @@ namespace rendering
             _default("./assets/shaders/default.vert", "./assets/shaders/default.frag"),
             _skybox("./assets/shaders/skybox.vert", "./assets/shaders/skybox.frag"),
             _debug("./assets/shaders/debug.vert", "./assets/shaders/debug.frag"),
-            _overlay("./assets/shaders/overlay.vert", "./assets/shaders/overlay.frag")
-            {}
+            _overlay("./assets/shaders/overlay.vert", "./assets/shaders/overlay.frag"),
+            _glare("./assets/shaders/glare.vert", "./assets/shaders/glare.frag")
+        {}
 
         [[nodiscard]] const ogllib::shader_program<ogllib::vertex_ptx2d> &simple() const { return _simple; }
         [[nodiscard]] const ogllib::shader_program<ogllib::vertex_ptx2d> &ptx2d_basic() const { return _ptx2d_basic; }
@@ -31,10 +33,23 @@ namespace rendering
         [[nodiscard]] const ogllib::shader_program<ogllib::vertex_p> &skybox() const { return _skybox; }
         [[nodiscard]] const ogllib::shader_program<ogllib::vertex_p> &debug() const { return _debug; }
         [[nodiscard]] const ogllib::shader_program<ogllib::vertex_pc> &overlay() const { return _overlay; }
+        [[nodiscard]] const ogllib::shader_program<ogllib::vertex_ptx2d> &glare() const { return _glare; }
 
+        const ogllib::shader_program_base& get_program(std::string shader_name) const
+        {
+            if (shader_name == "simple") return simple();
+            if (shader_name == "ptx2d_basic") return ptx2d_basic();
+            if (shader_name == "ptx2d_pvm") return ptx2d_pvm();
+            if (shader_name == "default_shader") return default_shader();
+            if (shader_name == "skybox") return skybox();
+            if (shader_name == "debug") return debug();
+            if (shader_name == "overlay") return overlay();
+            if (shader_name == "glare") return glare();
+
+            throw "Unknown shader program";
+        }
 
     private:
-
         // Program taking NDC position
         ogllib::shader_program<ogllib::vertex_ptx2d> _simple;
 
@@ -53,6 +68,8 @@ namespace rendering
         ogllib::shader_program<ogllib::vertex_p> _debug;
 
         ogllib::shader_program<ogllib::vertex_pc> _overlay;
+
+        ogllib::shader_program<ogllib::vertex_ptx2d> _glare;
     };
 
 }

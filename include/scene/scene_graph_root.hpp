@@ -64,6 +64,12 @@ namespace scene_graph
             return;
         }
 
+        void print(std::string prefix) override
+        {
+            std::cout << "root" << std::endl;
+            for (auto& c : _children) c.print("\t");
+        }
+
 
         [[nodiscard]] TId id() const override { return -1; }
         [[nodiscard]] glm::mat4 transform() const override { return  _transform; }

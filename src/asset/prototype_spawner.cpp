@@ -99,8 +99,7 @@ asset::prototype_spawner::load_prototype(
     for (auto &c : prototype["children"])
     {
         auto e_prototype = inflate_prototype(c);
-        auto &e_child = load_prototype(e_prototype, world, scene_graph);
-        index_to_entity.insert({count, e_child});
+        index_to_entity.insert({count, load_prototype(e_prototype, world, scene_graph)});
         count++;
     }
 
@@ -108,7 +107,7 @@ asset::prototype_spawner::load_prototype(
     for (auto &c : prototype["children"])
     {
         auto parent_index = c.value("parent_index", -1);
-        auto &e_child = index_to_entity.find(count)->second;
+        auto &e_child = index_to_entity.find(count++)->second;
         auto parent_id = parent_index == -1
                          ? e_root.id()
                          : index_to_entity.find(parent_index)->second.id();

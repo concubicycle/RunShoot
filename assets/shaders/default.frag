@@ -24,7 +24,7 @@ uniform sampler2D diffuse_texture;
 uniform vec3 specular; // Ks
 uniform float shininess; // alpha exponent
 
-
+uniform float color_multiplier;
 
 
 void main()
@@ -79,5 +79,8 @@ void main()
 
     //I = I + vec3(1, 0, 0);
 
-    FragColor = vec4(I, 1);
+    if (color_multiplier > 10)
+        I = vec3(1.f);
+
+    FragColor = vec4(I * color_multiplier, 1);
 }

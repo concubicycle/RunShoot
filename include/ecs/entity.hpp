@@ -53,6 +53,9 @@ namespace ecs
             return _archetype_id & component<T>::archetype_bit;
         }
 
+        void set_active(bool val) { _active = val; }
+        [[nodiscard]] bool active() const { return _active; }
+
 
     private:
         entity_id _id;

@@ -12,13 +12,15 @@
 
 struct segment_spawner_component : ecs::component<segment_spawner_component>
 {
-    std::uint32_t num_initial_segments {5};
     float turn_frequency {0.35f};
 
     glm::vec4 current_direction {0, 0, -1, 0};
     glm::vec3 current_position;
     float jump_distance { 80.f };
     float jump_distance_variance {30.f};
+
+    std::uint8_t num_initial_segments {10};
+    std::uint8_t initial_straights {3};
 
     glm::mat4 rotation {1.f};
 };

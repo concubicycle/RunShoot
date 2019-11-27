@@ -6,7 +6,7 @@
 #define __MESH_OPENGL_HPP_
 
 #include <cstdint>
-
+#include <glm/vec3.hpp>
 
 namespace ecs
 {

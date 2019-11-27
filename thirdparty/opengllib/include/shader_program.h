@@ -27,20 +27,33 @@ using namespace gl;
 
 namespace ogllib
 {
+    class shader_program_base
+    {
+    public:
+        virtual ~shader_program_base() = default;
+
+        virtual void bind() const = 0;
+        virtual void unbind() const = 0;
+
+        virtual void set_uniform(const std::string& name, GLfloat val) const = 0;
+        virtual	void set_uniform(const std::string& name, glm::mat4& val) const = 0;
+        virtual void set_uniform(const std::string& name, glm::vec3& val) const = 0;
+        virtual void set_uniform(const std::string& name, GLint val) const = 0;
+    };
 
     template<class TVertexFormat>
-    class shader_program
+    class shader_program : public shader_program_base
     {
         static constexpr const unsigned int GPU_INFO_BUFFER_SIZE = 512;
 
     public:
-        shader_program(std::string vertex_shader_path, std::string fragment_shader_path)
+        shader_program(const std::string& vertex_shader_path, const std::string& fragment_shader_path)
         {
             _id = glCreateProgram();
             build(vertex_shader_path, fragment_shader_path);
         }
 
-        ~shader_program()
+        ~shader_program() override
         {
             glDeleteProgram(_id); // Delete the shader program
         }
@@ -48,28 +61,28 @@ namespace ogllib
         void set_attrib_pointers() const;
         
 		
-		void set_uniform(const std::string& name, GLfloat val) const
-		{
+		void set_uniform(const std::string& name, GLfloat val) const override
+        {
             auto loc = _info.getUniformLocation(name);
             if (loc == -1) return;
 			glUniform1f(loc, val);
 		}
 
-		void set_uniform(const std::string& name, glm::mat4& val) const
+		void set_uniform(const std::string& name, glm::mat4& val) const override
 		{
 		    auto loc = _info.getUniformLocation(name);
 		    if (loc == -1) return;
 			glUniformMatrix4fv(loc, 1, GL_FALSE, glm::value_ptr(val));
 		}
 
-		void set_uniform(const std::string& name, glm::vec3& val) const
-		{
+		void set_uniform(const std::string& name, glm::vec3& val) const override
+        {
             auto loc = _info.getUniformLocation(name);
             if (loc == -1) return;
 			glUniform3fv(loc, 1, glm::value_ptr(val));
 		}
 
-        void set_uniform(const std::string& name, GLint val) const
+        void set_uniform(const std::string& name, GLint val) const override
         {
             auto loc = _info.getUniformLocation(name);
             if (loc == -1) return;
@@ -109,7 +122,7 @@ namespace ogllib
         }
 
         // BINDING
-        void bind() const
+        void bind() const override
         {
             if (!_compiled)
                 std::cerr << "Attempting to bind non-compiled program.";
@@ -117,7 +130,7 @@ namespace ogllib
             glUseProgram(_id);
         }
 
-        void unbind() const
+        void unbind() const override
         {
             glUseProgram(0);
         }

@@ -116,7 +116,7 @@ void rendering::model_render_loader::init_mesh(
     auto texture = _textures.load_texture(mesh.texture_filename);
     texture.bind();
     texture.set_texture_wrap(GL_REPEAT);
-    texture.set_filtering(GL_LINEAR, GL_LINEAR);
+    texture.set_filtering(GL_NEAREST, GL_NEAREST);
     texture.buffer();
     texture.gen_mip_maps();
 
@@ -164,7 +164,7 @@ void rendering::model_render_loader::init_mesh(
     auto texture = _textures.load_texture(mesh.textures[0].path);
     texture.bind();
     texture.set_texture_wrap(GL_REPEAT);
-    texture.set_filtering(GL_LINEAR, GL_LINEAR);
+    texture.set_filtering(GL_NEAREST, GL_NEAREST);
     texture.buffer();
     texture.gen_mip_maps();
 

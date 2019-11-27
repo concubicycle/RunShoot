@@ -15,10 +15,13 @@ namespace events
 {
     typedef event<ecs::entity&> entity_event;
     typedef event<const physics::entity_contact&, float> collision_event;
+    typedef event<std::string, float> camera_float_assign_event;
+
 
     typedef std::tuple<
         std::unordered_map<event_type, entity_event>,
-        std::unordered_map<event_type, collision_event>> event_maps;
+        std::unordered_map<event_type, collision_event>,
+        std::unordered_map<event_type, camera_float_assign_event>> event_maps;
 
     class event_exchange
     {

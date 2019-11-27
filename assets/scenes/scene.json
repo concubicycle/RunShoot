@@ -61,8 +61,6 @@
         }
       ]
     },
-
-
     {
       "entity_id": 7,
       "prototype": "./assets/prototypes/phys_cube.json",
@@ -99,7 +97,6 @@
         }
       ]
     },
-
     {
       "entity_id": 10,
       "prototype": "./assets/prototypes/phys_cube.json",
@@ -112,7 +109,6 @@
         }
       ]
     },
-
     {
       "entity_id": 11,
       "prototype": "./assets/prototypes/phys_cube.json",
@@ -125,7 +121,6 @@
         }
       ]
     },
-
     {
       "entity_id": 12,
       "prototype": "./assets/prototypes/phys_cube.json",
@@ -138,8 +133,6 @@
         }
       ]
     },
-
-
     {
       "entity_id": 13,
       "prototype": "./assets/prototypes/phys_cube.json",
@@ -152,7 +145,6 @@
         }
       ]
     },
-
     {
       "entity_id": 14,
       "prototype": "./assets/prototypes/cube_marker.json"

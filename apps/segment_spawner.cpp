@@ -66,8 +66,6 @@ void segment_spawner::spawn_segment(ecs::entity &e, core::behavior_context &ctx)
 
     segment_spawn.current_position = pos + glm::vec3(seg_offset);
 
-    //std::cout<< "Spawned at " << glm::to_string(translate[3]) << std::endl;
-
     if (seg_component.turn == left)
     {
         segment_spawn.rotation = _left_turn * segment_spawn.rotation;
