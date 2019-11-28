@@ -150,8 +150,8 @@ void drone_controller::friction(ecs::rigid_body_component &rb, drone_controller_
     // cancel off some tangent velocity, try not to orbit the player
     float tan_speed = glm::dot(rb.velocity, tangent);
 
-    if (tan_speed * tan_speed > 10.f)
-        rb.force -= 1.5f * tan_speed * tangent;
+    if (tan_speed * tan_speed > 40.f)
+        rb.force -= 5.0f * tan_speed * tangent;
 }
 
 void drone_controller::on_entity_created(ecs::entity &e)

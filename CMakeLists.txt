@@ -77,7 +77,7 @@ add_executable(${TARGET_NAME}
                apps/components/drone_spawner_component.cpp
                apps/components/drone_spawner_component.hpp
                apps/drone_spawner.cpp
-               apps/drone_spawner.hpp apps/drone_controller.cpp)
+               apps/drone_spawner.hpp apps/drone_controller.cpp apps/components/music_player_component.cpp apps/components/music_player_component.hpp)
 
 add_executable(generate_colliders apps/generate_colliders.cpp)
 
@@ -93,6 +93,7 @@ include(add_expected)
 include(add_assimp) # causes weird build issue on windows - can't close zlib.lib
 # include(add_tinygltf)
 include(add_glbinding)
+include(add_fmod)
 
 
 # Prevent GLFW from including gl.h, as this will break glbinding
@@ -107,7 +108,8 @@ target_include_directories(${TARGET_NAME} PRIVATE
                            ${GLM_INCLUDE}
                            ${SPDLOG_INCLUDE}
                            ${EXPECTED_INCLUDE}
-                           ${GLBINDING_INCLUDE})
+                           ${GLBINDING_INCLUDE}
+                           ${FMOD_INCLUDE_DIRS})
 
 include_directories(${TARGET_NAME}
                     ${JSON_INCLUDE}
@@ -208,7 +210,8 @@ target_link_libraries(${TARGET_NAME} PRIVATE
                       ${GLBINDING_AUX_LIB}
                       ${GLBINDING_LIB}
                       ${PHYSICS_LIB}
-                      ${PHYSICS_MODELS_LIB})
+                      ${PHYSICS_MODELS_LIB}
+                      ${FMOD_LIBRARIES})
 
 
 target_link_libraries(generate_colliders PRIVATE

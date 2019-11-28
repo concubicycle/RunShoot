@@ -31,16 +31,6 @@ bool compare_by_z(glm::vec3 a, glm::vec3 b)
 }
 
 
-class aabb_adder
-{
-public:w
-
-private:
-
-};
-
-
-
 int main(int argc, char** argv)
 {
     if (argc > 1)
