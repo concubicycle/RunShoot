@@ -231,3 +231,6 @@ if (CMAKE_DL_LIBS)
     target_link_libraries(${TARGET_NAME} PRIVATE ${CMAKE_DL_LIBS})
 endif ()
 
+
+set (CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR}/install)
+install(TARGETS ${TARGET_NAME} DESTINATION bin)

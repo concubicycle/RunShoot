@@ -30,21 +30,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/apps/music_player.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/music_player.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/components/add_custom_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/add_custom_components.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/components/drone_controller_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/drone_controller_component.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/components/music_player_component.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/music_player_component.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/components/music_player_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/music_player_component.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/components/runshoot_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/runshoot_component.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/drone_controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/drone_controller.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/runshoot.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/runshoot.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/prototypes/drone.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/drone.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/scenes/runshoot_gameplay.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scenes/runshoot_gameplay.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/renderer.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -361,7 +348,7 @@
       <workItem from="1574894614882" duration="2169000" />
       <workItem from="1574898978809" duration="2859000" />
       <workItem from="1574903647666" duration="18075000" />
-      <workItem from="1574928187103" duration="2906000" />
+      <workItem from="1574928187103" duration="6195000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>
