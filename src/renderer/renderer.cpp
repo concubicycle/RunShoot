@@ -149,7 +149,7 @@ void rendering::renderer::draw_scene(asset::scene &scene)
 
         auto light_pos = glm::vec3(0, 10.f, 10.f);
         auto light_color = glm::vec3(0.5, 0.5, 0.5);
-        auto ambient_light = glm::vec3(0.18, 0.19, 0.21);
+        auto ambient_light = glm::vec3(0.3, 0.31, 0.38);
         auto specular = glm::vec3(0.01f);
 
         if (r.mesh_format == asset::mesh_type::GLTF2)
@@ -310,7 +310,7 @@ void rendering::renderer::set_light_uniforms(const ogllib::shader_program_base &
             glm::vec3 zero(0.f);
             shader.set_uniform("pointLights[" + std::to_string(i) + "].color", zero);
             shader.set_uniform("pointLights[" + std::to_string(i) + "].light_pos", zero);
-            shader.set_uniform("pointLights[" + std::to_string(i) + "].intensity", 0);
+            shader.set_uniform("pointLights[" + std::to_string(i) + "].intensity", 0.f);
         } else
         {
             auto &l = light_e.get_component<ecs::punctual_light_component>();

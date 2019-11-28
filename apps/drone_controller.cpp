@@ -40,6 +40,14 @@ void drone_controller::update_single(ecs::entity &e, core::behavior_context &ctx
         case drone_controller_component::exploding: {
             auto& l = e.get_component<ecs::punctual_light_component>();
             l.intensity = 0;
+
+            component.active_after_destruction -= ctx.time.smoothed_delta_secs();
+
+            if (component.active_after_destruction < 0)
+            {
+                ctx.current_scene.remove(e);
+            }
+
             break;
         }
 

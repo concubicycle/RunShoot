@@ -20,6 +20,17 @@
           "drone_spawn_interval": 20
         }
       ]
+    },
+    {
+      "entity_id": 3,
+      "components": [
+        {
+          "component_bitshift": 24,
+          "tracks": [
+            "./assets/sound/Run_Shoot.wav"
+          ]
+        }
+      ]
     }
   ]
 }

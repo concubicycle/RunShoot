@@ -36,6 +36,7 @@ using GLenum = gl::GLenum;
 #include "runshoot.hpp"
 #include "player_controller.hpp"
 #include "drone_spawner.hpp"
+#include "music_player.hpp"
 
 using float_seconds = std::chrono::duration<float>;
 
@@ -101,6 +102,7 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     player_controller player_controller(events);
     segment_spawner segment_spawn(events);
     drone_spawner drone_spawn(events);
+    music_player music(events);
 
     auto scene = loader.load_scene("./assets/scenes/runshoot_gameplay.json", entities);
 
@@ -108,7 +110,7 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     glfwSetFramebufferSizeCallback(window, build_framebuffer_callback(renderer));
 
     game_systems data = {window, timer, limiter, input, renderer, scene, events, physics, debug_draw};
-    behaviors behaviors = {controller, drone_controller, player_controller, segment_spawn, drone_spawn};
+    behaviors behaviors = {controller, drone_controller, player_controller, segment_spawn, drone_spawn, music};
     render_loop(data, behaviors);
 }
 
@@ -129,6 +131,7 @@ void render_loop(game_systems &data, behaviors &behaviors)
         behaviors.player.update(ctx);
         behaviors.segment_spawn.update(ctx);
         behaviors.drone_spawn.update(ctx);
+        behaviors.music.update(ctx);
 
         data.renderer.draw_scene(data.scene);
         data.debug_draw.update();

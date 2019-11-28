@@ -39,6 +39,8 @@ struct drone_controller_component : public ecs::component<drone_controller_compo
     std::int8_t initial_flashes_before_blind {8};
     std::int8_t flashes_before_blind {8};
     bool light_on {false};
+
+    float active_after_destruction { 5.0f };
 };
 
 void load_drone_controller(const json& j, ecs::entity& e, string_table& hashes);

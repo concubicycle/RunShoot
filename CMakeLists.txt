@@ -77,7 +77,7 @@ add_executable(${TARGET_NAME}
                apps/components/drone_spawner_component.cpp
                apps/components/drone_spawner_component.hpp
                apps/drone_spawner.cpp
-               apps/drone_spawner.hpp apps/drone_controller.cpp apps/components/music_player_component.cpp apps/components/music_player_component.hpp)
+               apps/drone_spawner.hpp apps/drone_controller.cpp apps/components/music_player_component.cpp apps/components/music_player_component.hpp apps/music_player.cpp apps/music_player.hpp)
 
 add_executable(generate_colliders apps/generate_colliders.cpp)
 

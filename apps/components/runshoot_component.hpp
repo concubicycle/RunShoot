@@ -17,6 +17,7 @@ enum runshoot_component
     TurnTrigger = MAX_BASIC_COMPONENTS + 5, // 21
     SegmentSpawner = MAX_BASIC_COMPONENTS + 6, // 22
     DroneSpawner = MAX_BASIC_COMPONENTS + 7, // 23
+    MusicPlayer = MAX_BASIC_COMPONENTS + 8, // 24
 };
 
 #endif //__RUNSHOOT_COMPONENT_HPP_

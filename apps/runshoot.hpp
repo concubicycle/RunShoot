@@ -18,6 +18,7 @@
 #include "player_controller.hpp"
 #include "segment_spawner.hpp"
 #include "drone_spawner.hpp"
+#include "music_player.hpp"
 
 
 struct game_systems
@@ -40,6 +41,7 @@ struct behaviors
     player_controller& player;
     segment_spawner& segment_spawn;
     drone_spawner& drone_spawn;
+    music_player& music;
 };
 
 
