@@ -17,7 +17,6 @@
 
 namespace physics_models
 {
-
     class aabb_collider : public collider
     {
     public:
@@ -98,9 +97,6 @@ namespace physics_models
             _shape.max.x = glm::max(min.x, max.x);
             _shape.max.y = glm::max(min.y, max.y);
             _shape.max.z = glm::max(min.z, max.z);
-
-//            std::cout << glm::to_string(_shape.min) << std::endl;
-//            std::cout << glm::to_string(_shape.max) << std::endl << std::endl;
         }
 
         aabb &shape() { return _shape; }

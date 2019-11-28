@@ -8,7 +8,6 @@
 
 void load_segment_spawner(const json& j, ecs::entity& e, string_table& hashes)
 {
-
 }
 
 

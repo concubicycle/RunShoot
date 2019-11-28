@@ -129,7 +129,7 @@ void player_controller::update_running(ecs::entity &e, player_controller_compone
     player.time_since_collision += frame_time;
     player.time_since_grounded += frame_time;
 
-    if (player.time_since_grounded > 0.4f)
+    if (player.time_since_grounded > 0.3f)
     {
         player.state = player_state::airborne;
     }
@@ -326,7 +326,6 @@ void player_controller::move_component_positions(ecs::entity &e, glm::vec3 displ
 
 void player_controller::integrate(ecs::entity &e, ecs::rigid_body_component &rb, float frame_time)
 {
-    auto fa = rb.force * rb.mass_inverse();
     rb.force += rb.gravity;
     rb.acceleration = rb.force;
     rb.velocity += rb.acceleration * frame_time;
@@ -341,7 +340,7 @@ void player_controller::jump(ecs::entity &e, core::behavior_context& ctx)
     auto& t = e.get_component<ecs::transform_component>();
 
     bool nothing_under = true;
-    ctx.physics.raycast({t.pos, glm::vec3(0.f, -1.f, 0.f)}, [&nothing_under] (ecs::entity& e) {
+    ctx.physics.raycast({t.pos - 4.f*player.direction,  glm::vec3(0.f, -1.f, 0.f)}, [&nothing_under] (ecs::entity& e) {
        nothing_under = false;
     });
 
@@ -415,7 +414,7 @@ void player_controller::shoot(ecs::entity &e, core::behavior_context ctx)
     }, drone_controller_component::archetype_bit);
 
     player.recoil_acceleration = {
-        glm::linearRand(-1.f, 1.f),
-        glm::linearRand(1.f, 2.25f)
+        glm::linearRand(-0.8f, 0.8f),
+        glm::linearRand(1.f, 1.8f)
     };
 }

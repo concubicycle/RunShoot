@@ -16,7 +16,8 @@
       "entity_id": 2,
       "components": [
         {
-          "component_bitshift": 23
+          "component_bitshift": 23,
+          "drone_spawn_interval": 20
         }
       ]
     }

@@ -234,8 +234,8 @@
     "images" : [
         {
             "mimeType" : "image/jpeg",
-            "name" : "wall",
-            "uri" : "wall.jpg"
+            "name" : "hex",
+            "uri" : "hex.jpg"
         }
     ],
     "accessors" : [

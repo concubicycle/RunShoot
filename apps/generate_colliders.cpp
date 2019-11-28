@@ -33,7 +33,7 @@ bool compare_by_z(glm::vec3 a, glm::vec3 b)
 
 class aabb_adder
 {
-public:
+public:w
 
 private:
 

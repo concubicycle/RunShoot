@@ -45,7 +45,7 @@
         "mass": 0,
         "gravity": [
           0,
-          -25,
+          -35,
           0
         ]
       },
@@ -69,8 +69,8 @@
       {
         "component_bitshift": 19,
         "run_speed": 60,
-        "footstep_force": 200,
-        "jump_force": 1000,
+        "footstep_force": 210,
+        "jump_force": 1100,
         "total_turn_duration": 0.85,
         "run_acceleration": 0.005
       }

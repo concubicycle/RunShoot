@@ -38,6 +38,8 @@ protected:
         auto& c = e.get_component<ecs::camera_component>();
         auto& ctr = e.get_component<freefly_controller_component>();
 
+        _events.invoke<std::string, float>(events::camera_prop_set, "color_multiplier", 1.f);
+
         auto& input = ctx.input;
         auto frame_time = ctx.time.smoothed_delta_secs();
         auto speed = ctr.walk_speed;

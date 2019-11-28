@@ -61,7 +61,7 @@ auto listener_id = _event_exchange.subscribe<ecs::entity&>(
     std::function<void(ecs::entity&)>(on_entity_created));
 ```
 
-Then, it's clients need to unsubscribe like:
+Then, its clients need to unsubscribe like:
 ```oclight
 auto listener_id = _event_exchange.unsubscribe(
     events::entity_created, 
