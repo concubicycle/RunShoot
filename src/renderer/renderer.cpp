@@ -1,3 +1,5 @@
+#include <cstdlib>
+
 #include "renderer/renderer.hpp"
 #include <asset/scene.hpp>
 
@@ -64,6 +66,8 @@ rendering::renderer::renderer(
     });
 
     _cam_float_set_id = _events.subscribe<std::string, float>(events::camera_prop_set, cam_prop_set);
+
+    _lights.reserve(MinLightReferences);
 }
 
 rendering::renderer::~renderer()
@@ -145,8 +149,8 @@ void rendering::renderer::draw_scene(asset::scene &scene)
 
         auto light_pos = glm::vec3(0, 10.f, 10.f);
         auto light_color = glm::vec3(0.5, 0.5, 0.5);
-        auto ambient_light = glm::vec3(0.5, 0.5, 0.5);
-        auto specular = glm::vec3(0.03f);
+        auto ambient_light = glm::vec3(0.18, 0.19, 0.21);
+        auto specular = glm::vec3(0.01f);
 
         if (r.mesh_format == asset::mesh_type::GLTF2)
         {
@@ -158,12 +162,11 @@ void rendering::renderer::draw_scene(asset::scene &scene)
             shader.set_uniform("projection", projection);
             shader.set_uniform("model_inverse", model_inverse);
             shader.set_uniform("view_pos", cam.position);
-            shader.set_uniform("light_pos", light_pos);
-            shader.set_uniform("point_light", light_color);
             shader.set_uniform("ambient_light", ambient_light);
             shader.set_uniform("specular", specular);
             shader.set_uniform("shininess", 0.2f);
-            shader.set_uniform("light_intensity", 100.f);
+
+            set_light_uniforms(shader);
 
             for (int i = 0; i < cam.float_count; ++i)
                 shader.set_uniform(cam.float_props[i].name, cam.float_props[i].data);
@@ -234,6 +237,11 @@ void rendering::renderer::grab_entity(ecs::entity &e)
         _shaders.skybox().set_uniform("skybox", 0);
         cam.skybox->unbind();
     }
+
+    if (e.has<ecs::punctual_light_component>())
+    {
+        _lights.emplace_back(e);
+    }
 }
 
 void rendering::renderer::forget_entity(ecs::entity &e)
@@ -241,6 +249,23 @@ void rendering::renderer::forget_entity(ecs::entity &e)
     if (_camera_entity != nullptr && _camera_entity->id() == e.id())
     {
         _camera_entity = nullptr;
+    }
+
+    if (e.has<ecs::punctual_light_component>())
+    {
+        int found_ind = -1;
+        for(int i = 0; i < _lights.size(); ++i)
+        {
+            if (_lights[i].get().id() == e.id())
+            {
+                found_ind = i;
+                break;
+            }
+        }
+        if (found_ind > -1)
+        {
+            _lights.erase(_lights.begin() + found_ind);
+        }
     }
 }
 
@@ -270,5 +295,32 @@ void rendering::renderer::draw_skybox()
     cam.skybox->unbind();
 
     glDepthMask(GL_TRUE);
+}
+
+void rendering::renderer::set_light_uniforms(const ogllib::shader_program_base &shader)
+{
+    shader.set_uniform("pointLightCount", (GLint)(_lights.size()));
+
+    for (int i = 0; i < _lights.size(); ++i)
+    {
+        auto& light_e = _lights[i].get();
+
+        if (!light_e.active())
+        {
+            glm::vec3 zero(0.f);
+            shader.set_uniform("pointLights[" + std::to_string(i) + "].color", zero);
+            shader.set_uniform("pointLights[" + std::to_string(i) + "].light_pos", zero);
+            shader.set_uniform("pointLights[" + std::to_string(i) + "].intensity", 0);
+        } else
+        {
+            auto &l = light_e.get_component<ecs::punctual_light_component>();
+            auto &light_t = light_e.get_component<ecs::transform_component>();
+
+            shader.set_uniform("pointLights[" + std::to_string(i) + "].color", l.color);
+            shader.set_uniform("pointLights[" + std::to_string(i) + "].light_pos", light_t.pos);
+            shader.set_uniform("pointLights[" + std::to_string(i) + "].intensity", l.intensity);
+        }
+        if (i == 7) break;
+    }
 }
 

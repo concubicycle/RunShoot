@@ -74,11 +74,6 @@ void load_camera(const json &j, ecs::entity &e, string_table &hashes)
 void load_punctual_light(const json &j, ecs::entity &e, string_table &hashes)
 {
     auto &l = e.get_component<ecs::punctual_light_component>();
-    l.position = {
-        j["position"][0].get<float>(),
-        j["position"][1].get<float>(),
-        j["position"][2].get<float>()
-    };
 
     l.color = {
         j["color"][0].get<float>(),

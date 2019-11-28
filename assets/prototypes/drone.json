@@ -51,10 +51,36 @@
             ]
           }
         ]
+      },
+      {
+        "component_bitshift": 3,
+        "color": [0.4, 0.4, 0.6],
+        "intensity": 10
       }
     ]
   },
   "children": [
+    {
+      "components": [
+        {
+          "component_bitshift": 0,
+          "x": 0,
+          "y": -0.5,
+          "z": 0,
+          "pitch": 0,
+          "yaw": 0,
+          "roll": 0,
+          "scale_x": 1.0,
+          "scale_y": 1.0,
+          "scale_z": 1.0
+        },
+        {
+          "component_bitshift": 3,
+          "color": [1, 0, 0],
+          "intensity": 250
+        }
+      ]
+    },
     {
       "prototype": "./assets/prototypes/drone_light.json",
       "components": [  {

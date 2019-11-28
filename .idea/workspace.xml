@@ -30,46 +30,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/apps/components/music_player_component.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/components/music_player_component.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake_modules/add_fmod.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/drone_controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/drone_controller.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/generate_colliders.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/generate_colliders.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/prototypes/seg2.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/seg2.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/inc/fmod.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/inc/fmod.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/inc/fmod_codec.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/inc/fmod_common.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/inc/fmod_dsp.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/inc/fmod_dsp_effects.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/inc/fmod_errors.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/inc/fmod_output.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/lib/arm/libfmod.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/lib/arm/libfmod.so.11" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/lib/arm/libfmod.so.11.5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/lib/arm/libfmodL.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/lib/arm/libfmodL.so.11" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/lib/arm/libfmodL.so.11.5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/lib/armhf/libfmod.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/lib/armhf/libfmod.so.11" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/lib/armhf/libfmod.so.11.5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/lib/armhf/libfmodL.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/lib/armhf/libfmodL.so.11" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/lib/armhf/libfmodL.so.11.5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/lib/x86/libfmod.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/lib/x86/libfmod.so.11" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/lib/x86/libfmod.so.11.5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/lib/x86/libfmodL.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/lib/x86/libfmodL.so.11" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/lib/x86/libfmodL.so.11.5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/lib/x86_64/libfmod.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/lib/x86_64/libfmod.so.11" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/lib/x86_64/libfmod.so.11.5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/lib/x86_64/libfmodL.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/lib/x86_64/libfmodL.so.11" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/lib/x86_64/libfmodL.so.11.5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/drone.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/drone.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/player.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/player.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/shaders/default.frag" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/default.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/shaders/default.vert" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/default.vert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/renderer/renderer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/renderer/renderer.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/asset/assimp_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/assimp_loader.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/asset/component_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/component_loader.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/renderer.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -385,7 +356,7 @@
       <workItem from="1574842857296" duration="11289000" />
       <workItem from="1574894614882" duration="2169000" />
       <workItem from="1574898978809" duration="2859000" />
-      <workItem from="1574903647666" duration="7069000" />
+      <workItem from="1574903647666" duration="16759000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>

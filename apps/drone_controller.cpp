@@ -29,8 +29,7 @@ void drone_controller::update_single(ecs::entity &e, core::behavior_context &ctx
 
     switch(component.state)
     {
-        case drone_controller_component::exploding:
-            break;
+
         case drone_controller_component::flashing:
             update_flashing(e, ctx);
             update_following(e, ctx);
@@ -38,6 +37,12 @@ void drone_controller::update_single(ecs::entity &e, core::behavior_context &ctx
         case drone_controller_component::following:
             update_following(e, ctx);
             break;
+        case drone_controller_component::exploding: {
+            auto& l = e.get_component<ecs::punctual_light_component>();
+            l.intensity = 0;
+            break;
+        }
+
     }
 
     friction(rb, component);

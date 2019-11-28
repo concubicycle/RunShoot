@@ -42,7 +42,7 @@ asset::assimp_loader::mesh_result asset::assimp_loader::load_glf2(const std::str
     Assimp::Importer importer;
     const aiScene *scene = importer.ReadFile(
         path,
-        aiProcess_ValidateDataStructure);// | aiProcess_FixInfacingNormals | aiProcess_GenNormals);
+        aiProcess_ValidateDataStructure | aiProcess_FixInfacingNormals);// | aiProcess_FixInfacingNormals | aiProcess_GenNormals);
 
     auto error = importer.GetErrorString();
 

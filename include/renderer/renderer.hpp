@@ -33,6 +33,7 @@ namespace rendering
 {
 class renderer
 {
+    const std::uint32_t MinLightReferences = 32;
 public:
     renderer(
         const core::startup_config &config,
@@ -56,6 +57,8 @@ private:
     events::event_exchange& _events;
     overlay_temporary _overlay;
 
+    std::vector<std::reference_wrapper<ecs::entity>> _lights;
+
     ecs::entity* _camera_entity;
     listener_id _cam_listener_id;
     listener_id _cam_remove_listener_id;
@@ -63,7 +66,9 @@ private:
 
     float _screen_width, _screen_height;
 
+
     void draw_skybox();
+    void set_light_uniforms(const ogllib::shader_program_base& shader);
 
     void grab_entity(ecs::entity& e);
     void forget_entity(ecs::entity& e);
