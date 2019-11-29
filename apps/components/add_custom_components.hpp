@@ -20,6 +20,8 @@ using nlohmann::json;
 #include "segment_spawner_component.hpp"
 #include "drone_spawner_component.hpp"
 #include "music_player_component.hpp"
+#include "sound_emitter_component.hpp"
+
 
 template <typename TComponent>
 void add_component(std::function<void(const json &, ecs::entity &, string_table &)> load_func)
@@ -43,7 +45,7 @@ void add_custom_components()
     add_component<segment_spawner_component>(load_segment_spawner);
     add_component<drone_spawner_component>(load_drone_spawner);
     add_component<music_player_component>(load_music_player);
-
+    add_component<sound_emitter_component>(load_sound_emitter);
 }
 
 #endif //__ADD_CUSTOM_COMPONENTS_HPP_

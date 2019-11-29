@@ -48,6 +48,10 @@ public:
 
     glm::vec2 recoil_acceleration {0.f};
 
+    float gunshot_flash_time {0.1f};
+    float time_to_flash_out { 0.1f};
+
+
     // 0...1 value used to interpolate between previous and target direction
     float turn_t()
     {

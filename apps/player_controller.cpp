@@ -14,6 +14,7 @@
 #include "components/segment_component.hpp"
 #include "runshoot_event.hpp"
 #include "components/drone_controller_component.hpp"
+#include "components/sound_emitter_component.hpp"
 
 
 player_controller::player_controller(events::event_exchange &events) :
@@ -73,6 +74,15 @@ void player_controller::update_single(ecs::entity &e, core::behavior_context &ct
         float d = 1 - color_multiplier;
         color_multiplier += d * ctx.time.smoothed_delta_secs();
         c.set_float("color_multiplier", color_multiplier);
+    }
+
+    player.time_to_flash_out -= ctx.time.smoothed_delta_secs();
+    if (player.time_to_flash_out < 0)
+    {
+        e.graph_node->traverse([&e](ecs::entity& child_e, glm::mat4& transform) {
+            if (e.id() == child_e.id()) return;
+            child_e.set_active(false);
+        });
     }
 }
 
@@ -389,7 +399,7 @@ void player_controller::apply_acceleration(ecs::entity &e, core::behavior_contex
     if (player.recoil_acceleration.x != 0 || player.recoil_acceleration.y != 0)
     {
         auto mu = 0.85f;
-        auto N = 20.f;
+        auto N = 17.f;
         auto friction_d = -glm::normalize(player.recoil_acceleration);
         auto friction_m = mu * N;
         auto f = friction_d * friction_m;
@@ -404,6 +414,7 @@ void player_controller::shoot(ecs::entity &e, core::behavior_context ctx)
 {
     auto &cam = e.get_component<ecs::camera_component>();
     auto &player = e.get_component<player_controller_component>();
+    auto &sound = e.get_component<sound_emitter_component>();
 
     physics_models::ray ray = {cam.position, cam.fwd()};
 
@@ -415,6 +426,14 @@ void player_controller::shoot(ecs::entity &e, core::behavior_context ctx)
 
     player.recoil_acceleration = {
         glm::linearRand(-0.8f, 0.8f),
-        glm::linearRand(1.f, 1.8f)
+        glm::linearRand(1.2f, 1.8f)
     };
+
+    sound.sounds_to_play[sound.sounds_to_play_count++] = sound.sound_path_hashes[0];
+
+    e.graph_node->traverse([&e](ecs::entity& child_e, glm::mat4& transform) {
+        if (e.id() == child_e.id()) return;
+        child_e.set_active(true);
+    });
+    player.time_to_flash_out = player.gunshot_flash_time;
 }

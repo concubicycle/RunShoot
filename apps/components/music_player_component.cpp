@@ -19,8 +19,9 @@ void load_music_player(const json& j, ecs::entity& e, string_table& hashes)
 
     c.track_count = 0;
     for (auto& track : j["tracks"])
-    {
         c.tracks[c.track_count++] = track.get<std::string>();
-    }
+
+    for (std::uint32_t i = 0; i < c.track_count; ++i)
+        c.track_hashes[i] = hashes.hash_and_store(c.tracks[i]);
 }
 

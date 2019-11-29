@@ -37,6 +37,7 @@ using GLenum = gl::GLenum;
 #include "player_controller.hpp"
 #include "drone_spawner.hpp"
 #include "music_player.hpp"
+#include "sound_emitter.hpp"
 
 using float_seconds = std::chrono::duration<float>;
 
@@ -97,12 +98,15 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     physics::collisions collisions;
     physics::physics_world physics(events, collisions);
 
+    sound game_sound(app_string_table);
+
     freefly_controller controller(events);
     drone_controller drone_controller(events);
     player_controller player_controller(events);
     segment_spawner segment_spawn(events);
     drone_spawner drone_spawn(events);
-    music_player music(events);
+    music_player music(events, app_string_table, game_sound);
+    sound_emitter sounds(events, app_string_table, game_sound);
 
     auto scene = loader.load_scene("./assets/scenes/runshoot_gameplay.json", entities);
 
@@ -110,21 +114,21 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     glfwSetFramebufferSizeCallback(window, build_framebuffer_callback(renderer));
 
     game_systems data = {window, timer, limiter, input, renderer, scene, events, physics, debug_draw};
-    behaviors behaviors = {controller, drone_controller, player_controller, segment_spawn, drone_spawn, music};
+    behaviors behaviors = {controller, drone_controller, player_controller, segment_spawn, drone_spawn, music, sounds};
     render_loop(data, behaviors);
 }
 
-void render_loop(game_systems &data, behaviors &behaviors)
+void render_loop(game_systems &systems, behaviors &behaviors)
 {
-    auto &player = data.scene.entity_world().get_entity(111);
+    auto &player = systems.scene.entity_world().get_entity(111);
 
-    core::behavior_context ctx = {data.timer, data.input, data.scene, data.physics, data.renderer };
+    core::behavior_context ctx = {systems.timer, systems.input, systems.scene, systems.physics, systems.renderer };
 
-    while (!glfwWindowShouldClose(data.window))
+    while (!glfwWindowShouldClose(systems.window))
     {
-        data.timer.start();
-        data.physics.update(data.timer.delta_secs());
-        data.events.update(data.timer.smoothed_delta());
+        systems.timer.start();
+        systems.physics.update(systems.timer.delta_secs());
+        systems.events.update(systems.timer.smoothed_delta());
 
         behaviors.character.update(ctx);
         behaviors.drone.update(ctx);
@@ -132,19 +136,20 @@ void render_loop(game_systems &data, behaviors &behaviors)
         behaviors.segment_spawn.update(ctx);
         behaviors.drone_spawn.update(ctx);
         behaviors.music.update(ctx);
+        behaviors.sounds.update(ctx);
 
-        data.renderer.draw_scene(data.scene);
-        data.debug_draw.update();
+        systems.renderer.draw_scene(systems.scene);
+        systems.debug_draw.update();
 
-        glfwSwapBuffers(data.window);
+        glfwSwapBuffers(systems.window);
 
         glfwPollEvents();
-        data.input.update();
+        systems.input.update();
 
-        data.limiter.wait_remainder();
-        data.timer.end();
+        systems.limiter.wait_remainder();
+        systems.timer.end();
 
-        if (data.input.was_key_pressed(GLFW_KEY_ESCAPE)) break;
+        if (systems.input.was_key_pressed(GLFW_KEY_ESCAPE)) break;
     }
 }
 

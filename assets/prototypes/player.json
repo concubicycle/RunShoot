@@ -73,7 +73,36 @@
         "jump_force": 1100,
         "total_turn_duration": 0.85,
         "run_acceleration": 0.005
+      },
+      {
+        "component_bitshift": 25,
+        "sounds": [
+          "./assets/sound/shot.wav"
+        ]
       }
     ]
-  }
+  },
+  "children": [
+    {
+      "components": [
+        {
+          "component_bitshift": 0,
+          "x": 0,
+          "y": 10,
+          "z": 0,
+          "pitch": 0,
+          "yaw": 0,
+          "roll": 0,
+          "scale_x": 1.0,
+          "scale_y": 1.0,
+          "scale_z": 1.0
+        },
+        {
+          "component_bitshift": 3,
+          "color": [1, 0.8, 0],
+          "intensity": 75
+        }
+      ]
+    }
+  ]
 }

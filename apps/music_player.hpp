@@ -16,12 +16,13 @@
 #include <core/behavior.hpp>
 
 #include "components/music_player_component.hpp"
+#include "sound.hpp"
 
 
 class music_player : public core::behavior
 {
 public:
-    explicit music_player(events::event_exchange& events);
+    explicit music_player(events::event_exchange& events, string_table& app_strings, sound& sound);
 
     component_bitset required_components()  const override
     {
@@ -35,8 +36,8 @@ public:
 
 
 private:
-    FMOD::System *_system = nullptr;
-    FMOD::ChannelGroup *_channelGroup = nullptr;
+    string_table& _app_strings;
+    sound& _sound;
 };
 
 

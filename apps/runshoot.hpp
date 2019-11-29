@@ -19,6 +19,7 @@
 #include "segment_spawner.hpp"
 #include "drone_spawner.hpp"
 #include "music_player.hpp"
+#include "sound_emitter.hpp"
 
 
 struct game_systems
@@ -42,12 +43,13 @@ struct behaviors
     segment_spawner& segment_spawn;
     drone_spawner& drone_spawn;
     music_player& music;
+    sound_emitter& sounds;
 };
 
 
 GLFWwindow *set_up_glfw(core::startup_config& config);
 void run_game(core::startup_config &conf, GLFWwindow *window);
-void render_loop(game_systems &data, behaviors& behaviors);
+void render_loop(game_systems &systems, behaviors& behaviors);
 
 void (*build_framebuffer_callback(rendering::renderer& r))(GLFWwindow*, int, int);
 

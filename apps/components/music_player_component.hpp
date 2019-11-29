@@ -17,6 +17,7 @@ using nlohmann::json;
 
 struct music_player_component : ecs::component<music_player_component>
 {
+    size_t track_hashes[MAX_NUM_TRACKS];
     std::string tracks[MAX_NUM_TRACKS];
     std::uint16_t track_count;
 };

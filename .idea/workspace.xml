@@ -2,25 +2,25 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="RunShoot" targetName="glfw" />
-      <config projectName="RunShoot" targetName="spdlog" />
-      <config projectName="RunShoot" targetName="glm" />
-      <config projectName="RunShoot" targetName="asset" />
-      <config projectName="RunShoot" targetName="RunShoot" />
-      <config projectName="RunShoot" targetName="generate_colliders" />
-      <config projectName="RunShoot" targetName="ogllib" />
-      <config projectName="RunShoot" targetName="tests" />
-      <config projectName="RunShoot" targetName="glbinding" />
-      <config projectName="RunShoot" targetName="core" />
-      <config projectName="RunShoot" targetName="physics_models" />
-      <config projectName="RunShoot" targetName="physics" />
-      <config projectName="RunShoot" targetName="platform" />
-      <config projectName="RunShoot" targetName="ecs" />
       <config projectName="RunShoot" targetName="assimp" />
-      <config projectName="RunShoot" targetName="expected" />
-      <config projectName="RunShoot" targetName="memory" />
+      <config projectName="RunShoot" targetName="generate_colliders" />
+      <config projectName="RunShoot" targetName="glbinding" />
+      <config projectName="RunShoot" targetName="asset" />
+      <config projectName="RunShoot" targetName="ogllib" />
       <config projectName="RunShoot" targetName="nlohmann_json" />
+      <config projectName="RunShoot" targetName="physics" />
+      <config projectName="RunShoot" targetName="tests" />
+      <config projectName="RunShoot" targetName="physics_models" />
+      <config projectName="RunShoot" targetName="RunShoot" />
+      <config projectName="RunShoot" targetName="glfw" />
+      <config projectName="RunShoot" targetName="memory" />
       <config projectName="RunShoot" targetName="renderer" />
+      <config projectName="RunShoot" targetName="ecs" />
+      <config projectName="RunShoot" targetName="core" />
+      <config projectName="RunShoot" targetName="spdlog" />
+      <config projectName="RunShoot" targetName="expected" />
+      <config projectName="RunShoot" targetName="glm" />
+      <config projectName="RunShoot" targetName="platform" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -30,8 +30,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/apps/components/sound_emitter_component.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/components/sound_emitter_component.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/sound.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/sound.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/sound_emitter.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/sound_emitter.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/components/add_custom_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/add_custom_components.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/components/music_player_component.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/music_player_component.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/components/music_player_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/music_player_component.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/components/player_controller_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/player_controller_component.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/components/runshoot_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/runshoot_component.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/music_player.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/music_player.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/music_player.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/music_player.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/player_controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/runshoot.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/runshoot.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/blender/seg2.blend" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg2.blend" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/blender/seg2.blend1" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg2.blend1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/player.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/player.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sound/Run_Shoot.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/util/string_table.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/util/string_table.hpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -349,6 +370,8 @@
       <workItem from="1574898978809" duration="2859000" />
       <workItem from="1574903647666" duration="18075000" />
       <workItem from="1574928187103" duration="6195000" />
+      <workItem from="1574969296199" duration="6067000" />
+      <workItem from="1575014328413" duration="3098000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>

@@ -4,6 +4,7 @@ project(RunShoot C CXX)
 option(BUILD_OFFLINE "Build offline" ON)
 
 
+
 set(RunShoot_VERSION_MAJOR 0)
 set(RunShoot_VERSION_MINOR 1)
 
@@ -77,7 +78,16 @@ add_executable(${TARGET_NAME}
                apps/components/drone_spawner_component.cpp
                apps/components/drone_spawner_component.hpp
                apps/drone_spawner.cpp
-               apps/drone_spawner.hpp apps/drone_controller.cpp apps/components/music_player_component.cpp apps/components/music_player_component.hpp apps/music_player.cpp apps/music_player.hpp)
+               apps/drone_spawner.hpp
+               apps/drone_controller.cpp
+               apps/components/music_player_component.cpp
+               apps/components/music_player_component.hpp
+               apps/music_player.cpp
+               apps/music_player.hpp
+               apps/components/sound_emitter_component.cpp
+               apps/components/sound_emitter_component.hpp
+               apps/sound_emitter.cpp
+               apps/sound_emitter.hpp apps/sound.cpp apps/sound.hpp)
 
 add_executable(generate_colliders apps/generate_colliders.cpp)
 

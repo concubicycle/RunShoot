@@ -18,7 +18,7 @@ public:
         return hash;
     }
 
-    std::string operator[](size_t key)
+    std::string& operator[](size_t key)
     {
         return _hash_to_string[key];
     }
