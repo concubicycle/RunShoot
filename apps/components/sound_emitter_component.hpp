@@ -17,6 +17,15 @@
 
 using nlohmann::json;
 
+enum sound_state
+{
+    uninitialized = 0,
+    unchanged = 1,
+    started,
+    playing,
+    stopped
+};
+
 struct sound_emitter_component : ecs::component<sound_emitter_component>
 {
     float volume { 1.f };
@@ -26,8 +35,8 @@ struct sound_emitter_component : ecs::component<sound_emitter_component>
     size_t sound_path_hashes[MAX_SOUNDS];
     std::uint16_t sound_count {0};
 
-    size_t sounds_to_play[MAX_SOUNDS_TO_PLAY];
-    std::uint16_t sounds_to_play_count {0};
+    sound_state sound_states[MAX_SOUNDS];
+    std::uint32_t playback_ids[MAX_SOUNDS_TO_PLAY];
 };
 
 void load_sound_emitter(const json& j, ecs::entity& e, string_table& hashes);

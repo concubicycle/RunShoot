@@ -56,6 +56,12 @@
         "component_bitshift": 3,
         "color": [0.4, 0.4, 0.6],
         "intensity": 50
+      },
+      {
+        "component_bitshift": 63,
+        "sounds": [
+          "./assets/sound/drone.wav"
+        ]
       }
     ]
   },
@@ -77,7 +83,7 @@
         {
           "component_bitshift": 3,
           "color": [1, 0, 0],
-          "intensity": 300
+          "intensity": 50
         }
       ]
     },

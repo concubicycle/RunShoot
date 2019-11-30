@@ -25,7 +25,7 @@ int FMOD_Main()
     FMOD::Studio::System* system = NULL;
     ERRCHECK( FMOD::Studio::System::create(&system) );
 
-    // The example Studio project is authored for 5.1 sound, so set up the system output mode to match
+    // The example Studio project is authored for 5.1 sound_wrapper, so set up the system output mode to match
     FMOD::System* coreSystem = NULL;
     ERRCHECK( system->getCoreSystem(&coreSystem) );
     ERRCHECK( coreSystem->setSoftwareFormat(0, FMOD_SPEAKERMODE_5POINT1, 0) );

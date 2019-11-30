@@ -48,6 +48,9 @@
         "component_bitshift": 17,
         "run_speed": 35,
         "walk_speed": 35
+      },
+      {
+        "component_bitshift": 62
       }
     ]
   }

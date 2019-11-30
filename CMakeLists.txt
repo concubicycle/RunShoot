@@ -42,6 +42,7 @@ set(MEM_LIB "memory")
 set(ECS_LIB "ecs")
 set(PHYSICS_LIB "physics")
 set(PHYSICS_MODELS_LIB "physics_models")
+set(SOUND_LIB "sound")
 
 
 # WARNING: Doesn't work when build directory isn't /build for some reason (with CLion)
@@ -83,11 +84,7 @@ add_executable(${TARGET_NAME}
                apps/components/music_player_component.cpp
                apps/components/music_player_component.hpp
                apps/music_player.cpp
-               apps/music_player.hpp
-               apps/components/sound_emitter_component.cpp
-               apps/components/sound_emitter_component.hpp
-               apps/sound_emitter.cpp
-               apps/sound_emitter.hpp apps/sound.cpp apps/sound.hpp)
+               apps/music_player.hpp)
 
 add_executable(generate_colliders apps/generate_colliders.cpp)
 
@@ -118,8 +115,9 @@ target_include_directories(${TARGET_NAME} PRIVATE
                            ${GLM_INCLUDE}
                            ${SPDLOG_INCLUDE}
                            ${EXPECTED_INCLUDE}
-                           ${GLBINDING_INCLUDE}
-                           ${FMOD_INCLUDE_DIRS})
+                           ${GLBINDING_INCLUDE})
+
+
 
 include_directories(${TARGET_NAME}
                     ${JSON_INCLUDE}
@@ -130,6 +128,7 @@ include_directories(${TARGET_NAME}
                     ${ASSIMP_INCLUDE}
                     thirdparty/opengllib/include
                     #${TINYGLTF_INCLUDE}
+                    ${FMOD_INCLUDE_DIRS}
                     )
 
 
@@ -174,6 +173,7 @@ add_dependencies(${TARGET_NAME}
                  ${PLATFORMLIB_NAME}
                  ${RENDERER}
                  ${PHYSICS_LIB}
+                 ${SOUND_LIB}
                  scene
                  glfw
                  glbinding
@@ -207,6 +207,12 @@ add_dependencies(${PHYSICS_LIB}
 add_dependencies(${PHYSICS_MODELS_LIB}
 				glm)
 
+add_dependencies(${SOUND_LIB}
+                 ${ECS_LIB}
+                 glm)
+
+
+
 target_link_libraries(${TARGET_NAME} PRIVATE
                       ${GLFW_LIB}
                       ${CORELIB_NAME}
@@ -221,7 +227,8 @@ target_link_libraries(${TARGET_NAME} PRIVATE
                       ${GLBINDING_LIB}
                       ${PHYSICS_LIB}
                       ${PHYSICS_MODELS_LIB}
-                      ${FMOD_LIBRARIES})
+                      ${FMOD_LIBRARIES}
+                      ${SOUND_LIB})
 
 
 target_link_libraries(generate_colliders PRIVATE

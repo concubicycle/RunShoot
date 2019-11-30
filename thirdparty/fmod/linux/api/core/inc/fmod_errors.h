@@ -22,9 +22,9 @@ static const char *FMOD_ErrorString(FMOD_RESULT errcode)
     switch (errcode)
     {
         case FMOD_OK:                            return "No errors.";
-        case FMOD_ERR_BADCOMMAND:                return "Tried to call a function on a data type that does not allow this type of functionality (ie calling Sound::lock on a streaming sound).";
+        case FMOD_ERR_BADCOMMAND:                return "Tried to call a function on a data type that does not allow this type of functionality (ie calling Sound::lock on a streaming sound_wrapper).";
         case FMOD_ERR_CHANNEL_ALLOC:             return "Error trying to allocate a channel.";
-        case FMOD_ERR_CHANNEL_STOLEN:            return "The specified channel has been reused to play another sound.";
+        case FMOD_ERR_CHANNEL_STOLEN:            return "The specified channel has been reused to play another sound_wrapper.";
         case FMOD_ERR_DMA:                       return "DMA Failure.  See debug output for more information.";
         case FMOD_ERR_DSP_CONNECTION:            return "DSP connection error.  Connection possibly caused a cyclic dependency or connected dsps with incompatible buffer counts.";
         case FMOD_ERR_DSP_DONTPROCESS:           return "DSP return code from a DSP process query callback.  Tells mixer not to call the process callback and therefore not consume CPU.  Use this to optimize the DSP graph.";
@@ -55,21 +55,21 @@ static const char *FMOD_ErrorString(FMOD_RESULT errcode)
         case FMOD_ERR_INVALID_PARAM:             return "An invalid parameter was passed to this function.";
         case FMOD_ERR_INVALID_POSITION:          return "An invalid seek position was passed to this function.";
         case FMOD_ERR_INVALID_SPEAKER:           return "An invalid speaker was passed to this function based on the current speaker mode.";
-        case FMOD_ERR_INVALID_SYNCPOINT:         return "The syncpoint did not come from this sound handle.";
+        case FMOD_ERR_INVALID_SYNCPOINT:         return "The syncpoint did not come from this sound_wrapper handle.";
         case FMOD_ERR_INVALID_THREAD:            return "Tried to call a function on a thread that is not supported.";
         case FMOD_ERR_INVALID_VECTOR:            return "The vectors passed in are not unit length, or perpendicular.";
-        case FMOD_ERR_MAXAUDIBLE:                return "Reached maximum audible playback count for this sound's soundgroup.";
+        case FMOD_ERR_MAXAUDIBLE:                return "Reached maximum audible playback count for this sound_wrapper's soundgroup.";
         case FMOD_ERR_MEMORY:                    return "Not enough memory or resources.";
         case FMOD_ERR_MEMORY_CANTPOINT:          return "Can't use FMOD_OPENMEMORY_POINT on non PCM source data, or non mp3/xma/adpcm data if FMOD_CREATECOMPRESSEDSAMPLE was used.";
-        case FMOD_ERR_NEEDS3D:                   return "Tried to call a command on a 2d sound when the command was meant for 3d sound.";
+        case FMOD_ERR_NEEDS3D:                   return "Tried to call a command on a 2d sound_wrapper when the command was meant for 3d sound_wrapper.";
         case FMOD_ERR_NEEDSHARDWARE:             return "Tried to use a feature that requires hardware support.";
         case FMOD_ERR_NET_CONNECT:               return "Couldn't connect to the specified host.";
         case FMOD_ERR_NET_SOCKET_ERROR:          return "A socket error occurred.  This is a catch-all for socket-related errors not listed elsewhere.";
         case FMOD_ERR_NET_URL:                   return "The specified URL couldn't be resolved.";
         case FMOD_ERR_NET_WOULD_BLOCK:           return "Operation on a non-blocking socket could not complete immediately.";
-        case FMOD_ERR_NOTREADY:                  return "Operation could not be performed because specified sound/DSP connection is not ready.";
+        case FMOD_ERR_NOTREADY:                  return "Operation could not be performed because specified sound_wrapper/DSP connection is not ready.";
         case FMOD_ERR_OUTPUT_ALLOCATED:          return "Error initializing output device, but more specifically, the output device is already in use and cannot be reused.";
-        case FMOD_ERR_OUTPUT_CREATEBUFFER:       return "Error creating hardware sound buffer.";
+        case FMOD_ERR_OUTPUT_CREATEBUFFER:       return "Error creating hardware sound_wrapper buffer.";
         case FMOD_ERR_OUTPUT_DRIVERCALL:         return "A call to a standard soundcard driver failed, which could possibly mean a bug in the driver or resources were missing or exhausted.";
         case FMOD_ERR_OUTPUT_FORMAT:             return "Soundcard does not support the specified format.";
         case FMOD_ERR_OUTPUT_INIT:               return "Error initializing output device.";
@@ -81,11 +81,11 @@ static const char *FMOD_ErrorString(FMOD_RESULT errcode)
         case FMOD_ERR_RECORD:                    return "An error occurred trying to initialize the recording device.";
         case FMOD_ERR_REVERB_CHANNELGROUP:       return "Reverb properties cannot be set on this channel because a parent channelgroup owns the reverb connection.";
         case FMOD_ERR_REVERB_INSTANCE:           return "Specified instance in FMOD_REVERB_PROPERTIES couldn't be set. Most likely because it is an invalid instance number or the reverb doesn't exist.";
-        case FMOD_ERR_SUBSOUNDS:                 return "The error occurred because the sound referenced contains subsounds when it shouldn't have, or it doesn't contain subsounds when it should have.  The operation may also not be able to be performed on a parent sound.";
-        case FMOD_ERR_SUBSOUND_ALLOCATED:        return "This subsound is already being used by another sound, you cannot have more than one parent to a sound.  Null out the other parent's entry first.";
+        case FMOD_ERR_SUBSOUNDS:                 return "The error occurred because the sound_wrapper referenced contains subsounds when it shouldn't have, or it doesn't contain subsounds when it should have.  The operation may also not be able to be performed on a parent sound_wrapper.";
+        case FMOD_ERR_SUBSOUND_ALLOCATED:        return "This subsound is already being used by another sound_wrapper, you cannot have more than one parent to a sound_wrapper.  Null out the other parent's entry first.";
         case FMOD_ERR_SUBSOUND_CANTMOVE:         return "Shared subsounds cannot be replaced or moved from their parent stream, such as when the parent stream is an FSB file.";
         case FMOD_ERR_TAGNOTFOUND:               return "The specified tag could not be found or there are no tags.";
-        case FMOD_ERR_TOOMANYCHANNELS:           return "The sound created exceeds the allowable input channel count.  This can be increased using the 'maxinputchannels' parameter in System::setSoftwareFormat.";
+        case FMOD_ERR_TOOMANYCHANNELS:           return "The sound_wrapper created exceeds the allowable input channel count.  This can be increased using the 'maxinputchannels' parameter in System::setSoftwareFormat.";
         case FMOD_ERR_TRUNCATED:                 return "The retrieved string is too long to fit in the supplied buffer and has been truncated.";
         case FMOD_ERR_UNIMPLEMENTED:             return "Something in FMOD hasn't been implemented when it should be! contact support!";
         case FMOD_ERR_UNINITIALIZED:             return "This command failed because System::init or System::setDriver was not called.";

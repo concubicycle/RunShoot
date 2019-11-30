@@ -30,6 +30,7 @@ using GLenum = gl::GLenum;
 #include <renderer/model_render_loader.hpp>
 #include <renderer/renderer.hpp>
 #include <renderer/debug_drawer.hpp>
+#include <sound_wrapper/sound_system.hpp>
 
 #include "freefly_controller.hpp"
 #include "components/add_custom_components.hpp"
@@ -37,7 +38,6 @@ using GLenum = gl::GLenum;
 #include "player_controller.hpp"
 #include "drone_spawner.hpp"
 #include "music_player.hpp"
-#include "sound_emitter.hpp"
 
 using float_seconds = std::chrono::duration<float>;
 
@@ -98,7 +98,7 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     physics::collisions collisions;
     physics::physics_world physics(events, collisions);
 
-    sound game_sound(app_string_table);
+    sound::sound_system game_sound(app_string_table, events);
 
     freefly_controller controller(events);
     drone_controller drone_controller(events);
@@ -106,15 +106,14 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     segment_spawner segment_spawn(events);
     drone_spawner drone_spawn(events);
     music_player music(events, app_string_table, game_sound);
-    sound_emitter sounds(events, app_string_table, game_sound);
 
     auto scene = loader.load_scene("./assets/scenes/runshoot_gameplay.json", entities);
 
     renderer.init();
     glfwSetFramebufferSizeCallback(window, build_framebuffer_callback(renderer));
 
-    game_systems data = {window, timer, limiter, input, renderer, scene, events, physics, debug_draw};
-    behaviors behaviors = {controller, drone_controller, player_controller, segment_spawn, drone_spawn, music, sounds};
+    game_systems data = {window, timer, limiter, input, renderer, scene, events, physics, debug_draw, game_sound};
+    behaviors behaviors = {controller, drone_controller, player_controller, segment_spawn, drone_spawn, music};
     render_loop(data, behaviors);
 }
 
@@ -136,10 +135,11 @@ void render_loop(game_systems &systems, behaviors &behaviors)
         behaviors.segment_spawn.update(ctx);
         behaviors.drone_spawn.update(ctx);
         behaviors.music.update(ctx);
-        behaviors.sounds.update(ctx);
+
 
         systems.renderer.draw_scene(systems.scene);
         systems.debug_draw.update();
+        systems.game_sound.update();
 
         glfwSwapBuffers(systems.window);
 

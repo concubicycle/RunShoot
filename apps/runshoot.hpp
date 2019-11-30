@@ -19,7 +19,7 @@
 #include "segment_spawner.hpp"
 #include "drone_spawner.hpp"
 #include "music_player.hpp"
-#include "sound_emitter.hpp"
+
 
 
 struct game_systems
@@ -33,6 +33,7 @@ struct game_systems
     events::event_exchange& events;
     physics::physics_world& physics;
     rendering::debug_drawer& debug_draw;
+    sound::sound_system& game_sound;
 };
 
 struct behaviors
@@ -43,7 +44,6 @@ struct behaviors
     segment_spawner& segment_spawn;
     drone_spawner& drone_spawn;
     music_player& music;
-    sound_emitter& sounds;
 };
 
 

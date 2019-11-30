@@ -2,8 +2,8 @@
 Programmer Sound Example
 Copyright (c), Firelight Technologies Pty, Ltd 2012-2019.
 
-This example demonstrates how to implement the programmer sound callback to
-play an event that has a programmer specified sound.
+This example demonstrates how to implement the programmer sound_wrapper callback to
+play an event that has a programmer specified sound_wrapper.
 
 ### See Also ###
 Studio::EventInstance::setCallback
@@ -29,7 +29,7 @@ int FMOD_Main()
     FMOD::Studio::System* system = NULL;
     ERRCHECK( FMOD::Studio::System::create(&system) );
 
-    // The example Studio project is authored for 5.1 sound, so set up the system output mode to match
+    // The example Studio project is authored for 5.1 sound_wrapper, so set up the system output mode to match
     FMOD::System* coreSystem = NULL;
     ERRCHECK( system->getCoreSystem(&coreSystem) );
     ERRCHECK( coreSystem->setSoftwareFormat(0, FMOD_SPEAKERMODE_5POINT1, 0) );
@@ -155,7 +155,7 @@ FMOD_RESULT F_CALLBACK programmerSoundCallback(FMOD_STUDIO_EVENT_CALLBACK_TYPE t
         FMOD::Sound* sound = NULL;
         CHECK_RESULT( context->coreSystem->createSound(info.name_or_data, FMOD_LOOP_NORMAL | FMOD_CREATECOMPRESSEDSAMPLE | FMOD_NONBLOCKING | info.mode, &info.exinfo, &sound) );
 
-        // Pass the sound to FMOD
+        // Pass the sound_wrapper to FMOD
         props->sound = (FMOD_SOUND*)sound;
         props->subsoundIndex = info.subsoundindex;
     }
@@ -163,10 +163,10 @@ FMOD_RESULT F_CALLBACK programmerSoundCallback(FMOD_STUDIO_EVENT_CALLBACK_TYPE t
     {
         FMOD_STUDIO_PROGRAMMER_SOUND_PROPERTIES* props = (FMOD_STUDIO_PROGRAMMER_SOUND_PROPERTIES*)parameters;
 
-        // Obtain the sound
+        // Obtain the sound_wrapper
         FMOD::Sound* sound = (FMOD::Sound*)props->sound;
 
-        // Release the sound
+        // Release the sound_wrapper
         CHECK_RESULT( sound->release() );
     }
 

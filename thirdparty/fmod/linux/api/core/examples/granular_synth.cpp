@@ -8,25 +8,25 @@ effect.
 
 The basic operation is:
 
- * Play 2 sounds initially at the same time, the first sound immediately, and
-   the 2nd sound with a delay calculated by the length of the first sound.
+ * Play 2 sounds initially at the same time, the first sound_wrapper immediately, and
+   the 2nd sound_wrapper with a delay calculated by the length of the first sound_wrapper.
  * Call setDelay to initiate the delayed playback. setDelay is sample accurate
    and uses -output- samples as the time frame, not source samples. These
-   samples are a fixed amount per second regardless of the source sound format,
+   samples are a fixed amount per second regardless of the source sound_wrapper format,
    for example, 48000 samples per second if FMOD is initialized to 48khz output.
  * Output samples are calculated from source samples with a simple
    source->output sample rate conversion. i.e.
         sound_length *= output_rate
         sound_length /= sound_frequency
- * When the first sound finishes, the second one should have automatically
-   started. This is a good oppurtunity to queue up the next sound. Repeat
+ * When the first sound_wrapper finishes, the second one should have automatically
+   started. This is a good oppurtunity to queue up the next sound_wrapper. Repeat
    step 2.
- * Make sure the framerate is high enough to queue up a new sound before the
+ * Make sure the framerate is high enough to queue up a new sound_wrapper before the
    other one finishes otherwise you will get gaps.
 
 These sounds are not limited by format, channel count or bit depth like the 
 realtimestitching example is, and can also be modified to allow for overlap,
-by reducing the delay from the first sound playing to the second by the overlap
+by reducing the delay from the first sound_wrapper playing to the second by the overlap
 amount.
 
     #define USE_STREAMS = Use 2 stream instances, created while they play.
@@ -42,7 +42,7 @@ FMOD::System *gSystem;
 
 #ifdef USE_STREAMS
 #define NUMSOUNDS 3               /* Use some longer sounds, free and load them on the fly. */
-FMOD::Sound *sound[2] = { 0, 0 }; /* 2 streams active, double buffer them. */
+FMOD::Sound *sound_wrapper[2] = { 0, 0 }; /* 2 streams active, double buffer them. */
 const char  *soundname[NUMSOUNDS] = { Common_MediaPath("c.ogg"),
                                       Common_MediaPath("d.ogg"),
                                       Common_MediaPath("e.ogg") };
@@ -68,9 +68,9 @@ FMOD::Channel *queue_next_sound(int outputrate, FMOD::Channel *playingchannel, i
     memset(&info, 0, sizeof(FMOD_CREATESOUNDEXINFO));
     info.cbsize = sizeof(FMOD_CREATESOUNDEXINFO);
     info.suggestedsoundtype = FMOD_SOUND_TYPE_OGGVORBIS;
-    result = gSystem->createStream(soundname[newindex], FMOD_IGNORETAGS | FMOD_LOWMEM, &info, &sound[slot]);
+    result = gSystem->createStream(soundname[newindex], FMOD_IGNORETAGS | FMOD_LOWMEM, &info, &sound_wrapper[slot]);
     ERRCHECK(result);
-    newsound = sound[slot];
+    newsound = sound_wrapper[slot];
 #else   /* Use an existing sound that was passed into us */
     (void)slot;
     newsound = sound[newindex];
@@ -93,7 +93,7 @@ FMOD::Channel *queue_next_sound(int outputrate, FMOD::Channel *playingchannel, i
         ERRCHECK(result);
         
         /*
-            Grab the length of the playing sound, and its frequency, so we can caluate where to place the new sound on the time line.
+            Grab the length of the playing sound_wrapper, and its frequency, so we can caluate where to place the new sound_wrapper on the time line.
         */
         result = playingchannel->getCurrentSound(&playingsound);
         ERRCHECK(result);
@@ -103,15 +103,15 @@ FMOD::Channel *queue_next_sound(int outputrate, FMOD::Channel *playingchannel, i
         ERRCHECK(result);
         
         /* 
-            Now calculate the length of the sound in 'output samples'.  
-            Ie if a 44khz sound is 22050 samples long, and the output rate is 48khz, then we want to delay by 24000 output samples.
+            Now calculate the length of the sound_wrapper in 'output samples'.
+            Ie if a 44khz sound_wrapper is 22050 samples long, and the output rate is 48khz, then we want to delay by 24000 output samples.
         */
         soundlength *= outputrate;   
         soundlength /= (int)soundfrequency;
         
-        startdelay += soundlength; /* Add output rate adjusted sound length, to the clock value of the sound that is currently playing */
+        startdelay += soundlength; /* Add output rate adjusted sound_wrapper length, to the clock value of the sound_wrapper that is currently playing */
 
-        result = newchannel->setDelay(startdelay, 0); /* Set the delay of the new sound to the end of the old sound */
+        result = newchannel->setDelay(startdelay, 0); /* Set the delay of the new sound_wrapper to the end of the old sound_wrapper */
         ERRCHECK(result);
     }
     else
@@ -134,7 +134,7 @@ FMOD::Channel *queue_next_sound(int outputrate, FMOD::Channel *playingchannel, i
         float val, variation;
         
         /*
-            Randomize pitch/volume to make it sound more realistic / random.
+            Randomize pitch/volume to make it sound_wrapper more realistic / random.
         */
         result = newchannel->getFrequency(&val);
         ERRCHECK(result);
@@ -223,7 +223,7 @@ int FMOD_Main()
         ERRCHECK(result);
 
         /*
-            Replace the sound that just finished with a new sound, to create endless seamless stitching!
+            Replace the sound_wrapper that just finished with a new sound_wrapper, to create endless seamless stitching!
         */
         result = channel[slot]->isPlaying(&isplaying);
         if (result != FMOD_ERR_INVALID_HANDLE)
@@ -235,15 +235,15 @@ int FMOD_Main()
         {
 #ifdef USE_STREAMS
             /* 
-                Release the sound that isn't playing any more. 
+                Release the sound_wrapper that isn't playing any more.
             */
-            result = sound[slot]->release();       
+            result = sound_wrapper[slot]->release();
             ERRCHECK(result);
-            sound[slot] = 0;
+            sound_wrapper[slot] = 0;
 #endif
 
             /*
-                Replace sound that just ended with a new sound, queued up to trigger exactly after the other sound ends.
+                Replace sound_wrapper that just ended with a new sound_wrapper, queued up to trigger exactly after the other sound_wrapper ends.
             */
             channel[slot] = queue_next_sound(outputrate, channel[1-slot], rand()%NUMSOUNDS, slot);
             slot = 1-slot;  /* flip */
@@ -261,7 +261,7 @@ int FMOD_Main()
         Common_Draw("");
         Common_Draw("Channels are %s", paused ? "paused" : "playing");
 
-        Common_Sleep(10);   /* If you wait too long, ie longer than the length of the shortest sound, you will get gaps. */
+        Common_Sleep(10);   /* If you wait too long, ie longer than the length of the shortest sound_wrapper, you will get gaps. */
     } while (!Common_BtnPress(BTN_QUIT));
 
     /*

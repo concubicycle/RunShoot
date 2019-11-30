@@ -188,9 +188,9 @@ int FMOD_Main()
         Common_Draw("Copyright (c) Firelight Technologies 2004-2019.");
         Common_Draw("==================================================");
         Common_Draw("");
-        Common_Draw("Press %s to toggle sound 1 (16bit Mono 3D)", Common_BtnStr(BTN_ACTION1));
-        Common_Draw("Press %s to toggle sound 2 (8bit Mono 3D)", Common_BtnStr(BTN_ACTION2));
-        Common_Draw("Press %s to play a sound (16bit Stereo 2D)", Common_BtnStr(BTN_ACTION3));
+        Common_Draw("Press %s to toggle sound_wrapper 1 (16bit Mono 3D)", Common_BtnStr(BTN_ACTION1));
+        Common_Draw("Press %s to toggle sound_wrapper 2 (8bit Mono 3D)", Common_BtnStr(BTN_ACTION2));
+        Common_Draw("Press %s to play a sound_wrapper (16bit Stereo 2D)", Common_BtnStr(BTN_ACTION3));
         Common_Draw("Press %s or %s to move listener in still mode", Common_BtnStr(BTN_LEFT), Common_BtnStr(BTN_RIGHT));
         Common_Draw("Press %s to toggle listener auto movement", Common_BtnStr(BTN_MORE));
         Common_Draw("Press %s to quit", Common_BtnStr(BTN_QUIT));

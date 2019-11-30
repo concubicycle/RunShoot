@@ -50,18 +50,18 @@ rendering::renderer::renderer(
 
     if (_config.fullscreen())
     {
-        _screen_width = (float)_system_info.monitor_width();
-        _screen_height = (float)_system_info.monitor_height();
+        _screen_width = (float) _system_info.monitor_width();
+        _screen_height = (float) _system_info.monitor_height();
     } else
     {
         _screen_width = (float) _config.width();
-        _screen_height = (float)_config.height();
+        _screen_height = (float) _config.height();
     }
 
-    std::function<void(std::string name, float prop)> cam_prop_set([this](std::string name, float prop){
+    std::function<void(std::string name, float prop)> cam_prop_set([this](std::string name, float prop) {
         if (_camera_entity == nullptr) return;
 
-        auto& cam = _camera_entity->get_component<ecs::camera_component>();
+        auto &cam = _camera_entity->get_component<ecs::camera_component>();
         cam.set_float(std::move(name), prop);
     });
 
@@ -118,7 +118,7 @@ void rendering::renderer::draw_scene(asset::scene &scene)
 
     draw_skybox();
 
-    scene.scene_graph().traverse([this](ecs::entity &e, glm::mat4& model) {
+    scene.scene_graph().traverse([this](ecs::entity &e, glm::mat4 &model) {
         if (!e.active()) return;
 
         auto is_rt = e.has<ecs::render_component_ogl>() && e.has<ecs::transform_component>();
@@ -154,7 +154,7 @@ void rendering::renderer::draw_scene(asset::scene &scene)
 
         if (r.mesh_format == asset::mesh_type::GLTF2)
         {
-            auto& shader = _shaders.default_shader();
+            auto &shader = _shaders.default_shader();
             shader.bind();
 
             shader.set_uniform("model", model);
@@ -185,9 +185,9 @@ void rendering::renderer::draw_scene(asset::scene &scene)
             shader.unbind();
         } else
         {
-            const ogllib::shader_program_base& shader = r.shader
-                ? _shaders.get_program(*(r.shader))
-                : _shaders.get_program("ptx2d_pvm");
+            const ogllib::shader_program_base &shader = r.shader
+                                                        ? _shaders.get_program(*(r.shader))
+                                                        : _shaders.get_program("ptx2d_pvm");
 
             auto projection_view_model = projection * view * model;
 
@@ -222,7 +222,7 @@ void rendering::renderer::grab_entity(ecs::entity &e)
     {
         _camera_entity = &e;
 
-        auto& cam = e.get_component<ecs::camera_component>();
+        auto &cam = e.get_component<ecs::camera_component>();
         cam.skybox.emplace(
             cam.skybox_left,
             cam.skybox_top,
@@ -254,7 +254,7 @@ void rendering::renderer::forget_entity(ecs::entity &e)
     if (e.has<ecs::punctual_light_component>())
     {
         int found_ind = -1;
-        for(int i = 0; i < _lights.size(); ++i)
+        for (int i = 0; i < _lights.size(); ++i)
         {
             if (_lights[i].get().id() == e.id())
             {
@@ -271,7 +271,7 @@ void rendering::renderer::forget_entity(ecs::entity &e)
 
 void rendering::renderer::draw_skybox()
 {
-    auto& cam = _camera_entity->get_component<ecs::camera_component>();
+    auto &cam = _camera_entity->get_component<ecs::camera_component>();
 
     auto aspect = _screen_width / _screen_height;
     auto projection = glm::perspective(cam.fov, aspect, cam.near, cam.far);
@@ -299,11 +299,21 @@ void rendering::renderer::draw_skybox()
 
 void rendering::renderer::set_light_uniforms(const ogllib::shader_program_base &shader)
 {
-    shader.set_uniform("pointLightCount", (GLint)(_lights.size()));
+    shader.set_uniform("pointLightCount", (GLint) (_lights.size()));
+
+    auto& cam = _camera_entity->get_component<ecs::camera_component>();
+
+//    std::sort(_lights.begin(), _lights.end(), [&cam](ecs::entity &l1, ecs::entity &l2) -> bool {
+//        auto l1_pos = l1.graph_node->absolute_transform()[3];
+//        auto l2_pos  = l2.graph_node->absolute_transform()[3];
+//        float l1_dsq = glm::length2(cam.position - glm::vec3(l1_pos));
+//        float l2_dsq = glm::length2(cam.position - glm::vec3(l2_pos));
+//        return l1_dsq < l2_dsq;
+//    });
 
     for (int i = 0; i < _lights.size(); ++i)
     {
-        auto& light_e = _lights[i].get();
+        auto &light_e = _lights[i].get();
 
         if (!light_e.active())
         {
@@ -314,10 +324,10 @@ void rendering::renderer::set_light_uniforms(const ogllib::shader_program_base &
         } else
         {
             auto &l = light_e.get_component<ecs::punctual_light_component>();
-            auto &light_t = light_e.get_component<ecs::transform_component>();
+            auto light_t = glm::vec3(light_e.graph_node->absolute_transform()[3]);
 
             shader.set_uniform("pointLights[" + std::to_string(i) + "].color", l.color);
-            shader.set_uniform("pointLights[" + std::to_string(i) + "].light_pos", light_t.pos);
+            shader.set_uniform("pointLights[" + std::to_string(i) + "].light_pos", light_t);
             shader.set_uniform("pointLights[" + std::to_string(i) + "].intensity", l.intensity);
         }
         if (i == 7) break;

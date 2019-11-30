@@ -75,10 +75,18 @@
         "run_acceleration": 0.005
       },
       {
-        "component_bitshift": 25,
+        "component_bitshift": 63,
         "sounds": [
-          "./assets/sound/shot.wav"
+          "./assets/sound/shot.wav",
+          "./assets/sound/footstep1.wav",
+          "./assets/sound/footstep2.wav",
+          "./assets/sound/footstep3.wav",
+          "./assets/sound/footstep4.wav",
+          "./assets/sound/footstep5.wav"
         ]
+      },
+      {
+        "component_bitshift": 62
       }
     ]
   },
@@ -100,7 +108,7 @@
         {
           "component_bitshift": 3,
           "color": [1, 0.8, 0],
-          "intensity": 75
+          "intensity": 30
         }
       ]
     }

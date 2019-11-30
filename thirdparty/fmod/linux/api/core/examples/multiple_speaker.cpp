@@ -3,7 +3,7 @@ Multiple Speaker Example
 Copyright (c), Firelight Technologies Pty, Ltd 2004-2019.
 
 This example shows how to play sounds in multiple speakers, and also how to even
-assign sound subchannels, such as those in a stereo sound to different
+assign sound_wrapper subchannels, such as those in a stereo sound_wrapper to different
 individual speakers.
 ==============================================================================*/
 #include "fmod.hpp"
@@ -265,7 +265,7 @@ int FMOD_Main()
             Common_Draw("Speaker mode is set to %s%s", SPEAKERMODE_STRING[speakermode], speakermode < FMOD_SPEAKERMODE_7POINT1 ? " causing some speaker options to be unavailable" : "");
             Common_Draw("");
             Common_Draw("Press %s or %s to select mode", Common_BtnStr(BTN_UP), Common_BtnStr(BTN_DOWN));
-            Common_Draw("Press %s to play the sound", Common_BtnStr(BTN_ACTION1));
+            Common_Draw("Press %s to play the sound_wrapper", Common_BtnStr(BTN_ACTION1));
             for (int i = 0; i < SELECTION_COUNT; i++)
             {
                 bool disabled = !isSelectionAvailable(speakermode, i);

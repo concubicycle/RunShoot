@@ -194,7 +194,7 @@ namespace FMOD
         FMOD_RESULT F_API release                ();
         FMOD_RESULT F_API getSystemObject        (System **system);
 
-        // Standard sound manipulation functions.
+        // Standard sound_wrapper manipulation functions.
         FMOD_RESULT F_API lock                   (unsigned int offset, unsigned int length, void **ptr1, void **ptr2, unsigned int *len1, unsigned int *len2);
         FMOD_RESULT F_API unlock                 (void *ptr1, void *ptr2, unsigned int len1, unsigned int len2);
         FMOD_RESULT F_API setDefaults            (float frequency, int priority);

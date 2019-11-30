@@ -79,7 +79,7 @@ int FMOD_Main()
 
     /*
         By default, bypass all effects.  This means let the original signal go through without processing.
-        It will sound 'dry' until effects are enabled by the user.
+        It will sound_wrapper 'dry' until effects are enabled by the user.
     */
     result = dsplowpass->setBypass(true);
     ERRCHECK(result);
@@ -191,7 +191,7 @@ int FMOD_Main()
             Common_Draw("Copyright (c) Firelight Technologies 2004-2019.");
             Common_Draw("==================================================");
             Common_Draw("");
-            Common_Draw("Press %s to pause/unpause sound", Common_BtnStr(BTN_MORE));
+            Common_Draw("Press %s to pause/unpause sound_wrapper", Common_BtnStr(BTN_MORE));
             Common_Draw("Press %s to toggle dsplowpass effect", Common_BtnStr(BTN_ACTION1));
             Common_Draw("Press %s to toggle dsphighpass effect", Common_BtnStr(BTN_ACTION2));
             Common_Draw("Press %s to toggle dspecho effect", Common_BtnStr(BTN_ACTION3));

@@ -67,7 +67,7 @@ int FMOD_Main()
     int actualLatency = desiredLatency;                                 /* Latency measured once playback begins (smoothened for jitter) */
 
     /*
-        Create user sound to record into, then start recording.
+        Create user sound_wrapper to record into, then start recording.
     */
     FMOD_CREATESOUNDEXINFO exinfo = {0};
     exinfo.cbsize           = sizeof(FMOD_CREATESOUNDEXINFO);

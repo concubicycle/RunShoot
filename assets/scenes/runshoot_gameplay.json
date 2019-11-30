@@ -25,6 +25,18 @@
       "entity_id": 3,
       "components": [
         {
+          "component_bitshift": 0,
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "pitch": 0,
+          "yaw": 0,
+          "roll": 0,
+          "scale_x": 1.0,
+          "scale_y": 1.0,
+          "scale_z": 1.0
+        },
+        {
           "component_bitshift": 24,
           "tracks": [
             "./assets/sound/Run_Shoot.wav"

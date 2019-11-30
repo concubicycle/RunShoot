@@ -142,9 +142,9 @@ int FMOD_Main()
             Common_Draw("Copyright (c) Firelight Technologies 2004-2019.");
             Common_Draw("==================================================");
             Common_Draw("");
-            Common_Draw("Press %s to play a mono sound (drumloop)", Common_BtnStr(BTN_ACTION1));
-            Common_Draw("Press %s to play a mono sound (jaguar)", Common_BtnStr(BTN_ACTION2));
-            Common_Draw("Press %s to play a stereo sound (swish)", Common_BtnStr(BTN_ACTION3));
+            Common_Draw("Press %s to play a mono sound_wrapper (drumloop)", Common_BtnStr(BTN_ACTION1));
+            Common_Draw("Press %s to play a mono sound_wrapper (jaguar)", Common_BtnStr(BTN_ACTION2));
+            Common_Draw("Press %s to play a stereo sound_wrapper (swish)", Common_BtnStr(BTN_ACTION3));
             Common_Draw("Press %s to quit", Common_BtnStr(BTN_QUIT));
             Common_Draw("");
             Common_Draw("Time %02d:%02d:%02d/%02d:%02d:%02d : %s", ms / 1000 / 60, ms / 1000 % 60, ms / 10 % 100, lenms / 1000 / 60, lenms / 1000 % 60, lenms / 10 % 100, paused ? "Paused " : playing ? "Playing" : "Stopped");

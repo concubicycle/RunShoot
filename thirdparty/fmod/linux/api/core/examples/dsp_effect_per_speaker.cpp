@@ -3,7 +3,7 @@ DSP Effect Per Speaker Example
 Copyright (c), Firelight Technologies Pty, Ltd 2004-2019.
 
 This example shows how to manipulate a DSP network and as an example, creates 2
-DSP effects, splitting a single sound into 2 audio paths, which it then filters
+DSP effects, splitting a single sound_wrapper into 2 audio paths, which it then filters
 seperately.
 
 To only have each audio path come out of one speaker each,
@@ -95,8 +95,8 @@ int FMOD_Main()
     */
 
     /*
-        When a sound is played, a subnetwork is set up in the DSP network which looks like this.
-        Wavetable is the drumloop sound, and it feeds its data from right to left.
+        When a sound_wrapper is played, a subnetwork is set up in the DSP network which looks like this.
+        Wavetable is the drumloop sound_wrapper, and it feeds its data from right to left.
 
         [DSPHEAD]<------------[DSPCHANNELMIXER]<------------[CHANNEL HEAD]<------------[WAVETABLE - DRUMLOOP.WAV]
     */  
@@ -250,7 +250,7 @@ int FMOD_Main()
         Common_Draw("");
         Common_Draw("Press %s to toggle lowpass (left speaker)", Common_BtnStr(BTN_ACTION1));
         Common_Draw("Press %s to toggle highpass (right speaker)", Common_BtnStr(BTN_ACTION2));
-        Common_Draw("Press %s or %s to pan sound", Common_BtnStr(BTN_LEFT), Common_BtnStr(BTN_RIGHT));
+        Common_Draw("Press %s or %s to pan sound_wrapper", Common_BtnStr(BTN_LEFT), Common_BtnStr(BTN_RIGHT));
         Common_Draw("Press %s to quit", Common_BtnStr(BTN_QUIT));
         Common_Draw("");
         Common_Draw("Lowpass (left) is %s", lowpassbypass ? "inactive" : "active");

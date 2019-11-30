@@ -20,7 +20,7 @@ This example shows how to create a codec that reads raw PCM data.
    once after FMOD tries to open it as many other types of file.   If you want to override FMOD's 
    internal codecs then use the 'priority' parameter of System::loadPlugin or System::registerCodec.
 
-5. In the open callback, tell FMOD what sort of PCM format the sound will produce with the 
+5. In the open callback, tell FMOD what sort of PCM format the sound_wrapper will produce with the
    FMOD_CODEC_STATE::waveformat member.
 
 6. The 'close' callback is called when Sound::release is called by the FMOD user.
@@ -32,7 +32,7 @@ This example shows how to create a codec that reads raw PCM data.
    determined by the decode buffer size of the stream.  See FMOD_CREATESOUNDEXINFO or 
    FMOD_ADVANCEDSETTINGS.
 
-8. The 'seek' callback is called when Channel::setPosition is called, or when looping a sound 
+8. The 'seek' callback is called when Channel::setPosition is called, or when looping a sound_wrapper
    when it is a stream.
 
 ===============================================================================================*/
@@ -104,7 +104,7 @@ FMOD_RESULT F_CALLBACK rawopen(FMOD_CODEC_STATE *codec, FMOD_MODE /*usermode*/, 
     rawwaveformat.pcmblocksize = 0;
     rawwaveformat.lengthpcm    = codec->filesize / (rawwaveformat.channels * sizeof(short));   /* bytes converted to PCM samples */;
 
-    codec->numsubsounds      = 0;                    /* number of 'subsounds' in this sound.  For most codecs this is 0, only multi sound codecs such as FSB or CDDA have subsounds. */
+    codec->numsubsounds      = 0;                    /* number of 'subsounds' in this sound_wrapper.  For most codecs this is 0, only multi sound_wrapper codecs such as FSB or CDDA have subsounds. */
     codec->waveformat        = &rawwaveformat;
     codec->waveformatversion = FMOD_CODEC_WAVEFORMAT_VERSION;
     codec->plugindata        = 0;                    /* user data value */

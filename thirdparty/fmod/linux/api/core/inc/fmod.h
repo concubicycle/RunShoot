@@ -161,7 +161,7 @@ FMOD_RESULT F_API FMOD_Sound_Release                    (FMOD_SOUND *sound);
 FMOD_RESULT F_API FMOD_Sound_GetSystemObject            (FMOD_SOUND *sound, FMOD_SYSTEM **system);
 
 /*
-     Standard sound manipulation functions.
+     Standard sound_wrapper manipulation functions.
 */
 
 FMOD_RESULT F_API FMOD_Sound_Lock                       (FMOD_SOUND *sound, unsigned int offset, unsigned int length, void **ptr1, void **ptr2, unsigned int *len1, unsigned int *len2);

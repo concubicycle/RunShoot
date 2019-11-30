@@ -94,7 +94,7 @@ int FMOD_Main()
             }
             else
             {
-                /* Clean up previous record sound */
+                /* Clean up previous record sound_wrapper */
                 if (record[cursor].sound)
                 {
                     result = record[cursor].sound->release();

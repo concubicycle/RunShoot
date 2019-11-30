@@ -2,6 +2,7 @@
 // Created by sava on 11/26/19.
 //
 
+#include <sound_wrapper/sound_emitter_component.hpp>
 #include "drone_controller.hpp"
 
 component_bitset drone_controller::required_components() const
@@ -27,9 +28,13 @@ void drone_controller::update_single(ecs::entity &e, core::behavior_context &ctx
         });
     }
 
+    if (glm::length2(rb.velocity) > component.max_speed_sq)
+    {
+        rb.velocity = glm::normalize(rb.velocity) * component.max_speed;
+    }
+
     switch(component.state)
     {
-
         case drone_controller_component::flashing:
             update_flashing(e, ctx);
             update_following(e, ctx);
@@ -41,12 +46,13 @@ void drone_controller::update_single(ecs::entity &e, core::behavior_context &ctx
             auto& l = e.get_component<ecs::punctual_light_component>();
             l.intensity = 0;
 
+            auto& emitter = e.get_component<sound::sound_emitter_component>();
+            emitter.sound_states[0] = sound::stopped;
+
             component.active_after_destruction -= ctx.time.smoothed_delta_secs();
 
             if (component.active_after_destruction < 0)
-            {
                 ctx.current_scene.remove(e);
-            }
 
             break;
         }
@@ -169,6 +175,8 @@ void drone_controller::friction(ecs::rigid_body_component &rb, drone_controller_
 
 void drone_controller::on_entity_created(ecs::entity &e)
 {
-
+    auto& emitter = e.get_component<sound::sound_emitter_component>();
+    emitter.sound_states[0] = sound::playing;
+    emitter.loop_states[0] = true;
 }
 

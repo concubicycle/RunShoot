@@ -1,6 +1,7 @@
 #version 330 core
 out vec4 FragColor;
 
+#define EPSILON 0.0000001
 #define PI 3.1415926535897932384626433832795
 #define DOT_CLAMP 0.00001
 
@@ -86,6 +87,11 @@ void main()
 
     for (int i = 0; i < pointLightCount; i++)
     {
+        if (dot(pointLights[i].color, pointLights[i].color) < 0.0001)
+        {
+            continue;
+        }
+
         vec3 light_pos = pointLights[i].light_pos;
         vec3 light_vec = light_pos - fs_in.world_pos;
         vec3 view_vec = view_pos - fs_in.world_pos;

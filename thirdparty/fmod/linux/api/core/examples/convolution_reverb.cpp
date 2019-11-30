@@ -96,7 +96,7 @@ int FMOD_Main()
     ERRCHECK(result);
 
     /*
-        Retrieve the sound information for the Impulse Response input file
+        Retrieve the sound_wrapper information for the Impulse Response input file
     */
     FMOD_SOUND_FORMAT irSoundFormat;
     FMOD_SOUND_TYPE irSoundType;
@@ -137,7 +137,7 @@ int FMOD_Main()
     ERRCHECK(result);
 
     /*
-        We can now free our copy of the IR data and release the sound object, the reverb unit 
+        We can now free our copy of the IR data and release the sound_wrapper object, the reverb unit
         has created it's internal data
     */
     free(irData);

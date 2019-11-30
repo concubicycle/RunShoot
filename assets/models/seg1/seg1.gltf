@@ -53,7 +53,7 @@
         },
         {
             "doubleSided" : true,
-            "name" : "Material.001",
+            "name" : "Material.003",
             "pbrMetallicRoughness" : {
                 "baseColorTexture" : {
                     "index" : 1,
@@ -80,7 +80,7 @@
             ]
         },
         {
-            "name" : "Cube.001",
+            "name" : "Cube.003",
             "primitives" : [
                 {
                     "attributes" : {
@@ -109,9 +109,9 @@
             "uri" : "seg1_rooftop.png"
         },
         {
-            "mimeType" : "image/jpeg",
-            "name" : "windows_wall_lowres",
-            "uri" : "windows_wall_lowres.jpg"
+            "mimeType" : "image/png",
+            "name" : "wall_seg1",
+            "uri" : "wall_seg1.png"
         }
     ],
     "accessors" : [
@@ -152,35 +152,35 @@
         {
             "bufferView" : 4,
             "componentType" : 5126,
-            "count" : 6909,
+            "count" : 7994,
             "max" : [
-                66.0727767944336,
-                1.0664610862731934,
-                17.231605529785156
+                67.09309387207031,
+                0.451568603515625,
+                15.284209251403809
             ],
             "min" : [
-                -45.939910888671875,
-                -223.9155731201172,
-                -527.6687622070312
+                -46.649330139160156,
+                -318.81317138671875,
+                -525.6362915039062
             ],
             "type" : "VEC3"
         },
         {
             "bufferView" : 5,
             "componentType" : 5126,
-            "count" : 6909,
+            "count" : 7994,
             "type" : "VEC3"
         },
         {
             "bufferView" : 6,
             "componentType" : 5126,
-            "count" : 6909,
+            "count" : 7994,
             "type" : "VEC2"
         },
         {
             "bufferView" : 7,
             "componentType" : 5123,
-            "count" : 10797,
+            "count" : 12405,
             "type" : "SCALAR"
         }
     ],
@@ -207,28 +207,28 @@
         },
         {
             "buffer" : 0,
-            "byteLength" : 82908,
+            "byteLength" : 95928,
             "byteOffset" : 242972
         },
         {
             "buffer" : 0,
-            "byteLength" : 82908,
-            "byteOffset" : 325880
+            "byteLength" : 95928,
+            "byteOffset" : 338900
         },
         {
             "buffer" : 0,
-            "byteLength" : 55272,
-            "byteOffset" : 408788
+            "byteLength" : 63952,
+            "byteOffset" : 434828
         },
         {
             "buffer" : 0,
-            "byteLength" : 21594,
-            "byteOffset" : 464060
+            "byteLength" : 24810,
+            "byteOffset" : 498780
         }
     ],
     "buffers" : [
         {
-            "byteLength" : 485656,
+            "byteLength" : 523592,
             "uri" : "seg1.bin"
         }
     ]

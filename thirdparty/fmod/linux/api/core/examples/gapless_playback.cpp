@@ -112,7 +112,7 @@ int FMOD_Main()
     unsigned int numsounds = sizeof(note) / sizeof(note[0]);
 
     /*
-        Play all the sounds at once! Space them apart with set delay though so that they sound like they play in order.
+        Play all the sounds at once! Space them apart with set delay though so that they sound_wrapper like they play in order.
     */
     for (count = 0; count < numsounds; count++)
     {
@@ -120,7 +120,7 @@ int FMOD_Main()
         unsigned int slen;
         FMOD::Sound *s = sound[note[count]];                            /* Pick a note from our tune. */
 
-        result = system->playSound(s, channelgroup, true, &channel);    /* Play the sound on the channelgroup we want to use as the parent clock reference (for setDelay further down) */
+        result = system->playSound(s, channelgroup, true, &channel);    /* Play the sound_wrapper on the channelgroup we want to use as the parent clock reference (for setDelay further down) */
         ERRCHECK(result);
 
         if (!clock_start)
@@ -128,7 +128,7 @@ int FMOD_Main()
             result = channel->getDSPClock(0, &clock_start);
             ERRCHECK(result);
 
-            clock_start += (dsp_block_len * 2);                         /* Start the sound into the future, by 2 mixer blocks worth. */
+            clock_start += (dsp_block_len * 2);                         /* Start the sound_wrapper into the future, by 2 mixer blocks worth. */
                                                                         /* Should be enough to avoid the mixer catching up and hitting the clock value before we've finished setting up everything. */
                                                                         /* Alternatively the channelgroup we're basing the clock on could be paused to stop it ticking. */
         }
@@ -136,21 +136,21 @@ int FMOD_Main()
         {
             float freq;
 
-            result = s->getLength(&slen, FMOD_TIMEUNIT_PCM);            /* Get the length of the sound in samples. */
+            result = s->getLength(&slen, FMOD_TIMEUNIT_PCM);            /* Get the length of the sound_wrapper in samples. */
             ERRCHECK(result);
 
-            result = s->getDefaults(&freq, 0);                          /* Get the default frequency that the sound was recorded at. */
+            result = s->getDefaults(&freq, 0);                          /* Get the default frequency that the sound_wrapper was recorded at. */
             ERRCHECK(result);
 
-            slen = (unsigned int)((float)slen / freq * outputrate);     /* Convert the length of the sound to 'output samples' for the output timeline. */
+            slen = (unsigned int)((float)slen / freq * outputrate);     /* Convert the length of the sound_wrapper to 'output samples' for the output timeline. */
             
-            clock_start += slen;                                        /* Place the sound clock start time to this value after the last one. */
+            clock_start += slen;                                        /* Place the sound_wrapper clock start time to this value after the last one. */
         }
 
         result = channel->setDelay(clock_start, 0, false);              /* Schedule the channel to start in the future at the newly calculated channelgroup clock value. */
         ERRCHECK(result);
 
-        result = channel->setPaused(false);                             /* Unpause the sound.  Note that you won't hear the sounds, they are scheduled into the future. */
+        result = channel->setPaused(false);                             /* Unpause the sound_wrapper.  Note that you won't hear the sounds, they are scheduled into the future. */
         ERRCHECK(result);
     }
 

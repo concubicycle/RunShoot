@@ -2,16 +2,16 @@
 User Created Sound Example
 Copyright (c), Firelight Technologies Pty, Ltd 2004-2019.
 
-This example shows how create a sound with data filled by the user. It shows a
+This example shows how create a sound_wrapper with data filled by the user. It shows a
 user created static sample, followed by a user created stream. The former
-allocates all memory needed for the sound and is played back as a static sample, 
+allocates all memory needed for the sound_wrapper and is played back as a static sample,
 while the latter streams the data in chunks as it plays, using far less memory.
 ==============================================================================*/
 #include "fmod.hpp"
 #include "common.h"
 #include <math.h>
 
-FMOD_RESULT F_CALLBACK pcmreadcallback(FMOD_SOUND* /*sound*/, void *data, unsigned int datalen)
+FMOD_RESULT F_CALLBACK pcmreadcallback(FMOD_SOUND* /*sound_wrapper*/, void *data, unsigned int datalen)
 {
     static float  t1 = 0, t2 = 0;        // time
     static float  v1 = 0, v2 = 0;        // velocity
@@ -31,7 +31,7 @@ FMOD_RESULT F_CALLBACK pcmreadcallback(FMOD_SOUND* /*sound*/, void *data, unsign
     return FMOD_OK;
 }
 
-FMOD_RESULT F_CALLBACK pcmsetposcallback(FMOD_SOUND* /*sound*/, int /*subsound*/, unsigned int /*position*/, FMOD_TIMEUNIT /*postype*/)
+FMOD_RESULT F_CALLBACK pcmsetposcallback(FMOD_SOUND* /*sound_wrapper*/, int /*subsound*/, unsigned int /*position*/, FMOD_TIMEUNIT /*postype*/)
 {
     /*
         This is useful if the user calls Channel::setPosition and you want to seek your data accordingly.
@@ -86,7 +86,7 @@ int FMOD_Main()
         Common_Draw("Copyright (c) Firelight Technologies 2004-2019.");
         Common_Draw("==================================================");
         Common_Draw("");
-        Common_Draw("Sound played here is generated in realtime. It will either play as a stream which means it is continually filled as it is playing, or it will play as a static sample, which means it is filled once as the sound is created, then when played it will just play that short loop of data.");
+        Common_Draw("Sound played here is generated in realtime. It will either play as a stream which means it is continually filled as it is playing, or it will play as a static sample, which means it is filled once as the sound_wrapper is created, then when played it will just play that short loop of data.");
         Common_Draw("");
         Common_Draw("Press %s to play an infinite generated stream", Common_BtnStr(BTN_ACTION1));
         Common_Draw("Press %s to play a static looping sample", Common_BtnStr(BTN_ACTION2));
@@ -96,15 +96,15 @@ int FMOD_Main()
     } while (!Common_BtnPress(BTN_ACTION1) && !Common_BtnPress(BTN_ACTION2) && !Common_BtnPress(BTN_QUIT));
 
     /*
-        Create and play the sound.
+        Create and play the sound_wrapper.
     */
     memset(&exinfo, 0, sizeof(FMOD_CREATESOUNDEXINFO));
     exinfo.cbsize            = sizeof(FMOD_CREATESOUNDEXINFO);  /* Required. */
-    exinfo.numchannels       = 2;                               /* Number of channels in the sound. */
-    exinfo.defaultfrequency  = 44100;                           /* Default playback rate of sound. */
+    exinfo.numchannels       = 2;                               /* Number of channels in the sound_wrapper. */
+    exinfo.defaultfrequency  = 44100;                           /* Default playback rate of sound_wrapper. */
     exinfo.decodebuffersize  = 44100;                           /* Chunk size of stream update in samples. This will be the amount of data passed to the user callback. */
     exinfo.length            = exinfo.defaultfrequency * exinfo.numchannels * sizeof(signed short) * 5; /* Length of PCM data in bytes of whole song (for Sound::getLength) */
-    exinfo.format            = FMOD_SOUND_FORMAT_PCM16;         /* Data format of sound. */
+    exinfo.format            = FMOD_SOUND_FORMAT_PCM16;         /* Data format of sound_wrapper. */
     exinfo.pcmreadcallback   = pcmreadcallback;                 /* User callback for reading. */
     exinfo.pcmsetposcallback = pcmsetposcallback;               /* User callback for seeking. */
 

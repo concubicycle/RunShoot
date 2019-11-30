@@ -43,7 +43,7 @@ int FMOD_Main()
     /*
         This example uses an FSB file, which is a preferred pack format for fmod containing multiple sounds.
         This could just as easily be exchanged with a wav/mp3/ogg file for example, but in this case you wouldnt need to call getSubSound.
-        Because getNumSubSounds is called here the example would work with both types of sound file (packed vs single).
+        Because getNumSubSounds is called here the example would work with both types of sound_wrapper file (packed vs single).
     */
     result = system->createStream(Common_MediaPath("wave_vorbis.fsb"), FMOD_LOOP_NORMAL | FMOD_2D, 0, &sound);
     ERRCHECK(result);
@@ -62,7 +62,7 @@ int FMOD_Main()
     }
 
     /*
-        Play the sound.
+        Play the sound_wrapper.
     */
     result = system->playSound(sound_to_play, 0, false, &channel);
     ERRCHECK(result);
@@ -136,7 +136,7 @@ int FMOD_Main()
     /*
         Shut down
     */
-    result = sound->release();  /* Release the parent, not the sound that was retrieved with getSubSound. */
+    result = sound->release();  /* Release the parent, not the sound_wrapper that was retrieved with getSubSound. */
     ERRCHECK(result);
     result = system->close();
     ERRCHECK(result);

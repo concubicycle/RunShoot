@@ -3,8 +3,8 @@ Multiple System Example
 Copyright (c), Firelight Technologies Pty, Ltd 2004-2019.
 
 This example shows how to play sounds on two different output devices from the
-same application. It creates two FMOD::System objects, selects a different sound
-device for each, then allows the user to play one sound on each device.
+same application. It creates two FMOD::System objects, selects a different sound_wrapper
+device for each, then allows the user to play one sound_wrapper on each device.
 
 Note that sounds created on device A cannot be played on device B and vice
 versa.
@@ -165,8 +165,8 @@ int FMOD_Main()
             Common_Draw("Copyright (c) Firelight Technologies 2004-2019.");
             Common_Draw("==================================================");
             Common_Draw("");
-            Common_Draw("Press %s to play a sound on device A", Common_BtnStr(BTN_ACTION1));
-            Common_Draw("Press %s to play a sound on device B", Common_BtnStr(BTN_ACTION2));
+            Common_Draw("Press %s to play a sound_wrapper on device A", Common_BtnStr(BTN_ACTION1));
+            Common_Draw("Press %s to play a sound_wrapper on device B", Common_BtnStr(BTN_ACTION2));
             Common_Draw("Press %s to quit", Common_BtnStr(BTN_QUIT));
             Common_Draw("");
             Common_Draw("Channels playing on A: %d", channelsplayingA);

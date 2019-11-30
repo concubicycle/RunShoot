@@ -8,6 +8,7 @@
 #include <glm/gtc/epsilon.hpp>
 #include <glm/gtx/matrix_interpolation.hpp>
 #include <glm/gtc/random.hpp>
+#include <sound_wrapper/sound_emitter_component.hpp>
 
 #include "player_controller.hpp"
 #include "components/turn_trigger_component.hpp"
@@ -236,6 +237,7 @@ void player_controller::resolve_collision(
 {
     auto &rb = player_entity.get_component<ecs::rigid_body_component>();
     auto n = collision.contact().collision_axis();
+    auto& sound_emitter = player_entity.get_component<sound::sound_emitter_component>();
 
     if (collision.contact().is_trigger_contact())
     {
@@ -280,7 +282,11 @@ void player_controller::resolve_collision(
     if (n.y < 0)
     {
         if (player.time_since_grounded > 0.01f)
+        {
             rb.force += glm::vec3(0, player.footstep_force, 0);
+            sound_emitter.sound_states[player.footstep_sound_index] = sound::playing;
+            player.footstep_sound_index = (player.footstep_sound_index + 1) % 5 + 1;
+        }
 
         player.time_since_grounded = 0;
     }
@@ -414,7 +420,7 @@ void player_controller::shoot(ecs::entity &e, core::behavior_context ctx)
 {
     auto &cam = e.get_component<ecs::camera_component>();
     auto &player = e.get_component<player_controller_component>();
-    auto &sound = e.get_component<sound_emitter_component>();
+    auto &sound = e.get_component<sound::sound_emitter_component>();
 
     physics_models::ray ray = {cam.position, cam.fwd()};
 
@@ -429,11 +435,12 @@ void player_controller::shoot(ecs::entity &e, core::behavior_context ctx)
         glm::linearRand(1.2f, 1.8f)
     };
 
-    sound.sounds_to_play[sound.sounds_to_play_count++] = sound.sound_path_hashes[0];
+    sound.sound_states[0] = sound::playing;
 
     e.graph_node->traverse([&e](ecs::entity& child_e, glm::mat4& transform) {
         if (e.id() == child_e.id()) return;
         child_e.set_active(true);
     });
+
     player.time_to_flash_out = player.gunshot_flash_time;
 }

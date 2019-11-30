@@ -31,7 +31,7 @@ int FMOD_Main()
     FMOD::Studio::System *system = NULL;
     ERRCHECK( FMOD::Studio::System::create(&system) );
 
-    // The example Studio project is authored for 5.1 sound, so set up the system output mode to match
+    // The example Studio project is authored for 5.1 sound_wrapper, so set up the system output mode to match
     FMOD::System* coreSystem = NULL;
     ERRCHECK( system->getCoreSystem(&coreSystem) );
     ERRCHECK( coreSystem->setSoftwareFormat(0, FMOD_SPEAKERMODE_5POINT1, 0) );
@@ -119,8 +119,8 @@ int FMOD_Main()
         vec.forward.z = 1.0f;
         vec.up.y = 1.0f;
         static float t = 0;
-        vec.position.x = sinf(t) * 3.0f;        /* Rotate sound in a circle */
-        vec.position.z = cosf(t) * 3.0f;        /* Rotate sound in a circle */
+        vec.position.x = sinf(t) * 3.0f;        /* Rotate sound_wrapper in a circle */
+        vec.position.z = cosf(t) * 3.0f;        /* Rotate sound_wrapper in a circle */
         t += 0.03f;
 
         if (isOnGround)

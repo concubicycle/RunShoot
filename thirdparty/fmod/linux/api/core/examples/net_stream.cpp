@@ -102,7 +102,7 @@ int FMOD_Main()
                     {
                         char url[256];
 
-                        strncpy(url, (const char *)tag.data, 255);  /* data point to sound owned memory, copy it before the sound is released. */
+                        strncpy(url, (const char *)tag.data, 255);  /* data point to sound_wrapper owned memory, copy it before the sound_wrapper is released. */
 
                         result = sound->release();
                         ERRCHECK(result);
@@ -198,7 +198,7 @@ int FMOD_Main()
     do
     {
         Common_Update();
-        Common_Draw("Waiting for sound to finish opening before trying to release it....", Common_BtnStr(BTN_ACTION1));
+        Common_Draw("Waiting for sound_wrapper to finish opening before trying to release it....", Common_BtnStr(BTN_ACTION1));
         Common_Sleep(50);
         
         result = system->update();

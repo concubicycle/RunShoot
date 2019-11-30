@@ -27,7 +27,7 @@ int FMOD_Main()
     FMOD::Studio::System* system = NULL;
     ERRCHECK( FMOD::Studio::System::create(&system) );
 
-    // The example Studio project is authored for 5.1 sound, so set up the system output mode to match
+    // The example Studio project is authored for 5.1 sound_wrapper, so set up the system output mode to match
     FMOD::System* coreSystem = NULL;
     ERRCHECK( system->getCoreSystem(&coreSystem) );
     ERRCHECK( coreSystem->setSoftwareFormat(0, FMOD_SPEAKERMODE_5POINT1, 0) );
@@ -106,7 +106,7 @@ int FMOD_Main()
         Common_Draw("Press %s to fire and forget the explosion", Common_BtnStr(BTN_ACTION1));
         Common_Draw("Press %s to start the looping ambience", Common_BtnStr(BTN_ACTION2));
         Common_Draw("Press %s to stop the looping ambience", Common_BtnStr(BTN_ACTION3));
-        Common_Draw("Press %s to start/restart the cancel sound", Common_BtnStr(BTN_ACTION4));
+        Common_Draw("Press %s to start/restart the cancel sound_wrapper", Common_BtnStr(BTN_ACTION4));
         Common_Draw("Press %s to quit", Common_BtnStr(BTN_QUIT));
 
         Common_Sleep(50);

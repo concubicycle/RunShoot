@@ -143,8 +143,20 @@ set (PHYSICS_MODELS_HEADER_LIST
      ../include/physics_models/collider.hpp
      ../include/physics_models/contact.hpp
      ../include/physics_models/collision_tests.hpp
-     ../include/physics_models/aabb_collider.hpp ../include/physics_models/aabb_collider.hpp ../include/physics_models/sphere_collider.hpp ../include/physics_models/ray.hpp)
+     ../include/physics_models/aabb_collider.hpp
+     ../include/physics_models/aabb_collider.hpp
+     ../include/physics_models/sphere_collider.hpp
+     ../include/physics_models/ray.hpp)
 
+set (SOUND_SOURCE_LIST
+     ${PROJECT_SOURCE_DIR}/src/sound_wrapper/sound_system.cpp
+     ${PROJECT_SOURCE_DIR}/src/sound_wrapper/sound_emitter_component.cpp
+     ${PROJECT_SOURCE_DIR}/src/sound_wrapper/sound_listener_component.cpp)
+
+set (SOUND_HEADER_LIST
+     ${PROJECT_SOURCE_DIR}/include/sound_wrapper/sound_system.hpp
+     ../include/sound_wrapper/sound_emitter_component.hpp
+     ../include/sound_wrapper/sound_listener_component.hpp)
 
 set(HEADER_LIST
     ${PROJECT_SOURCE_DIR}/include/events/event_dispatcher.hpp
@@ -161,9 +173,12 @@ add_library(${MEM_LIB} STATIC ${MEMORY_SOURCE_LIST} ${MEMORY_HEADER_LIST})
 add_library(${ECS_LIB} STATIC ${ECS_SOURCE_LIST} ${ECS_HEADER_LIST})
 add_library(${PHYSICS_LIB} STATIC ${PHYSICS_SOURCE_LIST} ${PHYSICS_HEADER_LIST})
 add_library(${PHYSICS_MODELS_LIB} STATIC ${PHYSICS_MODELS_SOURCE_LIST} ${PHYSICS_MODELS_HEADER_LIST})
+add_library(${SOUND_LIB} STATIC ${SOUND_SOURCE_LIST} ${SOUND_HEADER_LIST})
 
 add_library(scene INTERFACE)
 target_include_directories(scene INTERFACE ${SCENE_HEADER_LIST})
+
+
 
 
 # We need this directory, and users of our library will need it too
@@ -175,6 +190,7 @@ target_include_directories(${MEM_LIB} PUBLIC ../include)
 target_include_directories(${ECS_LIB} PUBLIC ../include ../thirdparty/opengllib/include)
 target_include_directories(${PHYSICS_LIB} PUBLIC ../include)
 target_include_directories(${PHYSICS_MODELS_LIB} PUBLIC ../include)
+target_include_directories(${SOUND_LIB} PUBLIC ../include)
 
 
 
@@ -188,3 +204,4 @@ target_compile_features(${MEM_LIB} PUBLIC cxx_std_17)
 target_compile_features(${ECS_LIB} PUBLIC cxx_std_17)
 target_compile_features(${PHYSICS_LIB} PUBLIC cxx_std_17)
 target_compile_features(${PHYSICS_MODELS_LIB} PUBLIC cxx_std_17)
+target_compile_features(sound PUBLIC cxx_std_17)

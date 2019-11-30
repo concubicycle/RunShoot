@@ -28,7 +28,7 @@ else
 endif
 
 SOURCE_FILES = \
-    ../play_sound.cpp \
+    ../play_sound_3d.cpp \
     ../common.cpp \
     ../common_platform.cpp
 
