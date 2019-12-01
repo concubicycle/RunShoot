@@ -32,30 +32,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/components/player_controller_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/player_controller_component.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/drone_controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/drone_controller.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/drone_spawner.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/drone_spawner.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/player_controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/segment_spawner.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/segment_spawner.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blender/seg1.blend" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg1.blend" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blender/seg1.blend1" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg1.blend1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blender/seg2.blend" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg2.blend" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blender/seg2.blend1" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg2.blend1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blender/seg3.blend" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg3.blend" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blender/seg3.blend1" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg3.blend1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/seg2/seg2.bin" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg2/seg2.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/seg2/seg2.gltf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg2/seg2.gltf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/seg3/seg3.bin" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg3/seg3.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/seg3/seg3.gltf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg3/seg3.gltf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/prototypes/drone.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/drone.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/prototypes/player.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/player.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/prototypes/seg1.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/seg1.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/physics_models/aabb_collider.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics_models/aabb_collider.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/renderer/debug_drawer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/renderer/debug_drawer.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/sound_wrapper/sound_emitter_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/sound_wrapper/sound_emitter_component.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/physics/physics_world.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/physics/physics_world.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sound_wrapper/sound_emitter_component.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/sound_wrapper/sound_emitter_component.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sound_wrapper/sound_system.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/sound_wrapper/sound_system.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -386,7 +363,7 @@
       <workItem from="1575183269683" duration="4619000" />
       <workItem from="1575190936005" duration="2801000" />
       <workItem from="1575232661187" duration="48000" />
-      <workItem from="1575232723143" duration="3175000" />
+      <workItem from="1575232723143" duration="3236000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>
