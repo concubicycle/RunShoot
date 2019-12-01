@@ -113,6 +113,8 @@ namespace rendering
 
             for (auto &e : _entities)
             {
+                if (e.get().id() != 111) continue;
+
                 auto &aabbs = e.get().get_component<ecs::aabb_collider_component>();
 
                 for (int i = 0; i < aabbs.count; ++i)

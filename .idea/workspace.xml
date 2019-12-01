@@ -2,26 +2,26 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="RunShoot" targetName="glm" />
-      <config projectName="RunShoot" targetName="glfw" />
-      <config projectName="RunShoot" targetName="spdlog" />
-      <config projectName="RunShoot" targetName="sound" />
-      <config projectName="RunShoot" targetName="asset" />
-      <config projectName="RunShoot" targetName="RunShoot" />
-      <config projectName="RunShoot" targetName="generate_colliders" />
       <config projectName="RunShoot" targetName="ogllib" />
-      <config projectName="RunShoot" targetName="tests" />
       <config projectName="RunShoot" targetName="glbinding" />
-      <config projectName="RunShoot" targetName="core" />
-      <config projectName="RunShoot" targetName="physics_models" />
-      <config projectName="RunShoot" targetName="platform" />
-      <config projectName="RunShoot" targetName="physics" />
+      <config projectName="RunShoot" targetName="asset" />
+      <config projectName="RunShoot" targetName="generate_colliders" />
+      <config projectName="RunShoot" targetName="sound" />
       <config projectName="RunShoot" targetName="ecs" />
-      <config projectName="RunShoot" targetName="assimp" />
-      <config projectName="RunShoot" targetName="expected" />
-      <config projectName="RunShoot" targetName="memory" />
       <config projectName="RunShoot" targetName="nlohmann_json" />
+      <config projectName="RunShoot" targetName="tests" />
+      <config projectName="RunShoot" targetName="assimp" />
+      <config projectName="RunShoot" targetName="physics_models" />
+      <config projectName="RunShoot" targetName="RunShoot" />
+      <config projectName="RunShoot" targetName="glfw" />
+      <config projectName="RunShoot" targetName="physics" />
       <config projectName="RunShoot" targetName="renderer" />
+      <config projectName="RunShoot" targetName="memory" />
+      <config projectName="RunShoot" targetName="core" />
+      <config projectName="RunShoot" targetName="spdlog" />
+      <config projectName="RunShoot" targetName="expected" />
+      <config projectName="RunShoot" targetName="glm" />
+      <config projectName="RunShoot" targetName="platform" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -31,64 +31,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/include/sound_wrapper/sound_listener_component.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/sound_wrapper/sound_system.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sound_wrapper/sound_listener_component.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sound_wrapper/sound_system.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/components/add_custom_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/add_custom_components.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/components/drone_controller_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/drone_controller_component.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/components/player_controller_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/player_controller_component.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/components/sound_emitter_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/sound_emitter_component.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/drone_controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/drone_controller.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/music_player.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/music_player.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/music_player.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/music_player.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/drone_spawner.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/drone_spawner.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/player_controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/runshoot.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/runshoot.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/sound.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/sound.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/sound_emitter.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/sound_emitter.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/segment_spawner.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/segment_spawner.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/blender/seg1.blend" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg1.blend" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/blender/seg1.blend1" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg1.blend1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/seg1/seg1.bin" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg1/seg1.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/seg1/seg1.gltf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg1/seg1.gltf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/blender/seg2.blend" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg2.blend" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/blender/seg2.blend1" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg2.blend1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/blender/seg3.blend" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg3.blend" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/blender/seg3.blend1" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg3.blend1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg2/seg2.bin" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg2/seg2.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg2/seg2.gltf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg2/seg2.gltf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg3/seg3.bin" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg3/seg3.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg3/seg3.gltf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg3/seg3.gltf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/prototypes/drone.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/drone.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/prototypes/freefly_player.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/freefly_player.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/prototypes/player.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/player.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/scenes/runshoot_gameplay.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scenes/runshoot_gameplay.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/shaders/default.frag" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/default.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/renderer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/3d.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/3d.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/convolution_reverb.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/convolution_reverb.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/dsp_effect_per_speaker.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/dsp_effect_per_speaker.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/effects.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/effects.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/gapless_playback.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/gapless_playback.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/granular_synth.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/granular_synth.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/load_from_memory.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/load_from_memory.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/make/play_sound.makefile" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/make/play_sound.makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/multiple_speaker.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/multiple_speaker.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/multiple_system.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/multiple_system.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/net_stream.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/net_stream.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/play_sound.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/play_sound.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/play_stream.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/play_stream.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/plugins/fmod_codec_raw.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/plugins/fmod_codec_raw.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/record.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/record.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/record_enumeration.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/record_enumeration.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/user_created_sound.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/examples/user_created_sound.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/inc/fmod.h" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/inc/fmod.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/inc/fmod.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/inc/fmod.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/inc/fmod_errors.h" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/fmod/linux/api/core/inc/fmod_errors.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/api/studio/examples/3d.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/fmod/linux/api/studio/examples/3d.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/api/studio/examples/3d_multi.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/fmod/linux/api/studio/examples/3d_multi.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/api/studio/examples/music_callbacks.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/fmod/linux/api/studio/examples/music_callbacks.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/api/studio/examples/objectpan.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/fmod/linux/api/studio/examples/objectpan.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/api/studio/examples/programmer_sound.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/fmod/linux/api/studio/examples/programmer_sound.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/api/studio/examples/recording_playback.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/fmod/linux/api/studio/examples/recording_playback.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thirdparty/fmod/linux/api/studio/examples/simple_event.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/fmod/linux/api/studio/examples/simple_event.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/seg1.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/seg1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/physics_models/aabb_collider.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics_models/aabb_collider.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/renderer/debug_drawer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/renderer/debug_drawer.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/sound_wrapper/sound_emitter_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/sound_wrapper/sound_emitter_component.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/physics/physics_world.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/physics/physics_world.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sound_wrapper/sound_emitter_component.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/sound_wrapper/sound_emitter_component.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sound_wrapper/sound_system.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/sound_wrapper/sound_system.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -415,7 +382,11 @@
       <workItem from="1574928187103" duration="6195000" />
       <workItem from="1574969296199" duration="6067000" />
       <workItem from="1575014328413" duration="3098000" />
-      <workItem from="1575053185195" duration="35205000" />
+      <workItem from="1575053185195" duration="48217000" />
+      <workItem from="1575183269683" duration="4619000" />
+      <workItem from="1575190936005" duration="2801000" />
+      <workItem from="1575232661187" duration="48000" />
+      <workItem from="1575232723143" duration="3175000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>

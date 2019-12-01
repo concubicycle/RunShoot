@@ -20,7 +20,7 @@
 
 player_controller::player_controller(events::event_exchange &events) :
     behavior(events),
-    _jump_debounce(std::chrono::duration<float>(0.4f), jump),
+    _jump_debounce(std::chrono::duration<float>(0.3f), jump),
     _turn_debounce(std::chrono::duration<float>(1.25f), adjust_turn_counter),
     _right_turn(glm::rotate(-glm::half_pi<float>(), glm::vec3(0, 1, 0))),
     _left_turn(glm::rotate(glm::half_pi<float>(), glm::vec3(0, 1, 0)))
@@ -129,10 +129,9 @@ void player_controller::update_running(ecs::entity &e, player_controller_compone
         player.target_yaw = cam.yaw - glm::half_pi<float>();
         player.turn_dir = left;
         player.turn_counter += player.turn_dir;
-
     }
 
-    t.yaw = player.target_yaw;
+//    t.yaw = player.target_yaw;
 
     integrate(e, rb, frame_time);
     update_player_look(e, ctx.input, frame_time);
@@ -140,7 +139,7 @@ void player_controller::update_running(ecs::entity &e, player_controller_compone
     player.time_since_collision += frame_time;
     player.time_since_grounded += frame_time;
 
-    if (player.time_since_grounded > 0.3f)
+    if (player.time_since_grounded > 0.45f)
     {
         player.state = player_state::airborne;
     }
@@ -177,7 +176,6 @@ void player_controller::update_turning(ecs::entity &e, player_controller_compone
     } else
     {
         player.current_turn_duration += frame_time;
-
         auto t_turn = player.turn_t();
         if (t_turn > 1)
         {
@@ -188,7 +186,6 @@ void player_controller::update_turning(ecs::entity &e, player_controller_compone
             player.direction = glm::normalize(player.previous_direction + t_turn * interp);
             rb.velocity = player.direction * glm::length(rb.velocity);
         }
-
         player.current_turn_duration += ctx.time.smoothed_delta_secs();
     }
 
@@ -263,14 +260,16 @@ void player_controller::resolve_collision(
         auto n_norm = glm::normalize(collision.collision_axis());
         rb.velocity -= n_norm * glm::dot(n, rb.velocity);
         rb.force.x = rb.force.y = rb.force.z = 0.f;
-    } else if (player.time_since_collision < 0.05f && n.y == 0)
-    {
+    }
+    //else if (player.time_since_collision < 0.05f && n.y == 0)
+    //{
         // resolving xz plane collisions can jerk the player around.
         // probably a problem with collision system - not sure if this
         // would happen with a non-kinematic object. either way, we can
         // cheat here.
-        rb.force += glm::vec3(0, 20, 0);
-    } else
+        //rb.force += glm::vec3(0, 20, 0);
+        //}
+    else
     {
         auto move = n * -1.01f;
         rb.velocity -= n * glm::dot(n, rb.velocity);
@@ -284,7 +283,7 @@ void player_controller::resolve_collision(
         if (player.time_since_grounded > 0.01f)
         {
             rb.force += glm::vec3(0, player.footstep_force, 0);
-            sound_emitter.sound_states[player.footstep_sound_index] = sound::playing;
+            sound_emitter.set_sound_state(player.footstep_sound_index, sound::playing);
             player.footstep_sound_index = (player.footstep_sound_index + 1) % 5 + 1;
         }
 
@@ -435,7 +434,7 @@ void player_controller::shoot(ecs::entity &e, core::behavior_context ctx)
         glm::linearRand(1.2f, 1.8f)
     };
 
-    sound.sound_states[0] = sound::playing;
+    sound.set_sound_state(0, sound::playing);
 
     e.graph_node->traverse([&e](ecs::entity& child_e, glm::mat4& transform) {
         if (e.id() == child_e.id()) return;

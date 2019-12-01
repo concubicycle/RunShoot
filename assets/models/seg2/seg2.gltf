@@ -37,7 +37,7 @@
             "translation" : [
                 13.616500854492188,
                 -2.3920464515686035,
-                -12.959590911865234
+                -10.455245971679688
             ]
         },
         {
@@ -57,7 +57,7 @@
             "translation" : [
                 24.455055236816406,
                 -10.323291778564453,
-                -16.217679977416992
+                -13.713335037231445
             ]
         },
         {
@@ -146,8 +146,8 @@
     "images" : [
         {
             "mimeType" : "image/png",
-            "name" : "seg1_rooftop",
-            "uri" : "seg1_rooftop.png"
+            "name" : "seg2_roof",
+            "uri" : "seg2_roof.png"
         },
         {
             "mimeType" : "image/jpeg",
@@ -163,12 +163,12 @@
             "max" : [
                 73.50856018066406,
                 5.667797088623047,
-                7.5733256340026855
+                10.077670097351074
             ],
             "min" : [
                 -342.1404724121094,
                 -6.277367115020752,
-                -426.5254821777344
+                -424.0211486816406
             ],
             "type" : "VEC3"
         },
@@ -193,29 +193,29 @@
         {
             "bufferView" : 4,
             "componentType" : 5126,
-            "count" : 588,
+            "count" : 594,
             "max" : [
-                70.97108459472656,
+                70.82245635986328,
                 -5.844095230102539,
-                7.528019905090332
+                2.6273317337036133
             ],
             "min" : [
-                -330.3299560546875,
-                -130.64739990234375,
-                -411.5859069824219
+                -337.1292419433594,
+                -339.692138671875,
+                -422.7914123535156
             ],
             "type" : "VEC3"
         },
         {
             "bufferView" : 5,
             "componentType" : 5126,
-            "count" : 588,
+            "count" : 594,
             "type" : "VEC3"
         },
         {
             "bufferView" : 6,
             "componentType" : 5126,
-            "count" : 588,
+            "count" : 594,
             "type" : "VEC2"
         },
         {
@@ -248,28 +248,28 @@
         },
         {
             "buffer" : 0,
-            "byteLength" : 7056,
+            "byteLength" : 7128,
             "byteOffset" : 20600
         },
         {
             "buffer" : 0,
-            "byteLength" : 7056,
-            "byteOffset" : 27656
+            "byteLength" : 7128,
+            "byteOffset" : 27728
         },
         {
             "buffer" : 0,
-            "byteLength" : 4704,
-            "byteOffset" : 34712
+            "byteLength" : 4752,
+            "byteOffset" : 34856
         },
         {
             "buffer" : 0,
             "byteLength" : 1848,
-            "byteOffset" : 39416
+            "byteOffset" : 39608
         }
     ],
     "buffers" : [
         {
-            "byteLength" : 41264,
+            "byteLength" : 41456,
             "uri" : "seg2.bin"
         }
     ]

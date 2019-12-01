@@ -29,8 +29,8 @@ public:
     float total_turn_duration {0.5f}; // total time to turn
     float current_turn_duration {0.f}; // tune already spent turning
     turn_direction turn_dir;
-    float previous_yaw;
-    float target_yaw;
+    float previous_yaw {0};
+    float target_yaw {0};
     std::int8_t turn_counter {0};
     float run_acceleration {0.02f};
 

@@ -217,31 +217,42 @@ void sound::sound_system::update_emitters()
         // TODO: Refactor
         for (std::uint32_t i = 0; i < e.sound_count; ++i)
         {
-            switch (e.sound_states[i])
+            auto& emitter_sound = e.emitter_sounds[i];
+
+            switch (emitter_sound.state)
             {
                 case sound_state::stopped:
                 {
-                    stop_sound(e.playback_ids[i]);
-                    e.playback_ids[i] = 0;
+                    stop_sound(emitter_sound.playback);
+                    emitter_sound.playback = 0;
                     break;
                 }
                 case sound_state::playing:
-                    e.playback_ids[i] = play_sound_3d(e.sound_path_hashes[i], e.loop_states[i]);
+                    emitter_sound.playback = play_sound_3d(emitter_sound.path_hash, emitter_sound.loop);
                 default:
                 {
-                    if (_playbacks.find(e.playback_ids[i]) == _playbacks.end()) break;
+                    if (_playbacks.find(emitter_sound.playback) == _playbacks.end()) break;
 
-                    auto& sound_channel =_playbacks.find(e.playback_ids[i])->second;
+                    auto& sound_channel =_playbacks.find(emitter_sound.playback)->second;
                     FMOD_VECTOR pos = { t.pos.x, t.pos.y, t.pos.z };
                     FMOD_VECTOR vel = rb_opt
                                       ? FMOD_VECTOR { rb_opt->get().velocity.x, rb_opt->get().velocity.y, rb_opt->get().velocity.z }
                                       : FMOD_VECTOR { 0.f, 0.f, 0.f };
 
                     sound_channel.second->set3DAttributes(&pos, &vel);
+
+                    sound_channel.second->setVolume(emitter_sound.volume);
+
+//                    if (emitter_sound.loop)
+//                    {
+//                        FMOD_MODE mode;
+//                        sound_channel.second->getMode(&mode);
+//                        sound_channel.second->setMode(mode | FMOD_LOOP_NORMAL);
+//                    }
                 }
             }
 
-            e.sound_states[i] = sound_state::unchanged;
+            emitter_sound.state = sound_state::unchanged;
         }
     }
 }

@@ -47,7 +47,7 @@ void drone_controller::update_single(ecs::entity &e, core::behavior_context &ctx
             l.intensity = 0;
 
             auto& emitter = e.get_component<sound::sound_emitter_component>();
-            emitter.sound_states[0] = sound::stopped;
+            emitter.set_sound_state(0, sound::stopped);
 
             component.active_after_destruction -= ctx.time.smoothed_delta_secs();
 
@@ -176,7 +176,7 @@ void drone_controller::friction(ecs::rigid_body_component &rb, drone_controller_
 void drone_controller::on_entity_created(ecs::entity &e)
 {
     auto& emitter = e.get_component<sound::sound_emitter_component>();
-    emitter.sound_states[0] = sound::playing;
-    emitter.loop_states[0] = true;
+    emitter.set_sound_state(0, sound::playing);
+    emitter.emitter_sounds[0].loop = true;
 }
 

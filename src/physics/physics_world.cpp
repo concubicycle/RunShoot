@@ -160,6 +160,12 @@ void physics::physics_world::forget_entity(ecs::entity &e)
 
     if (col_it != _collision_entities.end()) _collision_entities.erase(col_it);
     if (phys_it != _physical_entities.end()) _physical_entities.erase(phys_it);
+
+    _contacts.erase(std::remove_if(
+        _contacts.begin(),
+        _contacts.end(),
+        [&e](entity_contact &c) {
+            return c.one().id() == e.id() || c.two().id() == e.id();}), _contacts.end());
 }
 
 void physics::physics_world::resolve_collision_continuous(std::vector<physics::entity_contact>::iterator first_col)

@@ -31,18 +31,32 @@ namespace sound
         stopped
     };
 
+    struct emitter_sound
+    {
+        std::string path;
+        size_t path_hash;
+        sound_state state {uninitialized};
+        playback_id playback {0};
+        bool loop {false};
+        float volume {1.f};
+    };
+
     struct sound_emitter_component : ecs::component<sound_emitter_component>
     {
-        float volume{1.f};
-        bool enable_doppler{false};
-
-        std::string sounds[MAX_SOUNDS];
-        size_t sound_path_hashes[MAX_SOUNDS]{};
         std::uint16_t sound_count{0};
+        emitter_sound emitter_sounds[MAX_SOUNDS];
+        void add_sound(std::string path, size_t hash)
+        {
+            emitter_sounds[sound_count++] = {
+                path,
+                hash
+            };
+        }
 
-        sound_state sound_states[MAX_SOUNDS]{};
-        playback_id playback_ids[MAX_SOUNDS]{};
-        bool loop_states[MAX_SOUNDS]{};
+        void set_sound_state(std::uint32_t index, sound_state state)
+        {
+            emitter_sounds[index].state = state;
+        }
     };
 
     void load_sound_emitter(const json &j, ecs::entity &e, string_table &hashes);
