@@ -45,11 +45,16 @@ namespace sound
     {
         std::uint16_t sound_count{0};
         emitter_sound emitter_sounds[MAX_SOUNDS];
+
         void add_sound(std::string path, size_t hash)
+        {
             emitter_sounds[sound_count++] = { path, hash };
+        }
 
         void set_sound_state(std::uint32_t index, sound_state state)
+        {
             emitter_sounds[index].state = state;
+        }
     };
 
     void load_sound_emitter(const json &j, ecs::entity &e, string_table &hashes);
