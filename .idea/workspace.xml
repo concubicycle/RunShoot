@@ -2,26 +2,26 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="RunShoot" targetName="sound" />
-      <config projectName="RunShoot" targetName="glfw" />
-      <config projectName="RunShoot" targetName="spdlog" />
-      <config projectName="RunShoot" targetName="glm" />
-      <config projectName="RunShoot" targetName="asset" />
-      <config projectName="RunShoot" targetName="RunShoot" />
-      <config projectName="RunShoot" targetName="generate_colliders" />
-      <config projectName="RunShoot" targetName="ogllib" />
-      <config projectName="RunShoot" targetName="tests" />
-      <config projectName="RunShoot" targetName="glbinding" />
-      <config projectName="RunShoot" targetName="core" />
-      <config projectName="RunShoot" targetName="physics_models" />
-      <config projectName="RunShoot" targetName="physics" />
-      <config projectName="RunShoot" targetName="platform" />
-      <config projectName="RunShoot" targetName="ecs" />
       <config projectName="RunShoot" targetName="assimp" />
-      <config projectName="RunShoot" targetName="expected" />
-      <config projectName="RunShoot" targetName="memory" />
+      <config projectName="RunShoot" targetName="ogllib" />
+      <config projectName="RunShoot" targetName="glbinding" />
+      <config projectName="RunShoot" targetName="asset" />
+      <config projectName="RunShoot" targetName="generate_colliders" />
+      <config projectName="RunShoot" targetName="sound" />
       <config projectName="RunShoot" targetName="nlohmann_json" />
+      <config projectName="RunShoot" targetName="physics" />
+      <config projectName="RunShoot" targetName="tests" />
+      <config projectName="RunShoot" targetName="physics_models" />
+      <config projectName="RunShoot" targetName="RunShoot" />
+      <config projectName="RunShoot" targetName="glfw" />
+      <config projectName="RunShoot" targetName="memory" />
       <config projectName="RunShoot" targetName="renderer" />
+      <config projectName="RunShoot" targetName="ecs" />
+      <config projectName="RunShoot" targetName="core" />
+      <config projectName="RunShoot" targetName="spdlog" />
+      <config projectName="RunShoot" targetName="expected" />
+      <config projectName="RunShoot" targetName="glm" />
+      <config projectName="RunShoot" targetName="platform" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -31,9 +31,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/apps/components/death_trigger_component.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/components/death_trigger_component.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/components/add_custom_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/add_custom_components.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/components/player_controller_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/player_controller_component.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/components/runshoot_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/runshoot_component.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/player_controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/player_controller.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/blender/seg1.blend" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg1.blend" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/blender/seg1.blend1" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg1.blend1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg1/seg1.bin" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg1/seg1.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg1/seg1.gltf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg1/seg1.gltf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/player.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/player.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/seg1.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/seg1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/scenes/scene.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scenes/scene.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ecs/chunk_component_accessor.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/chunk_component_accessor.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/physics_models/aabb_collider.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics_models/aabb_collider.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ecs/chunk_component_accessor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ecs/chunk_component_accessor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ecs/entity_world.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ecs/entity_world.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -79,7 +97,7 @@
   </component>
   <component name="OCFindUsagesOptions" text="false" ivars="false" properties="true" derivedClasses="false" />
   <component name="OCResolveContextSettings">
-    <option name="configuration" value="0-sound" />
+    <option name="configuration" value="0-RunShoot" />
   </component>
   <component name="ProjectId" id="1RkfA0cXEQvRmvTns35yj62oy90" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -364,7 +382,8 @@
       <workItem from="1575183269683" duration="4619000" />
       <workItem from="1575190936005" duration="2801000" />
       <workItem from="1575232661187" duration="48000" />
-      <workItem from="1575232723143" duration="11064000" />
+      <workItem from="1575232723143" duration="23538000" />
+      <workItem from="1575319143328" duration="3969000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>
@@ -373,7 +392,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570224484090</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="test commit from clion">
+      <created>1575267865997</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1575267865998</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -407,6 +433,7 @@
     </ignored-roots>
     <MESSAGE value="ECS stuff" />
     <MESSAGE value="ECS stuff and cmake config" />
-    <option name="LAST_COMMIT_MESSAGE" value="ECS stuff and cmake config" />
+    <MESSAGE value="test commit from clion" />
+    <option name="LAST_COMMIT_MESSAGE" value="test commit from clion" />
   </component>
 </project>

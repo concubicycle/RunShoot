@@ -40,8 +40,6 @@ ecs::entity &ecs::entity_world::get_entity(entity_id id)
     return _entity_lookup.find(id)->second;
 }
 
-std::atomic_uint ecs::entity_world::next_entity_id = 1;
-
 void ecs::entity_world::remove_entity(entity_id entity_id)
 {
     auto it = _entity_lookup.find(entity_id);
@@ -55,3 +53,5 @@ void ecs::entity_world::remove_entity(entity_id entity_id)
     _entity_lookup.erase(it);
 }
 
+
+std::atomic_uint ecs::entity_world::next_entity_id = 100000;

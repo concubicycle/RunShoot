@@ -84,7 +84,7 @@ add_executable(${TARGET_NAME}
                apps/components/music_player_component.cpp
                apps/components/music_player_component.hpp
                apps/music_player.cpp
-               apps/music_player.hpp)
+               apps/music_player.hpp apps/components/death_trigger_component.cpp apps/components/death_trigger_component.hpp)
 			   
 install(TARGETS ${TARGET_NAME} DESTINATION bin)
 

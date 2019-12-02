@@ -20,7 +20,11 @@
       },
       {
         "component_bitshift": 20,
-        "end_position": [0,0,-520],
+        "end_position": [
+          0,
+          0,
+          -520
+        ],
         "turn": 0
       },
       {
@@ -389,5 +393,43 @@
         ]
       }
     ]
-  }
+  },
+  "children": [
+    {
+      "components": [
+        {
+          "component_bitshift": 0,
+          "x": 0,
+          "y": 10,
+          "z": -320,
+          "pitch": 0,
+          "yaw": 0,
+          "roll": 0,
+          "scale_x": 30.0,
+          "scale_y": 1.0,
+          "scale_z": 1.0
+        },
+        {
+          "component_bitshift": 26
+        },
+        {
+          "component_bitshift": 4,
+          "colliders": [
+            {
+              "max": [
+                2,
+                2,
+                2
+              ],
+              "min": [
+                -2,
+                -2,
+                -2
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

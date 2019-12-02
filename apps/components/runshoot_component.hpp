@@ -19,6 +19,7 @@ enum runshoot_component
     DroneSpawner = MAX_BASIC_COMPONENTS + 7, // 23
     MusicPlayer = MAX_BASIC_COMPONENTS + 8, // 24
     SoundEmitter = MAX_BASIC_COMPONENTS + 9, // 25
+    DeathTrigger = MAX_BASIC_COMPONENTS + 10, // 26
 };
 
 #endif //__RUNSHOOT_COMPONENT_HPP_

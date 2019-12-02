@@ -23,7 +23,6 @@ enum player_state
 class player_controller_component : public ecs::component<player_controller_component>
 {
 public:
-
     glm::vec3 previous_direction {0.f, 0.f, -1.f};
     glm::vec3 direction { 0.f, 0.f, -1.f};
     glm::vec3 target_direction { 0.f, 0.f, -1.f };
@@ -54,11 +53,26 @@ public:
 
     std::uint8_t footstep_sound_index = 1;
 
+    float total_slide_duration { 1.f };
+    float drop_speed { 5.f };
+    float current_slide_duration {0.f};
+    glm::vec3 original_to_camera {0.f};
+    glm::vec3 target_to_camera {0.f};
+    glm::vec3 slide_to_camera_offset {0.f, -5, 0.f};
+    float down_t {0.2f};
+    float up_t {0.8f};
+
 
     // 0...1 value used to interpolate between previous and target direction
     float turn_t()
     {
         return current_turn_duration / total_turn_duration;
+    }
+
+    // 0...1 value used to interpolate between previous and target direction
+    float slide_t()
+    {
+        return current_slide_duration / total_slide_duration;
     }
 };
 

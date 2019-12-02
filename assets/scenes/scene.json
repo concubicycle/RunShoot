@@ -5,29 +5,12 @@
       "prototype": "./assets/prototypes/seg1.json"
     },
     {
-      "entity_id": 111,
-      "prototype": "./assets/prototypes/freefly_player.json",
+      "entity_id": 3,
+      "prototype": "./assets/prototypes/seg1.json",
       "components": [
         {
           "component_bitshift": 0,
-          "y": 20
-        }
-      ]
-    },
-    {
-      "entity_id": 133,
-      "prototype": "./assets/prototypes/drone.json"
-    },
-    {
-      "entity_id": 4,
-      "prototype": "./assets/prototypes/phys_cube.json"
-    },
-    {
-      "entity_id": 6,
-      "components": [
-        {
-          "component_bitshift": 0,
-          "x": 0,
+          "x": 50,
           "y": 3,
           "z": -9,
           "pitch": 0,
@@ -36,118 +19,18 @@
           "scale_x": 1.0,
           "scale_y": 1.0,
           "scale_z": 1.0
-        },
-        {
-          "component_bitshift": 2,
-          "mesh_path": "./assets/models/cube/cube.gltf",
-          "mesh_format": 2
-        },
-        {
-          "component_bitshift": 4,
-          "colliders": [
-            {
-              "min": [
-                -1,
-                -1,
-                -1
-              ],
-              "max": [
-                1,
-                1,
-                1
-              ]
-            }
-          ]
         }
       ]
     },
     {
-      "entity_id": 7,
-      "prototype": "./assets/prototypes/phys_cube.json",
+      "entity_id": 111,
+      "prototype": "./assets/prototypes/freefly_player.json",
       "components": [
         {
           "component_bitshift": 0,
-          "x": 0,
-          "y": 50,
-          "z": -9
+          "y": 20
         }
       ]
-    },
-    {
-      "entity_id": 8,
-      "prototype": "./assets/prototypes/phys_cube.json",
-      "components": [
-        {
-          "component_bitshift": 0,
-          "x": 0,
-          "y": 35,
-          "z": -35
-        }
-      ]
-    },
-    {
-      "entity_id": 9,
-      "prototype": "./assets/prototypes/phys_cube.json",
-      "components": [
-        {
-          "component_bitshift": 0,
-          "x": 0,
-          "y": 35,
-          "z": -45
-        }
-      ]
-    },
-    {
-      "entity_id": 10,
-      "prototype": "./assets/prototypes/phys_cube.json",
-      "components": [
-        {
-          "component_bitshift": 0,
-          "x": 3,
-          "y": 35,
-          "z": -50
-        }
-      ]
-    },
-    {
-      "entity_id": 11,
-      "prototype": "./assets/prototypes/phys_cube.json",
-      "components": [
-        {
-          "component_bitshift": 0,
-          "x": -5,
-          "y": 35,
-          "z": -40
-        }
-      ]
-    },
-    {
-      "entity_id": 12,
-      "prototype": "./assets/prototypes/phys_cube.json",
-      "components": [
-        {
-          "component_bitshift": 0,
-          "x": 0,
-          "y": 50,
-          "z": 25
-        }
-      ]
-    },
-    {
-      "entity_id": 13,
-      "prototype": "./assets/prototypes/phys_cube.json",
-      "components": [
-        {
-          "component_bitshift": 0,
-          "x": 9,
-          "y": 35,
-          "z": -30
-        }
-      ]
-    },
-    {
-      "entity_id": 14,
-      "prototype": "./assets/prototypes/cube_marker.json"
     }
   ]
 }

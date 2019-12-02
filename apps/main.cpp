@@ -154,10 +154,10 @@ void render_loop(game_systems &systems, behaviors &behaviors)
 
 void (*build_framebuffer_callback(rendering::renderer& r))(GLFWwindow*, int, int)
 {
-    static rendering::renderer& renderer = r;
+    static rendering::renderer& r_ref = r;
 
     void (*callback)(GLFWwindow*, int, int) = ([](GLFWwindow* window, int width, int height) {
-        renderer.resize(width, height);
+        rendering::renderer::resize(width, height);
     });
 
     return callback;

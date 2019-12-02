@@ -87,10 +87,6 @@ namespace physics_models
 
         void set_transform(glm::mat4& transform) override
         {
-            float w1 = _shape.max.x - _shape.min.x;
-            float h1 = _shape.max.y - _shape.min.y;
-            float d1 = _shape.max.z - _shape.min.z;
-
             glm::vec3 min = transform * glm::vec4(_shape_original.min, 1);
             glm::vec3 max = transform * glm::vec4(_shape_original.max, 1);
 
@@ -101,24 +97,6 @@ namespace physics_models
             _shape.max.x = glm::max(min.x, max.x);
             _shape.max.y = glm::max(min.y, max.y);
             _shape.max.z = glm::max(min.z, max.z);
-
-            float w2 = _shape.max.x - _shape.min.x;
-            float h2 = _shape.max.y - _shape.min.y;
-            float d2 = _shape.max.z - _shape.min.z;
-
-
-            if (glm::epsilonNotEqual<float>(w1, w2, 0.01f) ||
-                glm::epsilonNotEqual<float>(h1, h2, 0.01f) ||
-                glm::epsilonNotEqual<float>(d1, d2, 0.01f))
-            {
-                int i = 0;
-                i++;
-            }
-            else if (w1 > w2 && d1 > d2)
-            {
-                int i = 0;
-                i++;
-            }
         }
 
         aabb &shape() { return _shape; }

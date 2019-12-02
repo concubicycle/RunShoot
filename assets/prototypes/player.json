@@ -82,7 +82,8 @@
           "./assets/sound/footstep2.wav",
           "./assets/sound/footstep3.wav",
           "./assets/sound/footstep4.wav",
-          "./assets/sound/footstep5.wav"
+          "./assets/sound/footstep5.wav",
+          "./assets/sound/slide.wav"
         ]
       },
       {

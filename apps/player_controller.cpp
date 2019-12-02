@@ -62,6 +62,9 @@ void player_controller::update_single(ecs::entity &e, core::behavior_context &ct
         case turning:
             update_turning(e, player, ctx);
             break;
+        case sliding:
+            update_sliding(e, player, ctx);
+            break;
         case dying:
             break;
         case dead:
@@ -104,6 +107,7 @@ void player_controller::update_running(ecs::entity &e, player_controller_compone
     auto &rb = e.get_component<ecs::rigid_body_component>();
     auto &t = e.get_component<ecs::transform_component>();
     auto &cam = e.get_component<ecs::camera_component>();
+    auto &sound = e.get_component<sound::sound_emitter_component>();
 
     if (ctx.input.was_key_pressed(GLFW_KEY_SPACE))
     {
@@ -129,6 +133,13 @@ void player_controller::update_running(ecs::entity &e, player_controller_compone
         player.target_yaw = cam.yaw - glm::half_pi<float>();
         player.turn_dir = left;
         player.turn_counter += player.turn_dir;
+    } else if (ctx.input.was_key_pressed(GLFW_KEY_S) || ctx.input.was_key_pressed(GLFW_KEY_LEFT_CONTROL))
+    {
+        player.state = sliding;
+        player.original_to_camera = player.to_camera;
+        player.target_to_camera = player.to_camera + player.slide_to_camera_offset;
+        t.scale_y = 0.5f;
+        sound.emitter_sounds[6].state = sound::playing;
     }
 
 //    t.yaw = player.target_yaw;
@@ -191,6 +202,44 @@ void player_controller::update_turning(ecs::entity &e, player_controller_compone
 
     integrate(e, rb, frame_time);
     update_turn_look(e);
+}
+
+void player_controller::update_sliding(ecs::entity &e, player_controller_component &player, core::behavior_context &ctx)
+{
+    auto frame_time = ctx.time.smoothed_delta_secs();
+    auto &rb = e.get_component<ecs::rigid_body_component>();
+    auto &t = e.get_component<ecs::transform_component>();
+    auto &cam = e.get_component<ecs::camera_component>();
+
+    player.current_slide_duration += frame_time;
+
+    float slide_t = player.slide_t();
+
+    if (slide_t < player.down_t)
+    {
+        auto offset = slide_t / player.down_t * player.slide_to_camera_offset;
+        player.to_camera = player.original_to_camera + offset;
+    }
+
+    if (slide_t > player.up_t)
+    {
+        auto current_up_t = glm::length(slide_t - player.up_t) / glm::length(1.f - player.up_t);
+        auto offset = (1.f - current_up_t) * player.slide_to_camera_offset;
+        player.to_camera = player.original_to_camera + offset;
+
+    }
+
+    if (player.current_slide_duration > player.total_slide_duration)
+    {
+        player.state = running;
+        player.to_camera = player.original_to_camera;
+        player.current_slide_duration = 0.f;
+
+        t.scale_y = 1.f;
+    }
+
+    integrate(e, rb, frame_time);
+    update_player_look(e, ctx.input, ctx.time.smoothed_delta_secs());
 }
 
 void player_controller::update_turn_look(ecs::entity &e)
@@ -435,6 +484,7 @@ void player_controller::shoot(ecs::entity &e, core::behavior_context ctx)
     };
 
     sound.set_sound_state(0, sound::playing);
+    sound.emitter_sounds[0].volume = 0.25f;
 
     e.graph_node->traverse([&e](ecs::entity& child_e, glm::mat4& transform) {
         if (e.id() == child_e.id()) return;

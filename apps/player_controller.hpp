@@ -58,6 +58,9 @@ private:
 
     static void update_turning(ecs::entity &e, player_controller_component &player, core::behavior_context &ctx);
 
+    static void update_sliding(ecs::entity &e, player_controller_component &player, core::behavior_context &ctx);
+
+
     static void update_player_look(ecs::entity &e, core::input_manager &input, float frame_time);
 
     static void update_turn_look(ecs::entity &e);

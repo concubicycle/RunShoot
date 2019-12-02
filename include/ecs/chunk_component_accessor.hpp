@@ -30,8 +30,6 @@ namespace ecs
     public:
         chunk_component_accessor(void *chunk_ptr, component_bitset archetype_id);
 
-        chunk_component_accessor(const chunk_component_accessor &other);
-
         void *ptr() const { return _chunk_ptr; }
 
         /**
@@ -49,25 +47,7 @@ namespace ecs
             return (T *) get_component(component<T>::component_bitshift);
         }
 
-        void* get_component(std::uint8_t component_bitshift)
-        {
-            auto cursor = _header;
-            auto count = _description.component_count;
-
-            while (count-- > 0)
-            {
-                auto chunk_ptr_byte = (uintptr_t) _chunk_ptr;
-
-                if (cursor->component_bitshift == component_bitshift)
-                {
-                    return (void *) (chunk_ptr_byte + cursor->component_offset);
-                }
-
-                cursor++;
-            }
-
-            return nullptr;
-        }
+        void* get_component(std::uint8_t component_bitshift);
 
 
         /**
