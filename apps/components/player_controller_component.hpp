@@ -15,6 +15,7 @@ enum player_state
     running,
     airborne,
     turning,
+    sliding,
     dying,
     dead
 };

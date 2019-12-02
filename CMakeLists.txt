@@ -89,18 +89,15 @@ add_executable(${TARGET_NAME}
 install(TARGETS ${TARGET_NAME} DESTINATION bin)
 
 add_executable(generate_colliders apps/generate_colliders.cpp)
-
 add_executable(tests tests/main.cpp)
 
 
 include(add_glfw)
 include(add_nlohmann_json)
-#include (add_warnings) # will break windows build due to warnings in thirdparty libs
 include(add_glm)
 include(add_spdlog)
 include(add_expected)
-include(add_assimp) # causes weird build issue on windows - can't close zlib.lib
-# include(add_tinygltf)
+include(add_assimp)
 include(add_glbinding)
 include(add_fmod)
 
@@ -129,7 +126,6 @@ include_directories(${TARGET_NAME}
                     ${SPDLOG_INCLUDE}
                     ${ASSIMP_INCLUDE}
                     thirdparty/opengllib/include
-                    #${TINYGLTF_INCLUDE}
                     ${FMOD_INCLUDE_DIRS}
                     )
 
@@ -183,15 +179,13 @@ add_dependencies(${TARGET_NAME}
                  expected)
 
 add_dependencies(${ASSETLIB_NAME}
-                 #tinygltf
                  scene
                  ${ECS_LIB}
                  expected
                  ${OGLLIB_NAME}
                  nlohmann_json
                  glbinding
-                 assimp
-                 )
+                 assimp)
 
 add_dependencies(generate_colliders
                  expected
