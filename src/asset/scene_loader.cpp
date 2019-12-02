@@ -17,9 +17,9 @@ asset::scene_loader::scene_loader(prototype_spawner& spawner) :
     _spawner(spawner)
     {}
 
-asset::scene asset::scene_loader::load_scene(const std::string& file_path, ecs::entity_world &world)
+void asset::scene_loader::load_scene(const std::string& file_path, ecs::entity_world &world, asset::scene& scene)
 {
-    asset::scene scene(_spawner, world);
+    //asset::scene scene(_spawner, world);
     std::ifstream i(file_path);
     json scene_json;
     i >> scene_json;
@@ -30,6 +30,4 @@ asset::scene asset::scene_loader::load_scene(const std::string& file_path, ecs::
         json prototype = _spawner.inflate_prototype(entity_json);
         _spawner.load_prototype(prototype, world, scene.scene_graph(), id);
     }
-
-    return scene;
 }

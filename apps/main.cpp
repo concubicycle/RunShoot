@@ -107,7 +107,8 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     drone_spawner drone_spawn(events);
     music_player music(events, app_string_table, game_sound);
 
-    auto scene = loader.load_scene("./assets/scenes/runshoot_gameplay.json", entities);
+	asset::scene scene(spawner, entities);
+    loader.load_scene("./assets/scenes/runshoot_gameplay.json", entities, scene);
 
     renderer.init();
     glfwSetFramebufferSizeCallback(window, build_framebuffer_callback(renderer));

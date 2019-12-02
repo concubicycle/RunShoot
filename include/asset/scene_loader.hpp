@@ -32,7 +32,7 @@ namespace asset
     public:
         explicit scene_loader(prototype_spawner& spawner);
 
-        asset::scene load_scene(const std::string& file_path, ecs::entity_world& world);
+        void load_scene(const std::string& file_path, ecs::entity_world& world, asset::scene& scene);
 
     private:
         prototype_spawner& _spawner;

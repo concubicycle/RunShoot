@@ -26,14 +26,9 @@ namespace asset
             _entity_world(world),
             _scene_graph(extract_transform) {}
 
-        scene(scene &&other) :
-            _spawner(other._spawner),
-            _entity_world(other._entity_world),
-            _scene_graph(std::move(other._scene_graph))
-        {
-            int i = 0;
-            i++;
-        }
+		~scene()
+		{
+		}
 
         ecs::entity_world &entity_world() { return _entity_world; }
 

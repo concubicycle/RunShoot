@@ -85,6 +85,8 @@ add_executable(${TARGET_NAME}
                apps/components/music_player_component.hpp
                apps/music_player.cpp
                apps/music_player.hpp)
+			   
+install(TARGETS ${TARGET_NAME} DESTINATION bin)
 
 add_executable(generate_colliders apps/generate_colliders.cpp)
 
@@ -249,5 +251,3 @@ if (CMAKE_DL_LIBS)
 endif ()
 
 
-set (CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR}/install)
-install(TARGETS ${TARGET_NAME} DESTINATION bin)
