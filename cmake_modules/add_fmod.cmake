@@ -53,23 +53,23 @@ elseif (UNIX)
     set(FMOD_DIR ${PROJECT_SOURCE_DIR}/thirdparty/fmod/linux)
 
     set(FMOD_CORE_LIBS
-        libfmod)
+        fmod)
 
     set(FMOD_CORE_DEBUG_LIBS
-        libfmodL)
+        fmodL)
 
     set(FMOD_STUDIO_LIBS
-        libfmodstudio)
+        fmodstudio)
 
     set(FMOD_STUDIO_DEBUG_LIBS
-        libfmodstudioL)
+        fmodstudioL)
 
     set(FMOD_FSBANK_LIB
-        libfsbank
-        libfsbvorbis)
+        fsbank
+        fsbvorbis)
 
     set(FMOD_FSBANK_DEBUG_LIBS
-        libfsbankL)
+        fsbankL)
 		
 	set(FMOD_ARCH x86_64)
 

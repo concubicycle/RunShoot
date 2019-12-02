@@ -3,8 +3,7 @@ include(ExternalProject)
 ExternalProject_Add(assimp
     PREFIX assimp
     GIT_REPOSITORY https://github.com/assimp/assimp.git
-    GIT_TAG master
-	GIT_SHALLOW TRUE
+    GIT_TAG v5.0.0
     CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${EXTERNAL_INSTALL_LOCATION}/assimp
         -DBUILD_SHARED_LIBS=OFF
         -DASSIMP_BUILD_TESTS=OFF

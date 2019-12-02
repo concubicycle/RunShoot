@@ -2,26 +2,26 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="RunShoot" targetName="ogllib" />
-      <config projectName="RunShoot" targetName="glbinding" />
-      <config projectName="RunShoot" targetName="asset" />
-      <config projectName="RunShoot" targetName="generate_colliders" />
       <config projectName="RunShoot" targetName="sound" />
-      <config projectName="RunShoot" targetName="ecs" />
-      <config projectName="RunShoot" targetName="nlohmann_json" />
-      <config projectName="RunShoot" targetName="tests" />
-      <config projectName="RunShoot" targetName="assimp" />
-      <config projectName="RunShoot" targetName="physics_models" />
-      <config projectName="RunShoot" targetName="RunShoot" />
       <config projectName="RunShoot" targetName="glfw" />
-      <config projectName="RunShoot" targetName="physics" />
-      <config projectName="RunShoot" targetName="renderer" />
-      <config projectName="RunShoot" targetName="memory" />
-      <config projectName="RunShoot" targetName="core" />
       <config projectName="RunShoot" targetName="spdlog" />
-      <config projectName="RunShoot" targetName="expected" />
       <config projectName="RunShoot" targetName="glm" />
+      <config projectName="RunShoot" targetName="asset" />
+      <config projectName="RunShoot" targetName="RunShoot" />
+      <config projectName="RunShoot" targetName="generate_colliders" />
+      <config projectName="RunShoot" targetName="ogllib" />
+      <config projectName="RunShoot" targetName="tests" />
+      <config projectName="RunShoot" targetName="glbinding" />
+      <config projectName="RunShoot" targetName="core" />
+      <config projectName="RunShoot" targetName="physics_models" />
+      <config projectName="RunShoot" targetName="physics" />
       <config projectName="RunShoot" targetName="platform" />
+      <config projectName="RunShoot" targetName="ecs" />
+      <config projectName="RunShoot" targetName="assimp" />
+      <config projectName="RunShoot" targetName="expected" />
+      <config projectName="RunShoot" targetName="memory" />
+      <config projectName="RunShoot" targetName="nlohmann_json" />
+      <config projectName="RunShoot" targetName="renderer" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -31,7 +31,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/include/sound_wrapper/sound_emitter_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/sound_wrapper/sound_emitter_component.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/player.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/player.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake_modules/add_assimp.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake_modules/add_assimp.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake_modules/add_expected.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake_modules/add_expected.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake_modules/add_fmod.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake_modules/add_fmod.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake_modules/add_glbinding.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake_modules/add_glbinding.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake_modules/add_glfw.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake_modules/add_glfw.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake_modules/add_nlohmann_json.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake_modules/add_nlohmann_json.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake_modules/add_spdlog.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake_modules/add_spdlog.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake_modules/add_tinygltf.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake_modules/add_tinygltf.cmake" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -362,7 +371,7 @@
       <workItem from="1575183269683" duration="4619000" />
       <workItem from="1575190936005" duration="2801000" />
       <workItem from="1575232661187" duration="48000" />
-      <workItem from="1575232723143" duration="3259000" />
+      <workItem from="1575232723143" duration="5666000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>

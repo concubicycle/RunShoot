@@ -107,7 +107,7 @@
         },
         {
           "component_bitshift": 3,
-          "color": [1, 0.8, 0],
+          "color": [1, 0.6, 0],
           "intensity": 30
         }
       ]

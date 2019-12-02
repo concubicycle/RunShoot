@@ -3,7 +3,7 @@ include(ExternalProject)
 ExternalProject_Add(glbinding
     PREFIX glbinding
     GIT_REPOSITORY https://github.com/cginternals/glbinding.git
-    GIT_TAG v3.1
+    GIT_TAG v3.1.0
 	GIT_SHALLOW TRUE
     CMAKE_ARGS  -DCMAKE_INSTALL_PREFIX=${EXTERNAL_INSTALL_LOCATION}/glbinding
                 -DOPTION_BUILD_EXAMPLES=OFF
