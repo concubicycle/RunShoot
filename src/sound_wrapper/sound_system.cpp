@@ -28,7 +28,7 @@ FMOD_RESULT F_CALLBACK channelGroupCallback(FMOD_CHANNELCONTROL *channelControl,
                                             void *commandData1,
                                             void *commandData2)
 {
-    spdlog::info("FMod: channel control {0}, control type {1}");
+    // too noisy spdlog::info("FMod: channel control {0}, control type {1}");
     return FMOD_OK;
 }
 

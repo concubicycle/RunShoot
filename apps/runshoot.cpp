@@ -2,17 +2,13 @@
 // Created by sava on 10/18/19.
 //
 
-/////////////
-#include <glbinding/glbinding.h>
-#include <glbinding/gl/gl.h>
-#include <GLFW/glfw3.h>
-
-using namespace gl;
-using namespace glbinding;
-using GLenum = gl::GLenum;
-//////////////
 
 #include "runshoot.hpp"
+
+
+/////////////
+#include <glbinding/glbinding.h>
+//////////////
 
 
 

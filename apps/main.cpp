@@ -1,16 +1,11 @@
-#define _M3D_H_
-
-/////////////
-#include <GLFW/glfw3.h>
-#include <glbinding/glbinding.h>
-#include <glbinding/gl/gl.h>
-
-using namespace gl;
-using namespace glbinding;
-using GLenum = gl::GLenum;
-//////////////
-
 #include <chrono>
+
+#include <core/frame_limiter.hpp>
+#include <core/frame_timer.hpp>
+#include <core/startup_config.hpp>
+#include <core/system_info.hpp>
+#include <core/input_manager.hpp>
+
 
 #include <asset/texture_manager.hpp>
 #include <asset/basic_mesh_reader.hpp>
@@ -18,11 +13,7 @@ using GLenum = gl::GLenum;
 #include <asset/assimp_loader.hpp>
 #include <asset/prototype_loader.hpp>
 
-#include <core/frame_limiter.hpp>
-#include <core/frame_timer.hpp>
-#include <core/input_manager.hpp>
-#include <core/startup_config.hpp>
-#include <core/system_info.hpp>
+
 #include <ecs/entity_factory.hpp>
 #include <ecs/entity_world.hpp>
 #include <events/event_exchange.hpp>
@@ -39,6 +30,12 @@ using GLenum = gl::GLenum;
 #include "drone_spawner.hpp"
 #include "music_player.hpp"
 
+
+/////////////
+#include <GLFW/glfw3.h>
+//////////////
+
+
 using float_seconds = std::chrono::duration<float>;
 
 
@@ -47,7 +44,7 @@ void (*build_framebuffer_callback(rendering::renderer& r))(GLFWwindow*, int, int
 
 int main()
 {
-    std::srand (std::time(nullptr));
+	std::srand(std::time(0)); //use current time as seed for random generator
 
 
     core::startup_config conf = core::startup_config();

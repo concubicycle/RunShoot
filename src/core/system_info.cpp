@@ -4,6 +4,12 @@
 
 #include <core/system_info.hpp>
 
+#if (WIN32)
+#define NOMINMAX
+#include <windows.h>
+
+#endif
+
 #include <GLFW/glfw3.h>
 
 core::system_info::system_info()

@@ -117,7 +117,7 @@ namespace rendering
 
                 auto &aabbs = e.get().get_component<ecs::aabb_collider_component>();
 
-                for (int i = 0; i < aabbs.count; ++i)
+                for (unsigned int i = 0; i < aabbs.count; ++i)
                 {
                     auto &min = aabbs.colliders[i].shape().min;
                     auto &max = aabbs.colliders[i].shape().max;

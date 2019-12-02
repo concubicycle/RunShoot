@@ -66,9 +66,9 @@ public:
                 glm::vec3(spawner.horizontal_spawn_offset, spawner.vertical_spawn_offset, 0) +
                 player.direction * 20.f;
 
-            drone.horizontal_offset = rand() % 40 - 20;
-            drone.vertical_offset = rand() % 13 - 5;
-            drone.z_offset = rand() % 30 - 15;
+            drone.horizontal_offset = (float)(rand() % 40) - 20.f;
+            drone.vertical_offset = (float)(rand() % 13) - 5.f;
+            drone.z_offset = (float)(rand() % 30) - 15.f;
         }
     }
 

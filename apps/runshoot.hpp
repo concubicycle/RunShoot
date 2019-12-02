@@ -5,7 +5,7 @@
 #ifndef __RUNSHOOT_HPP_
 #define __RUNSHOOT_HPP_
 
-#include <GLFW/glfw3.h>
+
 #include <core/frame_timer.hpp>
 #include <core/input_manager.hpp>
 #include <renderer/renderer.hpp>
@@ -20,7 +20,12 @@
 #include "drone_spawner.hpp"
 #include "music_player.hpp"
 
+#if (WIN32)
+#define NOMINMAX
+#include <windows.h>
+#endif
 
+#include <GLFW/glfw3.h>
 
 struct game_systems
 {

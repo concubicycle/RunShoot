@@ -5,13 +5,18 @@
 #ifndef __INPUT_MANAGER_HPP_
 #define __INPUT_MANAGER_HPP_
 
-#include <GLFW/glfw3.h>
+
 #include <cstdint>
 #include <cstring>
 
 #include <util/running_average.hpp>
 #include <glm/vec2.hpp>
 
+#if (WIN32)
+#define NOMINMAX
+#include <windows.h>
+#endif
+#include <GLFW/glfw3.h>
 
 namespace core
 {

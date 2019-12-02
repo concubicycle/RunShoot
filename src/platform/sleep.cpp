@@ -23,7 +23,10 @@ void os::sleep(std::chrono::nanoseconds nanos)
 
 
 #if (WIN32)
+
+#define NOMINMAX
 #include <windows.h>
+
 #include <timeapi.h>
 
 void os::sleep(std::chrono::nanoseconds nanos)

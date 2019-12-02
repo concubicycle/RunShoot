@@ -30,3 +30,5 @@ add_library(ogllib STATIC
             include/vertex_pntx2d.h include/cubemap.hpp cubemap.cpp)
 
 target_include_directories(ogllib PUBLIC ./include ../../external/glbinding/include)
+
+target_compile_features(ogllib PUBLIC cxx_std_17)

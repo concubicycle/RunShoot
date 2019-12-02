@@ -151,8 +151,8 @@ void drone_controller::thrust_toward_target(ecs::entity &e)
 
     if (to_target.y < 0) to_target.y = 0.1f;
     to_target.y *= 2;
-    to_target.x *= .65;
-    to_target.z *= .65;
+    to_target.x *= .65f;
+    to_target.z *= .65f;
 
     rb.force += to_target * drone.acceleration;
 }
