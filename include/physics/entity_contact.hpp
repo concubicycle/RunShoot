@@ -25,6 +25,8 @@ namespace physics
         [[nodiscard]] const physics_models::contact &contact() const { return _contact; }
         [[nodiscard]] const glm::vec3& collision_axis() const { return _contact.collision_axis(); }
         [[nodiscard]] float time() const { return _contact.time(); }
+        [[nodiscard]] float is_no_collision() const { return _contact.time() == physics_models::contact::NoCollision; }
+
 
         void decrement_time(float amount) { _contact.decrement_time(amount); }
 

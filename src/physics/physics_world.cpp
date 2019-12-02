@@ -60,6 +60,9 @@ void physics::physics_world::detect_collisions()
             _contacts.emplace_back(e1, e2, _collisions.check_collision_and_generate_contact(e1, e2));
         }
     }
+
+    _contacts.erase(std::remove_if(_contacts.begin(), _contacts.end(),
+        [](entity_contact &c) { return c.is_no_collision();}), _contacts.end());
 }
 
 void physics::physics_world::resolve_collisions(float frame_time)
@@ -92,6 +95,10 @@ void physics::physics_world::resolve_collisions(float frame_time)
 
         frame_time -= dt;
     }
+
+    if (frame_time > 0)
+        for (auto &e : _physical_entities)
+            integrate_position(e, frame_time);
 }
 
 
