@@ -5,6 +5,8 @@
 #ifndef __SCENE_GRAPH_NODE_BASE_HPP_
 #define __SCENE_GRAPH_NODE_BASE_HPP_
 
+#include <optional>
+
 #include <glm/mat4x4.hpp>
 #include <functional>
 
