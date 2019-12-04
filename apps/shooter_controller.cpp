@@ -40,7 +40,9 @@ void shooter_controller::update_yaw(ecs::entity &e)
     auto player_t = player->get().graph_node->absolute_transform();
     auto player_pos = player_t[3];
 
-    glm::vec3 original_xz(0, 0, -1);
+    auto rot = glm::mat3(t);
+
+    glm::vec3 original_xz = rot * glm::vec3(0, 0, -1);
     glm::vec3 original_xz_left(-1, 0, 0);
     glm::vec3 to_player = glm::normalize(player_pos - pos);
     to_player.y = 0;
@@ -91,36 +93,7 @@ void shooter_controller::update_shooting(ecs::entity &e, core::behavior_context 
 
     if (!shooter.did_shoot)
     {
-        auto& sound_emitter = e.get_component<sound::sound_emitter_component>();
-        sound_emitter.set_sound_state(0, sound::playing);
-
-        animator.current_state = 1;
-        shooter.did_shoot = true;
-
-        e.graph_node->traverse([&e](ecs::entity& child_e, glm::mat4& transform) {
-            if (e.id() == child_e.id()) return;
-            child_e.set_active(true);
-        });
-
-        auto& transform = e.get_component<ecs::transform_component>();
-        auto t = e.graph_node->absolute_transform();
-        auto pos = t[3];
-        auto player_t = player->get().graph_node->absolute_transform();
-        auto player_pos = player_t[3];
-        auto to_player = glm::normalize(player_pos - pos);
-        float dist = glm::length(to_player);
-        float kill_chance = dist > 100 ? 0 : shooter.kill_chance;
-        auto rand = std::rand() % 100;
-        auto kill_chance_var = kill_chance * 100;
-        auto is_kill = rand < kill_chance_var;
-
-        if (is_kill)
-        {
-            _events.invoke<runshoot_event, ecs::entity&>(runshoot_event::shooter_hit, e);
-        } else
-        {
-            _events.invoke<runshoot_event, ecs::entity&>(runshoot_event::shooter_miss, e);
-        }
+        take_shot(e, ctx);
     }
 
     shooter.remaining_shot_flash_time -=dt;
@@ -143,6 +116,56 @@ void shooter_controller::update_dying(ecs::entity &e, core::behavior_context &ct
     if (shooter.time_to_die < 0)
     {
         remove_entity(e);
+    }
+}
+
+void shooter_controller::take_shot(ecs::entity &e, core::behavior_context &ctx)
+{
+    auto player = _player_grabber.get_single();
+    if (!player) return;
+
+    auto& shooter = e.get_component<shooter_controller_component>();
+    auto& animator = e.get_component<ecs::billboard_animation_component>();
+    auto& sound_emitter = e.get_component<sound::sound_emitter_component>();
+
+    shooter.did_shoot = true;
+
+    auto& transform = e.get_component<ecs::transform_component>();
+    auto t = e.graph_node->absolute_transform();
+    auto pos = t[3];
+    auto player_t = player->get().graph_node->absolute_transform();
+    auto player_pos = player_t[3];
+    auto to_player = player_pos - pos;
+
+    if (glm::length2(to_player) > 200000)
+    {
+        shooter.state = shooter_controller_component::waiting;
+        return;
+    }
+
+    to_player = glm::normalize(to_player);
+    float dist = glm::length(to_player);
+    float kill_chance = dist > 100 ? 0 : shooter.kill_chance;
+    auto rand = std::rand() % 100;
+    auto kill_chance_var = kill_chance * 100;
+    auto is_kill = rand < kill_chance_var;
+
+
+    sound_emitter.set_sound_state(0, sound::playing);
+
+    e.graph_node->traverse([&e](ecs::entity& child_e, glm::mat4& transform) {
+        if (e.id() == child_e.id()) return;
+        child_e.set_active(true);
+    });
+
+    animator.current_state = 1;
+
+    if (is_kill)
+    {
+        _events.invoke<runshoot_event, ecs::entity&>(runshoot_event::shooter_hit, e);
+    } else
+    {
+        _events.invoke<runshoot_event, ecs::entity&>(runshoot_event::shooter_miss, e);
     }
 }
 

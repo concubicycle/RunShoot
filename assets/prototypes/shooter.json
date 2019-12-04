@@ -15,9 +15,9 @@
       },
       {
         "component_bitshift": 4,
-        "is_trigger": true,
         "colliders": [
           {
+            "is_trigger": true,
             "min": [
               -5,
               -5,

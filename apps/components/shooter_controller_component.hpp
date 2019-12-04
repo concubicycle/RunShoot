@@ -26,8 +26,8 @@ struct shooter_controller_component : ecs::component<shooter_controller_componen
 
     shooter_state state {waiting};
 
-    float shoot_interval {3.f};
-    float time_to_shoot {3.f};
+    float shoot_interval {1.f};
+    float time_to_shoot {1.f};
 
     float shot_flash_time {0.15f};
     float remaining_shot_flash_time {0.15f};

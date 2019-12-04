@@ -389,8 +389,10 @@ void player_controller::resolve_trigger_collision(
     float dt)
 {
     auto &trigger_e = collision.the_other(player_entity.id());
-    auto &trigger_component = trigger_e.get_component<turn_trigger_component>();
-    _turn_debounce(player_entity, trigger_component.direction);
+    auto trigger_component = trigger_e.get_component_opt<turn_trigger_component>();
+
+    if (trigger_component)
+        _turn_debounce(player_entity, trigger_component->get().direction);
 }
 
 

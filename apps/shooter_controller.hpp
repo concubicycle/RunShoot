@@ -39,6 +39,8 @@ private:
     static void update_waiting(ecs::entity &e, core::behavior_context &ctx);
     void update_shooting(ecs::entity &e, core::behavior_context &ctx);
     void update_dying(ecs::entity &e, core::behavior_context &ctx);
+
+    void take_shot(ecs::entity &e, core::behavior_context &ctx);
 };
 
 

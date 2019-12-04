@@ -34,13 +34,12 @@
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="Shooter enemies implemented">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/components/segment_spawner_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/segment_spawner_component.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/components/shooter_controller_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/shooter_controller_component.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/segment_spawner.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/segment_spawner.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/prototypes/seg2.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/seg2.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/prototypes/seg3.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/seg3.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/player_controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/shooter_controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/shooter_controller.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/shooter_controller.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/shooter_controller.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/prototypes/shooter.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/shooter.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/scenes/scene.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scenes/scene.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sound_wrapper/sound_system.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/sound_wrapper/sound_system.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -381,7 +380,7 @@
       <workItem from="1575232723143" duration="23538000" />
       <workItem from="1575319143328" duration="22236000" />
       <workItem from="1575417136417" duration="9160000" />
-      <workItem from="1575428401649" duration="12625000" />
+      <workItem from="1575428401649" duration="15457000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>
