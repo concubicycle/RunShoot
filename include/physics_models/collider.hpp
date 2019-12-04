@@ -5,6 +5,8 @@
 #ifndef __COLLIDER_HPP_
 #define __COLLIDER_HPP_
 
+#include <optional>
+
 #include "contact.hpp"
 #include "sphere.hpp"
 #include "ray.hpp"

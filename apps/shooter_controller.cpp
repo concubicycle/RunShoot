@@ -14,6 +14,7 @@ void shooter_controller::update_single(ecs::entity &e, core::behavior_context &c
 
     auto& shooter = e.get_component<shooter_controller_component>();
     auto& animator = e.get_component<ecs::billboard_animation_component>();
+    auto& sound_emitter = e.get_component<sound::sound_emitter_component>();
 
     switch (shooter.state)
     {
@@ -24,9 +25,19 @@ void shooter_controller::update_single(ecs::entity &e, core::behavior_context &c
             update_shooting(e, ctx);
             break;
         case shooter_controller_component::dying:
+        {
+            if (shooter.last_state != shooter_controller_component::dying)
+            {
+                sound_emitter.set_sound_state(_death_sound, sound::playing);
+                _death_sound = (_death_sound + 1) % 3 + 1;
+            }
+
             update_dying(e, ctx);
             break;
+        }
     }
+
+    shooter.last_state = shooter.state;
 }
 
 void shooter_controller::update_yaw(ecs::entity &e)
@@ -71,7 +82,7 @@ void shooter_controller::update_waiting(ecs::entity &e, core::behavior_context &
 
     if (shooter.time_to_shoot < 0)
     {
-        shooter.time_to_shoot = shooter.shoot_interval + std::rand() % 2;
+        shooter.time_to_shoot = shooter.shoot_interval + (float) (std::rand() % 2);
         shooter.state = shooter_controller_component::shooting;
         shooter.did_shoot = false;
     }
@@ -137,7 +148,7 @@ void shooter_controller::take_shot(ecs::entity &e, core::behavior_context &ctx)
     auto player_pos = player_t[3];
     auto to_player = player_pos - pos;
 
-    if (glm::length2(to_player) > 200000)
+    if (glm::length2(to_player) > 160000)
     {
         shooter.state = shooter_controller_component::waiting;
         return;

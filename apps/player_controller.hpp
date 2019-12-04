@@ -33,6 +33,9 @@ protected:
 
 private:
     listener_id _collision_listener_id;
+    listener_id _shooter_hit_listener_id{};
+    listener_id _shooter_miss_listener_id{};
+
     debounce<ecs::entity &, core::behavior_context&> _jump_debounce;
     debounce<ecs::entity &, turn_direction> _turn_debounce;
     glm::mat4 _right_turn;
@@ -51,8 +54,7 @@ private:
     void resolve_trigger_collision(
         const physics::entity_contact &collision,
         ecs::entity &player_entity,
-        player_controller_component &player,
-        float dt);
+        player_controller_component &player);
 
     static void update_airborne(ecs::entity &e, player_controller_component &comp, core::behavior_context &ctx);
 

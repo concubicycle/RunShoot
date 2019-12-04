@@ -19,14 +19,14 @@
           {
             "is_trigger": true,
             "min": [
-              -5,
-              -5,
-              -2
+              -7,
+              -7,
+              -3
             ],
             "max": [
-              0,
-              3,
-              2
+              2,
+              5,
+              3
             ]
           }
         ]
@@ -34,7 +34,10 @@
       {
         "component_bitshift": 63,
         "sounds": [
-          "./assets/sound/shot.wav"
+          "./assets/sound/shooter_shot.wav",
+          "./assets/sound/shooter_death1.wav",
+          "./assets/sound/shooter_death2.wav",
+          "./assets/sound/shooter_death3.wav"
         ]
       },
       {

@@ -23,11 +23,11 @@ struct shooter_controller_component : ecs::component<shooter_controller_componen
         dying
     };
 
-
+    shooter_state last_state {waiting};
     shooter_state state {waiting};
 
-    float shoot_interval {1.f};
-    float time_to_shoot {1.f};
+    float shoot_interval {2.f};
+    float time_to_shoot {2.f};
 
     float shot_flash_time {0.15f};
     float remaining_shot_flash_time {0.15f};
@@ -35,7 +35,7 @@ struct shooter_controller_component : ecs::component<shooter_controller_componen
 
     float time_to_die {5.f};
 
-    float kill_chance = {0.3f};
+    float kill_chance = {0.06f};
 };
 
 void load_shooter_controller(const json& j, ecs::entity& e, string_table& hashes);

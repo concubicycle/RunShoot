@@ -15,7 +15,7 @@
 class shooter_controller : public core::behavior
 {
 public:
-    shooter_controller(events::event_exchange& events) : behavior(events),
+    explicit shooter_controller(events::event_exchange& events) : behavior(events),
         _player_grabber(events, [](ecs::entity& e) {
             return e.has<player_controller_component>() || e.has<freefly_controller_component>();
         })
@@ -33,6 +33,8 @@ public:
 
 private:
     core::entity_grabber _player_grabber;
+
+    std::uint8_t _death_sound = 1;
 
     void update_yaw(ecs::entity &e);
 

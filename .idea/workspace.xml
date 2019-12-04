@@ -31,15 +31,17 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="Shooter enemies implemented">
+    <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="fix build?">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/components/segment_spawner_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/segment_spawner_component.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/components/shooter_controller_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/shooter_controller_component.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/player_controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/player_controller.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/shooter_controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/shooter_controller.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/shooter_controller.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/shooter_controller.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/shooter_quad.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/shooter_quad.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/drone.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/drone.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/prototypes/shooter.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/shooter.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/physics_models/collider.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics_models/collider.hpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -380,7 +382,7 @@
       <workItem from="1575232723143" duration="23538000" />
       <workItem from="1575319143328" duration="22236000" />
       <workItem from="1575417136417" duration="9160000" />
-      <workItem from="1575428401649" duration="15457000" />
+      <workItem from="1575428401649" duration="20945000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>
@@ -448,7 +450,8 @@
     <MESSAGE value="Fixed (i hope) bad ID-related memory bug by making the generated ids start at 10000. Sliding behavior implemented, but no death." />
     <MESSAGE value="Slide" />
     <MESSAGE value="Shooter enemies implemented" />
-    <option name="LAST_COMMIT_MESSAGE" value="Shooter enemies implemented" />
+    <MESSAGE value="fix build?" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix build?" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

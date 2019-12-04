@@ -102,6 +102,22 @@ void player_controller::on_entity_created(ecs::entity &e)
 
     player.to_camera = c.position - t.pos;
     rb.velocity = player.direction * player.run_speed;
+
+    auto hit = std::function([&e](ecs::entity &shooter_e) {
+        auto& player = e.get_component<player_controller_component>();
+        player.state = dying;
+    });
+
+    auto hit_listener_id = _events.subscribe<runshoot_event, ecs::entity&>(runshoot_event::shooter_hit, hit);
+
+    auto forget = std::function([this, &e, hit_listener_id](ecs::entity &destroyed_e) {
+        if (destroyed_e.id() == e.id())
+        {
+            _events.unsubscribe(runshoot_event::shooter_hit, hit_listener_id);
+        }
+    });
+
+    _events.subscribe<ecs::entity&>(events::entity_destroyed, forget);
 }
 
 void player_controller::update_running(ecs::entity &e, player_controller_component &player, core::behavior_context &ctx)
@@ -385,8 +401,7 @@ void player_controller::resolve_collision(
 void player_controller::resolve_trigger_collision(
     const physics::entity_contact &collision,
     ecs::entity &player_entity,
-    player_controller_component &player,
-    float dt)
+    player_controller_component &player)
 {
     auto &trigger_e = collision.the_other(player_entity.id());
     auto trigger_component = trigger_e.get_component_opt<turn_trigger_component>();
