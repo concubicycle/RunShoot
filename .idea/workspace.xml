@@ -33,6 +33,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/animation/texture_animator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/animation/texture_animator.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -373,7 +374,7 @@
       <workItem from="1575232723143" duration="23538000" />
       <workItem from="1575319143328" duration="22236000" />
       <workItem from="1575417136417" duration="9160000" />
-      <workItem from="1575428401649" duration="22675000" />
+      <workItem from="1575428401649" duration="22975000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>
@@ -417,7 +418,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575452468505</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="fix buildddd?">
+      <created>1575454441250</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1575454441250</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
