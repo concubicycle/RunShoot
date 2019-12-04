@@ -320,7 +320,7 @@ void player_controller::resolve_collision(
 
     if (collision.contact().is_trigger_contact())
     {
-        resolve_trigger_collision(collision, player_entity, player, dt);
+        resolve_trigger_collision(collision, player_entity, player);
         return;
     }
 
