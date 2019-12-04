@@ -33,7 +33,6 @@
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/player_controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -374,7 +373,7 @@
       <workItem from="1575232723143" duration="23538000" />
       <workItem from="1575319143328" duration="22236000" />
       <workItem from="1575417136417" duration="9160000" />
-      <workItem from="1575428401649" duration="21229000" />
+      <workItem from="1575428401649" duration="22675000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>
@@ -411,7 +410,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575452302619</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fix buildddd?">
+      <created>1575452468505</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1575452468505</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -450,7 +456,8 @@
     <MESSAGE value="Slide" />
     <MESSAGE value="Shooter enemies implemented" />
     <MESSAGE value="fix build?" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix build?" />
+    <MESSAGE value="fix buildddd?" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix buildddd?" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
