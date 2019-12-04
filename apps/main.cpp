@@ -45,7 +45,7 @@ void (*build_framebuffer_callback(rendering::renderer& r))(GLFWwindow*, int, int
 
 int main()
 {
-	std::srand(std::time(0)); //use current time as seed for random generator
+	std::srand(std::time(nullptr));
 
     core::startup_config conf = core::startup_config();
     conf.load();
@@ -108,7 +108,7 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     shooter_controller shooter(events);
 
 	asset::scene scene(spawner, entities);
-    loader.load_scene("./assets/scenes/runshoot_gameplay.json", entities, scene);
+    loader.load_scene("./assets/scenes/scene.json", entities, scene);
 
     renderer.init();
     glfwSetFramebufferSizeCallback(window, build_framebuffer_callback(renderer));

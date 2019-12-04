@@ -210,7 +210,8 @@ void sound::sound_system::update_emitters()
     {
         if (!emitter.get().has<ecs::transform_component>()) continue;
 
-        auto& t = emitter.get().get_component<ecs::transform_component>();
+        auto t = emitter.get().graph_node->absolute_transform();
+        auto t_pos = t[3];
         auto& e = emitter.get().get_component<sound::sound_emitter_component>();
         auto rb_opt = emitter.get().get_component_opt<ecs::rigid_body_component>();
 
@@ -234,7 +235,7 @@ void sound::sound_system::update_emitters()
                     if (_playbacks.find(emitter_sound.playback) == _playbacks.end()) break;
 
                     auto& sound_channel =_playbacks.find(emitter_sound.playback)->second;
-                    FMOD_VECTOR pos = { t.pos.x, t.pos.y, t.pos.z };
+                    FMOD_VECTOR pos = { t_pos.x, t_pos.y, t_pos.z };
                     FMOD_VECTOR vel = rb_opt
                                       ? FMOD_VECTOR { rb_opt->get().velocity.x, rb_opt->get().velocity.y, rb_opt->get().velocity.z }
                                       : FMOD_VECTOR { 0.f, 0.f, 0.f };

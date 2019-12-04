@@ -22,6 +22,8 @@ struct segment_spawner_component : ecs::component<segment_spawner_component>
     std::uint8_t num_initial_segments {10};
 
     glm::mat4 rotation {1.f};
+
+    glm::uint32_t segments_before_shooters {4};
 };
 
 void load_segment_spawner(const json& j, ecs::entity& e, string_table& hashes);

@@ -6,6 +6,7 @@
 #include "segment_spawner.hpp"
 #include "runshoot_event.hpp"
 #include "components/segment_component.hpp"
+#include "components/shooter_controller_component.hpp"
 #include <ctime>
 
 
@@ -76,6 +77,16 @@ void segment_spawner::spawn_segment(ecs::entity &e, core::behavior_context &ctx)
     }
 
     _segments.push(seg_e);
+
+    // don't spawn soldiers at first
+    if (segment_spawn.segments_before_shooters > 0)
+    {
+        segment_spawn.segments_before_shooters--;
+        seg_e.graph_node->traverse([this](ecs::entity& e, glm::mat4& m) {
+           if (e.has<shooter_controller_component>())
+               remove_entity(e);
+        });
+    }
 }
 
 void segment_spawner::spawn_new_segment(ecs::entity &current_segment)

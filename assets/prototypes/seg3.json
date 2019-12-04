@@ -95,6 +95,36 @@
           "direction": 1
         }
       ]
+    },
+    {
+      "prototype": "./assets/prototypes/shooter.json",
+      "components": [
+        {
+          "component_bitshift": 0,
+          "x": -24,
+          "z": -22
+        }
+      ]
+    },
+    {
+      "prototype": "./assets/prototypes/shooter.json",
+      "components": [
+        {
+          "component_bitshift": 0,
+          "x": 15,
+          "z": -27
+        }
+      ]
+    },
+    {
+      "prototype": "./assets/prototypes/shooter.json",
+      "components": [
+        {
+          "component_bitshift": 0,
+          "x": 26,
+          "z": -190
+        }
+      ]
     }
   ]
 }

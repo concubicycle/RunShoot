@@ -15,6 +15,7 @@
       },
       {
         "component_bitshift": 4,
+        "is_trigger": true,
         "colliders": [
           {
             "min": [
@@ -46,7 +47,7 @@
       },
       {
         "component_bitshift": 7,
-        "frame_time": 0.07,
+        "frame_time": 0.05,
         "frame_dimension": 64,
         "column_count": 16,
         "loop": false,
