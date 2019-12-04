@@ -36,6 +36,8 @@ struct PointLight {
 uniform PointLight pointLights[NR_POINT_LIGHTS];
 uniform int pointLightCount;
 
+uniform vec2 tex_offset = vec2(0, 0);
+
 
 vec3 BRDF(vec3 L, vec3 V, vec3 Kd, vec3 Ks, float alpha, PointLight light)
 {
@@ -81,7 +83,7 @@ vec3 BRDF(vec3 L, vec3 V, vec3 Kd, vec3 Ks, float alpha, PointLight light)
 
 void main()
 {
-    vec3 Kd = texture(diffuse_texture, fs_in.texcoords_2d).rgb;
+    vec3 Kd = texture(diffuse_texture, tex_offset + fs_in.texcoords_2d).rgb;
     vec3 IaKd = ambient_light * Kd;
     vec3 I = IaKd;
 

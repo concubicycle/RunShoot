@@ -21,6 +21,7 @@ using nlohmann::json;
 #include "drone_spawner_component.hpp"
 #include "music_player_component.hpp"
 #include "death_trigger_component.hpp"
+#include "shooter_controller_component.hpp"
 
 
 #include <sound_wrapper/sound_emitter_component.hpp>
@@ -50,6 +51,8 @@ void add_custom_components()
     add_component<drone_spawner_component>(load_drone_spawner);
     add_component<music_player_component>(load_music_player);
     add_component<death_trigger_component>(load_death_trigger);
+    add_component<shooter_controller_component>(load_shooter_controller);
+
 
     // sound lib:
     add_component<sound::sound_emitter_component>(sound::load_sound_emitter);

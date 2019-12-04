@@ -2,26 +2,9 @@
   "entities": [
     {
       "entity_id": 2,
-      "prototype": "./assets/prototypes/seg1.json"
+      "prototype": "./assets/prototypes/seg2.json"
     },
-    {
-      "entity_id": 3,
-      "prototype": "./assets/prototypes/seg1.json",
-      "components": [
-        {
-          "component_bitshift": 0,
-          "x": 50,
-          "y": 3,
-          "z": -9,
-          "pitch": 0,
-          "yaw": 0.0,
-          "roll": 0,
-          "scale_x": 1.0,
-          "scale_y": 1.0,
-          "scale_z": 1.0
-        }
-      ]
-    },
+
     {
       "entity_id": 111,
       "prototype": "./assets/prototypes/freefly_player.json",

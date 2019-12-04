@@ -105,7 +105,7 @@ sound::playback_id sound::sound_system::play_sound(FMOD::Sound *sound, size_t pa
     if (!succeededOrWarn("FMOD: Failed to play sound_wrapper", result))
         throw;
 
-    channel->setVolume(0.5f);
+    channel->setVolume(1.0f);
 
     // Assign the channel to the group.
     result = channel->setChannelGroup(_channelGroup);

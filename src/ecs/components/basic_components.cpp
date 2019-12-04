@@ -5,7 +5,7 @@
 #include <ecs/ecs_types.hpp>
 #include <ecs/component.hpp>
 #include <ecs/components/basic_components.hpp>
-
+#include <ecs/components/billboard_animation_state.hpp>
 
 
 // ADD NEW COMPONENT BIT SHIFTS HERE
@@ -16,3 +16,4 @@ template<> const component_shift ecs::component<ecs::punctual_light_component>::
 template<> const component_shift ecs::component<ecs::aabb_collider_component>::component_bitshift = 4;
 template<> const component_shift ecs::component<ecs::sphere_collider_component>::component_bitshift = 5;
 template<> const component_shift ecs::component<ecs::rigid_body_component>::component_bitshift = 6;
+template<> const component_shift ecs::component<ecs::billboard_animation_component>::component_bitshift = 7;

@@ -118,7 +118,7 @@ namespace scene_graph
 
         void traverse_recurse(glm::mat4 accum, traverse_callback callback)
         {
-            accum = transform() * accum;
+            accum = accum * transform();
             callback(_data, accum);
             for (auto &c : _children) c.traverse_recurse(accum, callback);
         }

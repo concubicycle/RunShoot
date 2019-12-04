@@ -38,6 +38,7 @@ namespace ogllib
         virtual void set_uniform(const std::string& name, GLfloat val) const = 0;
         virtual	void set_uniform(const std::string& name, glm::mat4& val) const = 0;
         virtual void set_uniform(const std::string& name, glm::vec3& val) const = 0;
+        virtual void set_uniform(const std::string& name, glm::vec2& val) const =0;
         virtual void set_uniform(const std::string& name, GLint val) const = 0;
     };
 
@@ -81,6 +82,13 @@ namespace ogllib
             if (loc == -1) return;
 			glUniform3fv(loc, 1, glm::value_ptr(val));
 		}
+
+        void set_uniform(const std::string& name, glm::vec2& val) const override
+        {
+            auto loc = _info.getUniformLocation(name);
+            if (loc == -1) return;
+            glUniform2fv(loc, 1, glm::value_ptr(val));
+        }
 
         void set_uniform(const std::string& name, GLint val) const override
         {

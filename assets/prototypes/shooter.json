@@ -1,0 +1,79 @@
+{
+  "root": {
+    "components": [
+      {
+        "component_bitshift": 0,
+        "x": 0,
+        "y": 10,
+        "z": 0,
+        "pitch": 0,
+        "yaw": 0,
+        "roll": 0,
+        "scale_x": 1.0,
+        "scale_y": 1.0,
+        "scale_z": 1.0
+      },
+      {
+        "component_bitshift": 4,
+        "colliders": [
+          {
+            "min": [
+              -5,
+              -5,
+              -2
+            ],
+            "max": [
+              0,
+              3,
+              2
+            ]
+          }
+        ]
+      },
+      {
+        "component_bitshift": 63,
+        "sounds": [
+          "./assets/sound/shot.wav"
+        ]
+      },
+      {
+        "component_bitshift": 2,
+        "mesh_path": "./assets/models/shooter_quad.json",
+        "mesh_format": 1
+      },
+      {
+        "component_bitshift": 27
+      },
+      {
+        "component_bitshift": 7,
+        "frame_time": 0.07,
+        "frame_dimension": 64,
+        "column_count": 16,
+        "loop": false,
+        "states": [
+          [[0,0]],
+          [[1, 0]],
+          [
+            [2, 0],
+            [3, 0],
+            [4, 0],
+            [5, 0],
+            [6, 0],
+            [7, 0],
+            [8, 0],
+            [9, 0],
+            [10, 0],
+            [11, 0],
+            [12, 0],
+            [13, 0],
+            [14, 0],
+            [15, 0],
+            [0, 1],
+            [1, 1],
+            [2, 1]
+          ]
+        ]
+      }
+    ]
+  }
+}

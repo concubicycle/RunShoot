@@ -43,6 +43,7 @@ set(ECS_LIB "ecs")
 set(PHYSICS_LIB "physics")
 set(PHYSICS_MODELS_LIB "physics_models")
 set(SOUND_LIB "sound")
+set(ANIMATION_LIB "animation")
 
 
 # WARNING: Doesn't work when build directory isn't /build for some reason (with CLion)
@@ -84,7 +85,7 @@ add_executable(${TARGET_NAME}
                apps/components/music_player_component.cpp
                apps/components/music_player_component.hpp
                apps/music_player.cpp
-               apps/music_player.hpp apps/components/death_trigger_component.cpp apps/components/death_trigger_component.hpp)
+               apps/music_player.hpp apps/components/death_trigger_component.cpp apps/components/death_trigger_component.hpp apps/components/shooter_controller_component.cpp apps/components/shooter_controller_component.hpp apps/shooter_controller.cpp apps/shooter_controller.hpp)
 			   
 install(TARGETS ${TARGET_NAME} DESTINATION bin)
 
@@ -172,6 +173,7 @@ add_dependencies(${TARGET_NAME}
                  ${RENDERER}
                  ${PHYSICS_LIB}
                  ${SOUND_LIB}
+                 ${ANIMATION_LIB}
                  scene
                  glfw
                  glbinding
@@ -207,6 +209,9 @@ add_dependencies(${SOUND_LIB}
                  ${ECS_LIB}
                  glm)
 
+add_dependencies(${ANIMATION_LIB}
+                 ${ECS_LIB}
+                 glm)
 
 
 target_link_libraries(${TARGET_NAME} PRIVATE
@@ -224,7 +229,8 @@ target_link_libraries(${TARGET_NAME} PRIVATE
                       ${PHYSICS_LIB}
                       ${PHYSICS_MODELS_LIB}
                       ${FMOD_LIBRARIES}
-                      ${SOUND_LIB})
+                      ${SOUND_LIB}
+                      ${ANIMATION_LIB})
 
 
 target_link_libraries(generate_colliders PRIVATE

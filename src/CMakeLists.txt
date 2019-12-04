@@ -7,7 +7,7 @@ set(CORE_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/core/framerate.cpp
     ${PROJECT_SOURCE_DIR}/src/core/startup_config.cpp
     ${PROJECT_SOURCE_DIR}/src/core/input_manager.cpp
-    ${PROJECT_SOURCE_DIR}/src/core/system_info.cpp)
+    ${PROJECT_SOURCE_DIR}/src/core/system_info.cpp core/entity_grabber.cpp)
 
 set(CORE_HEADER_LIST
     ${PROJECT_SOURCE_DIR}/include/core/frame_limiter.hpp
@@ -16,7 +16,8 @@ set(CORE_HEADER_LIST
     ${PROJECT_SOURCE_DIR}/include/core/startup_config.hpp
     ${PROJECT_SOURCE_DIR}/include/core/startup.hpp
     ${PROJECT_SOURCE_DIR}/include/core/input_manager.hpp
-    ${PROJECT_SOURCE_DIR}/include/core/system_info.hpp)
+    ${PROJECT_SOURCE_DIR}/include/core/system_info.hpp
+    ../include/core/entity_grabber.hpp)
 
 
 set(RENDERER_SOURCE_LIST
@@ -105,7 +106,8 @@ set (ECS_SOURCE_LIST
      ${PROJECT_SOURCE_DIR}/src/ecs/component_meta.cpp
      ${PROJECT_SOURCE_DIR}/src/ecs/entity_factory.cpp
      ${PROJECT_SOURCE_DIR}/src/ecs/entity_world.cpp
-     ecs/chunk_component_accessor.cpp ecs/entity.cpp)
+     ecs/chunk_component_accessor.cpp
+     ecs/entity.cpp)
 
 set (ECS_HEADER_LIST
      ${PROJECT_SOURCE_DIR}/include/ecs/components/basic_components.hpp
@@ -119,7 +121,9 @@ set (ECS_HEADER_LIST
      ${PROJECT_SOURCE_DIR}/include/ecs/entity_factory.hpp
      ${PROJECT_SOURCE_DIR}/include/ecs/entity_world.hpp
      ${PROJECT_SOURCE_DIR}/include/ecs/entity.hpp
-     ${PROJECT_SOURCE_DIR}/include/ecs/components/mesh_opengl.hpp ../include/ecs/components/camera_property.hpp)
+     ${PROJECT_SOURCE_DIR}/include/ecs/components/mesh_opengl.hpp
+     ../include/ecs/components/camera_property.hpp
+     ../include/ecs/components/billboard_animation_state.hpp)
 
 
 set (PHYSICS_SOURCE_LIST
@@ -158,8 +162,15 @@ set (SOUND_HEADER_LIST
      ../include/sound_wrapper/sound_emitter_component.hpp
      ../include/sound_wrapper/sound_listener_component.hpp)
 
+
+set (ANIMATION_SOURCE_LIST
+     animation/texture_animator.cpp)
+
+set (ANIMATION_HEADER_LIST
+     ../include/animation/texture_animator.hpp)
+
+
 set(HEADER_LIST
-    ${PROJECT_SOURCE_DIR}/include/events/event_dispatcher.hpp
     ${PROJECT_SOURCE_DIR}/include/util/running_average.hpp
 )
 
@@ -174,6 +185,8 @@ add_library(${ECS_LIB} STATIC ${ECS_SOURCE_LIST} ${ECS_HEADER_LIST})
 add_library(${PHYSICS_LIB} STATIC ${PHYSICS_SOURCE_LIST} ${PHYSICS_HEADER_LIST})
 add_library(${PHYSICS_MODELS_LIB} STATIC ${PHYSICS_MODELS_SOURCE_LIST} ${PHYSICS_MODELS_HEADER_LIST})
 add_library(${SOUND_LIB} STATIC ${SOUND_SOURCE_LIST} ${SOUND_HEADER_LIST})
+add_library(${ANIMATION_LIB} STATIC ${ANIMATION_SOURCE_LIST} ${ANIMATION_HEADER_LIST})
+
 
 add_library(scene INTERFACE)
 target_include_directories(scene INTERFACE ${SCENE_HEADER_LIST})
@@ -191,6 +204,8 @@ target_include_directories(${ECS_LIB} PUBLIC ../include ../thirdparty/opengllib/
 target_include_directories(${PHYSICS_LIB} PUBLIC ../include)
 target_include_directories(${PHYSICS_MODELS_LIB} PUBLIC ../include)
 target_include_directories(${SOUND_LIB} PUBLIC ../include)
+target_include_directories(${ANIMATION_LIB} PUBLIC ../include)
+
 
 
 

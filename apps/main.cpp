@@ -22,6 +22,7 @@
 #include <renderer/renderer.hpp>
 #include <renderer/debug_drawer.hpp>
 #include <sound_wrapper/sound_system.hpp>
+#include <animation/texture_animator.hpp>
 
 #include "freefly_controller.hpp"
 #include "components/add_custom_components.hpp"
@@ -45,7 +46,6 @@ void (*build_framebuffer_callback(rendering::renderer& r))(GLFWwindow*, int, int
 int main()
 {
 	std::srand(std::time(0)); //use current time as seed for random generator
-
 
     core::startup_config conf = core::startup_config();
     conf.load();
@@ -97,12 +97,15 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
 
     sound::sound_system game_sound(app_string_table, events);
 
+    animation::texture_animator billboard_animation(events);
+
     freefly_controller controller(events);
     drone_controller drone_controller(events);
     player_controller player_controller(events);
     segment_spawner segment_spawn(events);
     drone_spawner drone_spawn(events);
     music_player music(events, app_string_table, game_sound);
+    shooter_controller shooter(events);
 
 	asset::scene scene(spawner, entities);
     loader.load_scene("./assets/scenes/runshoot_gameplay.json", entities, scene);
@@ -110,8 +113,8 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     renderer.init();
     glfwSetFramebufferSizeCallback(window, build_framebuffer_callback(renderer));
 
-    game_systems data = {window, timer, limiter, input, renderer, scene, events, physics, debug_draw, game_sound};
-    behaviors behaviors = {controller, drone_controller, player_controller, segment_spawn, drone_spawn, music};
+    game_systems data = {window, timer, limiter, input, renderer, scene, events, physics, debug_draw, game_sound, billboard_animation};
+    behaviors behaviors = {controller, drone_controller, player_controller, segment_spawn, drone_spawn, music, shooter};
     render_loop(data, behaviors);
 }
 
@@ -133,11 +136,12 @@ void render_loop(game_systems &systems, behaviors &behaviors)
         behaviors.segment_spawn.update(ctx);
         behaviors.drone_spawn.update(ctx);
         behaviors.music.update(ctx);
-
+        behaviors.shooter.update(ctx);
 
         systems.renderer.draw_scene(systems.scene);
         systems.debug_draw.update();
         systems.game_sound.update();
+        systems.billboard_animation.update(systems.timer.smoothed_delta_secs());
 
         glfwSwapBuffers(systems.window);
 

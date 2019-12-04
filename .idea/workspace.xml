@@ -2,26 +2,27 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="RunShoot" targetName="assimp" />
-      <config projectName="RunShoot" targetName="ogllib" />
-      <config projectName="RunShoot" targetName="glbinding" />
-      <config projectName="RunShoot" targetName="asset" />
-      <config projectName="RunShoot" targetName="generate_colliders" />
       <config projectName="RunShoot" targetName="sound" />
-      <config projectName="RunShoot" targetName="nlohmann_json" />
-      <config projectName="RunShoot" targetName="physics" />
-      <config projectName="RunShoot" targetName="tests" />
-      <config projectName="RunShoot" targetName="physics_models" />
-      <config projectName="RunShoot" targetName="RunShoot" />
-      <config projectName="RunShoot" targetName="glfw" />
-      <config projectName="RunShoot" targetName="memory" />
-      <config projectName="RunShoot" targetName="renderer" />
-      <config projectName="RunShoot" targetName="ecs" />
-      <config projectName="RunShoot" targetName="core" />
-      <config projectName="RunShoot" targetName="spdlog" />
-      <config projectName="RunShoot" targetName="expected" />
       <config projectName="RunShoot" targetName="glm" />
+      <config projectName="RunShoot" targetName="glfw" />
+      <config projectName="RunShoot" targetName="spdlog" />
+      <config projectName="RunShoot" targetName="asset" />
+      <config projectName="RunShoot" targetName="RunShoot" />
+      <config projectName="RunShoot" targetName="generate_colliders" />
+      <config projectName="RunShoot" targetName="ogllib" />
+      <config projectName="RunShoot" targetName="tests" />
+      <config projectName="RunShoot" targetName="glbinding" />
+      <config projectName="RunShoot" targetName="core" />
+      <config projectName="RunShoot" targetName="animation" />
+      <config projectName="RunShoot" targetName="physics_models" />
+      <config projectName="RunShoot" targetName="physics" />
       <config projectName="RunShoot" targetName="platform" />
+      <config projectName="RunShoot" targetName="ecs" />
+      <config projectName="RunShoot" targetName="assimp" />
+      <config projectName="RunShoot" targetName="expected" />
+      <config projectName="RunShoot" targetName="memory" />
+      <config projectName="RunShoot" targetName="nlohmann_json" />
+      <config projectName="RunShoot" targetName="renderer" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -30,28 +31,48 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/apps/components/death_trigger_component.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/components/death_trigger_component.hpp" afterDir="false" />
+    <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="Fixed (i hope) bad ID-related memory bug by making the generated ids start at 10000. Sliding behavior implemented, but no death.">
+      <change afterPath="$PROJECT_DIR$/apps/components/shooter_controller_component.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/components/shooter_controller_component.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/shooter_controller.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/shooter_controller.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/models/shooter_quad.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/prototypes/shooter.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/animation/texture_animator.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/core/entity_grabber.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/ecs/components/billboard_animation_state.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/animation/texture_animator.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/entity_grabber.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/components/add_custom_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/add_custom_components.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/components/drone_controller_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/drone_controller_component.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/components/player_controller_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/player_controller_component.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/components/runshoot_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/runshoot_component.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/drone_spawner.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/drone_spawner.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/player_controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/player_controller.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/runshoot.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/runshoot.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/runshoot_event.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/runshoot_event.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/blender/seg1.blend" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg1.blend" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/blender/seg1.blend1" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg1.blend1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/seg1/seg1.bin" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg1/seg1.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/models/seg1/seg1.gltf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg1/seg1.gltf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/prototypes/player.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/player.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/prototypes/seg1.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/seg1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/seg2.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/seg2.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/scenes/scene.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scenes/scene.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/chunk_component_accessor.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/chunk_component_accessor.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/physics_models/aabb_collider.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics_models/aabb_collider.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ecs/chunk_component_accessor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ecs/chunk_component_accessor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ecs/entity_world.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ecs/entity_world.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/shaders/default.frag" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/default.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/shaders/ptx2d_pvm.frag" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/ptx2d_pvm.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/core/behavior.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/core/behavior.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/scene/scene_graph_node.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/scene/scene_graph_node.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/asset/component_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/component_loader.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ecs/component_meta.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ecs/component_meta.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ecs/components/basic_components.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ecs/components/basic_components.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/event_dispatcher.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/physics/physics_world.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/physics/physics_world.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/renderer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sound_wrapper/sound_system.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/sound_wrapper/sound_system.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/include/shader_program.h" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/include/shader_program.h" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -97,7 +118,7 @@
   </component>
   <component name="OCFindUsagesOptions" text="false" ivars="false" properties="true" derivedClasses="false" />
   <component name="OCResolveContextSettings">
-    <option name="configuration" value="0-RunShoot" />
+    <option name="configuration" value="0-core" />
   </component>
   <component name="ProjectId" id="1RkfA0cXEQvRmvTns35yj62oy90" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -106,22 +127,23 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.advertisement.text.has.clang-format" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/sound_wrapper" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/assets/models" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="CPPToolchains" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/models" />
+      <recent name="$PROJECT_DIR$/src/sound_wrapper" />
+      <recent name="$PROJECT_DIR$/assets/shaders" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/include/core" />
       <recent name="$PROJECT_DIR$/include/asset" />
       <recent name="$PROJECT_DIR$/apps/components" />
       <recent name="$PROJECT_DIR$/include/physics_models" />
       <recent name="$PROJECT_DIR$/build/assets/models" />
-      <recent name="$PROJECT_DIR$/apps" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/sound_wrapper" />
-      <recent name="$PROJECT_DIR$/assets/shaders" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -138,6 +160,11 @@
   </component>
   <component name="RunManager" selected="CMake Application.RunShoot">
     <configuration name="RunShoot" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RunShoot" TARGET_NAME="RunShoot" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="RunShoot" RUN_TARGET_NAME="RunShoot">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="animation" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RunShoot" TARGET_NAME="animation" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -248,6 +275,7 @@
       <item itemvalue="CMake Application.RunShoot" />
       <item itemvalue="CMake Application.spdlog" />
       <item itemvalue="CMake Application.tests" />
+      <item itemvalue="CMake Application.animation" />
       <item itemvalue="CMake Application.asset" />
       <item itemvalue="CMake Application.core" />
       <item itemvalue="CMake Application.ecs" />
@@ -383,7 +411,9 @@
       <workItem from="1575190936005" duration="2801000" />
       <workItem from="1575232661187" duration="48000" />
       <workItem from="1575232723143" duration="23538000" />
-      <workItem from="1575319143328" duration="3969000" />
+      <workItem from="1575319143328" duration="22236000" />
+      <workItem from="1575417136417" duration="9160000" />
+      <workItem from="1575428401649" duration="10297000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>
@@ -399,7 +429,21 @@
       <option name="project" value="LOCAL" />
       <updated>1575267865998</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Fixed (i hope) bad ID-related memory bug by making the generated ids start at 10000. Sliding behavior implemented, but no death.">
+      <created>1575323941202</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1575323941202</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Slide">
+      <created>1575324004722</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1575324004722</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -434,6 +478,24 @@
     <MESSAGE value="ECS stuff" />
     <MESSAGE value="ECS stuff and cmake config" />
     <MESSAGE value="test commit from clion" />
-    <option name="LAST_COMMIT_MESSAGE" value="test commit from clion" />
+    <MESSAGE value="Fixed (i hope) bad ID-related memory bug by making the generated ids start at 10000. Sliding behavior implemented, but no death." />
+    <MESSAGE value="Slide" />
+    <option name="LAST_COMMIT_MESSAGE" value="Slide" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/asset/prototype_spawner.cpp</url>
+          <line>118</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/asset/prototype_spawner.cpp</url>
+          <line>128</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

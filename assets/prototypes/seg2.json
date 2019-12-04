@@ -67,6 +67,16 @@
           "z": -335
         }
       ]
+    },
+    {
+      "prototype": "./assets/prototypes/shooter.json",
+      "components": [
+        {
+          "component_bitshift": 0,
+          "x": -228,
+          "z": -380
+        }
+      ]
     }
   ]
 }

@@ -5,7 +5,10 @@ in vec2 TexCoord;
 
 uniform sampler2D model_texture;
 
+
+uniform vec2 tex_offset = vec2(0, 0);
+
 void main()
 {
-    FragColor = texture(model_texture, TexCoord);
+    FragColor = texture(model_texture, tex_offset + TexCoord);
 }

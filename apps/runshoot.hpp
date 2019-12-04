@@ -13,19 +13,23 @@
 #include <core/frame_limiter.hpp>
 #include <physics/physics_world.hpp>
 #include <renderer/debug_drawer.hpp>
+#include <animation/texture_animator.hpp>
+
 #include "freefly_controller.hpp"
 #include "drone_controller.hpp"
 #include "player_controller.hpp"
 #include "segment_spawner.hpp"
 #include "drone_spawner.hpp"
 #include "music_player.hpp"
+#include "shooter_controller.hpp"
 
-#if (WIN32)
+#if (WIN32) // msvc raises warnings if windows.h is after glfw3.h
 #define NOMINMAX
 #include <windows.h>
 #endif
 
 #include <GLFW/glfw3.h>
+
 
 struct game_systems
 {
@@ -39,6 +43,7 @@ struct game_systems
     physics::physics_world& physics;
     rendering::debug_drawer& debug_draw;
     sound::sound_system& game_sound;
+    animation::texture_animator& billboard_animation;
 };
 
 struct behaviors
@@ -49,6 +54,7 @@ struct behaviors
     segment_spawner& segment_spawn;
     drone_spawner& drone_spawn;
     music_player& music;
+    shooter_controller& shooter;
 };
 
 

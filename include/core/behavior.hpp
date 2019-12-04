@@ -41,7 +41,7 @@ namespace core
             _events.unsubscribe(events::event_type::entity_destroyed, _listener_id_destroy);
         }
 
-        virtual component_bitset required_components() const = 0;
+        [[nodiscard]] virtual component_bitset required_components() const = 0;
 
 
         void update(behavior_context &ctx)

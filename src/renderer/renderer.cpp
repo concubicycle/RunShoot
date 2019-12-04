@@ -137,13 +137,14 @@ void rendering::renderer::draw_scene(asset::scene &scene)
 
         if (r.billboard)
         {
-            glm::vec3 a(0.f, 0.f, 1.f);
-            glm::vec3 a_p = glm::normalize(cam.position - glm::vec3(model[3]));
-            float theta = acos(glm::dot(a, a_p));
-            glm::vec3 axis = glm::cross(a, a_p);
-            glm::mat4 rotation = glm::rotate(theta, axis);
+            glm::vec3 sprite_orig(0.f, 0.f, 1.f);
+            glm::vec3 sprite_to_cam = glm::normalize(cam.position - glm::vec3(model[3]));
             auto pos = model[3];
+            float theta = std::acos(glm::dot(sprite_orig, sprite_to_cam));
+            glm::vec3 axis = glm::cross(sprite_orig, sprite_to_cam);
+            glm::mat4 rotation = glm::rotate(theta, axis);
             model = rotation;
+
             set_translation(model, pos);
         }
 
@@ -197,6 +198,13 @@ void rendering::renderer::draw_scene(asset::scene &scene)
             shader.bind();
 
             shader.set_uniform("projection_view_model", projection_view_model);
+
+            if (e.has<ecs::billboard_animation_component>())
+            {
+                auto& billboard = e.get_component<ecs::billboard_animation_component>();
+                glm::vec2 tex_offset = billboard.current_tex_offset();
+                shader.set_uniform("tex_offset", tex_offset);
+            }
 
             if (r.hue) shader.set_uniform("hue", *r.hue);
 

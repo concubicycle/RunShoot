@@ -20,6 +20,7 @@ enum runshoot_component
     MusicPlayer = MAX_BASIC_COMPONENTS + 8, // 24
     SoundEmitter = MAX_BASIC_COMPONENTS + 9, // 25
     DeathTrigger = MAX_BASIC_COMPONENTS + 10, // 26
+    Shooter = MAX_BASIC_COMPONENTS + 11, // 27
 };
 
 #endif //__RUNSHOOT_COMPONENT_HPP_

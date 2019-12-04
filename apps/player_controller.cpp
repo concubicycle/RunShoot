@@ -16,6 +16,8 @@
 #include "runshoot_event.hpp"
 #include "components/drone_controller_component.hpp"
 #include "components/sound_emitter_component.hpp"
+#include "components/death_trigger_component.hpp"
+#include "components/shooter_controller_component.hpp"
 
 
 player_controller::player_controller(events::event_exchange &events) :
@@ -66,6 +68,7 @@ void player_controller::update_single(ecs::entity &e, core::behavior_context &ct
             update_sliding(e, player, ctx);
             break;
         case dying:
+            update_dying(e, player, ctx);
             break;
         case dead:
             break;
@@ -242,6 +245,20 @@ void player_controller::update_sliding(ecs::entity &e, player_controller_compone
     update_player_look(e, ctx.input, ctx.time.smoothed_delta_secs());
 }
 
+void player_controller::update_dying(ecs::entity &e, player_controller_component &player, core::behavior_context &ctx)
+{
+    auto frame_time = ctx.time.smoothed_delta_secs();
+    auto &rb = e.get_component<ecs::rigid_body_component>();
+    auto &c = e.get_component<ecs::camera_component>();
+
+    auto scale = player.current_fadeout_time / player.fadeout_time;
+    rb.velocity *= 5.f * frame_time;
+    c.set_float("color_multiplier", scale);
+
+    integrate(e, rb, frame_time);
+}
+
+
 void player_controller::update_turn_look(ecs::entity &e)
 {
     auto &c = e.get_component<ecs::camera_component>();
@@ -293,11 +310,20 @@ void player_controller::resolve_collision(
 
     auto &other_entity = collision.the_other(player_entity.id());
 
+    if (other_entity.has<death_trigger_component>())
+    {
+        player.state = dying;
+    }
+
     auto drone_opt = other_entity.get_component_opt<drone_controller_component>();
     auto is_dead_drone = drone_opt &&
         drone_opt->get().state == drone_controller_component::exploding;
     if (is_dead_drone)
+    {
+        auto& drone_rb = other_entity.get_component<ecs::rigid_body_component>();
+        drone_rb.velocity += player.direction * 200.f + glm::vec3(0.f, 1.f, 0.f) * 50.f;
         return;
+    }
 
     auto intersecting = collision.contact().time() == physics_models::contact::Intersecting;
 
@@ -473,10 +499,17 @@ void player_controller::shoot(ecs::entity &e, core::behavior_context ctx)
     physics_models::ray ray = {cam.position, cam.fwd()};
 
     ctx.physics.raycast(ray, [](ecs::entity &hit_entity) {
-        if (!hit_entity.has<drone_controller_component>()) return;
-        auto &drone = hit_entity.get_component<drone_controller_component>();
-        drone.state = drone_controller_component::exploding;
-    }, drone_controller_component::archetype_bit);
+        if (hit_entity.has<drone_controller_component>())
+        {
+            auto &drone = hit_entity.get_component<drone_controller_component>();
+            drone.state = drone_controller_component::exploding;
+        }
+        if (hit_entity.has<shooter_controller_component>())
+        {
+            auto &shooter = hit_entity.get_component<shooter_controller_component>();
+            shooter.state = shooter_controller_component::dying;
+        }
+    }, drone_controller_component::archetype_bit | shooter_controller_component::archetype_bit);
 
     player.recoil_acceleration = {
         glm::linearRand(-0.8f, 0.8f),
@@ -493,3 +526,4 @@ void player_controller::shoot(ecs::entity &e, core::behavior_context ctx)
 
     player.time_to_flash_out = player.gunshot_flash_time;
 }
+

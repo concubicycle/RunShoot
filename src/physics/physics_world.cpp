@@ -349,7 +349,7 @@ void physics::physics_world::raycast(
 {
     for (auto &e : _collision_entities)
     {
-        if ((e.get().archetype_id() & archetype) != archetype) continue;
+        if ((e.get().archetype_id() & archetype) == 0) continue;
 
         collider_iterator it(e);
         physics_models::collider *cursor;

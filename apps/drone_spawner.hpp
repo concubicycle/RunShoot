@@ -46,7 +46,7 @@ public:
         spawner.time_to_spawn -= ctx.time.smoothed_delta_secs();
 
         if (spawner.drone_spawn_interval > spawner.min_drone_spawn_interval)
-             spawner.drone_spawn_interval -= ctx.time.smoothed_delta_secs() * 0.1f;
+             spawner.drone_spawn_interval -= ctx.time.smoothed_delta_secs() * 0.15f;
 
         if (spawner.time_to_spawn < 0)
         {
@@ -66,7 +66,7 @@ public:
                 glm::vec3(spawner.horizontal_spawn_offset, spawner.vertical_spawn_offset, 0) +
                 player.direction * 20.f;
 
-            drone.horizontal_offset = (float)(rand() % 40) - 20.f;
+            drone.horizontal_offset = (float)(rand() % 35) - 17.5f;
             drone.vertical_offset = (float)(rand() % 13) - 5.f;
             drone.z_offset = (float)(rand() % 30) - 15.f;
         }

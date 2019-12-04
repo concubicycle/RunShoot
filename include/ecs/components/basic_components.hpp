@@ -28,6 +28,7 @@
 #include <ecs/component.hpp>
 #include <ecs/components/mesh_opengl.hpp>
 #include "camera_property.hpp"
+#include "billboard_animation_state.hpp"
 
 
 #define MAX_BASIC_COMPONENTS 16
@@ -256,6 +257,58 @@ namespace ecs
     private:
         float _mass;
         float _mass_inverse;
+    };
+
+    ///////////////////////// Billboard Animation Component /////////////////////////
+    struct billboard_animation_component : component<billboard_animation_component>
+    {
+        static const unsigned int MaxAnimationStates = 256;
+
+        std::uint32_t frame_dimension {64};
+        billboard_animation_state states[MaxAnimationStates];
+        std::uint32_t state_count {0};
+        float frame_time {1.f/16.f};
+        std::uint32_t last_state {0};
+        std::uint32_t current_state {0};
+        std::uint32_t column_count {0};
+        bool loop {false};
+
+        void increment_time(float dt)
+        {
+            auto& state = states[current_state];
+            auto t_total = state.frame_count * frame_time;
+
+            _current_t += dt;
+
+            if (_current_t > t_total && loop) _current_t -= t_total;
+            else if (_current_t > t_total) _current_t = t_total;
+        }
+
+        void reset_time() { _current_t = 0; }
+
+        glm::u32vec2 current_tex_coords()
+        {
+            auto& state = states[current_state];
+            auto t_total = state.frame_count * frame_time;
+            auto t = _current_t / t_total;
+            auto index = (std::uint32_t)(t * state.frame_count);
+            if (index == state.frame_count) index--;
+
+            return state.frames[index];
+        }
+
+        glm::vec2 current_tex_offset()
+        {
+            auto coords = current_tex_coords();
+            return {
+                (float)coords.x / (float)column_count,
+                (float)coords.y / (float)column_count
+            };
+        }
+
+    private:
+        float _current_t {0};
+
     };
 } // namespace ecs
 

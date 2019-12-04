@@ -32,7 +32,7 @@ public:
     float previous_yaw {0};
     float target_yaw {0};
     std::int8_t turn_counter {0};
-    float run_acceleration {0.02f};
+    float run_acceleration {0.03f};
 
     entity_id current_segment_id;
     int seg_clear_count {0};
@@ -61,6 +61,9 @@ public:
     glm::vec3 slide_to_camera_offset {0.f, -5, 0.f};
     float down_t {0.2f};
     float up_t {0.8f};
+
+    float fadeout_time {1.f};
+    float current_fadeout_time {0.f};
 
 
     // 0...1 value used to interpolate between previous and target direction

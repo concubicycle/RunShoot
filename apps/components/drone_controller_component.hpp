@@ -40,7 +40,7 @@ struct drone_controller_component : public ecs::component<drone_controller_compo
     std::int8_t flashes_before_blind {8};
     bool light_on {false};
 
-    float active_after_destruction { 5.0f };
+    float active_after_destruction { 1.0f };
 
     float max_speed { 200.f };
     float max_speed_sq { 40000.f };

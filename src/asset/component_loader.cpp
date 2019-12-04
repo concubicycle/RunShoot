@@ -156,6 +156,30 @@ void load_rigid_body(const json &j, ecs::entity &e, string_table &hashes)
     }
 }
 
+void load_billboard_animation(const json &j, ecs::entity &e, string_table &hashes)
+{
+    auto &a = e.get_component<ecs::billboard_animation_component>();
+
+    a.frame_time = j["frame_time"].get<float>();
+    a.frame_dimension = j["frame_dimension"].get<std::uint32_t>();
+    a.column_count = j["column_count"].get<std::uint32_t>();
+    a.loop = j["loop"].get<bool>();
+
+    for (auto& state_json : j["states"])
+    {
+        a.states[a.state_count] = ecs::billboard_animation_state();
+        auto& state = a.states[a.state_count++];
+
+        for (auto& frame : state_json)
+        {
+            state.frames[state.frame_count++] = {
+                frame[0].get<std::uint32_t>(),
+                frame[1].get<std::uint32_t>(),
+            };
+        }
+    }
+}
+
 
 bitshift_to_component_loader asset::component_loader::loader_functions
     {
@@ -166,6 +190,7 @@ bitshift_to_component_loader asset::component_loader::loader_functions
         {ecs::sphere_collider_component::component_bitshift, load_sphere},
         {ecs::punctual_light_component::component_bitshift, load_punctual_light },
         {ecs::rigid_body_component::component_bitshift, load_rigid_body},
+        {ecs::billboard_animation_component::component_bitshift, load_billboard_animation},
     };
 
 
