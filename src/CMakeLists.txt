@@ -208,8 +208,6 @@ target_include_directories(${ANIMATION_LIB} PUBLIC ../include)
 
 
 
-
-
 # All users of this library will need at least C++17
 target_compile_features(${CORELIB_NAME} PUBLIC cxx_std_17)
 target_compile_features(${PLATFORMLIB_NAME} PUBLIC cxx_std_17)
@@ -219,4 +217,5 @@ target_compile_features(${MEM_LIB} PUBLIC cxx_std_17)
 target_compile_features(${ECS_LIB} PUBLIC cxx_std_17)
 target_compile_features(${PHYSICS_LIB} PUBLIC cxx_std_17)
 target_compile_features(${PHYSICS_MODELS_LIB} PUBLIC cxx_std_17)
-target_compile_features(sound PUBLIC cxx_std_17)
+target_compile_features(${SOUND_LIB} PUBLIC cxx_std_17)
+target_compile_features(${ANIMATION_LIB} PUBLIC cxx_std_17)

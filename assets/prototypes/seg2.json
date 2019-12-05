@@ -74,7 +74,7 @@
           "pitch": 0,
           "yaw": 0,
           "roll": 0,
-          "scale_x": 30.0,
+          "scale_x": 1.0,
           "scale_y": 1.0,
           "scale_z": 1.0
         }
@@ -96,7 +96,7 @@
           "pitch": 0,
           "yaw": 0,
           "roll": 0,
-          "scale_x": 30.0,
+          "scale_x": 1.0,
           "scale_y": 1.0,
           "scale_z": 1.0
         }
@@ -118,7 +118,7 @@
           "pitch": 0,
           "yaw": 0,
           "roll": 0,
-          "scale_x": 30.0,
+          "scale_x": 1.0,
           "scale_y": 1.0,
           "scale_z": 1.0
         }
@@ -140,7 +140,7 @@
           "pitch": 0,
           "yaw": 0,
           "roll": 0,
-          "scale_x": 30.0,
+          "scale_x": 1.0,
           "scale_y": 1.0,
           "scale_z": 1.0
         }
@@ -162,7 +162,7 @@
           "pitch": 0,
           "yaw": 0,
           "roll": 0,
-          "scale_x": 30.0,
+          "scale_x": 1.0,
           "scale_y": 1.0,
           "scale_z": 1.0
         }

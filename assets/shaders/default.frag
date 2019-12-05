@@ -32,7 +32,7 @@ struct PointLight {
     vec3 light_pos;
     float intensity;
 };
-#define NR_POINT_LIGHTS 16
+#define NR_POINT_LIGHTS 8
 uniform PointLight pointLights[NR_POINT_LIGHTS];
 uniform int pointLightCount;
 

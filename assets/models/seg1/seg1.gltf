@@ -182,9 +182,9 @@
             "uri" : "wall_seg1.png"
         },
         {
-            "mimeType" : "image/jpeg",
-            "name" : "wall",
-            "uri" : "wall.jpg"
+            "mimeType" : "image/png",
+            "name" : "duct",
+            "uri" : "duct.png"
         },
         {
             "mimeType" : "image/png",
@@ -264,35 +264,35 @@
         {
             "bufferView" : 8,
             "componentType" : 5126,
-            "count" : 24,
+            "count" : 180,
             "max" : [
-                47.671241760253906,
+                46.59804916381836,
                 12.305103302001953,
                 -318.5941467285156
             ],
             "min" : [
-                -34.490867614746094,
-                8.822636604309082,
-                -322.06298828125
+                -38.13397216796875,
+                -5.0307512283325195,
+                -359.7948303222656
             ],
             "type" : "VEC3"
         },
         {
             "bufferView" : 9,
             "componentType" : 5126,
-            "count" : 24,
+            "count" : 180,
             "type" : "VEC3"
         },
         {
             "bufferView" : 10,
             "componentType" : 5126,
-            "count" : 24,
+            "count" : 180,
             "type" : "VEC2"
         },
         {
             "bufferView" : 11,
             "componentType" : 5123,
-            "count" : 36,
+            "count" : 384,
             "type" : "SCALAR"
         },
         {
@@ -373,48 +373,48 @@
         },
         {
             "buffer" : 0,
-            "byteLength" : 288,
+            "byteLength" : 2160,
             "byteOffset" : 523592
         },
         {
             "buffer" : 0,
-            "byteLength" : 288,
-            "byteOffset" : 523880
+            "byteLength" : 2160,
+            "byteOffset" : 525752
         },
         {
             "buffer" : 0,
-            "byteLength" : 192,
-            "byteOffset" : 524168
+            "byteLength" : 1440,
+            "byteOffset" : 527912
         },
         {
             "buffer" : 0,
-            "byteLength" : 72,
-            "byteOffset" : 524360
-        },
-        {
-            "buffer" : 0,
-            "byteLength" : 48,
-            "byteOffset" : 524432
+            "byteLength" : 768,
+            "byteOffset" : 529352
         },
         {
             "buffer" : 0,
             "byteLength" : 48,
-            "byteOffset" : 524480
+            "byteOffset" : 530120
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 48,
+            "byteOffset" : 530168
         },
         {
             "buffer" : 0,
             "byteLength" : 32,
-            "byteOffset" : 524528
+            "byteOffset" : 530216
         },
         {
             "buffer" : 0,
             "byteLength" : 12,
-            "byteOffset" : 524560
+            "byteOffset" : 530248
         }
     ],
     "buffers" : [
         {
-            "byteLength" : 524572,
+            "byteLength" : 530260,
             "uri" : "seg1.bin"
         }
     ]

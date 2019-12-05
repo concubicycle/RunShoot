@@ -400,17 +400,17 @@
         {
           "component_bitshift": 3,
           "color": [1, 0.545, 0.922],
-          "intensity": 60
+          "intensity": 20
         },
         {
           "component_bitshift": 0,
-          "x": 55,
+          "x": 65,
           "y": 13,
-          "z": -15,
+          "z": -11,
           "pitch": 0,
           "yaw": 0,
           "roll": 0,
-          "scale_x": 30.0,
+          "scale_x": 1.0,
           "scale_y": 1.0,
           "scale_z": 1.0
         }
@@ -421,22 +421,24 @@
         {
           "component_bitshift": 3,
           "color": [1, 0.545, 0.922],
-          "intensity": 40
+          "intensity": 20
         },
         {
           "component_bitshift": 0,
-          "x": 60,
+          "x": 65,
           "y": 14,
           "z": -2,
           "pitch": 0,
           "yaw": 0,
           "roll": 0,
-          "scale_x": 30.0,
+          "scale_x": 1.0,
           "scale_y": 1.0,
           "scale_z": 1.0
         }
       ]
     },
+
+
     {
       "components": [
         {

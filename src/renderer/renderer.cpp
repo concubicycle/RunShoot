@@ -128,7 +128,7 @@ void rendering::renderer::draw_scene(asset::scene &scene)
         auto &r = e.get_component<ecs::render_component_ogl>();
         auto &t = e.get_component<ecs::transform_component>();
 
-        auto model_inverse = glm::inverse(model);
+        auto model_inverse = glm::transpose(glm::inverse(model));
 
         auto aspect = _screen_width / _screen_height;
         auto projection = glm::perspective(cam.fov, aspect, cam.near, cam.far);
@@ -333,7 +333,7 @@ void rendering::renderer::set_light_uniforms(const ogllib::shader_program_base &
         shader.set_uniform("pointLights[" + std::to_string(light_count) + "].intensity", l.intensity);
 
         light_count++;
-        if (i == 15) break;
+        if (i == 7) break;
     }
 
     shader.set_uniform("pointLightCount", (GLint) (light_count));

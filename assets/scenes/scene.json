@@ -6,7 +6,8 @@
       "components": [
         {
           "component_bitshift": 0,
-          "z": 0
+          "z": 0,
+          "yaw": 0
         }
       ]
     },

@@ -11,7 +11,7 @@
 
 struct drone_spawner_component : public ecs::component<drone_spawner_component>
 {
-    float min_drone_spawn_interval {2.f};
+    float min_drone_spawn_interval {3.f};
     float drone_spawn_interval { 10.f };
     float time_to_spawn {10.f};
     float horizontal_spawn_offset {0.f};
