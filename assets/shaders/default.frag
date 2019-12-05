@@ -32,7 +32,7 @@ struct PointLight {
     vec3 light_pos;
     float intensity;
 };
-#define NR_POINT_LIGHTS 8
+#define NR_POINT_LIGHTS 16
 uniform PointLight pointLights[NR_POINT_LIGHTS];
 uniform int pointLightCount;
 
@@ -83,7 +83,8 @@ vec3 BRDF(vec3 L, vec3 V, vec3 Kd, vec3 Ks, float alpha, PointLight light)
 
 void main()
 {
-    vec3 Kd = texture(diffuse_texture, tex_offset + fs_in.texcoords_2d).rgb;
+    vec4 tex_color = texture(diffuse_texture, tex_offset + fs_in.texcoords_2d);
+    vec3 Kd = tex_color.rgb;
     vec3 IaKd = ambient_light * Kd;
     vec3 I = IaKd;
 
@@ -116,5 +117,5 @@ void main()
         I = vec3(1.f);
     }
 
-    FragColor = vec4(I * color_multiplier, 1);
+    FragColor = vec4(I * color_multiplier, tex_color.w);
 }

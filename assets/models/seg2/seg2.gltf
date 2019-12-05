@@ -12,7 +12,8 @@
                 1,
                 2,
                 3,
-                4
+                4,
+                5
             ]
         }
     ],
@@ -66,6 +67,10 @@
         {
             "mesh" : 1,
             "name" : "Cube.001"
+        },
+        {
+            "mesh" : 2,
+            "name" : "Plane"
         }
     ],
     "cameras" : [
@@ -103,6 +108,18 @@
                 "metallicFactor" : 0,
                 "roughnessFactor" : 0.4000000059604645
             }
+        },
+        {
+            "doubleSided" : true,
+            "name" : "Material.001",
+            "pbrMetallicRoughness" : {
+                "baseColorTexture" : {
+                    "index" : 2,
+                    "texCoord" : 0
+                },
+                "metallicFactor" : 0,
+                "roughnessFactor" : 0.5
+            }
         }
     ],
     "meshes" : [
@@ -133,6 +150,20 @@
                     "material" : 1
                 }
             ]
+        },
+        {
+            "name" : "Plane",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 8,
+                        "NORMAL" : 9,
+                        "TEXCOORD_0" : 10
+                    },
+                    "indices" : 11,
+                    "material" : 2
+                }
+            ]
         }
     ],
     "textures" : [
@@ -141,6 +172,9 @@
         },
         {
             "source" : 1
+        },
+        {
+            "source" : 2
         }
     ],
     "images" : [
@@ -153,6 +187,11 @@
             "mimeType" : "image/jpeg",
             "name" : "windows_wall_lowres",
             "uri" : "windows_wall_lowres.jpg"
+        },
+        {
+            "mimeType" : "image/png",
+            "name" : "velvet_rock_lit",
+            "uri" : "velvet_rock_lit.png"
         }
     ],
     "accessors" : [
@@ -223,6 +262,40 @@
             "componentType" : 5123,
             "count" : 924,
             "type" : "SCALAR"
+        },
+        {
+            "bufferView" : 8,
+            "componentType" : 5126,
+            "count" : 4,
+            "max" : [
+                33.2014045715332,
+                64.83536529541016,
+                -423.945556640625
+            ],
+            "min" : [
+                -16.44338607788086,
+                4.575614929199219,
+                -423.945556640625
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 9,
+            "componentType" : 5126,
+            "count" : 4,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 10,
+            "componentType" : 5126,
+            "count" : 4,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 11,
+            "componentType" : 5123,
+            "count" : 6,
+            "type" : "SCALAR"
         }
     ],
     "bufferViews" : [
@@ -265,11 +338,31 @@
             "buffer" : 0,
             "byteLength" : 1848,
             "byteOffset" : 39608
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 48,
+            "byteOffset" : 41456
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 48,
+            "byteOffset" : 41504
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 32,
+            "byteOffset" : 41552
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 12,
+            "byteOffset" : 41584
         }
     ],
     "buffers" : [
         {
-            "byteLength" : 41456,
+            "byteLength" : 41596,
             "uri" : "seg2.bin"
         }
     ]

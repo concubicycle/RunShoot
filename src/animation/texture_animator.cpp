@@ -2,10 +2,10 @@
 
 animation::texture_animator::texture_animator(events::event_exchange &events) : _events(events)
 {
-    auto grab_cam_fn = std::function([this](ecs::entity &e) { grab_entity(e); });
-    auto forget_cam_fn = std::function([this](ecs::entity &e) { forget_entity(e); });
-    _entity_create_listener_id = _events.subscribe<ecs::entity &>(events::entity_created, grab_cam_fn);
-    _entity_destroy_listener_id = _events.subscribe<ecs::entity &>(events::entity_destroyed, forget_cam_fn);
+    auto grab_fn = std::function([this](ecs::entity &e) { grab_entity(e); });
+    auto forget_fn = std::function([this](ecs::entity &e) { forget_entity(e); });
+    _entity_create_listener_id = _events.subscribe<ecs::entity &>(events::entity_created, grab_fn);
+    _entity_destroy_listener_id = _events.subscribe<ecs::entity &>(events::entity_destroyed, forget_fn);
 }
 
 

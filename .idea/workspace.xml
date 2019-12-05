@@ -2,27 +2,27 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="RunShoot" targetName="sound" />
-      <config projectName="RunShoot" targetName="glm" />
-      <config projectName="RunShoot" targetName="glfw" />
-      <config projectName="RunShoot" targetName="spdlog" />
-      <config projectName="RunShoot" targetName="asset" />
-      <config projectName="RunShoot" targetName="RunShoot" />
-      <config projectName="RunShoot" targetName="generate_colliders" />
       <config projectName="RunShoot" targetName="ogllib" />
-      <config projectName="RunShoot" targetName="tests" />
       <config projectName="RunShoot" targetName="glbinding" />
-      <config projectName="RunShoot" targetName="core" />
+      <config projectName="RunShoot" targetName="asset" />
       <config projectName="RunShoot" targetName="animation" />
-      <config projectName="RunShoot" targetName="physics_models" />
-      <config projectName="RunShoot" targetName="physics" />
-      <config projectName="RunShoot" targetName="platform" />
+      <config projectName="RunShoot" targetName="generate_colliders" />
+      <config projectName="RunShoot" targetName="sound" />
       <config projectName="RunShoot" targetName="ecs" />
-      <config projectName="RunShoot" targetName="assimp" />
-      <config projectName="RunShoot" targetName="expected" />
-      <config projectName="RunShoot" targetName="memory" />
       <config projectName="RunShoot" targetName="nlohmann_json" />
+      <config projectName="RunShoot" targetName="physics" />
+      <config projectName="RunShoot" targetName="tests" />
+      <config projectName="RunShoot" targetName="physics_models" />
+      <config projectName="RunShoot" targetName="platform" />
+      <config projectName="RunShoot" targetName="RunShoot" />
+      <config projectName="RunShoot" targetName="glfw" />
       <config projectName="RunShoot" targetName="renderer" />
+      <config projectName="RunShoot" targetName="memory" />
+      <config projectName="RunShoot" targetName="assimp" />
+      <config projectName="RunShoot" targetName="spdlog" />
+      <config projectName="RunShoot" targetName="expected" />
+      <config projectName="RunShoot" targetName="glm" />
+      <config projectName="RunShoot" targetName="core" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -32,7 +32,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/include/scene/scene_graph_node_base.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/scene/scene_graph_node_base.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/player_controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/shooter_controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/shooter_controller.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/blender/seg1.blend" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg1.blend" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/blender/seg1.blend1" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg1.blend1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg1/seg1.bin" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg1/seg1.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg1/seg1.gltf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg1/seg1.gltf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg2/seg2.bin" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg2/seg2.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg2/seg2.gltf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg2/seg2.gltf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/seg1.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/seg1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/seg2.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/seg2.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/scenes/scene.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scenes/scene.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/shaders/default.frag" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/default.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/physics_models/aabb_collider.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/physics_models/aabb_collider.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/animation/texture_animator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/animation/texture_animator.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/renderer.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -373,7 +388,9 @@
       <workItem from="1575232723143" duration="23538000" />
       <workItem from="1575319143328" duration="22236000" />
       <workItem from="1575417136417" duration="9160000" />
-      <workItem from="1575428401649" duration="23759000" />
+      <workItem from="1575428401649" duration="24165000" />
+      <workItem from="1575490145620" duration="966000" />
+      <workItem from="1575497446706" duration="8339000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>
@@ -431,7 +448,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575454755485</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="fix plz">
+      <created>1575455795849</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1575455795849</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -472,16 +496,12 @@
     <MESSAGE value="fix build?" />
     <MESSAGE value="fix buildddd?" />
     <MESSAGE value="fixing build..." />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing build..." />
+    <MESSAGE value="fix plz" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix plz" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/asset/prototype_spawner.cpp</url>
-          <line>118</line>
-          <option name="timeStamp" value="32" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/src/asset/prototype_spawner.cpp</url>
           <line>128</line>

@@ -145,7 +145,7 @@ void shooter_controller::take_shot(ecs::entity &e, core::behavior_context &ctx)
     auto t = e.graph_node->absolute_transform();
     auto pos = t[3];
     auto player_t = player->get().graph_node->absolute_transform();
-    auto player_pos = player_t[3];
+    auto player_pos = player_t[3] + glm::vec4(0.f, 5.f, 0.f, 0.f); // account for player height
     auto to_player = player_pos - pos;
 
     if (glm::length2(to_player) > 160000)
@@ -173,7 +173,18 @@ void shooter_controller::take_shot(ecs::entity &e, core::behavior_context &ctx)
 
     if (is_kill)
     {
-        _events.invoke<runshoot_event, ecs::entity&>(runshoot_event::shooter_hit, e);
+        float depth = dist;
+        ctx.physics.raycast({pos,  to_player}, [this, dist, &pos, &depth] (ecs::entity& e_hit) {
+            auto t = e_hit.graph_node->absolute_transform();
+            auto hit_pos = t[3];
+            auto hit_dist = glm::length(pos - hit_pos);
+            if (hit_dist < depth) depth = hit_dist;
+        });
+
+        if (glm::epsilonEqual(depth, dist, glm::epsilon<float>()))
+        {
+            _events.invoke<runshoot_event, ecs::entity&>(runshoot_event::shooter_hit, e);
+        }
     } else
     {
         _events.invoke<runshoot_event, ecs::entity&>(runshoot_event::shooter_miss, e);

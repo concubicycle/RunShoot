@@ -151,7 +151,7 @@ void rendering::renderer::draw_scene(asset::scene &scene)
         auto light_pos = glm::vec3(0, 10.f, 10.f);
         auto light_color = glm::vec3(0.5, 0.5, 0.5);
         auto ambient_light = glm::vec3(0.3, 0.31, 0.38);
-        auto specular = glm::vec3(0.01f);
+        auto specular = glm::vec3(0.0f);
 
         if (r.mesh_format == asset::mesh_type::GLTF2)
         {
@@ -201,7 +201,7 @@ void rendering::renderer::draw_scene(asset::scene &scene)
 
             if (e.has<ecs::billboard_animation_component>())
             {
-                auto& billboard = e.get_component<ecs::billboard_animation_component>();
+                auto &billboard = e.get_component<ecs::billboard_animation_component>();
                 glm::vec2 tex_offset = billboard.current_tex_offset();
                 shader.set_uniform("tex_offset", tex_offset);
             }
@@ -307,38 +307,35 @@ void rendering::renderer::draw_skybox()
 
 void rendering::renderer::set_light_uniforms(const ogllib::shader_program_base &shader)
 {
-    shader.set_uniform("pointLightCount", (GLint) (_lights.size()));
+    auto &cam = _camera_entity->get_component<ecs::camera_component>();
 
-    auto& cam = _camera_entity->get_component<ecs::camera_component>();
+    std::sort(_lights.begin(), _lights.end(), [&cam](ecs::entity &l1, ecs::entity &l2) -> bool {
+        auto l1_pos = l1.graph_node->absolute_transform()[3];
+        auto l2_pos = l2.graph_node->absolute_transform()[3];
+        float l1_dsq = glm::length2(cam.position - glm::vec3(l1_pos));
+        float l2_dsq = glm::length2(cam.position - glm::vec3(l2_pos));
+        return l1_dsq < l2_dsq;
+    });
 
-//    std::sort(_lights.begin(), _lights.end(), [&cam](ecs::entity &l1, ecs::entity &l2) -> bool {
-//        auto l1_pos = l1.graph_node->absolute_transform()[3];
-//        auto l2_pos  = l2.graph_node->absolute_transform()[3];
-//        float l1_dsq = glm::length2(cam.position - glm::vec3(l1_pos));
-//        float l2_dsq = glm::length2(cam.position - glm::vec3(l2_pos));
-//        return l1_dsq < l2_dsq;
-//    });
-
+    unsigned int light_count = 0;
     for (int i = 0; i < _lights.size(); ++i)
     {
         auto &light_e = _lights[i].get();
 
         if (!light_e.active())
-        {
-            glm::vec3 zero(0.f);
-            shader.set_uniform("pointLights[" + std::to_string(i) + "].color", zero);
-            shader.set_uniform("pointLights[" + std::to_string(i) + "].light_pos", zero);
-            shader.set_uniform("pointLights[" + std::to_string(i) + "].intensity", 0.f);
-        } else
-        {
-            auto &l = light_e.get_component<ecs::punctual_light_component>();
-            auto light_t = glm::vec3(light_e.graph_node->absolute_transform()[3]);
+            continue;
 
-            shader.set_uniform("pointLights[" + std::to_string(i) + "].color", l.color);
-            shader.set_uniform("pointLights[" + std::to_string(i) + "].light_pos", light_t);
-            shader.set_uniform("pointLights[" + std::to_string(i) + "].intensity", l.intensity);
-        }
-        if (i == 7) break;
+        auto &l = light_e.get_component<ecs::punctual_light_component>();
+        auto light_t = glm::vec3(light_e.graph_node->absolute_transform()[3]);
+
+        shader.set_uniform("pointLights[" + std::to_string(light_count) + "].color", l.color);
+        shader.set_uniform("pointLights[" + std::to_string(light_count) + "].light_pos", light_t);
+        shader.set_uniform("pointLights[" + std::to_string(light_count) + "].intensity", l.intensity);
+
+        light_count++;
+        if (i == 15) break;
     }
+
+    shader.set_uniform("pointLightCount", (GLint) (light_count));
 }
 

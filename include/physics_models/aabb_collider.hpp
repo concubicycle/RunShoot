@@ -34,6 +34,7 @@ namespace physics_models
 
         contact visit(sphere &sphere, glm::vec3 &combined_velocity) override
         {
+            // TODO: This is probably broken - reverse velocity.
             return intersect(_shape, sphere, combined_velocity);
         }
 

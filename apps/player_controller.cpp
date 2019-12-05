@@ -102,6 +102,9 @@ void player_controller::on_entity_created(ecs::entity &e)
 
     player.to_camera = c.position - t.pos;
     rb.velocity = player.direction * player.run_speed;
+    t.yaw = 0;
+    t.pitch = 0;
+    t.roll = 0;
 
     auto hit = std::function([&e](ecs::entity &shooter_e) {
         auto& player = e.get_component<player_controller_component>();

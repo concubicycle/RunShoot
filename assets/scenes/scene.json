@@ -2,11 +2,11 @@
   "entities": [
     {
       "entity_id": 2,
-      "prototype": "./assets/prototypes/seg3.json",
+      "prototype": "./assets/prototypes/seg2.json",
       "components": [
         {
           "component_bitshift": 0,
-          "z": -500
+          "z": 0
         }
       ]
     },
