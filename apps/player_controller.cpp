@@ -22,7 +22,7 @@
 
 player_controller::player_controller(events::event_exchange &events) :
     behavior(events),
-    _jump_debounce(std::chrono::duration<float>(0.3f), jump),
+    _jump_debounce(std::chrono::duration<float>(0.4f), jump),
     _turn_debounce(std::chrono::duration<float>(1.25f), adjust_turn_counter),
     _right_turn(glm::rotate(-glm::half_pi<float>(), glm::vec3(0, 1, 0))),
     _left_turn(glm::rotate(glm::half_pi<float>(), glm::vec3(0, 1, 0)))
@@ -50,8 +50,28 @@ void player_controller::update_single(ecs::entity &e, core::behavior_context &ct
 
     apply_acceleration(e, ctx);
 
-    if (ctx.input.was_mouse_clicked(GLFW_MOUSE_BUTTON_1))
-        shoot(e, ctx);
+    if (player.state != dying && player.state != dead)
+    {
+        if (ctx.input.was_mouse_clicked(GLFW_MOUSE_BUTTON_1))
+            shoot(e, ctx);
+
+        float color_multiplier = c.get_float("color_multiplier");
+        if (color_multiplier != 1)
+        {
+            float d = 1 - color_multiplier;
+            color_multiplier += d * ctx.time.smoothed_delta_secs();
+            c.set_float("color_multiplier", color_multiplier);
+        }
+
+        player.time_to_flash_out -= ctx.time.smoothed_delta_secs();
+        if (player.time_to_flash_out < 0)
+        {
+            e.graph_node->traverse([&e](ecs::entity &child_e, glm::mat4 &transform) {
+                if (e.id() == child_e.id()) return;
+                child_e.set_active(false);
+            });
+        }
+    }
 
     switch (player.state)
     {
@@ -73,24 +93,6 @@ void player_controller::update_single(ecs::entity &e, core::behavior_context &ct
         case dead:
             break;
     }
-
-
-    float color_multiplier = c.get_float("color_multiplier");
-    if (color_multiplier != 1)
-    {
-        float d = 1 - color_multiplier;
-        color_multiplier += d * ctx.time.smoothed_delta_secs();
-        c.set_float("color_multiplier", color_multiplier);
-    }
-
-    player.time_to_flash_out -= ctx.time.smoothed_delta_secs();
-    if (player.time_to_flash_out < 0)
-    {
-        e.graph_node->traverse([&e](ecs::entity& child_e, glm::mat4& transform) {
-            if (e.id() == child_e.id()) return;
-            child_e.set_active(false);
-        });
-    }
 }
 
 void player_controller::on_entity_created(ecs::entity &e)
@@ -107,11 +109,11 @@ void player_controller::on_entity_created(ecs::entity &e)
     t.roll = 0;
 
     auto hit = std::function([&e](ecs::entity &shooter_e) {
-        auto& player = e.get_component<player_controller_component>();
+        auto &player = e.get_component<player_controller_component>();
         player.state = dying;
     });
 
-    auto hit_listener_id = _events.subscribe<runshoot_event, ecs::entity&>(runshoot_event::shooter_hit, hit);
+    auto hit_listener_id = _events.subscribe<runshoot_event, ecs::entity &>(runshoot_event::shooter_hit, hit);
 
     auto forget = std::function([this, &e, hit_listener_id](ecs::entity &destroyed_e) {
         if (destroyed_e.id() == e.id())
@@ -120,7 +122,7 @@ void player_controller::on_entity_created(ecs::entity &e)
         }
     });
 
-    _events.subscribe<ecs::entity&>(events::entity_destroyed, forget);
+    _events.subscribe<ecs::entity &>(events::entity_destroyed, forget);
 }
 
 void player_controller::update_running(ecs::entity &e, player_controller_component &player, core::behavior_context &ctx)
@@ -172,7 +174,7 @@ void player_controller::update_running(ecs::entity &e, player_controller_compone
     player.time_since_collision += frame_time;
     player.time_since_grounded += frame_time;
 
-    if (player.time_since_grounded > 0.45f)
+    if (player.time_since_grounded > 0.48f)
     {
         player.state = player_state::airborne;
     }
@@ -193,6 +195,11 @@ void player_controller::update_airborne(ecs::entity &e, player_controller_compon
     if (comp.time_since_grounded < 0.2f)
     {
         comp.state = player_state::running;
+    }
+
+    if (t.pos.y < comp.kill_y)
+    {
+        comp.state = dying;
     }
 }
 
@@ -270,6 +277,8 @@ void player_controller::update_dying(ecs::entity &e, player_controller_component
     auto &rb = e.get_component<ecs::rigid_body_component>();
     auto &c = e.get_component<ecs::camera_component>();
 
+    player.current_fadeout_time -= frame_time;
+
     auto scale = player.current_fadeout_time / player.fadeout_time;
     rb.velocity *= 5.f * frame_time;
     c.set_float("color_multiplier", scale);
@@ -319,7 +328,7 @@ void player_controller::resolve_collision(
 {
     auto &rb = player_entity.get_component<ecs::rigid_body_component>();
     auto n = collision.contact().collision_axis();
-    auto& sound_emitter = player_entity.get_component<sound::sound_emitter_component>();
+    auto &sound_emitter = player_entity.get_component<sound::sound_emitter_component>();
 
     if (collision.contact().is_trigger_contact())
     {
@@ -336,10 +345,10 @@ void player_controller::resolve_collision(
 
     auto drone_opt = other_entity.get_component_opt<drone_controller_component>();
     auto is_dead_drone = drone_opt &&
-        drone_opt->get().state == drone_controller_component::exploding;
+                         drone_opt->get().state == drone_controller_component::exploding;
     if (is_dead_drone)
     {
-        auto& drone_rb = other_entity.get_component<ecs::rigid_body_component>();
+        auto &drone_rb = other_entity.get_component<ecs::rigid_body_component>();
         drone_rb.velocity += player.direction * 200.f + glm::vec3(0.f, 1.f, 0.f) * 50.f;
         return;
     }
@@ -355,8 +364,8 @@ void player_controller::resolve_collision(
         rb.velocity -= n_norm * glm::dot(n, rb.velocity);
         rb.force.x = rb.force.y = rb.force.z = 0.f;
     }
-    //else if (player.time_since_collision < 0.05f && n.y == 0)
-    //{
+        //else if (player.time_since_collision < 0.05f && n.y == 0)
+        //{
         // resolving xz plane collisions can jerk the player around.
         // probably a problem with collision system - not sure if this
         // would happen with a non-kinematic object. either way, we can
@@ -443,20 +452,20 @@ void player_controller::integrate(ecs::entity &e, ecs::rigid_body_component &rb,
     move_component_positions(e, rb.velocity * frame_time);
 }
 
-void player_controller::jump(ecs::entity &e, core::behavior_context& ctx)
+void player_controller::jump(ecs::entity &e, core::behavior_context &ctx)
 {
     auto &rb = e.get_component<ecs::rigid_body_component>();
     auto &player = e.get_component<player_controller_component>();
-    auto& t = e.get_component<ecs::transform_component>();
+    auto &t = e.get_component<ecs::transform_component>();
 
     bool nothing_under = true;
-    ctx.physics.raycast({t.pos - 4.f*player.direction,  glm::vec3(0.f, -1.f, 0.f)}, [&nothing_under] (ecs::entity& e) {
-       nothing_under = false;
+    ctx.physics.raycast({t.pos - 4.f * player.direction, glm::vec3(0.f, -1.f, 0.f)}, [&nothing_under](ecs::entity &e) {
+        nothing_under = false;
     });
 
     if (!nothing_under)
     {
-        rb.force += glm::vec3(0, player.jump_force, 0);
+        rb.force += glm::vec3(0, player.jump_force, 0) - rb.force;
         player.state = player_state::airborne;
     }
 }
@@ -539,7 +548,7 @@ void player_controller::shoot(ecs::entity &e, core::behavior_context ctx)
     sound.set_sound_state(0, sound::playing);
     sound.emitter_sounds[0].volume = 0.25f;
 
-    e.graph_node->traverse([&e](ecs::entity& child_e, glm::mat4& transform) {
+    e.graph_node->traverse([&e](ecs::entity &child_e, glm::mat4 &transform) {
         if (e.id() == child_e.id()) return;
         child_e.set_active(true);
     });

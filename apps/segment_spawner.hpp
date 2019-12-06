@@ -12,6 +12,7 @@
 #include <core/behavior.hpp>
 #include <core/behavior_context.hpp>
 #include <util/debounce.hpp>
+#include <random>
 
 #include "components/segment_spawner_component.hpp"
 
@@ -33,6 +34,11 @@ private:
     glm::mat4 _left_turn;
     glm::mat4 _right_turn;
     listener_id _segment_cleared_listener;
+
+    std::random_device _r {};
+    std::mt19937 _gen { _r() };
+    std::uniform_int_distribution<> _turn_chance_distribution { 0, 100 };
+
     std::queue<std::reference_wrapper<ecs::entity>> _segments;
     std::string seg_one_path = "./assets/prototypes/seg1.json";
     std::string seg_two_path = "./assets/prototypes/seg2.json";

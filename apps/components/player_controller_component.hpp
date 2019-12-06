@@ -63,7 +63,9 @@ public:
     float up_t {0.8f};
 
     float fadeout_time {1.f};
-    float current_fadeout_time {0.f};
+    float current_fadeout_time {1.f};
+
+    float kill_y {-30.f};
 
 
     // 0...1 value used to interpolate between previous and target direction

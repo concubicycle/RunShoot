@@ -45,10 +45,19 @@ void segment_spawner::spawn_segment(ecs::entity &e, core::behavior_context &ctx)
 {
     auto& segment_spawn = e.get_component<segment_spawner_component>();
 
-    int seg_index_var = std::rand() % 100;
-    int freq_int = (int)(segment_spawn.turn_frequency * 100.f);
+    int seg_index_var = _turn_chance_distribution(_gen);
+    int freq_int = (int)(segment_spawn.turn_frequency * 100);
 
-    int seg_index = seg_index_var < freq_int ? seg_index_var % _segment_prototype_paths.size() : 0;
+    unsigned long seg_index = seg_index_var < freq_int
+        ? seg_index_var % _segment_prototype_paths.size()
+        : 0;
+
+    if (segment_spawn.are_last_two_turns(seg_index))
+        seg_index = 0;
+
+    segment_spawn.last_two_turns[1] = segment_spawn.last_two_turns[0];
+    segment_spawn.last_two_turns[0] = seg_index;
+
     auto& seg_e = ctx.current_scene.load_prototype(_segment_prototype_paths[seg_index]);
 
     auto& t = seg_e.get_component<ecs::transform_component>();

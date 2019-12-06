@@ -9,6 +9,7 @@
 #include <util/string_table.hpp>
 #include <nlohmann/json.hpp>
 #include <ecs/entity.hpp>
+#include "turn_direction.hpp"
 
 struct segment_spawner_component : ecs::component<segment_spawner_component>
 {
@@ -24,6 +25,13 @@ struct segment_spawner_component : ecs::component<segment_spawner_component>
     glm::mat4 rotation {1.f};
 
     glm::uint32_t segments_before_shooters {2};
+
+    std::uint32_t last_two_turns[2] {0, 0};
+
+    bool are_last_two_turns(std::uint32_t dir)
+    {
+        return last_two_turns[0] == dir && last_two_turns[1] == dir;
+    }
 };
 
 void load_segment_spawner(const json& j, ecs::entity& e, string_table& hashes);
