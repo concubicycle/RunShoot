@@ -120,6 +120,7 @@ namespace ecs
         std::uint64_t mesh_path_hash;
         asset::mesh_type mesh_format;
         bool billboard {false};
+        bool has_alpha {false};
     };
 
 #undef near

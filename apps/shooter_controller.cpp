@@ -47,27 +47,34 @@ void shooter_controller::update_yaw(ecs::entity &e)
 
     auto& transform = e.get_component<ecs::transform_component>();
     auto t = e.graph_node->absolute_transform();
-    auto pos = t[3];
     auto player_t = player->get().graph_node->absolute_transform();
+    auto soldier_pos = t[3];
     auto player_pos = player_t[3];
 
-    auto rot = glm::mat3(t);
+    glm::vec4 original_xz = glm::vec4(0.f, 0.f, -1.f, 0.f);
+    glm::vec4 original_xz_right = glm::vec4(-1.f, 0.f, 0.f, 0.f);
 
-    glm::vec3 original_xz = rot * glm::vec3(0, 0, -1);
-    glm::vec3 original_xz_left(-1, 0, 0);
-    glm::vec3 to_player = glm::normalize(player_pos - pos);
+    original_xz = t * original_xz;
+    original_xz_right = t * original_xz_right;
+
+    glm::vec3 to_player = player_pos - soldier_pos;
     to_player.y = 0;
 
-    auto d = glm::dot(to_player, original_xz);
-    auto side = glm::dot(to_player, original_xz_left);
+    to_player = glm::normalize(to_player);
+
+    auto d = glm::dot(to_player, glm::vec3(original_xz));
+    auto side = glm::dot(to_player, glm::vec3(original_xz_right));
+
     auto theta = std::acos(d);
 
-    if (side < 0)
-        theta = glm::pi<float>() - (theta);
-    else
-        theta = glm::pi<float>() - (-theta);
+    if (std::isnan(theta)) return;
 
-    transform.yaw = theta;
+    if (side < 0)
+        theta = (-theta);
+    else
+        theta = (theta);
+
+    transform.yaw += theta;
 }
 
 void shooter_controller::update_waiting(ecs::entity &e, core::behavior_context &ctx)
@@ -154,8 +161,10 @@ void shooter_controller::take_shot(ecs::entity &e, core::behavior_context &ctx)
         return;
     }
 
-    to_player = glm::normalize(to_player);
     float dist = glm::length(to_player);
+
+    to_player = glm::normalize(to_player);
+
     float kill_chance = dist > 100 ? 0 : shooter.kill_chance;
     auto rand = std::rand() % 100;
     auto kill_chance_var = kill_chance * 100;

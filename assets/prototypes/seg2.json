@@ -179,26 +179,7 @@
         }
       ]
     },
-    {
-      "prototype": "./assets/prototypes/shooter.json",
-      "components": [
-        {
-          "component_bitshift": 0,
-          "x": -228,
-          "z": -380
-        }
-      ]
-    },
-    {
-      "prototype": "./assets/prototypes/shooter.json",
-      "components": [
-        {
-          "component_bitshift": 0,
-          "x": -15,
-          "z": -15
-        }
-      ]
-    },
+
     {
       "prototype": "./assets/prototypes/shooter.json",
       "components": [

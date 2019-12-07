@@ -105,6 +105,8 @@ namespace ogllib
 			_bytes = std::shared_ptr<std::uint8_t>(nullptr);
         }
 
+        bool has_alpha() const { return _color_type == gl::GLenum::GL_RGBA; }
+
     private:
         bool _is_bound = false;
 

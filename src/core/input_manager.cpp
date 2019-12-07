@@ -215,9 +215,15 @@ core::input_manager::input_manager(GLFWwindow *window) :
 
     if (glfwRawMouseMotionSupported())
         glfwSetInputMode(window, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
+
+    double x, y;
+    glfwGetCursorPos(_window, &x, &y);
+    _last_x = x;
+    _last_y = y;
 }
 
 glm::vec2 core::input_manager::click_position(std::uint8_t button)
 {
     return _last_click_position;
 }
+

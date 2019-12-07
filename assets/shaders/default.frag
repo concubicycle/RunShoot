@@ -117,5 +117,7 @@ void main()
         I = vec3(1.f);
     }
 
+    if (tex_color.w == 0) discard;
+
     FragColor = vec4(I * color_multiplier, tex_color.w);
 }

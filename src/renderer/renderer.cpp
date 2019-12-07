@@ -11,6 +11,7 @@
 
 using namespace gl;
 
+
 void
 MessageCallback(GLenum source,
                 GLenum type,
@@ -114,106 +115,18 @@ void rendering::renderer::draw_scene(asset::scene &scene)
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    auto &entities = scene.entity_world();
-
     draw_skybox();
 
     scene.scene_graph().traverse([this](ecs::entity &e, glm::mat4 &model) {
         if (!e.active()) return;
+        if (!e.has<ecs::render_component_ogl>()) return;
 
-        auto is_rt = e.has<ecs::render_component_ogl>() && e.has<ecs::transform_component>();
-        if (!is_rt) return;
+        auto& r = e.get_component<ecs::render_component_ogl>();
 
-        auto &cam = _camera_entity->get_component<ecs::camera_component>();
-        auto &r = e.get_component<ecs::render_component_ogl>();
-        auto &t = e.get_component<ecs::transform_component>();
+        draw_object(e, model);
 
-        auto model_inverse = glm::transpose(glm::inverse(model));
 
-        auto aspect = _screen_width / _screen_height;
-        auto projection = glm::perspective(cam.fov, aspect, cam.near, cam.far);
 
-        auto view = cam.view();
-
-        if (r.billboard)
-        {
-            glm::vec3 sprite_orig(0.f, 0.f, 1.f);
-            glm::vec3 sprite_to_cam = glm::normalize(cam.position - glm::vec3(model[3]));
-            auto pos = model[3];
-            float theta = std::acos(glm::dot(sprite_orig, sprite_to_cam));
-            glm::vec3 axis = glm::cross(sprite_orig, sprite_to_cam);
-            glm::mat4 rotation = glm::rotate(theta, axis);
-            model = rotation;
-
-            set_translation(model, pos);
-        }
-
-        auto light_pos = glm::vec3(0, 10.f, 10.f);
-        auto light_color = glm::vec3(0.5, 0.5, 0.5);
-        auto ambient_light = glm::vec3(0.3, 0.31, 0.38);
-        auto specular = glm::vec3(0.0f);
-
-        if (r.mesh_format == asset::mesh_type::GLTF2)
-        {
-            auto &shader = _shaders.default_shader();
-            shader.bind();
-
-            shader.set_uniform("model", model);
-            shader.set_uniform("view", view);
-            shader.set_uniform("projection", projection);
-            shader.set_uniform("model_inverse", model_inverse);
-            shader.set_uniform("view_pos", cam.position);
-            shader.set_uniform("ambient_light", ambient_light);
-            shader.set_uniform("specular", specular);
-            shader.set_uniform("shininess", 0.2f);
-
-            set_light_uniforms(shader);
-
-            for (int i = 0; i < cam.float_count; ++i)
-                shader.set_uniform(cam.float_props[i].name, cam.float_props[i].data);
-
-            for (std::uint32_t i = 0; i < r.mesh_count; ++i)
-            {
-                glActiveTexture(GL_TEXTURE0);
-                glBindTexture(GL_TEXTURE_2D, r.meshes[i].diffuse_texture_id);
-
-                glBindVertexArray(r.meshes[i].vao);
-                glDrawElements(GL_TRIANGLES, r.meshes[i].element_count, GL_UNSIGNED_INT, nullptr);
-            }
-
-            glBindVertexArray(0);
-            glBindTexture(GL_TEXTURE_2D, 0);
-            shader.unbind();
-        } else
-        {
-            const ogllib::shader_program_base &shader = r.shader
-                                                        ? _shaders.get_program(*(r.shader))
-                                                        : _shaders.get_program("ptx2d_pvm");
-
-            auto projection_view_model = projection * view * model;
-
-            glActiveTexture(GL_TEXTURE0);
-            glBindTexture(GL_TEXTURE_2D, r.meshes[0].diffuse_texture_id);
-
-            shader.bind();
-
-            shader.set_uniform("projection_view_model", projection_view_model);
-
-            if (e.has<ecs::billboard_animation_component>())
-            {
-                auto &billboard = e.get_component<ecs::billboard_animation_component>();
-                glm::vec2 tex_offset = billboard.current_tex_offset();
-                shader.set_uniform("tex_offset", tex_offset);
-            }
-
-            if (r.hue) shader.set_uniform("hue", *r.hue);
-
-            glBindVertexArray(r.meshes[0].vao);
-            glDrawElements(GL_TRIANGLES, r.meshes[0].element_count, GL_UNSIGNED_INT, nullptr);
-            glBindVertexArray(0);
-
-            shader.unbind();
-        }
     });
 
     _overlay.draw(_screen_width, _screen_height);
@@ -337,5 +250,99 @@ void rendering::renderer::set_light_uniforms(const ogllib::shader_program_base &
     }
 
     shader.set_uniform("pointLightCount", (GLint) (light_count));
+}
+
+void rendering::renderer::draw_object(ecs::entity& e, glm::mat4 model)
+{
+    auto &cam = _camera_entity->get_component<ecs::camera_component>();
+
+    auto& r = e.get_component<ecs::render_component_ogl>();
+
+    auto model_inverse = glm::transpose(glm::inverse(model));
+
+    auto aspect = _screen_width / _screen_height;
+    auto projection = glm::perspective(cam.fov, aspect, cam.near, cam.far);
+
+    auto view = cam.view();
+
+    if (r.billboard)
+    {
+        glm::vec3 sprite_orig(0.f, 0.f, 1.f);
+        glm::vec3 sprite_to_cam = glm::normalize(cam.position - glm::vec3(model[3]));
+        auto pos = model[3];
+        float theta = std::acos(glm::dot(sprite_orig, sprite_to_cam));
+        glm::vec3 axis = glm::cross(sprite_orig, sprite_to_cam);
+        glm::mat4 rotation = glm::rotate(theta, axis);
+        model = rotation;
+
+        set_translation(model, pos);
+    }
+
+    auto light_pos = glm::vec3(0, 10.f, 10.f);
+    auto light_color = glm::vec3(0.5, 0.5, 0.5);
+    auto ambient_light = glm::vec3(0.3, 0.31, 0.38);
+    auto specular = glm::vec3(0.0f);
+
+    if (r.mesh_format == asset::mesh_type::GLTF2)
+    {
+        auto &shader = _shaders.default_shader();
+        shader.bind();
+
+        shader.set_uniform("model", model);
+        shader.set_uniform("view", view);
+        shader.set_uniform("projection", projection);
+        shader.set_uniform("model_inverse", model_inverse);
+        shader.set_uniform("view_pos", cam.position);
+        shader.set_uniform("ambient_light", ambient_light);
+        shader.set_uniform("specular", specular);
+        shader.set_uniform("shininess", 0.2f);
+
+        set_light_uniforms(shader);
+
+        for (int i = 0; i < cam.float_count; ++i)
+            shader.set_uniform(cam.float_props[i].name, cam.float_props[i].data);
+
+        for (std::uint32_t i = 0; i < r.mesh_count; ++i)
+        {
+            glActiveTexture(GL_TEXTURE0);
+            glBindTexture(GL_TEXTURE_2D, r.meshes[i].diffuse_texture_id);
+
+            glBindVertexArray(r.meshes[i].vao);
+            glDrawElements(GL_TRIANGLES, r.meshes[i].element_count, GL_UNSIGNED_INT, nullptr);
+        }
+
+        glBindVertexArray(0);
+        glBindTexture(GL_TEXTURE_2D, 0);
+        shader.unbind();
+    } else
+    {
+        const ogllib::shader_program_base &shader = r.shader
+                                                    ? _shaders.get_program(*(r.shader))
+                                                    : _shaders.get_program("ptx2d_pvm");
+
+        auto projection_view_model = projection * view * model;
+
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, r.meshes[0].diffuse_texture_id);
+
+        shader.bind();
+
+        shader.set_uniform("projection_view_model", projection_view_model);
+
+        if (e.has<ecs::billboard_animation_component>())
+        {
+            auto &billboard = e.get_component<ecs::billboard_animation_component>();
+            glm::vec2 tex_offset = billboard.current_tex_offset();
+            shader.set_uniform("tex_offset", tex_offset);
+        }
+
+        if (r.hue) shader.set_uniform("hue", *r.hue);
+
+        glBindVertexArray(r.meshes[0].vao);
+        glDrawElements(GL_TRIANGLES, r.meshes[0].element_count, GL_UNSIGNED_INT, nullptr);
+        glBindVertexArray(0);
+
+        shader.unbind();
+    }
 }
 

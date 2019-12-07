@@ -47,7 +47,7 @@ namespace core
 
     private:
         GLFWwindow *_window;
-        double _last_x = 0, _last_y = 0;
+        double _last_x, _last_y;
         util::running_average<glm::vec2, float> _mouse_delta;
 
         std::uint8_t* _current_key_states;

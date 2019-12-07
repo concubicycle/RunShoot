@@ -10,5 +10,9 @@ uniform vec2 tex_offset = vec2(0, 0);
 
 void main()
 {
-    FragColor = texture(model_texture, tex_offset + TexCoord);
+    vec4 color = texture(model_texture, TexCoord+tex_offset);
+
+    if (color.w == 0) discard;
+
+    FragColor = color;
 }

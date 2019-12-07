@@ -2,27 +2,27 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="RunShoot" targetName="assimp" />
-      <config projectName="RunShoot" targetName="ogllib" />
-      <config projectName="RunShoot" targetName="glbinding" />
-      <config projectName="RunShoot" targetName="asset" />
-      <config projectName="RunShoot" targetName="generate_colliders" />
       <config projectName="RunShoot" targetName="sound" />
-      <config projectName="RunShoot" targetName="nlohmann_json" />
-      <config projectName="RunShoot" targetName="tests" />
-      <config projectName="RunShoot" targetName="glm" />
-      <config projectName="RunShoot" targetName="physics_models" />
-      <config projectName="RunShoot" targetName="RunShoot" />
       <config projectName="RunShoot" targetName="glfw" />
-      <config projectName="RunShoot" targetName="memory" />
-      <config projectName="RunShoot" targetName="physics" />
-      <config projectName="RunShoot" targetName="expected" />
-      <config projectName="RunShoot" targetName="renderer" />
-      <config projectName="RunShoot" targetName="ecs" />
-      <config projectName="RunShoot" targetName="core" />
       <config projectName="RunShoot" targetName="spdlog" />
+      <config projectName="RunShoot" targetName="glm" />
+      <config projectName="RunShoot" targetName="asset" />
+      <config projectName="RunShoot" targetName="RunShoot" />
+      <config projectName="RunShoot" targetName="generate_colliders" />
+      <config projectName="RunShoot" targetName="ogllib" />
+      <config projectName="RunShoot" targetName="tests" />
+      <config projectName="RunShoot" targetName="glbinding" />
+      <config projectName="RunShoot" targetName="core" />
       <config projectName="RunShoot" targetName="animation" />
+      <config projectName="RunShoot" targetName="physics_models" />
+      <config projectName="RunShoot" targetName="physics" />
       <config projectName="RunShoot" targetName="platform" />
+      <config projectName="RunShoot" targetName="ecs" />
+      <config projectName="RunShoot" targetName="assimp" />
+      <config projectName="RunShoot" targetName="expected" />
+      <config projectName="RunShoot" targetName="memory" />
+      <config projectName="RunShoot" targetName="nlohmann_json" />
+      <config projectName="RunShoot" targetName="renderer" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -31,17 +31,24 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="put in temporary fix to help prevent chance of track self-interlap.">
+    <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/components/player_controller_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/player_controller_component.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/components/segment_spawner_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/segment_spawner_component.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/freefly_controller.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/freefly_controller.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/player_controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/segment_spawner.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/segment_spawner.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/segment_spawner.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/segment_spawner.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blender/seg1.blend" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg1.blend" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blender/seg1.blend1" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg1.blend1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/player_controller.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/shooter_controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/shooter_controller.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/prototypes/seg2.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/seg2.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/prototypes/seg3.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/seg3.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/shaders/default.frag" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/default.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/shaders/ptx2d_basic.frag" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/ptx2d_basic.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/shaders/ptx2d_pvm.frag" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/ptx2d_pvm.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/core/input_manager.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/core/input_manager.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/renderer/renderer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/renderer/renderer.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/input_manager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/input_manager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/model_render_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/model_render_loader.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/renderer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thirdparty/opengllib/include/ogl_2d_tex.h" beforeDir="false" afterPath="$PROJECT_DIR$/thirdparty/opengllib/include/ogl_2d_tex.h" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -385,7 +392,8 @@
       <workItem from="1575428401649" duration="24165000" />
       <workItem from="1575490145620" duration="966000" />
       <workItem from="1575497446706" duration="17298000" />
-      <workItem from="1575589156609" duration="7690000" />
+      <workItem from="1575589156609" duration="31199000" />
+      <workItem from="1575678671360" duration="6610000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>
@@ -464,7 +472,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575516980816</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="put in temporary fix to help prevent chance of track self-interlap. fix clang warning">
+      <created>1575613371446</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1575613371446</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -509,17 +524,7 @@
     <MESSAGE value="fix plz build" />
     <MESSAGE value="fixed lights and stuff" />
     <MESSAGE value="put in temporary fix to help prevent chance of track self-interlap." />
-    <option name="LAST_COMMIT_MESSAGE" value="put in temporary fix to help prevent chance of track self-interlap." />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/asset/prototype_spawner.cpp</url>
-          <line>128</line>
-          <option name="timeStamp" value="33" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="put in temporary fix to help prevent chance of track self-interlap. fix clang warning" />
+    <option name="LAST_COMMIT_MESSAGE" value="put in temporary fix to help prevent chance of track self-interlap. fix clang warning" />
   </component>
 </project>

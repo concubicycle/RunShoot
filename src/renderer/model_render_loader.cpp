@@ -120,6 +120,8 @@ void rendering::model_render_loader::init_mesh(
     texture.buffer();
     texture.gen_mip_maps();
 
+    r.has_alpha = texture.has_alpha();
+
     r.meshes[mesh_index].vao = vao.id();
     r.meshes[mesh_index].vbo = vbo.id(); // note, this will be deleted
     r.meshes[mesh_index].ebo = ebo.id(); // note, this will be deleted
@@ -167,6 +169,8 @@ void rendering::model_render_loader::init_mesh(
     texture.set_filtering(GL_NEAREST, GL_NEAREST);
     texture.buffer();
     texture.gen_mip_maps();
+
+    r.has_alpha = texture.has_alpha();
 
     r.meshes[mesh_index].vao = vao.id();
     r.meshes[mesh_index].vbo = vbo.id(); // note, this will be deleted

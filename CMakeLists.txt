@@ -9,7 +9,7 @@ set(RunShoot_VERSION_MAJOR 0)
 set(RunShoot_VERSION_MINOR 1)
 
 ##### change for release #####
-set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_BUILD_TYPE Release)
 ##############################
 
 

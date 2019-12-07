@@ -66,6 +66,7 @@ private:
 
     float _screen_width, _screen_height;
 
+    void draw_object(ecs::entity& e, glm::mat4 model);
 
     void draw_skybox();
     void set_light_uniforms(const ogllib::shader_program_base& shader);

@@ -104,9 +104,10 @@ void player_controller::on_entity_created(ecs::entity &e)
 
     player.to_camera = c.position - t.pos;
     rb.velocity = player.direction * player.run_speed;
-    t.yaw = 0;
-    t.pitch = 0;
-    t.roll = 0;
+
+    c.pitch = 0;//glm::pi<float>()/4.f;
+    c.roll = 0;
+    c.yaw = 0;
 
     auto hit = std::function([&e](ecs::entity &shooter_e) {
         auto &player = e.get_component<player_controller_component>();
@@ -289,6 +290,12 @@ void player_controller::update_dying(ecs::entity &e, player_controller_component
 
 void player_controller::update_turn_look(ecs::entity &e)
 {
+    if (_starting_mouse_lock > 0)
+    {
+        _starting_mouse_lock--;
+        return;
+    }
+
     auto &c = e.get_component<ecs::camera_component>();
     auto &player = e.get_component<player_controller_component>();
 
@@ -306,6 +313,12 @@ void player_controller::update_turn_look(ecs::entity &e)
 
 void player_controller::update_player_look(ecs::entity &e, core::input_manager &input, float frame_time)
 {
+    if (_starting_mouse_lock > 0)
+    {
+        _starting_mouse_lock--;
+        return;
+    }
+
     auto &c = e.get_component<ecs::camera_component>();
     auto mouse_delta = input.mouse_delta();
 

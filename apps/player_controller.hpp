@@ -36,12 +36,13 @@ private:
     listener_id _shooter_hit_listener_id{};
     listener_id _shooter_miss_listener_id{};
 
-    debounce<ecs::entity &, core::behavior_context&> _jump_debounce;
+    debounce<ecs::entity &, core::behavior_context &> _jump_debounce;
     debounce<ecs::entity &, turn_direction> _turn_debounce;
     glm::mat4 _right_turn;
     glm::mat4 _left_turn;
 
-    void update_running(ecs::entity &e, player_controller_component &player, core::behavior_context &ctx);
+    std::uint32_t _starting_mouse_lock = 10;
+
 
     void on_collision(const physics::entity_contact &collision, float dt);
 
@@ -56,24 +57,25 @@ private:
         ecs::entity &player_entity,
         player_controller_component &player);
 
-    static void update_airborne(ecs::entity &e, player_controller_component &comp, core::behavior_context &ctx);
+    void update_turn_look(ecs::entity &e);
 
-    static void update_turning(ecs::entity &e, player_controller_component &player, core::behavior_context &ctx);
+    void update_player_look(ecs::entity &e, core::input_manager &input, float frame_time);
 
-    static void update_sliding(ecs::entity &e, player_controller_component &player, core::behavior_context &ctx);
+    void update_running(ecs::entity &e, player_controller_component &player, core::behavior_context &ctx);
+
+    void update_airborne(ecs::entity &e, player_controller_component &comp, core::behavior_context &ctx);
+
+    void update_turning(ecs::entity &e, player_controller_component &player, core::behavior_context &ctx);
+
+    void update_sliding(ecs::entity &e, player_controller_component &player, core::behavior_context &ctx);
 
     static void update_dying(ecs::entity &e, player_controller_component &player, core::behavior_context &ctx);
-
-
-    static void update_player_look(ecs::entity &e, core::input_manager &input, float frame_time);
-
-    static void update_turn_look(ecs::entity &e);
 
     static void integrate(ecs::entity &e, ecs::rigid_body_component &rb, float frame_time);
 
     static void move_component_positions(ecs::entity &e, glm::vec3 displacement);
 
-    static void jump(ecs::entity &e, core::behavior_context& ctx);
+    static void jump(ecs::entity &e, core::behavior_context &ctx);
 
     static void adjust_turn_counter(ecs::entity &e, turn_direction direction);
 
