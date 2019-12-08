@@ -91,6 +91,7 @@ void player_controller::update_single(ecs::entity &e, core::behavior_context &ct
             update_dying(e, player, ctx);
             break;
         case dead:
+            _events.invoke<const std::string&>(events::scene_change, "./assets/scenes/runshoot_gameplay.json");
             break;
     }
 }
@@ -285,6 +286,9 @@ void player_controller::update_dying(ecs::entity &e, player_controller_component
     c.set_float("color_multiplier", scale);
 
     integrate(e, rb, frame_time);
+
+    if (player.current_fadeout_time < 0)
+        player.state = dead;
 }
 
 

@@ -16,7 +16,9 @@ namespace events
         collision = 3,
 
         delay_entity_jump = 4,
-        camera_prop_set = 5
+        camera_prop_set = 5,
+        scene_change = 6,
+        exit = 7
     };
 }
 

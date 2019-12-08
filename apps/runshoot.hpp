@@ -29,6 +29,7 @@
 #endif
 
 #include <GLFW/glfw3.h>
+#include <core/scene_tracker.hpp>
 
 
 struct game_systems
@@ -38,12 +39,13 @@ struct game_systems
     core::frame_limiter &limiter;
     core::input_manager& input;
     rendering::renderer& renderer;
-    asset::scene& scene;
     events::event_exchange& events;
     physics::physics_world& physics;
     rendering::debug_drawer& debug_draw;
     sound::sound_system& game_sound;
     animation::texture_animator& billboard_animation;
+    asset::prototype_spawner& spawner;
+    ecs::entity_world& entities;
 };
 
 struct behaviors
@@ -59,8 +61,10 @@ struct behaviors
 
 
 GLFWwindow *set_up_glfw(core::startup_config& config);
+
+void run_scenes(game_systems &systems, string_table &strings);
 void run_game(core::startup_config &conf, GLFWwindow *window);
-void render_loop(game_systems &systems, behaviors& behaviors);
+void render_loop(game_systems &systems, behaviors& behaviors, asset::scene& scene, core::scene_tracker& scenes);
 
 void (*build_framebuffer_callback(rendering::renderer& r))(GLFWwindow*, int, int);
 

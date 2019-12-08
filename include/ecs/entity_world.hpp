@@ -66,6 +66,8 @@ namespace ecs
          *  structure that you can iterate over.
          */
 
+        void free_all();
+
     private:
         entity_factory &_entity_factory;
         events::event_exchange& _events;

@@ -62,6 +62,8 @@ namespace ecs
                 return;
             }
 
+            _ids.erase(e.id());
+
             return _archetype_pools.find(id)->second.free_entity(e);
         }
 

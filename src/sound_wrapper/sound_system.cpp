@@ -257,3 +257,11 @@ void sound::sound_system::update_emitters()
         }
     }
 }
+
+void sound::sound_system::stop_all()
+{
+    for (auto pair : _playbacks)
+        pair.second.second->stop();
+
+    _playbacks.clear();
+}

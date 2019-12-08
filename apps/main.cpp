@@ -34,6 +34,7 @@
 
 /////////////
 #include <GLFW/glfw3.h>
+#include <core/scene_tracker.hpp>
 //////////////
 
 
@@ -77,7 +78,6 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     asset::component_loader component_loader(app_string_table);
     asset::prototype_loader prototypes;
     asset::prototype_spawner spawner(events, component_loader, prototypes);
-    asset::scene_loader loader(spawner);
 
     core::system_info info;
     core::frame_timer timer;
@@ -99,32 +99,44 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
 
     animation::texture_animator billboard_animation(events);
 
-    freefly_controller controller(events);
-    drone_controller drone_controller(events);
-    player_controller player_controller(events);
-    segment_spawner segment_spawn(events);
-    drone_spawner drone_spawn(events);
-    music_player music(events, app_string_table, game_sound);
-    shooter_controller shooter(events);
-
-	asset::scene scene(spawner, entities);
-    loader.load_scene("./assets/scenes/runshoot_gameplay.json", entities, scene);
 
     renderer.init();
     glfwSetFramebufferSizeCallback(window, build_framebuffer_callback(renderer));
 
-    game_systems data = {window, timer, limiter, input, renderer, scene, events, physics, debug_draw, game_sound, billboard_animation};
-    behaviors behaviors = {controller, drone_controller, player_controller, segment_spawn, drone_spawn, music, shooter};
-    render_loop(data, behaviors);
+    game_systems data = {window, timer, limiter, input, renderer, events, physics, debug_draw, game_sound, billboard_animation, spawner, entities};
+    run_scenes(data, app_string_table);
 }
 
-void render_loop(game_systems &systems, behaviors &behaviors)
+void run_scenes(game_systems &systems, string_table &strings)
 {
-    auto &player = systems.scene.entity_world().get_entity(111);
+    core::scene_tracker scenes("./assets/scenes/runshoot_gameplay.json", systems.events);
+    asset::scene_loader loader(systems.spawner);
 
-    core::behavior_context ctx = {systems.timer, systems.input, systems.scene, systems.physics, systems.renderer };
+    while (scenes.has_next())
+    {
+        freefly_controller controller(systems.events);
+        drone_controller drone_controller(systems.events);
+        player_controller player_controller(systems.events);
+        segment_spawner segment_spawn(systems.events);
+        drone_spawner drone_spawn(systems.events);
+        music_player music(systems.events, strings, systems.game_sound);
+        shooter_controller shooter(systems.events);
+        behaviors behaviors = {controller, drone_controller, player_controller, segment_spawn, drone_spawn, music, shooter};
 
-    while (!glfwWindowShouldClose(systems.window))
+        asset::scene scene(systems.spawner, systems.entities);
+        loader.load_scene(scenes.next(), systems.entities, scene);
+
+        render_loop(systems, behaviors, scene, scenes);
+        systems.entities.free_all();
+        systems.game_sound.stop_all();
+    }
+}
+
+void render_loop(game_systems &systems, behaviors &behaviors, asset::scene& scene, core::scene_tracker& scenes)
+{
+    core::behavior_context ctx = {systems.timer, systems.input, scene, systems.physics, systems.renderer };
+
+    while (!glfwWindowShouldClose(systems.window) && !scenes.has_next())
     {
         systems.timer.start();
         systems.physics.update(systems.timer.delta_secs());
@@ -138,7 +150,7 @@ void render_loop(game_systems &systems, behaviors &behaviors)
         behaviors.music.update(ctx);
         behaviors.shooter.update(ctx);
 
-        systems.renderer.draw_scene(systems.scene);
+        systems.renderer.draw_scene(scene);
         systems.debug_draw.update();
         systems.game_sound.update();
         systems.billboard_animation.update(systems.timer.smoothed_delta_secs());

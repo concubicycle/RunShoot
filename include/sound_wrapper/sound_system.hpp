@@ -34,6 +34,8 @@ namespace sound
 
         void update();
 
+        void stop_all();
+
     private:
         events::event_exchange& _events;
 

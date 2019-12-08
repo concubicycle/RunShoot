@@ -55,3 +55,14 @@ void ecs::entity_world::remove_entity(entity_id entity_id)
 
 
 std::atomic_uint ecs::entity_world::next_entity_id = 100000;
+
+void ecs::entity_world::free_all()
+{
+    for (auto pair : _entity_lookup)
+    {
+        _events.invoke<entity&>(events::entity_destroyed, pair.second);
+        _entity_factory.free_entity(pair.second);
+    }
+
+    _entity_lookup.clear();
+}
