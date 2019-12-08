@@ -60,7 +60,7 @@ void shooter_controller::update_yaw(ecs::entity &e)
     glm::vec3 to_player = player_pos - soldier_pos;
     to_player.y = 0;
 
-    to_player = glm::normalize(to_player);
+    to_player = - glm::normalize(to_player);
 
     auto d = glm::dot(to_player, glm::vec3(original_xz));
     auto side = glm::dot(to_player, glm::vec3(original_xz_right));
