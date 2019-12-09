@@ -30,6 +30,7 @@
 #include "player_controller.hpp"
 #include "drone_spawner.hpp"
 #include "music_player.hpp"
+#include "main_menu_controller.hpp"
 
 
 /////////////
@@ -109,7 +110,7 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
 
 void run_scenes(game_systems &systems, string_table &strings)
 {
-    core::scene_tracker scenes("./assets/scenes/runshoot_gameplay.json", systems.events);
+    core::scene_tracker scenes("./assets/scenes/instructions.json", systems.events);
     asset::scene_loader loader(systems.spawner);
 
     while (scenes.has_next())
@@ -121,7 +122,8 @@ void run_scenes(game_systems &systems, string_table &strings)
         drone_spawner drone_spawn(systems.events);
         music_player music(systems.events, strings, systems.game_sound);
         shooter_controller shooter(systems.events);
-        behaviors behaviors = {controller, drone_controller, player_controller, segment_spawn, drone_spawn, music, shooter};
+        main_menu_controller main_menu(systems.events);
+        behaviors behaviors = {controller, drone_controller, player_controller, segment_spawn, drone_spawn, music, shooter, main_menu};
 
         asset::scene scene(systems.spawner, systems.entities);
         loader.load_scene(scenes.next(), systems.entities, scene);
@@ -149,6 +151,7 @@ void render_loop(game_systems &systems, behaviors &behaviors, asset::scene& scen
         behaviors.drone_spawn.update(ctx);
         behaviors.music.update(ctx);
         behaviors.shooter.update(ctx);
+        behaviors.main_menu.update(ctx);
 
         systems.renderer.draw_scene(scene);
         systems.debug_draw.update();

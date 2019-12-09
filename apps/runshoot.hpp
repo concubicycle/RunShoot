@@ -22,6 +22,7 @@
 #include "drone_spawner.hpp"
 #include "music_player.hpp"
 #include "shooter_controller.hpp"
+#include "main_menu_controller.hpp"
 
 #if (WIN32) // msvc raises warnings if windows.h is after glfw3.h
 #define NOMINMAX
@@ -57,6 +58,7 @@ struct behaviors
     drone_spawner& drone_spawn;
     music_player& music;
     shooter_controller& shooter;
+    main_menu_controller& main_menu;
 };
 
 

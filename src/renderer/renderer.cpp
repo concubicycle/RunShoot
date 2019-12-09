@@ -142,21 +142,24 @@ void rendering::renderer::grab_entity(ecs::entity &e)
     if (e.archetype_id() & ecs::camera_component::archetype_bit)
     {
         _camera_entity = &e;
-
         auto &cam = e.get_component<ecs::camera_component>();
-        cam.skybox.emplace(
-            cam.skybox_left,
-            cam.skybox_top,
-            cam.skybox_front,
-            cam.skybox_bottom,
-            cam.skybox_right,
-            cam.skybox_back);
 
-        cam.skybox->bind();
-        _shaders.skybox().set_attrib_pointers();
-        _shaders.skybox().bind();
-        _shaders.skybox().set_uniform("skybox", 0);
-        cam.skybox->unbind();
+        if (cam.has_skybox)
+        {
+            cam.skybox.emplace(
+                cam.skybox_left,
+                cam.skybox_top,
+                cam.skybox_front,
+                cam.skybox_bottom,
+                cam.skybox_right,
+                cam.skybox_back);
+
+            cam.skybox->bind();
+            _shaders.skybox().set_attrib_pointers();
+            _shaders.skybox().bind();
+            _shaders.skybox().set_uniform("skybox", 0);
+            cam.skybox->unbind();
+        }
     }
 
     if (e.has<ecs::punctual_light_component>())
@@ -193,6 +196,7 @@ void rendering::renderer::forget_entity(ecs::entity &e)
 void rendering::renderer::draw_skybox()
 {
     auto &cam = _camera_entity->get_component<ecs::camera_component>();
+    if (!cam.has_skybox) return;
 
     auto aspect = _screen_width / _screen_height;
     auto projection = glm::perspective(cam.fov, aspect, cam.near, cam.far);
@@ -261,7 +265,9 @@ void rendering::renderer::draw_object(ecs::entity& e, glm::mat4 model)
     auto model_inverse = glm::transpose(glm::inverse(model));
 
     auto aspect = _screen_width / _screen_height;
-    auto projection = glm::perspective(cam.fov, aspect, cam.near, cam.far);
+    auto projection = cam.mode == ecs::camera_component::perspective
+        ? glm::perspective(cam.fov, aspect, cam.near, cam.far)
+        : glm::ortho(-_screen_width / 2.f, _screen_width / 2.f, -_screen_height / 2.f, _screen_height / 2.f, cam.near, cam.far);
 
     auto view = cam.view();
 

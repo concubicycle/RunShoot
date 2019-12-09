@@ -144,12 +144,14 @@ namespace ecs
         float fov = 45.f, near = 0.1f, far = 1000.f;
 
         std::optional<ogllib::cubemap> skybox;
+        bool has_skybox;
         std::string skybox_left;
         std::string skybox_top;
         std::string skybox_front;
         std::string skybox_bottom;
         std::string skybox_right;
         std::string skybox_back;
+
 
 
         glm::mat3 right_up_fwd()

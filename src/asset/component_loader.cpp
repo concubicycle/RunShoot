@@ -61,12 +61,20 @@ void load_camera(const json &j, ecs::entity &e, string_table &hashes)
     c.near = j["near"].get<float>();
     c.far = j["far"].get<float>();
 
-    c.skybox_left = j["skybox_left"].get<std::string>();
-    c.skybox_top = j["skybox_top"].get<std::string>();
-    c.skybox_front = j["skybox_front"].get<std::string>();
-    c.skybox_bottom = j["skybox_bottom"].get<std::string>();
-    c.skybox_right = j["skybox_right"].get<std::string>();
-    c.skybox_back = j["skybox_back"].get<std::string>();
+    if (j.find("skybox_left") != j.end())
+    {
+        c.skybox_left = j["skybox_left"].get<std::string>();
+        c.skybox_top = j["skybox_top"].get<std::string>();
+        c.skybox_front = j["skybox_front"].get<std::string>();
+        c.skybox_bottom = j["skybox_bottom"].get<std::string>();
+        c.skybox_right = j["skybox_right"].get<std::string>();
+        c.skybox_back = j["skybox_back"].get<std::string>();
+        c.has_skybox = true;
+    }
+    else
+    {
+        c.has_skybox = false;
+    }
 
     c.mode = (ecs::camera_component::camera_mode) j["mode"].get<int>();
 }

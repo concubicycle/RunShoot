@@ -22,6 +22,7 @@ using nlohmann::json;
 #include "music_player_component.hpp"
 #include "death_trigger_component.hpp"
 #include "shooter_controller_component.hpp"
+#include "main_menu_controller_component.hpp"
 
 
 #include <sound_wrapper/sound_emitter_component.hpp>
@@ -52,6 +53,7 @@ void add_custom_components()
     add_component<music_player_component>(load_music_player);
     add_component<death_trigger_component>(load_death_trigger);
     add_component<shooter_controller_component>(load_shooter_controller);
+    add_component<main_menu_controller_component>(load_main_menu_controller);
 
 
     // sound lib:
