@@ -10,6 +10,7 @@ in VS_OUT {
     vec3 normal;
     vec2 texcoords_2d;
     vec3 world_pos;
+    float fog_factor;
 } fs_in;
 
 // light uniforms
@@ -119,5 +120,8 @@ void main()
 
     if (tex_color.w == 0) discard;
 
-    FragColor = vec4(I * color_multiplier, tex_color.w);
+    vec4 color_multiplied = vec4(I * color_multiplier, tex_color.w);
+    //vec4 fogged = mix(color_multiplied, vec4(0.5, 0.5, 0.5, tex_color.w), fs_in.fog_factor);
+
+    FragColor = color_multiplied;
 }

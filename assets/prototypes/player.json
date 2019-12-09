@@ -68,7 +68,7 @@
       },
       {
         "component_bitshift": 19,
-        "run_speed": 60,
+        "run_speed": 72,
         "footstep_force": 16,
         "jump_force": 60,
         "total_turn_duration": 0.85,

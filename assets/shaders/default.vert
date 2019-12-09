@@ -12,6 +12,7 @@ out VS_OUT {
 //    vec3 light_vec;
 //    vec3 view_vec;
     vec3 world_pos;
+    float fog_factor;
 } vs_out;
 
 uniform mat4 model, model_inverse, projection, view;
@@ -30,5 +31,8 @@ void main()
     vs_out.texcoords_2d = texcoords_2d;
 
     gl_Position = projection * view * world_pos;
+    float maxf = 3000;
+    float fd = gl_Position.w > maxf ? maxf : gl_Position.w;
+    vs_out.fog_factor = (maxf - fd) / maxf;
 }
 
