@@ -32,19 +32,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/apps/components/main_menu_controller_component.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/components/main_menu_controller_component.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/main_menu_controller.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/models/instructions.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/scenes/instructions.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/components/add_custom_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/add_custom_components.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/components/runshoot_component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/components/runshoot_component.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/runshoot.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/runshoot.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/ecs/components/basic_components.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/asset/component_loader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/component_loader.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/freefly_controller.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/freefly_controller.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/player_controller.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/player_controller.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/apps/player_controller.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/blender/seg3.blend" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg3.blend" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/blender/seg3.blend1" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg3.blend1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg3/seg2.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg3/seg2.gltf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg3/seg2_roof.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg3/seg3.bin" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg3/seg3.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg3/seg3.gltf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/models/seg3/seg3.gltf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg3/wall.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/models/seg3/windows_wall.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/player.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/player.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/prototypes/seg3.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/prototypes/seg3.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/scenes/scene.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scenes/scene.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/renderer/renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/renderer.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -393,7 +396,7 @@
       <workItem from="1575678671360" duration="6610000" />
       <workItem from="1575798017333" duration="1124000" />
       <workItem from="1575799160919" duration="2860000" />
-      <workItem from="1575835317354" duration="8583000" />
+      <workItem from="1575835317354" duration="12286000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>

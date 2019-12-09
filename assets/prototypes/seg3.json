@@ -84,6 +84,73 @@
   },
   "children": [
     {
+      "components": [
+        {
+          "component_bitshift": 3,
+          "color": [1, 0, 0],
+          "intensity": 70
+        },
+        {
+          "component_bitshift": 0,
+          "x": -15,
+          "y": 45,
+          "z": -230,
+          "pitch": 0,
+          "yaw": 0,
+          "roll": 0,
+          "scale_x": 1.0,
+          "scale_y": 1.0,
+          "scale_z": 1.0
+        }
+      ]
+    },
+
+    {
+      "components": [
+        {
+          "component_bitshift": 3,
+          "color": [1, 0, 0],
+          "intensity": 40
+        },
+        {
+          "component_bitshift": 0,
+          "x": -15,
+          "y": 20,
+          "z": -230,
+          "pitch": 0,
+          "yaw": 0,
+          "roll": 0,
+          "scale_x": 1.0,
+          "scale_y": 1.0,
+          "scale_z": 1.0
+        }
+      ]
+    },
+
+    {
+      "components": [
+        {
+          "component_bitshift": 3,
+          "color": [1, 0, 0],
+          "intensity": 80
+        },
+        {
+          "component_bitshift": 0,
+          "x": -18,
+          "y": 30,
+          "z": -232,
+          "pitch": 0,
+          "yaw": 0,
+          "roll": 0,
+          "scale_x": 1.0,
+          "scale_y": 1.0,
+          "scale_z": 1.0
+        }
+      ]
+    },
+
+
+    {
       "prototype": "./assets/prototypes/turn_trigger.json",
       "components": [
         {

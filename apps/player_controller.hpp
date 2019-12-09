@@ -38,6 +38,8 @@ private:
 
     debounce<ecs::entity &, core::behavior_context &> _jump_debounce;
     debounce<ecs::entity &, turn_direction> _turn_debounce;
+    debounce<ecs::entity &> _footstep_debounce;
+
     glm::mat4 _right_turn;
     glm::mat4 _left_turn;
 

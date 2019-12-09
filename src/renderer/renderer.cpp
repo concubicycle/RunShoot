@@ -86,7 +86,7 @@ bool rendering::renderer::init()
     else
         glViewport(0, 0, _system_info.monitor_width(), _system_info.monitor_height());
 
-    gl::glClearColor(0.2f, 0.1f, 0.3f, 0.f);
+    gl::glClearColor(0.f, 0.f, 0.f, 0.f);
 
     if (_config.backface_culling())
     {

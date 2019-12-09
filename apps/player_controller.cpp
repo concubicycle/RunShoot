@@ -24,6 +24,12 @@ player_controller::player_controller(events::event_exchange &events) :
     behavior(events),
     _jump_debounce(std::chrono::duration<float>(0.4f), jump),
     _turn_debounce(std::chrono::duration<float>(1.25f), adjust_turn_counter),
+    _footstep_debounce(std::chrono::duration<float>(0.1f), [](ecs::entity& e) {
+        auto& sound_emitter = e.get_component<sound::sound_emitter_component>();
+        auto& player = e.get_component<player_controller_component>();
+        sound_emitter.set_sound_state(player.footstep_sound_index, sound::playing);
+        player.footstep_sound_index = (player.footstep_sound_index + 1) % 5 + 1;
+    }),
     _right_turn(glm::rotate(-glm::half_pi<float>(), glm::vec3(0, 1, 0))),
     _left_turn(glm::rotate(glm::half_pi<float>(), glm::vec3(0, 1, 0)))
 {
@@ -166,9 +172,10 @@ void player_controller::update_running(ecs::entity &e, player_controller_compone
         player.target_to_camera = player.to_camera + player.slide_to_camera_offset;
         t.scale_y = 0.5f;
         sound.emitter_sounds[6].state = sound::playing;
-    }
 
-//    t.yaw = player.target_yaw;
+        if (rb.velocity.y > 0)
+            rb.velocity.y = 0;
+    }
 
     integrate(e, rb, frame_time);
     update_player_look(e, ctx.input, frame_time);
@@ -403,8 +410,7 @@ void player_controller::resolve_collision(
         if (player.time_since_grounded > 0.01f)
         {
             rb.force += glm::vec3(0, player.footstep_force, 0);
-            sound_emitter.set_sound_state(player.footstep_sound_index, sound::playing);
-            player.footstep_sound_index = (player.footstep_sound_index + 1) % 5 + 1;
+            _footstep_debounce(player_entity);
         }
 
         player.time_since_grounded = 0;
@@ -464,7 +470,9 @@ void player_controller::integrate(ecs::entity &e, ecs::rigid_body_component &rb,
 {
     rb.force += rb.gravity;
     rb.acceleration = rb.force;
-    rb.velocity += rb.acceleration * frame_time;
+    rb.velocity += rb.acceleration;
+
+
     rb.force = glm::vec3(0);
     move_component_positions(e, rb.velocity * frame_time);
 }
