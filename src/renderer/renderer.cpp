@@ -344,6 +344,9 @@ void rendering::renderer::draw_object(ecs::entity& e, glm::mat4 model)
 
         if (r.hue) shader.set_uniform("hue", *r.hue);
 
+        for (int i = 0; i < cam.float_count; ++i)
+            shader.set_uniform(cam.float_props[i].name, cam.float_props[i].data);
+
         glBindVertexArray(r.meshes[0].vao);
         glDrawElements(GL_TRIANGLES, r.meshes[0].element_count, GL_UNSIGNED_INT, nullptr);
         glBindVertexArray(0);

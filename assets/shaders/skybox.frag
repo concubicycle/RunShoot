@@ -11,7 +11,12 @@ uniform float color_multiplier;
 
 void main()
 {
-    vec4 color = color_multiplier > 10 ? vec4(1) : texture(skybox, TexCoords);
-    color = vec4(color.xyz * color_multiplier, 1);
-    FragColor = color;
+    vec4 color = texture(skybox, TexCoords);
+
+    if (color_multiplier > 3)
+    {
+        color = vec4(1.f);
+    }
+    vec4 color_multiplied = vec4((color * color_multiplier).xyz, color.w);
+    FragColor = color_multiplier > 3 ? vec4(1, 1, 1, 1) : color_multiplied;
 }
