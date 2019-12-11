@@ -45,6 +45,8 @@ set(PHYSICS_MODELS_LIB "physics_models")
 set(SOUND_LIB "sound")
 set(ANIMATION_LIB "animation")
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY  ${CMAKE_BINARY_DIR}/bin)
+
 
 # WARNING: Doesn't work when build directory isn't /build for some reason (with CLion)
 file(COPY ${ASSETS_DIR} DESTINATION ${CMAKE_BINARY_DIR})

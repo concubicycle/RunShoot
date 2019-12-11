@@ -2,6 +2,7 @@
 
 CS 529 Project. First person shooter/endless runner
 
+
 ## Milestone 1
 
 The main is in /apps/main.cpp.
@@ -118,6 +119,8 @@ make
 ```
 
 ### Windows
+
+*NOTE*: For a Release build, you have to change the mode to Release in CMakeLists.txt, and then change it in Visual Studio when building. Same for debug
 
 This is being tested on Visual Studio 2017. The paths for projects pulled from github can be finicky depending 
 on platform/tools, so it's best to work with VS2017. Milestone 1 has been tested and works on VS2019.
