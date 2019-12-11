@@ -51,6 +51,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY  ${CMAKE_BINARY_DIR}/bin)
 # WARNING: Doesn't work when build directory isn't /build for some reason (with CLion)
 file(COPY ${ASSETS_DIR} DESTINATION ${CMAKE_BINARY_DIR})
 
+file(COPY ${ASSETS_DIR} DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+
 
 add_executable(${TARGET_NAME}
                apps/main.cpp
