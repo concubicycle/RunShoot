@@ -85,7 +85,15 @@ add_executable(${TARGET_NAME}
                apps/components/music_player_component.cpp
                apps/components/music_player_component.hpp
                apps/music_player.cpp
-               apps/music_player.hpp apps/components/death_trigger_component.cpp apps/components/death_trigger_component.hpp apps/components/shooter_controller_component.cpp apps/components/shooter_controller_component.hpp apps/shooter_controller.cpp apps/shooter_controller.hpp apps/components/main_menu_controller_component.cpp apps/components/main_menu_controller_component.hpp apps/main_menu_controller.hpp)
+               apps/music_player.hpp
+               apps/components/death_trigger_component.cpp
+               apps/components/death_trigger_component.hpp
+               apps/components/shooter_controller_component.cpp
+               apps/components/shooter_controller_component.hpp
+               apps/shooter_controller.cpp apps/shooter_controller.hpp
+               apps/components/main_menu_controller_component.cpp
+               apps/components/main_menu_controller_component.hpp
+               apps/main_menu_controller.hpp)
 			   
 install(TARGETS ${TARGET_NAME} DESTINATION bin)
 

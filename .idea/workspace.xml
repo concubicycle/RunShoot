@@ -33,11 +33,9 @@
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blender/seg3.blend" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg3.blend" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blender/seg3.blend1" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blender/seg3.blend1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/shaders/ptx2d_pvm.frag" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/ptx2d_pvm.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/shaders/skybox.frag" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/skybox.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/renderer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/renderer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/shaders/overlay.vert" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/overlay.vert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/renderer/overlay.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/renderer/overlay.hpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -82,14 +80,10 @@
     </option>
   </component>
   <component name="OCFindUsagesOptions" text="false" ivars="false" properties="true" derivedClasses="false" />
-  <component name="OCResolveContextSettings">
-    <option name="configuration" value="0-RunShoot" />
-  </component>
   <component name="ProjectId" id="1RkfA0cXEQvRmvTns35yj62oy90" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.advertisement.text.has.clang-format" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -386,7 +380,9 @@
       <workItem from="1575798017333" duration="1124000" />
       <workItem from="1575799160919" duration="2860000" />
       <workItem from="1575835317354" duration="18696000" />
-      <workItem from="1575924345594" duration="2422000" />
+      <workItem from="1575924345594" duration="2789000" />
+      <workItem from="1575965460549" duration="685000" />
+      <workItem from="1576006894112" duration="3010000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>

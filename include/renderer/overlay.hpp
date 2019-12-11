@@ -51,6 +51,12 @@ public:
 
         _shader_set.overlay().bind();
         _shader_set.overlay().set_attrib_pointers();
+
+        glGenVertexArrays(1, &_health_vao);
+        glGenBuffers(1, &_health_vbo);
+        glBindVertexArray(_health_vao);
+        glBindBuffer(GL_ARRAY_BUFFER, _health_vbo);
+        glBufferData(GL_ARRAY_BUFFER, _health_bar.size() * sizeof(ogllib::vertex_pc), _health_bar.data(), GL_STATIC_DRAW);
     }
 
     void draw (float screen_width, float screen_height)
@@ -62,12 +68,18 @@ public:
 
         auto aspect = screen_width / screen_height;
         auto projection = glm::ortho(-half_w, half_w, -half_h, half_h);
+        auto model = glm::mat4(1.f);
 
         shader.bind();
         shader.set_uniform("projection", projection);
+        shader.set_uniform("model", model);
 
         bind();
         glDrawArrays(GL_TRIANGLES, 0, 24);
+        unbind();
+
+        bind_health();
+        glDrawArrays(GL_TRIANGLES, 0, 6);
         unbind();
 
     }
@@ -77,6 +89,11 @@ private:
     const rendering::shader_set& _shader_set;
     GLuint _vbo;
     GLuint _vao;
+
+    GLuint _health_vbo;
+    GLuint _health_vao;
+
+
 
     void bind()
     {
@@ -91,6 +108,13 @@ private:
     }
 
 
+    void bind_health()
+    {
+        glBindVertexArray(_health_vao);
+        glBindBuffer(GL_ARRAY_BUFFER, _health_vbo);
+    }
+
+
     std::vector<ogllib::vertex_pc> _vertices {
         { 1.f, 3.f, -5.f, 0.f, 1.f, 0.f, 1.f },
         { 1.f, 10.f, -5.f, 0.f, 1.f, 0.f, 1.f },
@@ -99,6 +123,16 @@ private:
         { -1.f, 3.f, -5.f, 0.f, 1.f, 0.f, 1.f },
         { 1.f, 10.f, -5.f, 0.f, 1.f, 0.f, 1.f },
         { -1.f, 10.f, -5.f, 0.f, 1.f, 0.f, 1.f }
+    };
+
+    std::vector<ogllib::vertex_pc> _health_bar {
+        { 10.f, -10.f, -5.f, 1.f, 0.f, 0.f, 1.f },
+        { 10.f, 10.f, -5.f, 1.f, 0.f, 0.f, 1.f },
+        { -10.f, -10.f, -5.f, 1.f, 0.f, 0.f, 1.f },
+
+        { -10.f, -10.f, -5.f, 1.f, 0.f, 0.f, 1.f },
+        { 10.f, 10.f, -5.f, 1.f, 0.f, 0.f, 1.f },
+        { -10.f, 10.f, -5.f, 1.f, 0.f, 0.f, 1.f }
     };
 };
 
