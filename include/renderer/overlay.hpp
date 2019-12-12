@@ -57,6 +57,8 @@ public:
         glBindVertexArray(_health_vao);
         glBindBuffer(GL_ARRAY_BUFFER, _health_vbo);
         glBufferData(GL_ARRAY_BUFFER, _health_bar.size() * sizeof(ogllib::vertex_pc), _health_bar.data(), GL_STATIC_DRAW);
+
+        _shader_set.overlay().set_attrib_pointers();
     }
 
     void draw (float screen_width, float screen_height)
@@ -72,16 +74,10 @@ public:
 
         shader.bind();
         shader.set_uniform("projection", projection);
-        shader.set_uniform("model", model);
 
         bind();
         glDrawArrays(GL_TRIANGLES, 0, 24);
         unbind();
-
-        bind_health();
-        glDrawArrays(GL_TRIANGLES, 0, 6);
-        unbind();
-
     }
 
 
