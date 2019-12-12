@@ -32,9 +32,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd54510a-8069-4250-96f6-0e4eb650a8af" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/shaders/overlay.vert" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shaders/overlay.vert" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/renderer/overlay.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/renderer/overlay.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake_modules/add_assimp.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake_modules/add_assimp.cmake" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -382,7 +380,7 @@
       <workItem from="1575924345594" duration="2789000" />
       <workItem from="1575965460549" duration="685000" />
       <workItem from="1576006894112" duration="3613000" />
-      <workItem from="1576128524080" duration="824000" />
+      <workItem from="1576128524080" duration="962000" />
     </task>
     <task id="LOCAL-00001" summary="ECS stuff and cmake config">
       <created>1570224484089</created>
