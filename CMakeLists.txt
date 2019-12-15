@@ -4,13 +4,8 @@ project(RunShoot C CXX)
 option(BUILD_OFFLINE "Build offline" ON)
 
 
-
 set(RunShoot_VERSION_MAJOR 0)
 set(RunShoot_VERSION_MINOR 1)
-
-##### change for release #####
-set(CMAKE_BUILD_TYPE "Release")
-##############################
 
 
 if (${BUILD_OFFLINE})
