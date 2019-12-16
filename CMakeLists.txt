@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.13)
 project(RunShoot C CXX)
 
 option(BUILD_OFFLINE "Build offline" ON)
@@ -221,7 +221,21 @@ add_dependencies(ogllib
                  glm
                  spdlog)
 
-
+target_link_libraries(${CORELIB_NAME} PUBLIC
+                      ${PLATFORMLIB_NAME}
+                      ${RENDERER}
+                      ${OGLLIB_NAME}
+                      ${ASSETLIB_NAME}
+                      ${ECS_LIB}
+                      ${MEM_LIB}
+                      ${ASSIMP_LIB}
+                      ${GLBINDING_AUX_LIB}
+                      ${GLBINDING_LIB}
+                      ${PHYSICS_LIB}
+                      ${PHYSICS_MODELS_LIB}
+                      ${FMOD_LIBRARIES}
+                      ${SOUND_LIB}
+                      ${ANIMATION_LIB})
 
 target_link_libraries(${TARGET_NAME} PRIVATE
                       ${GLFW_LIB}
