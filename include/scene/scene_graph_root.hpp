@@ -61,7 +61,6 @@ namespace scene_graph
 
         void remove_from_parent() override
         {
-            return;
         }
 
         void print(std::string prefix) override

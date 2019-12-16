@@ -6,3 +6,4 @@ file(GLOB OGLLIB_SOURCE
 add_library(${OGLLIB_NAME} ${OGLLIB_SOURCE})
 
 set (OGLLIB_INCLUDE ${PROJECT_SOURCE_DIR}/${THIRD_PARTY}/opengllib/include)
+

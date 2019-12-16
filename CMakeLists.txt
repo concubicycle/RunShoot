@@ -141,18 +141,15 @@ include_directories(${TARGET_NAME}
 add_subdirectory(src)
 add_subdirectory(thirdparty/opengllib)
 
-add_dependencies(${CORELIB_NAME}
-                 expected
-                 ${PLATFORMLIB_NAME}
-                 ${ASSETLIB_NAME}
-                 nlohmann_json
-                 glfw
-                 ${GLM})
 
-add_dependencies(ogllib
+add_dependencies(${ASSETLIB_NAME}
+                 scene
+                 ${ECS_LIB}
+                 expected
+                 ${OGLLIB_NAME}
+                 nlohmann_json
                  glbinding
-                 ${GLM}
-                 ${SPDLOG})
+                 assimp)
 
 add_dependencies(${ECS_LIB}
                  ogllib
@@ -161,6 +158,22 @@ add_dependencies(${ECS_LIB}
                  ${MEM_LIB}
                  ${GLM}
                  ${PHYSICS_MODELS_LIB})
+
+add_dependencies(${PHYSICS_LIB}
+                 ${ECS_LIB}
+                 ${PHYSICS_MODELS_LIB}
+                 nlohmann_json)
+
+add_dependencies(${PHYSICS_MODELS_LIB}
+                 glm)
+
+add_dependencies(${SOUND_LIB}
+                 ${ECS_LIB}
+                 glm)
+
+add_dependencies(${ANIMATION_LIB}
+                 ${ECS_LIB}
+                 glm)
 
 add_dependencies(${RENDERER}
                  glbinding
@@ -172,28 +185,27 @@ add_dependencies(${RENDERER}
                  ${GLM}
                  ${SPDLOG})
 
-add_dependencies(${TARGET_NAME}
-                 ${ASSETLIB_NAME}
-                 ${CORELIB_NAME}
+add_dependencies(${CORELIB_NAME}
+                 expected
+                 glfw
+                 nlohmann_json
+                 ${GLM}
                  ${PLATFORMLIB_NAME}
+                 ${ECS_LIB}
+                 ${ASSETLIB_NAME}
                  ${RENDERER}
                  ${PHYSICS_LIB}
                  ${SOUND_LIB}
                  ${ANIMATION_LIB}
-                 scene
+                 scene)
+
+
+add_dependencies(${TARGET_NAME}
+                 ${CORELIB_NAME}
                  glfw
                  glbinding
-                 assimp
                  expected)
 
-add_dependencies(${ASSETLIB_NAME}
-                 scene
-                 ${ECS_LIB}
-                 expected
-                 ${OGLLIB_NAME}
-                 nlohmann_json
-                 glbinding
-                 assimp)
 
 add_dependencies(generate_colliders
                  expected
@@ -203,21 +215,10 @@ add_dependencies(generate_colliders
                  ${ASSETLIB_NAME}
                  ogllib)
 
-add_dependencies(${PHYSICS_LIB}
-                 ${ECS_LIB}
-                 ${PHYSICS_MODELS_LIB}
-				 nlohmann_json)
-				 
-add_dependencies(${PHYSICS_MODELS_LIB}
-				glm)
-
-add_dependencies(${SOUND_LIB}
-                 ${ECS_LIB}
-                 glm)
-
-add_dependencies(${ANIMATION_LIB}
-                 ${ECS_LIB}
-                 glm)
+add_dependencies(ogllib
+                 glbinding
+                 glm
+                 spdlog)
 
 
 target_link_libraries(${TARGET_NAME} PRIVATE
