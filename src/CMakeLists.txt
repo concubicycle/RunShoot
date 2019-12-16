@@ -219,3 +219,20 @@ target_compile_features(${PHYSICS_LIB} PUBLIC cxx_std_17)
 target_compile_features(${PHYSICS_MODELS_LIB} PUBLIC cxx_std_17)
 target_compile_features(${SOUND_LIB} PUBLIC cxx_std_17)
 target_compile_features(${ANIMATION_LIB} PUBLIC cxx_std_17)
+
+
+target_link_libraries(${CORELIB_NAME} PUBLIC
+                      ${PLATFORMLIB_NAME}
+                      ${RENDERER}
+                      ${OGLLIB_NAME}
+                      ${ASSETLIB_NAME}
+                      ${ECS_LIB}
+                      ${MEM_LIB}
+                      ${ASSIMP_LIB}
+                      ${GLBINDING_AUX_LIB}
+                      ${GLBINDING_LIB}
+                      ${PHYSICS_LIB}
+                      ${PHYSICS_MODELS_LIB}
+                      ${FMOD_LIBRARIES}
+                      ${SOUND_LIB}
+                      ${ANIMATION_LIB})

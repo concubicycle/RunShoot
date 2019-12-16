@@ -197,6 +197,7 @@ add_dependencies(${CORELIB_NAME}
                  ${PHYSICS_LIB}
                  ${SOUND_LIB}
                  ${ANIMATION_LIB}
+                 ${MEM_LIB}
                  scene)
 
 
@@ -221,23 +222,10 @@ add_dependencies(ogllib
                  spdlog)
 
 
+
 target_link_libraries(${TARGET_NAME} PRIVATE
                       ${GLFW_LIB}
-                      ${CORELIB_NAME}
-                      ${PLATFORMLIB_NAME}
-                      ${RENDERER}
-                      ${OGLLIB_NAME}
-                      ${ASSETLIB_NAME}
-                      ${ECS_LIB}
-                      ${MEM_LIB}
-                      ${ASSIMP_LIB}
-                      ${GLBINDING_AUX_LIB}
-                      ${GLBINDING_LIB}
-                      ${PHYSICS_LIB}
-                      ${PHYSICS_MODELS_LIB}
-                      ${FMOD_LIBRARIES}
-                      ${SOUND_LIB}
-                      ${ANIMATION_LIB})
+                      ${CORELIB_NAME})
 
 
 target_link_libraries(generate_colliders PRIVATE
