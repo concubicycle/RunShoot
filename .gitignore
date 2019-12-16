@@ -20,3 +20,5 @@ cmake-build-release/*
 sh.exe.stackdump
 
 install/
+
+.idea/

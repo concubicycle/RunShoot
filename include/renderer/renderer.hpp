@@ -27,6 +27,7 @@
 
 #include <renderer/shader_set.hpp>
 #include <renderer/overlay.hpp>
+#include "render_config.hpp"
 
 
 namespace rendering
@@ -36,8 +37,7 @@ class renderer
     const std::uint32_t MinLightReferences = 32;
 public:
     renderer(
-        const core::startup_config &config,
-        const core::system_info& system_info,
+        render_config& config,
         const shader_set& shader_set,
         events::event_exchange& events);
 
@@ -48,11 +48,11 @@ public:
     void draw_scene(asset::scene& scene);
     static void resize(std::uint32_t width, std::uint32_t height);
 
-    [[nodiscard]] glm::vec2 screen_size() const { return {_screen_width, _screen_height}; }
+    [[nodiscard]] glm::vec2 screen_size() const { return {_config.width(), _config.height()}; }
 
 private:
-    const core::startup_config &_config;
-    const core::system_info& _system_info;
+    render_config& _config;
+
     const shader_set& _shaders;
     events::event_exchange& _events;
     overlay_temporary _overlay;
@@ -63,8 +63,6 @@ private:
     listener_id _cam_listener_id;
     listener_id _cam_remove_listener_id;
     listener_id _cam_float_set_id;
-
-    float _screen_width, _screen_height;
 
     void draw_object(ecs::entity& e, glm::mat4 model);
 

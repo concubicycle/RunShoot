@@ -1,5 +1,3 @@
-#include <cstdlib>
-
 #include "renderer/renderer.hpp"
 #include <asset/scene.hpp>
 
@@ -33,12 +31,10 @@ MessageCallback(GLenum source,
 
 
 rendering::renderer::renderer(
-    const core::startup_config &config,
-    const core::system_info &system_info,
+    render_config& config,
     const shader_set &shaders,
     events::event_exchange &events) :
     _config(config),
-    _system_info(system_info),
     _shaders(shaders),
     _events(events),
     _camera_entity(nullptr),
@@ -48,16 +44,6 @@ rendering::renderer::renderer(
     auto forget_cam_fn = std::function<void(ecs::entity &)>([this](ecs::entity &e) { forget_entity(e); });
     _cam_listener_id = _events.subscribe<ecs::entity &>(events::entity_created, grab_cam_fn);
     _cam_remove_listener_id = _events.subscribe(events::entity_destroyed, forget_cam_fn);
-
-    if (_config.fullscreen())
-    {
-        _screen_width = (float) _system_info.monitor_width();
-        _screen_height = (float) _system_info.monitor_height();
-    } else
-    {
-        _screen_width = (float) _config.width();
-        _screen_height = (float) _config.height();
-    }
 
     std::function<void(std::string name, float prop)> cam_prop_set([this](std::string name, float prop) {
         if (_camera_entity == nullptr) return;
@@ -81,12 +67,7 @@ rendering::renderer::~renderer()
 
 bool rendering::renderer::init()
 {
-    if (!_config.fullscreen())
-        glViewport(0, 0, _config.width(), _config.height());
-    else
-        glViewport(0, 0, _system_info.monitor_width(), _system_info.monitor_height());
-
-    gl::glClearColor(0.f, 0.f, 0.f, 0.f);
+    glViewport(0, 0, _config.width(), _config.height());
 
     if (_config.backface_culling())
     {
@@ -124,12 +105,9 @@ void rendering::renderer::draw_scene(asset::scene &scene)
         auto& r = e.get_component<ecs::render_component_ogl>();
 
         draw_object(e, model);
-
-
-
     });
 
-    _overlay.draw(_screen_width, _screen_height);
+    _overlay.draw(_config.width(), _config.height());
 }
 
 void rendering::renderer::resize(std::uint32_t width, std::uint32_t height)
@@ -177,8 +155,8 @@ void rendering::renderer::forget_entity(ecs::entity &e)
 
     if (e.has<ecs::punctual_light_component>())
     {
-        int found_ind = -1;
-        for (int i = 0; i < _lights.size(); ++i)
+        unsigned long found_ind = -1;
+        for (unsigned long i = 0; i < _lights.size(); ++i)
         {
             if (_lights[i].get().id() == e.id())
             {
@@ -198,7 +176,7 @@ void rendering::renderer::draw_skybox()
     auto &cam = _camera_entity->get_component<ecs::camera_component>();
     if (!cam.has_skybox) return;
 
-    auto aspect = _screen_width / _screen_height;
+    auto aspect = _config.width() / _config.height();
     auto projection = glm::perspective(cam.fov, aspect, cam.near, cam.far);
 
     auto cam_basis = cam.right_up_fwd();
@@ -235,7 +213,7 @@ void rendering::renderer::set_light_uniforms(const ogllib::shader_program_base &
     });
 
     unsigned int light_count = 0;
-    for (int i = 0; i < _lights.size(); ++i)
+    for (unsigned long i = 0; i < _lights.size(); ++i)
     {
         auto &light_e = _lights[i].get();
 
@@ -264,10 +242,10 @@ void rendering::renderer::draw_object(ecs::entity& e, glm::mat4 model)
 
     auto model_inverse = glm::transpose(glm::inverse(model));
 
-    auto aspect = _screen_width / _screen_height;
+    auto aspect = _config.width() / _config.height();
     auto projection = cam.mode == ecs::camera_component::perspective
         ? glm::perspective(cam.fov, aspect, cam.near, cam.far)
-        : glm::ortho(-_screen_width / 2.f, _screen_width / 2.f, -_screen_height / 2.f, _screen_height / 2.f, cam.near, cam.far);
+        : glm::ortho(-_config.width() / 2.f, _config.width() / 2.f, -_config.height() / 2.f, _config.height() / 2.f, cam.near, cam.far);
 
     auto view = cam.view();
 

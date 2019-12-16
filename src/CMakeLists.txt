@@ -22,8 +22,8 @@ set(CORE_HEADER_LIST
 
 set(RENDERER_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/renderer/renderer.cpp
-    ../include/renderer/render_data.hpp
-    renderer/model_render_loader.cpp)
+    ../include/renderer/render_config.hpp
+    renderer/model_render_loader.cpp renderer/render_config.cpp)
 
 set(RENDERER_HEADER_LIST
     ${PROJECT_SOURCE_DIR}/include/renderer/renderer.hpp

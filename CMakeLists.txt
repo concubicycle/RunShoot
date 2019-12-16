@@ -9,7 +9,7 @@ set(RunShoot_VERSION_MINOR 1)
 
 
 if (${BUILD_OFFLINE})
-    set_property(DIRECTORY ${PROJECT_SOURCE_DIR} PROPERTY EP_UPDATE_DISCONNECTED ON)
+    set_property(DIRECTORY ${RunShoot_SOURCE_DIR} PROPERTY EP_UPDATE_DISCONNECTED ON)
 endif()
 
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake_modules")
@@ -167,7 +167,6 @@ add_dependencies(${RENDERER}
                  expected
                  glfw
                  ${ECS_LIB}
-                 ${CORELIB_NAME}
                  ${ASSETLIB_NAME}
                  ${OGLLIB_NAME}
                  ${GLM}

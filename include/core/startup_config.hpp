@@ -19,9 +19,9 @@ public:
     startup_config()
         : config_json(make_default())
     {
+        load();
     }
 
-    void load();
 
     bool fullscreen() const;
     std::uint32_t height() const;
@@ -32,6 +32,8 @@ public:
 
 private:
     json make_default() const;
+    void load();
+
 };
 } // namespace core
 

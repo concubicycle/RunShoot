@@ -49,8 +49,7 @@ int main()
 {
 	std::srand(std::time(nullptr));
 
-    core::startup_config conf = core::startup_config();
-    conf.load();
+    core::startup_config conf;
 
     auto window = set_up_glfw(conf);
 
@@ -87,7 +86,8 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
 
     rendering::shader_set shaders;
     rendering::model_render_loader render_loader(shaders, reader, assimp_reader, app_string_table, textures, events);
-    rendering::renderer renderer(conf, info, shaders, events);
+    rendering::render_config render_conf(info.monitor_width(), info.monitor_height(), conf.width(), conf.height(), conf.backface_culling(), conf.fullscreen());
+    rendering::renderer renderer(render_conf, shaders, events);
     rendering::debug_drawer debug_draw(conf, info, events, shaders, input);
 
     ecs::entity_factory factory(1);
@@ -99,7 +99,6 @@ void run_game(core::startup_config &conf, GLFWwindow *window)
     sound::sound_system game_sound(app_string_table, events);
 
     animation::texture_animator billboard_animation(events);
-
 
     renderer.init();
     glfwSetFramebufferSizeCallback(window, build_framebuffer_callback(renderer));
