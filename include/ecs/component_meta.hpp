@@ -19,7 +19,6 @@ using nlohmann::json;
 
 namespace ecs
 {
-
     class component_meta
     {
     public:

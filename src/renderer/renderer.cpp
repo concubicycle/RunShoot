@@ -153,22 +153,9 @@ void rendering::renderer::forget_entity(ecs::entity &e)
         _camera_entity = nullptr;
     }
 
-    if (e.has<ecs::punctual_light_component>())
-    {
-        unsigned long found_ind = -1;
-        for (unsigned long i = 0; i < _lights.size(); ++i)
-        {
-            if (_lights[i].get().id() == e.id())
-            {
-                found_ind = i;
-                break;
-            }
-        }
-        if (found_ind > -1)
-        {
-            _lights.erase(_lights.begin() + found_ind);
-        }
-    }
+    _lights.erase(std::remove_if(_lights.begin(), _lights.end(), [&e](const ecs::entity& light_e) {
+       return e.id() ==  light_e.id();
+    }), _lights.end());
 }
 
 void rendering::renderer::draw_skybox()
