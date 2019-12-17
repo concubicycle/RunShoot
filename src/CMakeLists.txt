@@ -7,7 +7,9 @@ set(CORE_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/core/framerate.cpp
     ${PROJECT_SOURCE_DIR}/src/core/startup_config.cpp
     ${PROJECT_SOURCE_DIR}/src/core/input_manager.cpp
-    ${PROJECT_SOURCE_DIR}/src/core/system_info.cpp core/entity_grabber.cpp core/scene_tracker.cpp)
+    ${PROJECT_SOURCE_DIR}/src/core/system_info.cpp
+    core/entity_grabber.cpp
+    core/scene_tracker.cpp)
 
 set(CORE_HEADER_LIST
     ${PROJECT_SOURCE_DIR}/include/core/frame_limiter.hpp
@@ -17,8 +19,8 @@ set(CORE_HEADER_LIST
     ${PROJECT_SOURCE_DIR}/include/core/startup.hpp
     ${PROJECT_SOURCE_DIR}/include/core/input_manager.hpp
     ${PROJECT_SOURCE_DIR}/include/core/system_info.hpp
-    ../include/core/entity_grabber.hpp ../include/core/scene_tracker.hpp)
-
+    ../include/core/entity_grabber.hpp
+    ../include/core/scene_tracker.hpp)
 
 set(RENDERER_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/renderer/renderer.cpp
@@ -169,14 +171,12 @@ set (ANIMATION_SOURCE_LIST
 set (ANIMATION_HEADER_LIST
      ../include/animation/texture_animator.hpp)
 
-
 set(HEADER_LIST
-    ${PROJECT_SOURCE_DIR}/include/util/running_average.hpp
-)
+    ${PROJECT_SOURCE_DIR}/include/util/running_average.hpp)
 
 
 # Make an automatic library - will be static or dynamic based on user setting
-add_library(${CORELIB_NAME} STATIC ${CORE_SOURCE_LIST} ${CORE_HEADER_LIST})
+add_library(${CORELIB_NAME} SHARED ${CORE_SOURCE_LIST} ${CORE_HEADER_LIST})
 add_library(${PLATFORMLIB_NAME} STATIC ${PLATFORM_SOURCE_LIST} ${PLATFORM_HEADER_LIST})
 add_library(${RENDERER} STATIC ${RENDERER_SOURCE_LIST} ${RENDERER_HEADER_LIST})
 add_library(${ASSETLIB_NAME} STATIC ${ASSET_SOURCE_LIST} ${ASSET_HEADER_LIST})
