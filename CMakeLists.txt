@@ -10,11 +10,12 @@ if (${BUILD_OFFLINE})
     set_property(DIRECTORY ${RunShoot_SOURCE_DIR} PROPERTY EP_UPDATE_DISCONNECTED ON)
 endif()
 
+
 # Visual Studio and others will ignore CMAKE_BUILD_TYPE. This causes problems with ExternalProject_Add,
 # Since the dependency will be built and the cmake scripts will have no way to tell whether Debug or
 # Release libs were built. But we can force only one build type to be available in visual studio, like:
 set (CMAKE_BUILD_TYPE Debug)
-set (CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
+
 
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake_modules")
 set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/install/")
@@ -49,6 +50,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY  ${CMAKE_BINARY_DIR}/bin)
 
 # WARNING: Doesn't work when build directory isn't /build for some reason (with CLion)
 file(COPY ${ASSETS_DIR} DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+file(COPY ${ASSETS_DIR} DESTINATION ${CMAKE_BINARY_DIR})
 
 
 add_executable(${TARGET_NAME}
@@ -260,5 +262,7 @@ endif (UNIX)
 if (CMAKE_DL_LIBS)
     target_link_libraries(${TARGET_NAME} PRIVATE ${CMAKE_DL_LIBS})
 endif ()
+
+set (CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
 
 

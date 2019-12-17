@@ -28,15 +28,15 @@ endif ()
 
 
 
-if(WIN32 AND MSVC)
-add_custom_command(TARGET ${TARGET_NAME} POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        ${EXTERNAL_INSTALL_LOCATION}/glbinding/glbinding.dll
-        $<TARGET_FILE_DIR:${TARGET_NAME}>)                 
-		
-		
-add_custom_command(TARGET ${TARGET_NAME} POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        ${EXTERNAL_INSTALL_LOCATION}/glbinding/glbinding-aux.dll
-        $<TARGET_FILE_DIR:${TARGET_NAME}>)                 
-endif()
+#if(WIN32 AND MSVC)
+#add_custom_command(TARGET ${TARGET_NAME} POST_BUILD
+#    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+#        ${EXTERNAL_INSTALL_LOCATION}/glbinding/lib/glbinding${WIN_LIB_SUFFIX}.dll
+#        $<TARGET_FILE_DIR:${TARGET_NAME}>)                 
+#		
+#		
+#add_custom_command(TARGET ${TARGET_NAME} POST_BUILD
+#    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+#        ${EXTERNAL_INSTALL_LOCATION}/glbinding/lib/glbinding-aux${WIN_LIB_SUFFIX}.dll
+#        $<TARGET_FILE_DIR:${TARGET_NAME}>)                 
+#endif()
