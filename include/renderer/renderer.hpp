@@ -57,6 +57,8 @@ private:
     events::event_exchange& _events;
     overlay_temporary _overlay;
 
+
+
     std::vector<std::reference_wrapper<ecs::entity>> _lights;
 
     ecs::entity* _camera_entity;

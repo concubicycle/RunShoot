@@ -8,7 +8,6 @@ set(CORE_SOURCE_LIST
     ${PROJECT_SOURCE_DIR}/src/core/startup_config.cpp
     ${PROJECT_SOURCE_DIR}/src/core/input_manager.cpp
     ${PROJECT_SOURCE_DIR}/src/core/system_info.cpp
-    core/entity_grabber.cpp
     core/scene_tracker.cpp)
 
 set(CORE_HEADER_LIST
@@ -19,7 +18,6 @@ set(CORE_HEADER_LIST
     ${PROJECT_SOURCE_DIR}/include/core/startup.hpp
     ${PROJECT_SOURCE_DIR}/include/core/input_manager.hpp
     ${PROJECT_SOURCE_DIR}/include/core/system_info.hpp
-    ../include/core/entity_grabber.hpp
     ../include/core/scene_tracker.hpp)
 
 set(RENDERER_SOURCE_LIST
@@ -109,7 +107,8 @@ set (ECS_SOURCE_LIST
      ${PROJECT_SOURCE_DIR}/src/ecs/entity_factory.cpp
      ${PROJECT_SOURCE_DIR}/src/ecs/entity_world.cpp
      ecs/chunk_component_accessor.cpp
-     ecs/entity.cpp)
+     ecs/entity.cpp
+     ecs/entity_grabber.cpp)
 
 set (ECS_HEADER_LIST
      ${PROJECT_SOURCE_DIR}/include/ecs/components/basic_components.hpp
@@ -124,8 +123,9 @@ set (ECS_HEADER_LIST
      ${PROJECT_SOURCE_DIR}/include/ecs/entity_world.hpp
      ${PROJECT_SOURCE_DIR}/include/ecs/entity.hpp
      ${PROJECT_SOURCE_DIR}/include/ecs/components/mesh_opengl.hpp
-     ../include/ecs/components/camera_property.hpp
-     ../include/ecs/components/billboard_animation_state.hpp)
+     ${PROJECT_SOURCE_DIR}/include/ecs/components/camera_property.hpp
+     ${PROJECT_SOURCE_DIR}/include/ecs/components/billboard_animation_state.hpp
+     ${PROJECT_SOURCE_DIR}/include/ecs/entity_grabber.hpp)
 
 
 set (PHYSICS_SOURCE_LIST

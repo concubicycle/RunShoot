@@ -7,7 +7,7 @@
 
 
 #include <core/behavior.hpp>
-#include <core/entity_grabber.hpp>
+#include <ecs/entity_grabber.hpp>
 #include "components/shooter_controller_component.hpp"
 #include "components/player_controller_component.hpp"
 #include "components/freefly_controller_component.hpp"
@@ -32,7 +32,7 @@ public:
 
 
 private:
-    core::entity_grabber _player_grabber;
+    ecs::entity_grabber _player_grabber;
 
     std::uint8_t _death_sound = 1;
 

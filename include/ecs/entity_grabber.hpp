@@ -9,7 +9,7 @@
 #include <events/event_exchange.hpp>
 #include "ecs/entity.hpp"
 
-namespace core
+namespace ecs
 {
 
     class entity_grabber
@@ -34,8 +34,6 @@ namespace core
         void grab_entity (ecs::entity &e);
         void forget_entity (ecs::entity &e);
     };
-
-
 }
 
 
