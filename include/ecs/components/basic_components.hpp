@@ -53,11 +53,9 @@ namespace ecs
         float pitch = 0;
         float yaw = 0;
         float roll = 0;
-        float scale_x = 0;
-        float scale_y = 0;
-        float scale_z = 0;
-
-
+        float scale_x = 1;
+        float scale_y = 1;
+        float scale_z = 1;
 
         [[nodiscard]] glm::mat4 to_mat4() const
         {
@@ -113,12 +111,12 @@ namespace ecs
     ////////////////// Actual OpenGL render component //////////////////
     struct render_component_ogl : public component<render_component_ogl>
     {
-        mesh_opengl meshes[MAX_RENDER_MESHES];
+        mesh_opengl meshes[MAX_RENDER_MESHES] {};
         std::optional<glm::vec3> hue;
         std::optional<std::string> shader;
-        std::uint32_t mesh_count;
-        std::uint64_t mesh_path_hash;
-        asset::mesh_type mesh_format;
+        std::uint32_t mesh_count {0};
+        std::uint64_t mesh_path_hash {0};
+        asset::mesh_type mesh_format {0};
         bool billboard {false};
         bool has_alpha {false};
     };

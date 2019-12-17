@@ -9,8 +9,8 @@
 #include <cstdio>
 #include <vector>
 
-#include "pool_allocator.hpp"
-#include "typed_pool_allocator.hpp"
+#include <memory/pool_allocator.hpp>
+#include <memory/typed_pool_allocator.hpp>
 
 typedef struct another_struct
 {

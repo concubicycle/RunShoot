@@ -10,7 +10,7 @@
 #include <vector>
 #include <cstring>
 
-#include "pool_allocator.hpp"
+#include <memory/pool_allocator.hpp>
 
 typedef struct sample_struct
 {

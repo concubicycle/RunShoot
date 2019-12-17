@@ -101,7 +101,10 @@ add_executable(${TARGET_NAME}
 install(TARGETS ${TARGET_NAME} DESTINATION bin)
 
 add_executable(generate_colliders apps/generate_colliders.cpp)
-add_executable(tests tests/main.cpp)
+add_executable(tests EXCLUDE_FROM_ALL
+               tests/main.cpp
+               tests/pool_allocator_tests.h
+               tests/archetype_pool_tests.h)
 
 
 include(add_glfw)
@@ -252,7 +255,7 @@ target_link_libraries(generate_colliders PRIVATE
                       ${ASSIMP_LIB})
 
 target_link_libraries(tests
-                      ${MEM_LIB})
+                      ${CORELIB_NAME})
 
 
 if (UNIX)
