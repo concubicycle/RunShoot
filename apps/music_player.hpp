@@ -10,13 +10,14 @@
 #include <thread>
 
 #include <ecs/ecs_types.hpp>
-#include <core/behavior.hpp>
+#include <ecs/behavior.hpp>
 #include <sound_wrapper/sound_system.hpp>
 
 #include "components/music_player_component.hpp"
+#include <ecs/behavior.hpp>
 
 
-class music_player : public core::behavior
+class music_player : public ecs::behavior<core::behavior_context>
 {
 public:
     explicit music_player(events::event_exchange& events, string_table& app_strings, sound::sound_system& sound);

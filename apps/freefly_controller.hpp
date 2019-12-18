@@ -6,7 +6,7 @@
 #define __FREEFLY_CONTROLLER_HPP_
 
 #include <iostream>
-#include <core/behavior.hpp>
+#include <ecs/behavior.hpp>
 #include <events/event_exchange.hpp>
 
 #include <glm/gtx/euler_angles.hpp>
@@ -15,12 +15,13 @@
 #include <glm/gtx/string_cast.hpp>
 
 #include "components/freefly_controller_component.hpp"
+#include <ecs/behavior.hpp>
 
 
-class freefly_controller : public core::behavior
+class freefly_controller : public ecs::behavior<core::behavior_context>
 {
 public:
-    explicit freefly_controller(events::event_exchange& events)  : behavior(events) {}
+    explicit freefly_controller(events::event_exchange& events)  : ecs::behavior<core::behavior_context>(events) {}
 
     component_bitset required_components()  const override
     {

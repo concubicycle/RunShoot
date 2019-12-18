@@ -6,13 +6,14 @@
 #define __SHOOTER_CONTROLLER_HPP_
 
 
-#include <core/behavior.hpp>
+#include <ecs/behavior.hpp>
 #include <ecs/entity_grabber.hpp>
 #include "components/shooter_controller_component.hpp"
 #include "components/player_controller_component.hpp"
 #include "components/freefly_controller_component.hpp"
+#include <ecs/behavior.hpp>
 
-class shooter_controller : public core::behavior
+class shooter_controller : public ecs::behavior<core::behavior_context>
 {
 public:
     explicit shooter_controller(events::event_exchange& events) : behavior(events),

@@ -7,12 +7,13 @@
 
 #include <string>
 #include <ecs/ecs_types.hpp>
-#include <core/behavior.hpp>
+#include <ecs/behavior.hpp>
 #include <events/event_exchange.hpp>
 #include "components/main_menu_controller_component.hpp"
+#include <ecs/behavior.hpp>
 
 
-class main_menu_controller : public core::behavior
+class main_menu_controller : public ecs::behavior<core::behavior_context>
 {
 
 public:

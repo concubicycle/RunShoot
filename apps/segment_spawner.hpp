@@ -9,14 +9,15 @@
 #include <vector>
 #include <string>
 
-#include <core/behavior.hpp>
+#include <ecs/behavior.hpp>
 #include <core/behavior_context.hpp>
 #include <util/debounce.hpp>
 #include <random>
 
 #include "components/segment_spawner_component.hpp"
+#include <ecs/behavior.hpp>
 
-class segment_spawner : public core::behavior
+class segment_spawner : public ecs::behavior<core::behavior_context>
 {
 public:
     explicit segment_spawner(events::event_exchange& events);

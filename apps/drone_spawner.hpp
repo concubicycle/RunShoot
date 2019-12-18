@@ -7,16 +7,17 @@
 
 #include <ctime>
 
-#include <core/behavior.hpp>
+#include <ecs/behavior.hpp>
 
 #include "components/drone_spawner_component.hpp"
 #include "components/player_controller_component.hpp"
 #include "components/drone_controller_component.hpp"
+#include <ecs/behavior.hpp>
 
-class drone_spawner : public core::behavior
+class drone_spawner : public ecs::behavior<core::behavior_context>
 {
 public:
-    drone_spawner(events::event_exchange& events) : behavior(events)
+    drone_spawner(events::event_exchange& events) : ecs::behavior<core::behavior_context>(events)
     {
         auto grab_cam_fn = std::function([this](ecs::entity &e) { try_grab_player(e); });
         auto forget_cam_fn = std::function([this](ecs::entity &e) { try_forget_player(e); });

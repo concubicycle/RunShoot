@@ -7,16 +7,17 @@
 #include <glm/gtx/string_cast.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include <core/behavior.hpp>
+#include <ecs/behavior.hpp>
 #include <physics/entity_contact.hpp>
 #include <physics/collider_iterator.hpp>
 
 #include <util/debounce.hpp>
 
 #include "components/player_controller_component.hpp"
+#include <ecs/behavior.hpp>
 
 
-class player_controller : public core::behavior
+class player_controller : public ecs::behavior<core::behavior_context>
 {
 public:
     explicit player_controller(events::event_exchange &events);

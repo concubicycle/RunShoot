@@ -125,7 +125,8 @@ set (ECS_HEADER_LIST
      ${PROJECT_SOURCE_DIR}/include/ecs/components/mesh_opengl.hpp
      ${PROJECT_SOURCE_DIR}/include/ecs/components/camera_property.hpp
      ${PROJECT_SOURCE_DIR}/include/ecs/components/billboard_animation_state.hpp
-     ${PROJECT_SOURCE_DIR}/include/ecs/entity_grabber.hpp)
+     ${PROJECT_SOURCE_DIR}/include/ecs/entity_grabber.hpp
+     ${PROJECT_SOURCE_DIR}/include/ecs/behavior.hpp)
 
 
 set (PHYSICS_SOURCE_LIST

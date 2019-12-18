@@ -18,6 +18,7 @@
 #include "components/sound_emitter_component.hpp"
 #include "components/death_trigger_component.hpp"
 #include "components/shooter_controller_component.hpp"
+#include <ecs/behavior.hpp>
 
 
 player_controller::player_controller(events::event_exchange &events) :

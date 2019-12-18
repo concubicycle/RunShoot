@@ -3,6 +3,7 @@
 //
 
 #include "music_player.hpp"
+#include <ecs/behavior.hpp>
 
 music_player::music_player(events::event_exchange &events, string_table& app_strings, sound::sound_system& sound)
     : behavior(events)

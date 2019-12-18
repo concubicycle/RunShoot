@@ -10,17 +10,18 @@
 #include <ecs/ecs_types.hpp>
 #include <ecs/entity.hpp>
 #include <events/event_exchange.hpp>
-#include "behavior_context.hpp"
+#include "core/behavior_context.hpp"
 
-namespace core
+
+namespace ecs
 {
+    template <typename TContext>
     class behavior
     {
-        const std::uint32_t VectorElementsReserved = 128;
+        const uint32_t VectorElementsReserved = 128;
 
     public:
-        explicit behavior(events::event_exchange &events)
-            : _events(events)
+        explicit behavior(events::event_exchange &events) : _events(events)
         {
             std::function<void(ecs::entity&)> on_create =
                 std::bind(&behavior::_on_entity_created, this, std::placeholders::_1);
@@ -37,43 +38,45 @@ namespace core
 
         virtual ~behavior()
         {
-            _events.unsubscribe(events::event_type::entity_created, _listener_id_create);
-            _events.unsubscribe(events::event_type::entity_destroyed, _listener_id_destroy);
+            _events.unsubscribe(events::entity_created, _listener_id_create);
+            _events.unsubscribe(events::entity_destroyed, _listener_id_destroy);
         }
 
         [[nodiscard]] virtual component_bitset required_components() const = 0;
 
 
-        void update(behavior_context &ctx)
+        void update(TContext &ctx)
         {
-            for (auto& e : _entities_to_remove)
+            for (auto &e : _entities_to_remove)
                 ctx.current_scene.remove(e);
 
             _entities_to_remove.clear();
 
-            for (auto& e : _entities)
+            for (auto &e : _entities)
                 update_single(e, ctx);
         }
 
     protected:
-        virtual void update_single(ecs::entity& e, behavior_context &ctx) = 0;
-        virtual void on_entity_created(ecs::entity& e) {}
-        virtual void on_entity_destroyed(ecs::entity& e) {}
+        virtual void update_single(::ecs::entity &e, TContext &ctx) = 0;
 
-        events::event_exchange& _events;
+        virtual void on_entity_created(::ecs::entity &e) {}
 
-        void remove_entity(ecs::entity& e)
+        virtual void on_entity_destroyed(::ecs::entity &e) {}
+
+        events::event_exchange &_events;
+
+        void remove_entity(::ecs::entity &e)
         {
             _entities_to_remove.emplace_back(e);
         }
 
     private:
-        std::vector<std::reference_wrapper<ecs::entity>> _entities;
-        std::vector<std::reference_wrapper<ecs::entity>> _entities_to_remove;
+        std::vector<std::reference_wrapper<::ecs::entity>> _entities;
+        std::vector<std::reference_wrapper<::ecs::entity>> _entities_to_remove;
         listener_id _listener_id_create;
         listener_id _listener_id_destroy;
 
-        void _on_entity_created(ecs::entity& e)
+        void _on_entity_created(::ecs::entity &e)
         {
             auto req_comps = required_components();
             auto e_comps = e.archetype_id();
@@ -84,11 +87,11 @@ namespace core
             }
         }
 
-        void _on_entity_destroyed(ecs::entity& e)
+        void _on_entity_destroyed(::ecs::entity &e)
         {
             auto it = std::find_if(
                 _entities.begin(), _entities.end(),
-                [&e](ecs::entity& x) { return x.id() == e.id();});
+                [&e](::ecs::entity &x) { return x.id() == e.id(); });
 
             if (it != _entities.end())
             {

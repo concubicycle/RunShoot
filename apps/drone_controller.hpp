@@ -7,11 +7,12 @@
 
 #include <glm/gtc/random.hpp>
 
-#include <core/behavior.hpp>
+#include <ecs/behavior.hpp>
 #include "components/drone_controller_component.hpp"
 #include "components/player_controller_component.hpp"
+#include <ecs/behavior.hpp>
 
-class drone_controller : public core::behavior
+class drone_controller : public ecs::behavior<core::behavior_context>
 {
 public:
     explicit drone_controller(events::event_exchange &events) : behavior(events) {}

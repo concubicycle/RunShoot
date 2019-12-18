@@ -7,11 +7,11 @@
 #include "runshoot_event.hpp"
 #include "components/segment_component.hpp"
 #include "components/shooter_controller_component.hpp"
+#include <ecs/behavior.hpp>
 #include <ctime>
 
 
-segment_spawner::segment_spawner(events::event_exchange &events) :
-    behavior(events),
+segment_spawner::segment_spawner(events::event_exchange &events) : ecs::behavior<core::behavior_context>(events),
     _left_turn(glm::rotate(glm::half_pi<float>(), glm::vec3(0, 1, 0))),
     _right_turn(glm::rotate(-glm::half_pi<float>(), glm::vec3(0, 1, 0))),
     _spawn_new_segment(std::chrono::duration<float>(1.75), [this](ecs::entity& e) {
